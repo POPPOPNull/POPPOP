@@ -1,0 +1,49 @@
+.admin-sidebar-layout{
+    width: 300px;
+    background-color: #403F6F;
+    height:950px;
+    overflow-y:hidden;
+}
+.admin-side-logo1{
+    color: yellow;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+.admin-side-logo2{
+    color: yellow;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+.admin-sidebutton-layout{
+    height: 35%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    top: 0px;
+    cursor: pointer;
+}
+
+.admin-side-button{
+    /* background-color: blue; */
+    color: white;
+    font-size: 20px;
+    height: 50px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    
+    
+}
