@@ -2,8 +2,25 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.ohgiraffers.poppop.user.model.dao.UserMapper">
     <resultMap id="userResultMap" type="com.ohgiraffers.poppop.user.model.dto.UserDTO">
-
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
     </resultMap>
+
+    <select resultMap="userResultMap" id="selectUserList">
+        select
+              id,
+              name
+         from user;
+    </select>
+    <insert id="regisetUser">
+        insert into user (id,name) values (#{id},#{name})
+    </insert>
+    <delete id="removeUser">
+        delete from user where id=#{id}
+    </delete>
+    <update id="updateUser">
+        update user set name=#{name} where id=#{no}
+    </update>
 </mapper>
