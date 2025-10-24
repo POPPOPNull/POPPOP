@@ -28,39 +28,33 @@ public class UserController {
         return ResponseEntity.ok(new ArrayList<>(userService.selectUserList()));
     }
 
-
-
-    @GetMapping("/entity")
-    public ResponseEntity<Message> getEntity(){
-
-        return ResponseEntity.ok(new Message(123,"hello"));
-    }
-
     @PostMapping("/user")
-    public ResponseEntity<?> registUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<?> insertUser(@RequestBody UserDTO userDTO){
         userService.registUser(userDTO);
 
          return ResponseEntity
-                 .created(URI.create("/user/user"))
+                 .created(URI.create("/user/list"))
                  .build();
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> removeUser(@PathVariable int id){
+    public ResponseEntity<?> deleteUser(@PathVariable int id){
         userService.removeUser(id);
 
         return ResponseEntity
-                .created(URI.create("/user/user/"))
+                .created(URI.create("/user/list"))
                 .build();
     }
 
     @PutMapping("/user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO){
 
-        userService.updateUser(id,userDTO);
+        String name = userDTO.getName();
+        System.out.println(userDTO);
+        userService.updateUser(id,name);
 
         return ResponseEntity
-                .created(URI.create("/user/user/"))
+                .created(URI.create("/user/list"))
                 .build();
     }
 

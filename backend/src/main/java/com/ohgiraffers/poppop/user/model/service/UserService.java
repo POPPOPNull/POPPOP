@@ -30,7 +30,7 @@ public class UserService {
         userMapper.removeUser(id);
     }
 
-    public void updateUser(int id, UserDTO userDTO) {
-        userMapper.updateUser(id,userDTO);
+    public void updateUser(int id, String name) {
+        userMapper.updateUser(id,name);
     }
 }

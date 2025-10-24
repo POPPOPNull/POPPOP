@@ -22,11 +22,12 @@ export function registUser(user){
 }
 
 //수정
-export function updateUser(no,userDTO){
-    return axios.put(`${BACKEND_URL}/user/user/${no}`,{no,userDTO})
+export function updateUser(id,userDTO){
+    return axios.put(`${BACKEND_URL}/user/user/${id}`,userDTO)
     .then(function(response){
         console.log(response.data)
     })
+    
 }
 
 //삭제

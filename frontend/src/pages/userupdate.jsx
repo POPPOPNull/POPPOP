@@ -8,19 +8,26 @@ import { useNavigate } from "react-router-dom";
 function UpdateUser(){
     const naviagate = useNavigate()
 
-    const [userDTO, setUserDTO] = useState({
-        id:0,
-        name:""
+    const[userDTO,setUserDTO] = useState({
+        name: ""
     })
+
+    const onChangeHandler3 = (e) => {
+        setUserDTO(
+            {...userDTO,
+            [e.target.name]: e.target.value
+        }
+        )
+        console.log(userDTO)
+    }
+
+
     const [id,setId] = useState(0)
     const [name, setName] = useState("")
 
     const onChangeHandler = (e) =>{
-        setUserDTO({
-            ...userDTO,
-            [e.target.name] : e.target.value
-        })
-        console.log(userDTO)
+        setName(e.target.value)
+        console.log(name)
     }
 
     const onChangeHandler2 = (e) => {
@@ -30,13 +37,11 @@ function UpdateUser(){
 
     const onClickHandler = () => {
         updateUser(id,userDTO)
+        console.log(id,name)
         naviagate("/test2")
     }
 
-    useEffect(()=>{
-        console.log("id바뀜")
-        console.log(id)
-    },[id])
+
 
     
 
@@ -45,9 +50,9 @@ function UpdateUser(){
         <div className="userupdate-layout">
             <h1>유저 수정</h1>
             <div>수정할 유저 id : </div>
-            <input type="number" name="id" onChange={onChangeHandler2}/>
+            <input type="number" onChange={onChangeHandler2}/>
             <div>수정 후 유저 이름 : </div>
-            <input type="text" name="name" onChange={onChangeHandler}/>
+            <input type="text" name="name" onChange={onChangeHandler3}/>
             <button onClick={onClickHandler}>수정</button>
         </div>
         </>
