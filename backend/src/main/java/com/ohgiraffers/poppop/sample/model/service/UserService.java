@@ -1,7 +1,7 @@
-package com.ohgiraffers.poppop.user.model.service;
+package com.ohgiraffers.poppop.sample.model.service;
 
-import com.ohgiraffers.poppop.user.model.dao.UserMapper;
-import com.ohgiraffers.poppop.user.model.dto.UserDTO;
+import com.ohgiraffers.poppop.sample.model.dao.UserMapper;
+import com.ohgiraffers.poppop.sample.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

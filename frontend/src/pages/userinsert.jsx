@@ -30,7 +30,6 @@ function RegistUser(){
     const onClickHandler = () =>{
         console.log(user)
         registUser(user)
-        naviagate("/test2")
     }
 
     return(

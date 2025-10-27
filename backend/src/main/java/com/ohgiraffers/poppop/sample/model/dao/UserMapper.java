@@ -1,6 +1,6 @@
-package com.ohgiraffers.poppop.user.model.dao;
+package com.ohgiraffers.poppop.sample.model.dao;
 
-import com.ohgiraffers.poppop.user.model.dto.UserDTO;
+import com.ohgiraffers.poppop.sample.model.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ohgiraffers.poppop.user.controller;
+package com.ohgiraffers.poppop.sample.controller;
 
 public class Message {
     private int httpStatusCode;

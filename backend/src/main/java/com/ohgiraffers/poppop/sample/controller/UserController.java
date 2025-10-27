@@ -1,7 +1,7 @@
-package com.ohgiraffers.poppop.user.controller;
+package com.ohgiraffers.poppop.sample.controller;
 
-import com.ohgiraffers.poppop.user.model.dto.UserDTO;
-import com.ohgiraffers.poppop.user.model.service.UserService;
+import com.ohgiraffers.poppop.sample.model.dto.UserDTO;
+import com.ohgiraffers.poppop.sample.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +42,7 @@ public class UserController {
         userService.removeUser(id);
 
         return ResponseEntity
-                .created(URI.create("/user/list"))
-                .build();
+                .noContent().build();
     }
 
     @PutMapping("/user/{id}")
@@ -54,7 +53,7 @@ public class UserController {
         userService.updateUser(id,name);
 
         return ResponseEntity
-                .created(URI.create("/user/list"))
+                .created(URI.create("/user/list/"+id))
                 .build();
     }
 

@@ -1,4 +1,4 @@
-package com.ohgiraffers.poppop.user.model.dto;
+package com.ohgiraffers.poppop.sample.model.dto;
 
 public class UserDTO {
 

@@ -32,7 +32,7 @@ export function updateUser(id,userDTO){
 
 //삭제
 export function removeUser(id){
-    return axios.delete(`${BACKEND_URL}/user/user/${id}`,{data : id})
+    return axios.delete(`${BACKEND_URL}/user/user/${id}`)
     .then(function(response){
         console.log(response.data)
     })
