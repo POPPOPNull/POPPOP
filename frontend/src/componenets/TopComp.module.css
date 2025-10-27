@@ -1,0 +1,22 @@
+.layout{
+    height: 600px;
+    background-color: skyblue;
+    color: black;
+}
+.rollinglayout{
+    background-color: pink;
+    width: 900px;
+}
+.slide{
+    background-color: pink;
+    height: 550px;
+    
+    
+    
+}
+.swiper{
+    background-color: green;
+    height: 550px;
+    z-index: 1000;
+    
+}

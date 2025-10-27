@@ -4,6 +4,62 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.popupstore.model.dao.PopupStoreMapper">
     <resultMap id="popupStoreResultMap" type="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
-
+        <id property="no" column="popup_no"/>
+        <result property="name" column="popup_name"/>
+        <result property="brandName" column="brand_name"/>
+        <result property="startDate" column="popup_start_date"/>
+        <result property="endDate" column="popup_end_date"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="location" column="popup_location"/>
+        <result property="reservableStatus" column="reservable_status"/>
+        <result property="explanation" column="popup_explanation"/>
+        <result property="approvalStatus" column="approval_status"/>
+        <result property="rejectionReason" column="rejection_reason"/>
+        <result property="categoryNo" column="category_no"/>
+        <result property="id" column="id"/>
+        <result property="hashtags" column="hashtags"/>
+        <result property="clickCount" column="click_count"/>
     </resultMap>
+
+
+    <select id="selectPopupStoreByPagePlacement" resultMap="popupStoreResultMap">
+        select
+               popup_no,
+               popup_name,
+               brand_name,
+               popup_start_date,
+               popup_end_date,
+               open_time,
+               close_time,
+               popup_location,
+               reservable_status,
+               popup_explanation,
+               approval_status,
+               rejection_reason,
+               category_no,
+               id,
+               hashtags,
+               click_count
+    </select>
+    <select id="selectAllPopupStore" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        category_no,
+        id,
+        hashtags,
+        click_count
+        from popup_store
+    </select>
 </mapper>
