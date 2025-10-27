@@ -1,0 +1,16 @@
+.tabdetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+.tabs {
+    list-style: none;
+    display: flex;
+    padding-inline-start: 0;
+
+}
+.tabs li {
+    position: relative;
+    margin: 0 50px;
+}
