@@ -25,4 +25,8 @@ public class PopupStoreService {
     public List<PopupStoreDTO> selectAllPopupStore() {
         return popupStoreMapper.selectAllPopupStore();
     }
+
+    public PopupStoreDTO selectPopupStoreDetails(int popupNo) {
+        return popupStoreMapper.selectPopupStoreDetails(popupNo);
+    }
 }

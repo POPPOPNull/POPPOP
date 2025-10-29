@@ -17,13 +17,14 @@ function TopComp (){
             <div className={TCSytle.layout}>최상단컴포넌트
                 <Swiper
                     className={TCSytle.swiper}
-                    spaceBetween={50}
-                    slidesPerView={3}
+                    spaceBetween={10}
+                    slidesPerView={5}
                     loop={true}
                     modules={[Autoplay]} 
                     autoplay={{
-                        delay:3000
+                        delay:2000
                     }}
+                    
                 >
                     <SwiperSlide className={TCSytle.slide}>팝업A1</SwiperSlide>
                     <SwiperSlide className={TCSytle.slide}>팝업A2</SwiperSlide>

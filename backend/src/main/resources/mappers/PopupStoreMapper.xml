@@ -62,4 +62,25 @@
         click_count
         from popup_store
     </select>
+    <select id="selectPopupStoreDetails" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        category_no,
+        id,
+        hashtags,
+        click_count
+        from popup_store
+        where popup_no=#{popupNo}
+    </select>
 </mapper>

@@ -4,6 +4,14 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.pageplacement.model.dao.PagePlacementMapper">
     <resultMap id="pagePlacementResultMap" type="com.ohgiraffers.poppop.pageplacement.model.dto.PagePlacementDTO">
-
+        <id property="popupNo" column="popup_no"/>
+        <result property="pagePosition" column="page_position"/>
+        <result property="pageNo" column="page_no"/>
     </resultMap>
+
+    <select id="selectTopPagePlacement" resultMap="pagePlacementResultMap">
+        select * from page_placement where page_position="top"
+    </select>
+
+
 </mapper>

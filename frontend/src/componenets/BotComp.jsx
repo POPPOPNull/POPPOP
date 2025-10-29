@@ -30,7 +30,7 @@ export function BotComp() {
                 <div className={BCStyle.date}>today+5</div>
                 <div className={BCStyle.date}>today+6</div>
             </div>
-            <div>
+            <div className={BCStyle.botlayout}>
                 {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore}/>)}
             </div>
         </>

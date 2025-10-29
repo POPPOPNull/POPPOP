@@ -38,9 +38,6 @@ public class PopupStoreController {
     // 팝업스토어 전체조회 (하단)
     @GetMapping("/popup-stores/lower")
     public ResponseEntity<List<PopupStoreDTO>> selectAllPopupStore(){
-
-
-
         return ResponseEntity
                 .ok(new ArrayList<>(popupStoreService.selectAllPopupStore()));
     }
@@ -74,11 +71,10 @@ public class PopupStoreController {
 
     // 팝업스토어 상세조회
     @GetMapping("/popup-stores/{popupNo}")
-    public ResponseEntity<?> selectPopupStoreDetails(){
+    public ResponseEntity<PopupStoreDTO> selectPopupStoreDetails(@PathVariable("popupNo") int popupNo){
 
         return ResponseEntity
-                .created(URI.create(""))
-                .build();
+                .ok(popupStoreService.selectPopupStoreDetails(popupNo));
     }
 
 }
