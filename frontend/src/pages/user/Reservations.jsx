@@ -1,15 +1,15 @@
 import Header from "../../layouts/usermain/header";
-import MypageBody from "../../layouts/usermain/MyPageMain";
+import Reservation from "../../layouts/usermain/Reservation";
 import Buttons from "../../layouts/usermain/buttonbar";
 
-function MypageMain(){
+function Reservations() {
     return(
         <>
         <Header/>
-        <MypageBody/>
+        <Reservation/>
         <Buttons/>
         </>
     )
 }
 
-export default MypageMain;
+export default Reservations;

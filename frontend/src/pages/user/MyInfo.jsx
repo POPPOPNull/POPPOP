@@ -2,7 +2,7 @@ import Header from "../../layouts/usermain/header";
 import MypageBody from "../../layouts/usermain/MyPageMain";
 import Buttons from "../../layouts/usermain/buttonbar";
 
-function MypageMain(){
+function Information() {
     return(
         <>
         <Header/>
@@ -12,4 +12,4 @@ function MypageMain(){
     )
 }
 
-export default MypageMain;
+export default Information;

@@ -1,15 +1,15 @@
 import Header from "../../layouts/usermain/header";
-import MypageBody from "../../layouts/usermain/MyPageMain";
+import MapBody from "../../layouts/usermain/MapBody";
 import Buttons from "../../layouts/usermain/buttonbar";
 
-function MypageMain(){
+function Maps() {
     return(
         <>
         <Header/>
-        <MypageBody/>
+        <MapBody/>
         <Buttons/>
         </>
     )
 }
 
-export default MypageMain;
+export default Maps;

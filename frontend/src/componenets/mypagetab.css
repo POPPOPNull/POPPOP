@@ -5,9 +5,13 @@
     margin-top: 100px;
 }
 .tabs {
+    font-size: 20px;
+    font-weight: 500;
     list-style: none;
     display: flex;
     padding-inline-start: 0;
+    text-decoration: 2px underline;
+    text-underline-offset: 10px;
 
 }
 .tabs li {

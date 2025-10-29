@@ -1,13 +1,14 @@
 import "./main.css";
-import Tab from "../../componenets/MyPageTab";
+import "./mapbody.css";
+// import Map from "../../componenets/Map";
 
-function Mypage (){
+function MapBody (){
     return(
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    <div>
-                        <Tab/>
+                    <div className="map">
+                    {/* <Map/> */}
                     </div>
                 </div>
             </div>
@@ -15,4 +16,4 @@ function Mypage (){
     )
 }
 
-export default Mypage;
+export default MapBody;

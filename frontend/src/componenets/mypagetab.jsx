@@ -11,9 +11,9 @@ function Tab() {
                 <h1>마이페이지</h1>
                 <div>
                     <ul className="tabs">
-                        <li>회원정보</li>
-                        <li>리뷰</li>
-                        <li>예약확인</li>
+                        <li><NavLink to="/myinfo" style={({isActive})=> ({color: isActive ? "yellow" : "white",})}>회원정보</NavLink></li>
+                        <li><NavLink to="/myreview" style={({isActive})=> ({color: isActive ? "yellow" : "white",})}>리뷰</NavLink></li>
+                        <li><NavLink to="/myreservation" style={({isActive})=> ({color: isActive ? "yellow" : "white",})}>예약확인</NavLink></li>
                     </ul>
                 </div>
             </div>
