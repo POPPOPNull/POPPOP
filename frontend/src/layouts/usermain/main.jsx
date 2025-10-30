@@ -1,5 +1,13 @@
 import "./main.css"
 import DragComp from "../../componenets/movingUI";
+import TopComp from "../../componenets/TopComp";
+import {MidComp1,MidComp2} from "../../componenets/MidComp";
+import CategoryComp from "../../componenets/CategoryComp";
+import Blank from "../../componenets/Blank";
+import { BotComp } from "../../componenets/BotComp";
+
+
+
 
 function User (){
     return(
@@ -7,8 +15,15 @@ function User (){
             <div className="user-main-layout">
                 <div className="user-main">
                     <div className="blank"></div>
-                    <div>유저메인 컴포넌트 자리</div>
-                    <DragComp/>
+                    <Blank/>
+                    <TopComp/>
+                    <Blank/>
+                    <CategoryComp/>
+                    <MidComp1/>
+                    <MidComp2/>
+                    <BotComp/>
+
+                    
                 
                     <div className="footer">푸터자리입니다.</div>
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import "./header.css"
+import SearchBar from "../userdetail/SearchBar";
 
 function Header(){
     return(

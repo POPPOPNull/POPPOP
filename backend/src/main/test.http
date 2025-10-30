@@ -25,3 +25,7 @@ Content-Type: application/json
     "id" : 77777,
     "name" : "test1"
 }
+
+###
+GET http://localhost:8080/page-placement/top
+Content-Type: application/json
