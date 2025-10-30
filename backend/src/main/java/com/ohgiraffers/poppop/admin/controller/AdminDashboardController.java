@@ -11,14 +11,15 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminDashboardController {
 
     private final AdminService adminService;
 
-    public AdminController(AdminService adminService) {
+    public AdminDashboardController(AdminService adminService) {
         this.adminService = adminService;
     }
 
+    // admin user 대시보드 KPI 카드 데이터 요청
     @GetMapping("/users-count")
     public ResponseEntity<Map<String, Long>> usersCount(){
 
@@ -26,4 +27,5 @@ public class AdminController {
 
         return ResponseEntity.ok(Collections.singletonMap("usersCount", count));
     }
+
 }

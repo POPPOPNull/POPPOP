@@ -2,6 +2,7 @@ import "./App.css"
 import User from "./pages/user/usermain"
 import Manager from "./pages/manager/manager";
 import Admin from "./pages/admin/adminmain"
+import AdminMembers from "./pages/admin/adminMembers"
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 import PopupDetails from "./pages/user/PopupDetails"
 import MyPopupPage from "./pages/manager/mypopup";
@@ -15,10 +16,10 @@ import Maps from "./pages/user/Maps"
 import Reservations from "./pages/user/Reservations"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
-import Popups from "./layouts/userdetail/Popups";
-import ReviewInsert from "./layouts/userdetail/ReviewInsert";
+
 import InsertReview from "./pages/user/InsertReview";
 
+import AdminMembersPage from "./pages/admin/adminMembers";
 
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/manager/reservation" element={<ReservationPage />} />
         <Route path="/manager/managerHome" element={<ManagerHome />} />
         <Route path="/admin" element={<Admin/>}/>
+          <Route path="/admin/members" element={<AdminMembersPage/>}/>
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>
