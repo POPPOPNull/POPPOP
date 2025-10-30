@@ -1,5 +1,5 @@
 import ManagerSidebar from "../../layouts/managermain/manager-sidebar";
-import Reservation from "../../componenets/reservation/reservation";
+import Reservation from "../../componenets/manager/reservation/reservation";
 import "./manager-page.css";
 
 function ReservationPage() {

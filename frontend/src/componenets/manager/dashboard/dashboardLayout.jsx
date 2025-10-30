@@ -1,6 +1,6 @@
 import DashboardTop from "./dashboardTop";
 import DashboardGrid from "./dashboardGrid";
-import "../../pages/manager/manager-page.css";
+import "../../../pages/manager/manager-page.css";
 import { useState } from "react";
 
 function DashboardLayout() {
