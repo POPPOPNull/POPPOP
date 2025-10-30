@@ -6,6 +6,18 @@ function ManagerHome() {
 
   return (
     <div className="mh-wrap">
+      {/* 이모티콘  */}
+      <div className="mh-emoji-layer">
+        <span className="emo emo-1">🍪</span>
+        <span className="emo emo-2">📚</span>
+        <span className="emo emo-3">🛍️</span>
+        <span className="emo emo-4">🎁</span>
+        <span className="emo emo-5">🥐</span>
+        <span className="emo emo-6">👠</span>
+        <span className="emo emo-7">📈</span>
+        <span className="emo emo-8">🧣</span>
+      </div>
+
       <div className="mh-header">
         {/* 로고 + hover 메뉴 */}
         <div
