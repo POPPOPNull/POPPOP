@@ -1,10 +1,11 @@
 import "./main.css"
-import DragComp from "../../componenets/movingUI";
-import TopComp from "../../componenets/TopComp";
-import {MidComp1,MidComp2} from "../../componenets/MidComp";
-import CategoryComp from "../../componenets/CategoryComp";
-import Blank from "../../componenets/Blank";
-import { BotComp } from "../../componenets/BotComp";
+
+import CategoryComp from "../../componenets/usermain/CategoryComp";
+import Blank from "../../componenets/usermain/Blank";
+import { BotComp } from "../../componenets/usermain/BotComp";
+
+import TopComp from "../../componenets/usermain/TopComp";
+import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
 
 
 

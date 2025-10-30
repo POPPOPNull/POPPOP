@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import BCStyle from "./MidComp.module.css"
-import { selectAllPopupStore } from "../api/PopupStoreAPI"
-import PopupStores from "./PopupStores"
+import { selectAllPopupStore } from "../../api/PopupStoreAPI"
+import PopupStores from "../PopupStores"
 
 
 export function BotComp() {

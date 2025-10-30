@@ -9,7 +9,8 @@ export function MidComp1(){
             <Swiper
             slidesPerView={3}
             className={MCStyle.layout}
-            spaceBetween={30}
+            spaceBetween={10}
+            slidesOffsetAfter={100}
             >
                 
                 <SwiperSlide  className={MCStyle.slide}>팝업B1</SwiperSlide>
@@ -30,7 +31,8 @@ export function MidComp2(){
             <Swiper
             slidesPerView={3}
             className={MCStyle.layout}
-            spaceBetween={30}
+            spaceBetween={10}
+            slidesOffsetAfter={100}
             >
                 
                 <SwiperSlide  className={MCStyle.slide}>팝업C1</SwiperSlide>
