@@ -18,7 +18,9 @@ function CategoryComp(){
             <Swiper
                 className={CCStyle.layout}
                 slidesPerView={3}
-                spaceBetween={30}
+                spaceBetween={10}
+                slidesOffsetAfter={100}
+                
             >
                 <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
                 <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
@@ -27,6 +29,7 @@ function CategoryComp(){
                 <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
                 <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
                 <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
+            
             </Swiper>
         </>
     )
