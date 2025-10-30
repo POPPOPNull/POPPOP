@@ -1,4 +1,4 @@
-import ManagerHome from "../../componenets/managerMain/managerHome";
+import ManagerHome from "../../componenets/manager/managerMain/managerHome";
 
 function ManagerHomePage() {
   return <ManagerHome />;

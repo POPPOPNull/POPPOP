@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import sampleIcon1 from '../../assets/icons/users-alt.svg';
 
 function AdminKPI1(){
 
@@ -28,7 +27,7 @@ function AdminKPI1(){
     return(
         <>
         <div className="adminKPI-box1">
-            <img src={sampleIcon1} alt="샘플1" className="side-icon"/>
+            <img src='/public/icons/users-alt.png' alt="샘플1" className="side-icon"/>
             {loading ? "로딩..." : err ? `에러: ${err}` : `사용자 수 / ${count}`}
         </div>
         </>

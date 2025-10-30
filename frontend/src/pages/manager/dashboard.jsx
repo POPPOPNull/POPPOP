@@ -1,4 +1,4 @@
-import DashboardLayout from "../../componenets/dashboard/dashboardLayout";
+import DashboardLayout from "../../componenets/manager/dashboard/dashboardLayout";
 
 function Dashboard() {
   return <DashboardLayout />;

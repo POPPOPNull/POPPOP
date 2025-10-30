@@ -2,6 +2,13 @@ import { useEffect,useState } from "react"
 import { locationCoordExchange, selectPopupStoreDetails } from "../../api/PopupStoreAPI"
 import { useParams } from "react-router-dom";
 import KakaoMap from "../../componenets/Map";
+import { selectPopupStoreDetails } from "../../api/PopupStoreAPI"
+import { BrowserRouter, Link, Route, Routes, useParams } from "react-router-dom";
+import PPStyle from "./Popups.module.css"
+import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
+import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
+import ReviewView from "../../componenets/pupupinfo/ReviewView";
+
 
 
 
@@ -10,11 +17,6 @@ function Popups(){
     const {popupNo} = useParams();
 
     const [popup, setPopup] = useState({});
-
-    const [coord, setCoord] = useState({
-        lat:"",
-        lng:""
-    })
 
     useEffect(()=>{
         selectPopupStoreDetails(popupNo)
@@ -28,18 +30,6 @@ function Popups(){
     },[])
 
 
-    useEffect(()=>{
-
-        locationCoordExchange(popup.location)
-        .then(data => {
-            console.log(data)
-            setCoord({
-                lat:data.documents[0].y,
-                lng:data.documents[0].x
-            })
-            console.log(coord)
-        })
-    },[popup])
 
 
 
@@ -48,8 +38,23 @@ function Popups(){
             <div className="user-main-layout">
                 <div className="user-main">
                     <div className="blank"></div>
-                    <div>{popup.no}의 상세페이지</div>
-                    <KakaoMap props={coord}/>               
+                    <div className={PPStyle.poster}>이미지준비중</div>
+                    <div className={PPStyle.imagebuttonlayout}>
+                        <Link to={`/user/${popupNo}`} className={PPStyle.imagebuttons}>
+                            <div>정보</div>
+                        </Link>
+                         <Link to={`/user/${popupNo}/review`} className={PPStyle.imagebuttons}>
+                            후기
+                        </Link>
+                    </div>
+                    <div className={PPStyle.popupname}>{popup.name}</div>
+                    <div className={PPStyle.popupduration}>{popup.startDate} ~ {popup.endDate}</div>
+                    <div className={PPStyle.popuplocation}>{popup.location}</div>
+                    <div>{popup.hashtags}</div>
+                    <PopupInfo/>
+                    <ReviewView/>
+                    <MidComp1/>
+                    <MidComp2/>
                     <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>
