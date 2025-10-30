@@ -1,9 +1,61 @@
 import "./admin-main.css"
+import AdminKPI1 from "../../componenets/admin/adminKPI1"
+import AdminSearchBar from "../../componenets/admin/adminSearchBar"
+import AdminChart from "../../componenets/admin/adminChart"
+import AdminLineChart from "../../componenets/admin/adminLineChart"
+import AdminBarChart from "../../componenets/admin/adminBarChart"
+import AdminKPITotalLeft from "../../componenets/admin/adminKPITotalLeft"
+import AdminKPITotalRight from "../../componenets/admin/adminKPITotalRight"
 
 function AdminMain (){
     return(
         <>
-        <div className="admin-main-layout">어드민 메인 컴포넌트 자리</div>
+        <div className="admin-main-layout">
+            <h1 className="admin-main-text">메인</h1>
+                <AdminSearchBar/>
+                <div className="adminKPI-layout">
+                    <div className="adminKPI-layout-up">
+                        <AdminKPITotalLeft/>
+                        <AdminKPITotalRight/>
+                    </div>
+                    <div className="adminKPI-layout-down">
+                        <AdminKPI1/><AdminKPI1/><AdminKPI1/><AdminKPI1/>
+                    </div>
+                    
+                </div>
+                <div className="admin-chart-layout">
+                    <div className="admin-chart-box">
+                        <div className="chart-header">
+                            <p className="chart-title">차트 1 입니다.</p>
+                            <button className="chart-button">기간</button>
+                        </div>
+                        <div className="admin-chart"><AdminChart height={200} width={400}/></div>
+                    </div>
+                    <div className="admin-chart-box">
+                        <div className="chart-header">
+                            <p className="chart-title">차트 2 입니다.</p>
+                            <button className="chart-button">기간</button>
+                        </div>
+                        <div className="admin-chart"><AdminChart height={200} width={400}/></div>
+                    </div>
+                </div>
+                <div className="admin-chart-layout">
+                    <div className="admin-chart-box">
+                        <div className="chart-header">
+                            <p className="chart-title">차트 3 입니다.</p>
+                            <button className="chart-button">기간</button>
+                        </div>
+                        <div className="admin-chart"><AdminLineChart height={200} width={360}/></div>
+                    </div>
+                    <div className="admin-chart-box">
+                        <div className="chart-header">
+                            <p className="chart-title">차트 4 입니다.</p>
+                            <button className="chart-button">기간</button>
+                        </div>
+                        <div className="admin-chart"><AdminBarChart height={200} width={360}/></div>
+                    </div>
+                </div>
+        </div>
         </>
     )
 }

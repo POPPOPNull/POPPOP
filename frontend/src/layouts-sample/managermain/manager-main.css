@@ -1,0 +1,9 @@
+.main-layout{
+    position: fixed;
+    top: 0;
+    left: 300px ;
+    background-color: black;
+    color: white;
+    height: 950px;
+    width: 100%;
+}

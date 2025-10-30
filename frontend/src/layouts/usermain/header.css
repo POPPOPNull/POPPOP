@@ -13,8 +13,9 @@
     z-index: 1001;
 }
 .logo{
-    color: yellow;
+    color: #FFCF0D;
     font-size: 40px;
+    font-weight: 700;
     width: 900px;
     height: 100px;
     position: fixed;

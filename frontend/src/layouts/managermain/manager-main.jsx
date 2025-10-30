@@ -1,12 +1,11 @@
-import "./manager-main.css"
+import "./manager-main.css";
 
-function ManagerMain (){
-    return(
-        <>
-        <div className="main-layout">매니저 메인 컴포넌트 자리</div>
-        <div className="main-layout">테스트</div>
-        </>
-    )
+function ManagerMain() {
+  return (
+    <main className="manager-main">
+     
+    </main>
+  );
 }
 
-export default ManagerMain
+export default ManagerMain;
