@@ -1,0 +1,109 @@
+:root {
+  --yellow: #FFD400;
+  --black: #000;
+  --white: #fff;
+}
+
+/* 전체 래퍼 */
+.mh-wrap {
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh; /* 화면 전체 높이 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 80px;
+  box-sizing: border-box;
+}
+
+/* 상단 영역 */
+.mh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* 로고 */
+.mh-logo-wrap {
+  position: relative;
+}
+
+.mh-logo {
+  font-size: 40px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--yellow);
+}
+
+/* hover 시 알약 버튼 나타남 */
+.mh-menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  display: none; /* 기본 숨김 */
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* hover 시 보이기 */
+.mh-logo-wrap:hover .mh-menu {
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* 알약 버튼 스타일 */
+.mh-menu button {
+  background: var(--yellow);
+  border: none;
+  border-radius: 999px;
+  color: var(--black);
+  font-weight: 700;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.mh-menu button:hover {
+  transform: scale(1.05);
+}
+
+/* 로그아웃 */
+.mh-logout {
+  color: var(--yellow);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 중앙 메인 */
+.mh-main {
+  text-align: center;
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 수직 중앙 */
+  align-items: center; /* 수평 중앙 */
+}
+
+.mh-title {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.mh-brand {
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--yellow);
+  margin-bottom: 16px;
+}
+
+.mh-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #f5f5f5;
+}
+
+/* 알약 3개 버튼 등장 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
