@@ -1,12 +1,12 @@
 import Header from "../../layouts/usermain/header";
-import MypageBody from "../../layouts/usermain/MyPageMain";
+import MyReservationBody from "../../layouts/mypage/MyReservation";
 import Buttons from "../../layouts/usermain/buttonbar";
 
 function Booking() {
     return(
         <>
         <Header/>
-        <MypageBody/>
+        <MyReservationBody/>
         <Buttons/>
         </>
         

@@ -1,10 +1,14 @@
 import { useEffect,useState } from "react"
+import { locationCoordExchange, selectPopupStoreDetails } from "../../api/PopupStoreAPI"
+import { useParams } from "react-router-dom";
+import KakaoMap from "../../componenets/Map";
 import { selectPopupStoreDetails } from "../../api/PopupStoreAPI"
 import { BrowserRouter, Link, Route, Routes, useParams } from "react-router-dom";
 import PPStyle from "./Popups.module.css"
 import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
 import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
 import ReviewView from "../../componenets/pupupinfo/ReviewView";
+
 
 
 

@@ -5,13 +5,14 @@ import Admin from "./pages/admin/adminmain"
 import AdminMembers from "./pages/admin/adminMembers"
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 import PopupDetails from "./pages/user/PopupDetails"
+import KakaoMap from "./componenets/Map"
 import MyPopupPage from "./pages/manager/mypopup";
 import ReservationPage from "./pages/manager/reservation";
 import ManagerHome from "./pages/manager/managerHome";
-import Mypage from "./pages/user/MyPage"
+import MyPage from "./pages/user/MyPage"
 import MyInformation from "./pages/user/MyInfo"
-import MyReview from "./pages/user/MyReview"
-import MyReservation from "./pages/user/MyReservation"
+import MyReview from "./pages/user/MyReviews"
+import MyReservation from "./pages/user/MyReservations"
 import Maps from "./pages/user/Maps"
 import Reservations from "./pages/user/Reservations"
 import Login from "./pages/Login"
@@ -38,16 +39,15 @@ function App() {
           <Route path=":popupNo/review" element={<InsertReview/>}/>
         </Route>
 
-
-
-
         <Route path="/manager" element={<Manager/>}/>
         <Route path="/manager/mypopup" element={<MyPopupPage />} />
         <Route path="/manager/reservation" element={<ReservationPage />} />
         <Route path="/manager/managerHome" element={<ManagerHome />} />
         <Route path="/admin" element={<Admin/>}/>
+
           <Route path="/admin/members" element={<AdminMembersPage/>}/>
         <Route path="/mypage" element={<Mypage/>}/>
+
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>
         <Route path="/myreservation" element={<MyReservation/>}/>

@@ -1,4 +1,4 @@
-import "./main.css";
+import "../usermain/main.css";
 import Tab from "../../componenets/MyPageTab";
 
 function Mypage (){
@@ -6,9 +6,7 @@ function Mypage (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    <div>
-                        <Tab/>
-                    </div>
+                    <Tab/>
                 </div>
             </div>
         </>

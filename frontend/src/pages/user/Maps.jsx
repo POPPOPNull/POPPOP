@@ -1,5 +1,5 @@
 import Header from "../../layouts/usermain/header";
-import MapBody from "../../layouts/usermain/MapBody";
+import MapBody from "../../layouts/map/MapBody";
 import Buttons from "../../layouts/usermain/buttonbar";
 
 function Maps() {
