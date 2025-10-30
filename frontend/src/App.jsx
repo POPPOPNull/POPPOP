@@ -3,6 +3,8 @@ import User from "./pages/user/usermain"
 import Manager from "./pages/manager/manager";
 import Admin from "./pages/admin/adminmain"
 import { BrowserRouter,Routes,Route} from "react-router-dom"
+import PopupDetails from "./pages/user/PopupDetails"
+import KakaoMap from "./componenets/Maps"
 import MyPopupPage from "./pages/manager/mypopup";
 import ReservationPage from "./pages/manager/reservation";
 import ManagerHome from "./pages/manager/managerHome";
@@ -25,7 +27,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<User/>}/>
-        <Route path="/user" element={<User/>}/>
+        <Route path="/user">
+          <Route index element={<User/>}></Route>
+          <Route path=":popupNo" element={<PopupDetails/>}/>
+        </Route>
         <Route path="/manager" element={<Manager/>}/>
         <Route path="/manager/mypopup" element={<MyPopupPage />} />
         <Route path="/manager/reservation" element={<ReservationPage />} />
