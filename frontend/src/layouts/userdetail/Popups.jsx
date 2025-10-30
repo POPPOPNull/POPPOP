@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import { locationCoordExchange, selectPopupStoreDetails } from "../../api/PopupStoreAPI"
 import { useParams } from "react-router-dom";
-import KakaoMap from "../../componenets/Maps";
+import KakaoMap from "../../componenets/Map";
 
 
 

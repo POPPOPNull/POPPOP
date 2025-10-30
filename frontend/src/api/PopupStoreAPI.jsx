@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const restapikey = process.env.REACT_APP_KAKAOMAP_RESTAPI_KEY
+
+const key = import.meta.env.VITE_KAKAOMAP_KEY
+
+const restapikey = import.meta.env.VITE_KAKAOMAP_RESTAPI_KEY
 
 const BACKEND_URL = 'http://localhost:8080';
 

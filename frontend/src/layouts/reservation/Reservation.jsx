@@ -1,4 +1,4 @@
-import "./main.css";
+import "../usermain/main.css";
 import "./reservation.css"
 
 function Reservation (){
