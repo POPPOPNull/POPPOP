@@ -4,8 +4,13 @@
     left: 350px;
     background-color: #f4f6fa;
     color: black;
-    height: 950px;
-    width: 100%;
+    height: 100vh;
+    width: calc(100% - 350px);
+    overflow-y: auto;
+    overflow-x: auto;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    padding-right: 20px;
 }
 
 .admin-main-text{
@@ -149,7 +154,6 @@
 }
 
 .admin-chart{
-    flex: 1 1 auto;
     display: flex;
     align-items: center;
     justify-content: center;

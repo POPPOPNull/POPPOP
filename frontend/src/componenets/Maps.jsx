@@ -6,7 +6,7 @@ import { Map, useKakaoLoader } from "react-kakao-maps-sdk";
 
 function KakaoMap({props}){
 
-    const key = process.env.REACT_APP_KAKAOMAP_KEY
+    const key = import.meta.env.VITE_KAKAOMAP_KEY
 
     useKakaoLoader({
         appkey: key,
