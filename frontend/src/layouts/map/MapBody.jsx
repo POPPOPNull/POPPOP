@@ -2,7 +2,6 @@ import "../usermain/main.css";
 import "./mapbody.css";
 import { useEffect, useState } from "react";
 import KakaoMap from "../../componenets/Map";
-import {MidComp1} from "../../componenets/MidComp";
 
 function MapBody (){
 
@@ -43,7 +42,7 @@ function MapBody (){
                     <div className="map">
                     <KakaoMap props={coord}/>   
                     </div>
-                    <MidComp1/>
+                  
                 </div>
             </div>
         </>

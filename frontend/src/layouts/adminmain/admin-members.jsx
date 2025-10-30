@@ -1,5 +1,5 @@
 import "./admin-members.css"
-import "../../componenets/mypopup/mypopup.css"
+import "../../componenets/manager/mypopup/mypopup.css"
 import AdminKPI1 from "../../componenets/admin/adminKPI1"
 import AdminSearchBar from "../../componenets/admin/adminSearchBar"
 import AdminChart from "../../componenets/admin/adminChart"

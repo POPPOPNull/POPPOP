@@ -25,6 +25,8 @@ import AdminMembersPage from "./pages/admin/adminMembers";
 
 
 
+
+
 function App() {
   
 
@@ -46,7 +48,7 @@ function App() {
         <Route path="/admin" element={<Admin/>}/>
 
           <Route path="/admin/members" element={<AdminMembersPage/>}/>
-        <Route path="/mypage" element={<Mypage/>}/>
+        <Route path="/mypage" element={<MyPage/>}/>
 
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>
