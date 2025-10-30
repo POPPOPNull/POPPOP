@@ -1,9 +1,41 @@
-.main-layout{
-    position: fixed;
-    top: 0;
-    left: 300px ;
-    background-color: black;
-    color: white;
-    height: 950px;
-    width: 100%;
+/* 대시보드 본문 레이아웃 */
+.manager-main {
+  margin-left: 300px;
+
+
+  min-height: 100vh;
+  padding: 24px;
+
+  background: transparent;
+  color: white;
+
+  /* 사이드바보다 위에 오도록 */
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* 디버그용(보이면 OK, 나중에 지워도 됨) */
+  outline: 1px solid rgba(255,255,255,.15);
 }
+
+/* 공통 블록 스타일 */
+.block {
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+  color: #fff;
+
+  /* 디버그용(보이면 OK, 나중에 지워도 됨) */
+  border: 1px dashed rgba(255,255,255,.3);
+}
+
+/* 각 블록 색상/높이 */
+.block-one   { background: #6366f1; height: 150px; }
+.block-two   { background: #10b981; height: 250px; }
+.block-three { background: #f59e0b; height: 450px; }

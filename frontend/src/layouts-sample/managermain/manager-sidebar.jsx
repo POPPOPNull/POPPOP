@@ -1,6 +1,6 @@
 import "./manager-sidebar.css"
 
-function ManagerSidebar(){
+function MangerSidebar(){
 
 
 
@@ -19,4 +19,4 @@ function ManagerSidebar(){
     )
 }
 
-export default ManagerSidebar
+export default MangerSidebar
