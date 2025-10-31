@@ -8,7 +8,6 @@ function Tab() {
     return(
         <>
             <div className="tabdetails">
-                <h1>마이페이지</h1>
                 <div>
                     <ul className="tabs">
                         <li><NavLink to="/myinfo" style={({isActive})=> ({color: isActive ? "#FFCF0D" : "white",})}>회원정보</NavLink></li>

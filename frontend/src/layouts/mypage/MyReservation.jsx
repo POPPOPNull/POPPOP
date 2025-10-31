@@ -1,5 +1,6 @@
 import "../usermain/main.css";
 import Tab from "../../componenets/MyPageTab";
+import MyResrvDetail from "../../componenets/MyResvDetail";
 
 function MyReservation (){
     return(
@@ -7,7 +8,7 @@ function MyReservation (){
             <div className="user-main-layout">
                 <div className="user-main">
                     <Tab/>
-                    <h1>예약내역</h1>
+                    <MyResrvDetail/>
                 </div>
             </div>
         </>
