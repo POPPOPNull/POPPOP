@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -61,12 +62,13 @@ public class PopupStoreController {
     }
 
     // 팝업스토어 검색조회
-    @GetMapping("/popup-stores/search?keyword={searchWord}")
-    public ResponseEntity<?> selectPopupStoreBySearchKeyword(@RequestParam String searchWord){
+    @GetMapping("/popup-stores/search")
+    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreBySearchKeyword(@RequestParam String searchWord){
+        System.out.println("searchWord = " + searchWord);
+        System.out.println(popupStoreService.selectPopupStoreByKeyword(searchWord));
 
-        return  ResponseEntity
-                .created(URI.create(""))
-                .build();
+
+        return  ResponseEntity.ok(popupStoreService.selectPopupStoreByKeyword(searchWord));
     }
 
     // 팝업스토어 상세조회
@@ -75,6 +77,16 @@ public class PopupStoreController {
 
         return ResponseEntity
                 .ok(popupStoreService.selectPopupStoreDetails(popupNo));
+    }
+    // 오늘 기준 팝업스토어 조회
+    @GetMapping("/popup-stores")
+    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreToday(@RequestParam String startDate,@RequestParam String endDate, @RequestParam String status){
+        System.out.println("startDate = " + startDate);
+        System.out.println("endDate = " + endDate);
+        System.out.println("status = " + status);
+
+
+        return ResponseEntity.ok(popupStoreService.selectPopupStoreToday(startDate,endDate,status));
     }
 
 }

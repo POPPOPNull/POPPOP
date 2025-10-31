@@ -83,4 +83,64 @@
         from popup_store
         where popup_no=#{popupNo}
     </select>
+    <select id="selectPopupStoreToday" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        category_no,
+        id,
+        hashtags,
+        click_count
+        from popup_store
+        <!--진행중-->
+        <if test="status!=null and status=='open'">
+            where popup_end_date &gt; #{startDate}
+              and popup_start_date &lt; #{endDate}
+        </if>
+        <!--오픈예정-->
+        <if test="status!=null and status=='scheduled'">
+            where popup_start_date &gt; #{startDate}
+        </if>
+        <!--종료-->
+        <if test="status!=null and status=='done'">
+            where popup_end_date &lt; #{endDate}
+        </if>
+        <if test="status!=null and status=='all'">
+            where approval_status = "승인"
+        </if>
+    </select>
+    <select id="selectPopupStoreByKeyword" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        category_no,
+        id,
+        hashtags,
+        click_count
+        from popup_store
+        where popup_name like concat('%',#{searchWord},'%')
+           or brand_name like concat('%',#{searchWord},'%')
+           or popup_location like concat('%',#{searchWord},'%')
+           or hashtags like concat('%',#{searchWord},'%')
+    </select>
 </mapper>

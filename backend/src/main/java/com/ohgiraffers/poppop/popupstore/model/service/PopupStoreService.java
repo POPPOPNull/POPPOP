@@ -5,6 +5,7 @@ import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,5 +29,13 @@ public class PopupStoreService {
 
     public PopupStoreDTO selectPopupStoreDetails(int popupNo) {
         return popupStoreMapper.selectPopupStoreDetails(popupNo);
+    }
+
+    public List<PopupStoreDTO> selectPopupStoreToday(String startDate, String endDate, String status) {
+        return popupStoreMapper.selectPopupStoreToday(startDate,endDate,status);
+    }
+
+    public List<PopupStoreDTO> selectPopupStoreByKeyword(String searchWord) {
+        return popupStoreMapper.selectPopupStoreByKeyword(searchWord);
     }
 }

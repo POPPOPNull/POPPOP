@@ -23,3 +23,14 @@ export function locationCoordExchange(location){
     .then(response=>response.data)
     
 }
+
+// 팝업스토어 오늘 기준 오픈예정상태에 따른 조회
+export function selectPopupstoreByOpenStatus({startDate,endDate,status}){
+    return axios.get(`${BACKEND_URL}/popup-stores?startDate=${startDate}&endDate=${endDate}&status=${status}`)
+    .then(response=>response.data)
+}
+// 팝업스토어 검색조회
+export function selectPopupStoreBySearchWord({searchWord}){
+    return axios.get(`${BACKEND_URL}/popup-stores/search?searchWord=${searchWord}`)
+    .then(response=>response.data)
+}
