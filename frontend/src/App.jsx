@@ -22,7 +22,7 @@ import SignUp from "./pages/SignUp"
 import InsertReview from "./pages/user/InsertReview";
 
 import AdminMembersPage from "./pages/admin/adminMembers";
-
+import UserSearch from "./pages/user/UserSearch";
 
 
 
@@ -40,6 +40,8 @@ function App() {
           <Route index element={<User/>}/>
           <Route path=":popupNo" element={<PopupDetails/>}/>
           <Route path=":popupNo/review" element={<InsertReview/>}/>
+          <Route path="search" element={<UserSearch/>}/>
+
         </Route>
 
         <Route path="/manager" element={<Manager/>}/>
