@@ -17,7 +17,7 @@
         select count(*) from `member`
     </select>
 
-    <select id="findAllMembers" resultMap="memberResultMap">
+    <select id="selectAllMembers" resultMap="memberResultMap">
         select
               id,
               name,

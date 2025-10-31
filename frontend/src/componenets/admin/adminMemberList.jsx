@@ -1,36 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { selectAllMembers } from "../../api/adminAPI";
 
 function AdminMemberList(){    
 
-    const [searchText, setSearchText] = useState("");
     const [members, setMembers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [err, setErr] = useState(null);
 
     useEffect(() => {
-        const fetchMembers = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/admin/members");
-
-                setMembers(response.data);
+                const data = await selectAllMembers();
+                setMembers(data);
             } catch (error) {
-                setErr(error);
+                console.error("selectAllMembers 호출 에러", error);
             } finally {
-                setLoading(false);
+                
             }
-        };
-
-        fetchMembers();
+        }
+        fetchData();
     }, []);
-
-    if (loading) {
-        return <div>회원 목록을 불러오는 중...</div>
-    }
-
-    if (err) {
-        return <div>오류 : {err.message || "알 수 없는 오류"}</div>
-    }
 
     return(
         <div>
@@ -44,7 +32,9 @@ function AdminMemberList(){
                             <div className="ellipsis">{member.phone}</div>
                             <div className="ellipsis">{member.email}</div>
                             <div className="ellipsis">{member.gender}</div>
-                            <div className="ellipsis">{member.birthDate}</div>
+                            <div className="ellipsis center">
+                                {new Date(member.birthDate).toISOString().slice(0, 10)}
+                            </div>
                             
                         </div>
                     ))

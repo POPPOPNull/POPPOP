@@ -10,5 +10,5 @@ public interface AdminMapper {
 
     int countUsers();
 
-    List<MemberDTO> findAllMembers();
+    List<MemberDTO> selectAllMembers();
 }
