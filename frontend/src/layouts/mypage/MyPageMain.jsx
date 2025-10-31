@@ -1,5 +1,6 @@
 import "../usermain/main.css";
 import Tab from "../../componenets/MyPageTab";
+import MyInfoDetail from "../../componenets/MyInfoDetail";
 
 function Mypage (){
     return(
@@ -7,6 +8,7 @@ function Mypage (){
             <div className="user-main-layout">
                 <div className="user-main">
                     <Tab/>
+                    <MyInfoDetail/>
                 </div>
             </div>
         </>
