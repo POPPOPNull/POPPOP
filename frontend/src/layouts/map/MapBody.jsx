@@ -2,6 +2,7 @@ import "../usermain/main.css";
 import "./mapbody.css";
 import { useEffect, useState } from "react";
 import KakaoMap from "../../componenets/Map";
+import NearComp from "../../componenets/NearComp";
 
 function MapBody (){
 
@@ -40,9 +41,9 @@ function MapBody (){
             <div className="user-main-layout">
                 <div className="user-main">
                     <div className="map">
-                    <KakaoMap props={coord}/>   
+                    <KakaoMap props={coord}/>
                     </div>
-                  
+                    <NearComp/>
                 </div>
             </div>
         </>
