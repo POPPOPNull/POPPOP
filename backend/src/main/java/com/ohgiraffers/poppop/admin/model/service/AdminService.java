@@ -19,7 +19,7 @@ public class AdminService {
         return adminMapper.countUsers();
     }
 
-    public List<MemberDTO> findAllMembers() {
-        return adminMapper.findAllMembers();
+    public List<MemberDTO> selectAllMembers() {
+        return adminMapper.selectAllMembers();
     }
 }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Montserrat:wght@400;600;800&family=Poppins:wght@400;600;800&family=Righteous&display=swap');
 
 .admin-sidebar-layout{
-    width: 350px;
+    width: 300px;
     background-color: #F4f6fa;
     height:100vh;
     overflow-y:auto;
@@ -41,29 +41,43 @@
     /* background-color: red; */
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: flex-start;
     position: relative;
     top: 0px;
+    padding-right: 50px;
 }
 
 .admin-side-button{
     /* background-color: blue; */
     color: #929498;
     font-family: 'pretendard', sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
     height: 50px;
-    width: 80%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 12px;
-    border-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     cursor: pointer;
 }
 
-.side-icon{
+.admin-side-button:hover {
+    background: linear-gradient(to right, #eba9cf, #f4002d);
+    color: #ffffff
+}
+
+.admin-side-button.active {
+    background: linear-gradient(to right, #eba9cf, #f4002d);
+    color: #ffffff
+}
+
+.admin-side-button.active .arrow-icon {
+    transform: rotate(90deg);
+}
+
+.side-icon {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
@@ -71,3 +85,24 @@
     display: inline-block;
     vertical-align: middle;
 }
+
+.arrow-icon {
+    width: 15px;
+    height: 15px;
+    margin-left: auto;
+    margin-right: 40px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.admin-submenu-layout {
+    padding-left: 25px;
+    background-color: #f4f6fa;
+}
+
+.admin-submenu-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #929498;
+}
+

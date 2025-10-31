@@ -1,12 +1,5 @@
 import "./admin-members.css"
-import "../../componenets/manager/mypopup/mypopup.css"
-import AdminKPI1 from "../../componenets/admin/adminKPI1"
 import AdminSearchBar from "../../componenets/admin/adminSearchBar"
-import AdminChart from "../../componenets/admin/adminChart"
-import AdminLineChart from "../../componenets/admin/adminLineChart"
-import AdminBarChart from "../../componenets/admin/adminBarChart"
-import AdminKPITotalLeft from "../../componenets/admin/adminKPITotalLeft"
-import AdminKPITotalRight from "../../componenets/admin/adminKPITotalRight"
 import AdminMemberList from "../../componenets/admin/adminMemberList"
 
 function AdminMembers (){
