@@ -21,7 +21,7 @@ public class AdminMemberController {
 
     @GetMapping("/members")
     public ResponseEntity<List<MemberDTO>> selectAllMembers() {
-        List<MemberDTO> memberList = adminService.findAllMembers();
+        List<MemberDTO> memberList = adminService.selectAllMembers();
         return ResponseEntity.ok(memberList);
     }
 }
