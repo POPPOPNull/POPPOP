@@ -7,6 +7,7 @@ import { BrowserRouter,Routes,Route} from "react-router-dom"
 import PopupDetails from "./pages/user/PopupDetails"
 import KakaoMap from "./componenets/Map"
 import MyPopupPage from "./pages/manager/mypopup";
+import MypopupdetPage from "./pages/manager/mypopupdet";
 import ReservationPage from "./pages/manager/reservation";
 import ManagerHome from "./pages/manager/managerHome";
 import MyPage from "./pages/user/MyPage"
@@ -43,6 +44,7 @@ function App() {
 
         <Route path="/manager" element={<Manager/>}/>
         <Route path="/manager/mypopup" element={<MyPopupPage />} />
+        <Route path="/manager/mypopupdet" element={<MypopupdetPage />} />
         <Route path="/manager/reservation" element={<ReservationPage />} />
         <Route path="/manager/managerHome" element={<ManagerHome />} />
         <Route path="/admin" element={<Admin/>}/>
