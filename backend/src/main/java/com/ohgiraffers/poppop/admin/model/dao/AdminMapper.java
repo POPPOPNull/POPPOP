@@ -10,5 +10,6 @@ public interface AdminMapper {
 
     int countUsers();
 
-    List<MemberDTO> selectAllMembers();
+    List<MemberDTO> selectAllMembers(String role);
+
 }

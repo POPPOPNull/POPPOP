@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface ReviewMapper {
     List<ReviewDTO> selectReviewByPopupStore(int popupNo);
+
+    List<ReviewDTO> selectAllReviews();
 }

@@ -5,15 +5,15 @@ import "./admin-sidebar.css";
 const poppopMenus = [
     { name: "메인", icon: "/public/icons/home.png", subMenus: [{name : "대시보드", path: "/admin"}] },
     { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [{name: "회원 전체 조회", path: "/admin/members"}]},
-    { name: "리뷰내역", icon: "/public/icons/feedback-review.png", subMenus: []},
-    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: []},
+    { name: "리뷰내역", icon: "/public/icons/feedback-review.png", subMenus: [{name: "리뷰 전체 조회", path: "/admin/reviews"}]},
+    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: [{name: "예약 내역 전체 조회", path: "/admin/reservation"}]},
 ];
 
 const poptnerMenus = [
-    { name: "메인", icon: "/public/icons/home.png", subMenus: [] },
-    { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: []},
-    { name: "팝업목록", icon: "/public/icons/shop.png", subMenus: []},
-    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: []},
+    { name: "메인", icon: "/public/icons/home.png", subMenus: [{name: "대시보드", path: "/admin/manager-main"}] },
+    { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [{name: "회원 전체 조회", path: "/admin/manager-members"}]},
+    { name: "팝업목록", icon: "/public/icons/shop.png", subMenus: [{name: "팝업 전체 조회", path: "/admin/manager-popup"}]},
+    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: [{name: "팝업 예약 조회", path: "/admin/manager-reservation"}]},
 ];
 
 function AdminSidebar(){

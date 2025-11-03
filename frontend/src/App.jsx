@@ -1,8 +1,6 @@
 import "./App.css"
 import User from "./pages/user/usermain"
 import Manager from "./pages/manager/manager";
-import Admin from "./pages/admin/adminmain"
-import AdminMembers from "./pages/admin/adminMembers"
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 import PopupDetails from "./pages/user/PopupDetails"
 import KakaoMap from "./componenets/Map"
@@ -21,8 +19,16 @@ import SignUp from "./pages/SignUp"
 
 import InsertReview from "./pages/user/InsertReview";
 
-import AdminMembersPage from "./pages/admin/adminMembers";
+import AdminLayout from "./pages/admin/adminLayout";
+import AdminMain from "./layouts/adminmain/admin-main";
+import AdminMembers from "./layouts/adminmain/admin-members";
+import AdminReview from "./layouts/adminmain/admin-review";
 import UserSearch from "./pages/user/UserSearch";
+import AdminReservation from "./layouts/adminmain/admin-reservation";
+import AdminManagerMain from "./layouts/adminmain/admin-manager-main";
+import AdminManagerMemberList from "./componenets/admin/adminManagerMemberList";
+import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
+import AdminManagerReservationList from "./componenets/admin/adminManagerReservationList";
 import UserFavorite from "./pages/user/UserFavorite";
 
 
@@ -53,10 +59,19 @@ function App() {
         <Route path="/manager/mypopupreg" element={<MyPopupRegPage />} />
         <Route path="/manager/reservation" element={<ReservationPage />} />
         <Route path="/manager/managerHome" element={<ManagerHome />} />
-        <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admin" element={<AdminLayout/>}>
+          <Route index element={<AdminMain/>} />
+          <Route path="members" element={<AdminMembers/>} />
+          <Route path="reviews" element={<AdminReview/>} />
+          <Route path="reservation" element={<AdminReservation/>} />
+          <Route path="manager-main" element={<AdminManagerMain/>} />
+          <Route path="manager-members" element={<AdminManagerMemberList/>} />
+          <Route path="manager-popup" element={<AdminManagerPopupList/>} />
+          <Route path="manager-reservation" element={<AdminManagerReservationList/>} />
+        </Route>
+
 
           <Route path="/admin/members" element={<AdminMembersPage/>}/>
-
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>
         <Route path="/myreservation" element={<MyReservation/>}/>

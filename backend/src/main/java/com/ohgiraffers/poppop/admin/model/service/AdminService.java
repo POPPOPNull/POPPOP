@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.admin.model.service;
 
 import com.ohgiraffers.poppop.admin.model.dao.AdminMapper;
 import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
+import com.ohgiraffers.poppop.review.model.dto.ReviewDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public class AdminService {
     }
 
     public List<MemberDTO> selectAllMembers() {
-        return adminMapper.selectAllMembers();
+        return adminMapper.selectAllMembers("user");
     }
+
+    public List<MemberDTO> selectAllManagers() {
+        return adminMapper.selectAllMembers("manager");
+    }
+
 }

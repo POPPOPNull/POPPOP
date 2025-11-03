@@ -6,14 +6,16 @@ public class ReviewDTO {
     private String content;
     private int popupNo;
     private String memberId;
+    private String popupName;
 
     public ReviewDTO (){}
 
-    public ReviewDTO(int reviewNo, String content, int popupNo, String memberId) {
+    public ReviewDTO(int reviewNo, String content, int popupNo, String memberId, String popupName) {
         this.reviewNo = reviewNo;
         this.content = content;
         this.popupNo = popupNo;
         this.memberId = memberId;
+        this.popupName = popupName;
     }
 
     public int getReviewNo() {
@@ -48,6 +50,14 @@ public class ReviewDTO {
         this.memberId = memberId;
     }
 
+    public String getPopupName() {
+        return popupName;
+    }
+
+    public void setPopupName(String popupName) {
+        this.popupName = popupName;
+    }
+
     @Override
     public String toString() {
         return "ReviewDTO{" +
@@ -55,6 +65,7 @@ public class ReviewDTO {
                 ", content='" + content + '\'' +
                 ", popupNo=" + popupNo +
                 ", memberId='" + memberId + '\'' +
+                ", popupName='" + popupName + '\'' +
                 '}';
     }
 }
