@@ -6,7 +6,7 @@ import AdminBarChart from "../../componenets/admin/adminBarChart"
 import AdminKPITotalLeft from "../../componenets/admin/adminKPITotalLeft"
 import AdminKPITotalRight from "../../componenets/admin/adminKPITotalRight"
 
-function AdminMain (){
+function AdminManagerMain (){
     return(
         <>
             <div className="adminKPI-layout">
@@ -55,4 +55,4 @@ function AdminMain (){
     )
 }
 
-export default AdminMain
+export default AdminManagerMain

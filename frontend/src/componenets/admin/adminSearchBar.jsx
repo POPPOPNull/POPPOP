@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { SearchContext } from "./searchProvider";
 
 function AdminSearchBar(){    
 
-    const [searchText, setSearchText] = useState("");
+    const { searchText, setSearchText } = useContext(SearchContext);
 
     return(
-        <>
         <div className="adminSearchBar">
             <img src='/public/icons/search.png' alt="검색" className="side-icon"/>
             <input 
@@ -16,8 +16,7 @@ function AdminSearchBar(){
             onChange={(e) => setSearchText(e.target.value)}
             />
         </div>
-        </>
-    )
+    );
 }
 
 export default AdminSearchBar;

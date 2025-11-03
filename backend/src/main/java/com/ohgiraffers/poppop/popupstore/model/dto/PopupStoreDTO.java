@@ -18,14 +18,14 @@ public class PopupStoreDTO {
     private String explanation;
     private String approvalStatus;
     private String rejectionReason;
-    private String categoryNo;
+    private String categoryName;
     private String id;
     private String hashtags;
     private int clickCount;
 
     public PopupStoreDTO(){}
 
-    public PopupStoreDTO(int no, String name, String brandName, Date startDate, Date endDate, Time openTime, Time closeTime, String location, boolean reservableStatus, String explanation, String approvalStatus, String rejectionReason, String categoryNo, String id, String hashtags, int clickCount) {
+    public PopupStoreDTO(int no, String name, String brandName, Date startDate, Date endDate, Time openTime, Time closeTime, String location, boolean reservableStatus, String explanation, String approvalStatus, String rejectionReason, String categoryName, String id, String hashtags, int clickCount) {
         this.no = no;
         this.name = name;
         this.brandName = brandName;
@@ -38,7 +38,7 @@ public class PopupStoreDTO {
         this.explanation = explanation;
         this.approvalStatus = approvalStatus;
         this.rejectionReason = rejectionReason;
-        this.categoryNo = categoryNo;
+        this.categoryName = categoryName;
         this.id = id;
         this.hashtags = hashtags;
         this.clickCount = clickCount;
@@ -140,12 +140,12 @@ public class PopupStoreDTO {
         this.rejectionReason = rejectionReason;
     }
 
-    public String getCategoryNo() {
-        return categoryNo;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategoryNo(String categoryNo) {
-        this.categoryNo = categoryNo;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getId() {
@@ -187,7 +187,7 @@ public class PopupStoreDTO {
                 ", explanation='" + explanation + '\'' +
                 ", approvalStatus='" + approvalStatus + '\'' +
                 ", rejectionReason='" + rejectionReason + '\'' +
-                ", categoryNo='" + categoryNo + '\'' +
+                ", categoryName='" + categoryName + '\'' +
                 ", id='" + id + '\'' +
                 ", hashtags=" + hashtags +
                 ", clickCount=" + clickCount +

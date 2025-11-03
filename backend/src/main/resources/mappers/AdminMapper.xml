@@ -10,6 +10,7 @@
         <result property="role" column="role"/>
         <result property="email" column="email"/>
         <result property="gender" column="gender"/>
+        <result property="businessNo" column="business_no"/>
         <result property="birthDate" column="birth_date"/>
     </resultMap>
 
@@ -25,8 +26,12 @@
               role,
               email,
               gender,
+              business_no,
               birth_date
           from member
+        <if test="role != null and role != ''">
+         where role like #{role}
+        </if>
     </select>
 
 </mapper>

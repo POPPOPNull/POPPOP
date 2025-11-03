@@ -18,4 +18,8 @@ public class ReviewService {
     public List<ReviewDTO> selectReviewByPopupStore(int popupNo) {
         return reviewMapper.selectReviewByPopupStore(popupNo);
     }
+
+    public List<ReviewDTO> selectAllReviews() {
+        return reviewMapper.selectAllReviews();
+    }
 }

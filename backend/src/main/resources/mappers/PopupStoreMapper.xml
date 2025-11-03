@@ -16,7 +16,7 @@
         <result property="explanation" column="popup_explanation"/>
         <result property="approvalStatus" column="approval_status"/>
         <result property="rejectionReason" column="rejection_reason"/>
-        <result property="categoryNo" column="category_no"/>
+        <result property="categoryName" column="category_name"/>
         <result property="id" column="id"/>
         <result property="hashtags" column="hashtags"/>
         <result property="clickCount" column="click_count"/>
@@ -37,7 +37,7 @@
                popup_explanation,
                approval_status,
                rejection_reason,
-               category_no,
+               category_name,
                id,
                hashtags,
                click_count
@@ -56,7 +56,7 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_no,
+        category_name,
         id,
         hashtags,
         click_count
@@ -76,7 +76,7 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_no,
+        category_name,
         id,
         hashtags,
         click_count
@@ -97,7 +97,7 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_no,
+        category_name,
         id,
         hashtags,
         click_count
@@ -133,7 +133,7 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_no,
+        category_name,
         id,
         hashtags,
         click_count

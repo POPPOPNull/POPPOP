@@ -4,6 +4,47 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper">
     <resultMap id="reservationResultMap" type="com.ohgiraffers.poppop.reservation.model.dto.ReservationDTO">
-
+        <id property="reservationNo" column="reservation_no"/>
+        <result property="reservationStatus" column="reservation_status"/>
+        <result property="reservationPersonnel" column="reservation_personnel"/>
+        <result property="cancelReason" column="cancel_reason"/>
+        <result property="popupNo" column="popup_no"/>
+        <result property="memberId" column="id"/>
+        <result property="popupName" column="popup_name"/>
     </resultMap>
+
+    <resultMap id="reservationSummaryResultMap" type="com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO">
+        <result property="popupName" column="popup_name"/>
+        <result property="status" column="status"/>
+        <result property="reservationCount" column="reservation_count"/>
+        <result property="totalPersonnel" column="total_personnel"/>
+    </resultMap>
+
+    <select id="selectAllReservation" resultMap="reservationResultMap">
+        select
+               r.reservation_no,
+               r.reservation_status,
+               r.reservation_personnel,
+               r.cancel_reason,
+               p.popup_name,
+               r.id
+          from reservation r
+          join popup_store p on r.popup_no = p.popup_no
+    </select>
+
+    <select id="selectReservationSummary" resultMap="reservationSummaryResultMap">
+        select
+               p.popup_name,
+               case
+                   when curdate() between p.popup_start_date and p.popup_end_date then '진행중'
+                   when curdate() > p.popup_end_date then '종료'
+                   else '오픈예정'
+               end as status,
+               count(r.reservation_no) as reservation_count,
+               ifnull(sum(r.reservation_personnel), 0) as total_personnel
+          from popup_store p
+          left join reservation r on p.popup_no = r.popup_no
+         group by p.popup_no, p.popup_name, p.popup_start_date, p.popup_end_date
+         order by p.popup_no
+    </select>
 </mapper>

@@ -8,6 +8,7 @@
         <result property="content" column="review_content"/>
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
+        <result property="popupName" column="popup_name"/>
     </resultMap>
 
     <select id="selectReviewByPopupStore" resultMap="reviewResultMap">
@@ -16,6 +17,16 @@
                id
           from review
          where popup_no = #{popupNo}
+    </select>
 
+    <select id="selectAllReviews" resultMap="reviewResultMap">
+        select
+               r.review_no,
+               r.review_content,
+               r.popup_no,
+               r.id,
+               p.popup_name
+          from review r
+          join popup_store p on r.popup_no = p.popup_no
     </select>
 </mapper>
