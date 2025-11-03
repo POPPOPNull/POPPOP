@@ -6,11 +6,21 @@ import { BotComp } from "../../componenets/usermain/BotComp";
 
 import TopComp from "../../componenets/usermain/TopComp";
 import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
+import {useDrag, DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { memo } from "react";
+// import Test from "../../pages/dndtest/DndTest";
+
 
 
 
 
 function User (){
+
+
+
+
+
     return(
         <>
             <div className="user-main-layout">
@@ -18,10 +28,13 @@ function User (){
                     <div className="blank"></div>
                     <Blank/>
                     <TopComp/>
-                    <Blank/>
-                    <CategoryComp/>
-                    <MidComp1/>
-                    <MidComp2/>
+                    {/* <Test/> */}
+                    <DndProvider backend={HTML5Backend}>
+                        <CategoryComp/>
+                        <MidComp1/>
+                        <MidComp2/>
+                    </DndProvider>
+                    
                     <BotComp/>
 
                     

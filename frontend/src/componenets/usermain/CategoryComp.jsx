@@ -1,7 +1,11 @@
+import { useDrag } from "react-dnd";
 import CCStyle from "./MidComp.module.css"
 import { Swiper, SwiperSlide } from "swiper/react";
 
+
 function CategoryComp(){
+
+
 
     return(
         <>
@@ -19,7 +23,7 @@ function CategoryComp(){
                 className={CCStyle.layout}
                 slidesPerView={3}
                 spaceBetween={10}
-                slidesOffsetAfter={100}
+                slidesOffsetAfter={200}
                 
             >
                 <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>

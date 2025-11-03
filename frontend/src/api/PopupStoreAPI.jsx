@@ -25,12 +25,30 @@ export function locationCoordExchange(location){
 }
 
 // 팝업스토어 오늘 기준 오픈예정상태에 따른 조회
-export function selectPopupstoreByOpenStatus({startDate,endDate,status}){
+export function selectPopupstoreByOpenStatus(startDate,endDate,status){
     return axios.get(`${BACKEND_URL}/popup-stores?startDate=${startDate}&endDate=${endDate}&status=${status}`)
     .then(response=>response.data)
 }
 // 팝업스토어 검색조회
-export function selectPopupStoreBySearchWord({searchWord}){
+export function selectPopupStoreBySearchWord(searchWord){
     return axios.get(`${BACKEND_URL}/popup-stores/search?searchWord=${searchWord}`)
+    .then(response=>response.data)
+}
+//팝업스토어 찜목록 조회
+export function selectFavoritePopupStoreById(id){
+    return axios.get(`${BACKEND_URL}/popup-stores/favorite/${id}`)
+    .then(response=>response.data)
+}
+
+// 팝업스토어 랜덤조회
+export function selectPopupRandomly(){
+    const arr = new Array();
+    for(let i =arr.length;i<7;i++){
+        arr[i]=parseInt((Math.random()*50)+1)
+    }
+    console.log("arr",arr)
+
+
+    return axios.get(`${BACKEND_URL}/popup-stores/random/${arr}`)
     .then(response=>response.data)
 }

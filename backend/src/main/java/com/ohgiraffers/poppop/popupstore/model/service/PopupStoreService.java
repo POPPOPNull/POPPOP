@@ -5,7 +5,6 @@ import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,5 +36,13 @@ public class PopupStoreService {
 
     public List<PopupStoreDTO> selectPopupStoreByKeyword(String searchWord) {
         return popupStoreMapper.selectPopupStoreByKeyword(searchWord);
+    }
+
+    public List<PopupStoreDTO> selectFavoritePopupStoreById(String id) {
+        return popupStoreMapper.selectFavoritePopupStoreById(id);
+    }
+
+    public List<PopupStoreDTO> selectPopupStoreRandomly(ArrayList<Integer> random) {
+        return popupStoreMapper.selectPopupStoreRandomly(random);
     }
 }

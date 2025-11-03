@@ -1,0 +1,4 @@
+.botlayout{
+    display: flex;
+    flex-wrap: wrap;
+}
