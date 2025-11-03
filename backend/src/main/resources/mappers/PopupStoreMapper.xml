@@ -56,10 +56,9 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_name,
         id,
-        hashtags,
-        click_count
+        click_count,
+        category_name
         from popup_store
     </select>
     <select id="selectPopupStoreDetails" resultMap="popupStoreResultMap">
@@ -76,10 +75,9 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_name,
         id,
-        hashtags,
-        click_count
+        click_count,
+        category_name
         from popup_store
         where popup_no=#{popupNo}
     </select>
@@ -97,10 +95,9 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_name,
         id,
-        hashtags,
-        click_count
+        click_count,
+        category_name
         from popup_store
         <!--진행중-->
         <if test="status!=null and status=='open'">
@@ -119,6 +116,7 @@
             where approval_status = "승인"
         </if>
     </select>
+    <!--검색조회-->
     <select id="selectPopupStoreByKeyword" resultMap="popupStoreResultMap">
         select
         popup_no,
@@ -133,10 +131,9 @@
         popup_explanation,
         approval_status,
         rejection_reason,
-        category_name,
         id,
-        hashtags,
-        click_count
+        click_count,
+        category_name
         from popup_store
         where popup_name like concat('%',#{searchWord},'%')
            or brand_name like concat('%',#{searchWord},'%')
@@ -147,22 +144,21 @@
     <!-- 찜목록 조회 -->
     <select id="selectFavoritePopupStoreById" resultMap="popupStoreResultMap">
         select
-                p.popup_no,
-                popup_name,
-                brand_name,
-                popup_start_date,
-                popup_end_date,
-                open_time,
-                close_time,
-                popup_location,
-                reservable_status,
-                popup_explanation,
-                approval_status,
-                rejection_reason,
-                category_no,
-                p.id,
-                hashtags,
-                click_count
+        p.popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        p.id,
+        click_count,
+        category_name
                 from popup_store p
                 join favorite f on p.popup_no = f.popup_no
                 where f.id = #{id}
@@ -171,22 +167,21 @@
     <!--랜덤 조회-->
     <select id="selectPopupStoreRandomly" resultMap="popupStoreResultMap">
         select
-            popup_no,
-            popup_name,
-            brand_name,
-            popup_start_date,
-            popup_end_date,
-            open_time,
-            close_time,
-            popup_location,
-            reservable_status,
-            popup_explanation,
-            approval_status,
-            rejection_reason,
-            category_no,
-            id,
-            hashtags,
-            click_count
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name
             from popup_store
             where popup_no in
         <foreach item="popupNo" collection="random" open="(" separator="," close=")">

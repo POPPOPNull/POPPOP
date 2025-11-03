@@ -71,7 +71,7 @@ function App() {
         </Route>
 
 
-          <Route path="/admin/members" element={<AdminMembersPage/>}/>
+         
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>
         <Route path="/myreservation" element={<MyReservation/>}/>
