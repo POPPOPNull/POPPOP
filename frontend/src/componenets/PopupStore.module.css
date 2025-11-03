@@ -1,5 +1,5 @@
 .layout{
-    width: 450px;
+    width: 400px;
     height: 300px;
     /* background-color: white; */
     color: black;
@@ -27,6 +27,7 @@
 }
 .favorite{
     color: white;
-    padding : 10px;
+    width: 50px;
     background-color: black;
+    text-align: center;
 }

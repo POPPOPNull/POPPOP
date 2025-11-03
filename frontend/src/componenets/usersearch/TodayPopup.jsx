@@ -16,23 +16,25 @@ function TodayPopup(){
     const[popups, setPopups] = useState([])
 
 
+    const onChangeStatus = (e) =>{
+        setStatus(e.target.value)
+    }
+
     useEffect(
         ()=>{
+            console.log("지금 선택한 검색 상태 ",status)
             selectPopupstoreByOpenStatus(startDate,endDate,status)
             .then(data=>{
-                console.log("data",data)
+                console.log("검색기준데이터",data)
                 setPopups(data)
+            
             })
-            console.log(status)
-            console.log(startDate,endDate)
+            
         }
         ,[status]
     )
 
-    const onChangeStatus = (e) =>{
-        setStatus(e.target.value)
-        
-    }
+
 
     
     return(

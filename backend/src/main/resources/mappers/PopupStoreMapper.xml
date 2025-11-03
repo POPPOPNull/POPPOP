@@ -143,4 +143,59 @@
            or popup_location like concat('%',#{searchWord},'%')
            or hashtags like concat('%',#{searchWord},'%')
     </select>
+
+    <!-- 찜목록 조회 -->
+    <select id="selectFavoritePopupStoreById" resultMap="popupStoreResultMap">
+        select
+                p.popup_no,
+                popup_name,
+                brand_name,
+                popup_start_date,
+                popup_end_date,
+                open_time,
+                close_time,
+                popup_location,
+                reservable_status,
+                popup_explanation,
+                approval_status,
+                rejection_reason,
+                category_no,
+                p.id,
+                hashtags,
+                click_count
+                from popup_store p
+                join favorite f on p.popup_no = f.popup_no
+                where f.id = #{id}
+
+    </select>
+    <!--랜덤 조회-->
+    <select id="selectPopupStoreRandomly" resultMap="popupStoreResultMap">
+        select
+            popup_no,
+            popup_name,
+            brand_name,
+            popup_start_date,
+            popup_end_date,
+            open_time,
+            close_time,
+            popup_location,
+            reservable_status,
+            popup_explanation,
+            approval_status,
+            rejection_reason,
+            category_no,
+            id,
+            hashtags,
+            click_count
+            from popup_store
+            where popup_no in
+        <foreach item="popupNo" collection="random" open="(" separator="," close=")">
+            #{popupNo}
+        </foreach>
+            order by field(popup_no,
+        <foreach item="popupNo" collection="random" open="" separator="," close="">
+            #{popupNo}
+        </foreach>
+        )
+    </select>
 </mapper>

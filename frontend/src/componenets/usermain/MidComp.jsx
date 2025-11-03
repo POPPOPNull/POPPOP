@@ -1,8 +1,26 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import MCStyle from "./MidComp.module.css"
+import { selectPopupRandomly } from "../../api/PopupStoreAPI";
+import { useState,useEffect } from "react";
+import PopupComp from "./PopupComp";
+
+
 
 
 export function MidComp1(){
+
+    const [popups, setPopups] = useState([])
+
+    useEffect(()=>{
+        selectPopupRandomly()
+        .then(data=>{
+            console.log("randompopup",data)
+            setPopups(data)
+            
+        })
+    },[])
+    
+
     return(
         <>
         <div className={MCStyle.explain}>중단컴포넌트 주제 1</div>
@@ -10,21 +28,27 @@ export function MidComp1(){
             slidesPerView={3}
             className={MCStyle.layout}
             spaceBetween={10}
-            slidesOffsetAfter={100}
+            slidesOffsetAfter={200}
             >
-                
-                <SwiperSlide  className={MCStyle.slide}>팝업B1</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업B2</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업B3</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업B4</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업B5</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업B6</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업B7</SwiperSlide>
+            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
             </Swiper>
         </>
     )
 }
 export function MidComp2(){
+
+        const [popups, setPopups] = useState([])
+
+    useEffect(()=>{
+        selectPopupRandomly()
+        .then(data=>{
+            console.log("randompopup",data)
+            setPopups(data)
+            
+        })
+    },[])
+
+
     return(
         <>
         <div className={MCStyle.explain}>중단컴포넌트 주제 2</div>
@@ -32,16 +56,9 @@ export function MidComp2(){
             slidesPerView={3}
             className={MCStyle.layout}
             spaceBetween={10}
-            slidesOffsetAfter={100}
+            slidesOffsetAfter={200}
             >
-                
-                <SwiperSlide  className={MCStyle.slide}>팝업C1</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업C2</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업C3</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업C4</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업C5</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업C6</SwiperSlide>
-                <SwiperSlide  className={MCStyle.slide}>팝업C7</SwiperSlide>
+            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
             </Swiper>
         </>
     )

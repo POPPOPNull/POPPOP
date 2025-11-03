@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,16 +26,7 @@ public class PopupStoreController {
         this.popupStoreService = popupStoreService;
     }
 
-    // page placement에 따른 팝업스토어 조회 (상단)
-    @GetMapping("/popup-stores/upper")
-    public ResponseEntity<?> selectPopupStoreByPagePlacement(){
 
-        popupStoreService.selectPopupStoreByPagePlacement();
-
-        return ResponseEntity
-                .created(URI.create(""))
-                .build();
-    }
 
     // 팝업스토어 전체조회 (하단)
     @GetMapping("/popup-stores/lower")
@@ -89,4 +81,26 @@ public class PopupStoreController {
         return ResponseEntity.ok(popupStoreService.selectPopupStoreToday(startDate,endDate,status));
     }
 
+    // 찜목록 조회
+    @GetMapping("/popup-stores/favorite/{id}")
+    public ResponseEntity<List<PopupStoreDTO>> selectFavoritePopupStoreById(@PathVariable String id){
+        return ResponseEntity.ok(popupStoreService.selectFavoritePopupStoreById(id));
+    }
+
+    // 팝업스토어 랜덤조회
+    @GetMapping("popup-stores/random/{random}")
+    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreRandomly(@PathVariable ArrayList<Integer> random){
+//        List<PopupStoreDTO> list = new ArrayList<>(popupStoreService.selectAllPopupStore());
+//
+////        for(int i = 0; i<7; i++ ){
+////           int randomNo = (int)(Math.random()*list.size())+1;
+////            random.add(randomNo);
+////        }
+////        System.out.println(random);
+
+
+
+
+        return ResponseEntity.ok(popupStoreService.selectPopupStoreRandomly(random));
+    }
 }

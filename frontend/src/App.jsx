@@ -6,9 +6,9 @@ import PopupDetails from "./pages/user/PopupDetails"
 import KakaoMap from "./componenets/Map"
 import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
+import MyPopupRegPage from "./pages/manager/mypopupreg";
 import ReservationPage from "./pages/manager/reservation";
 import ManagerHome from "./pages/manager/managerHome";
-import MyPage from "./pages/user/MyPage"
 import MyInformation from "./pages/user/MyInfo"
 import MyReview from "./pages/user/MyReviews"
 import MyReservation from "./pages/user/MyReservations"
@@ -29,6 +29,8 @@ import AdminManagerMain from "./layouts/adminmain/admin-manager-main";
 import AdminManagerMemberList from "./componenets/admin/adminManagerMemberList";
 import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
 import AdminManagerReservationList from "./componenets/admin/adminManagerReservationList";
+import UserFavorite from "./pages/user/UserFavorite";
+
 
 
 
@@ -47,12 +49,14 @@ function App() {
           <Route path=":popupNo" element={<PopupDetails/>}/>
           <Route path=":popupNo/review" element={<InsertReview/>}/>
           <Route path="search" element={<UserSearch/>}/>
+          <Route path="favorite" element={<UserFavorite/>}></Route>
 
         </Route>
 
         <Route path="/manager" element={<Manager/>}/>
         <Route path="/manager/mypopup" element={<MyPopupPage />} />
         <Route path="/manager/mypopupdet" element={<MypopupdetPage />} />
+        <Route path="/manager/mypopupreg" element={<MyPopupRegPage />} />
         <Route path="/manager/reservation" element={<ReservationPage />} />
         <Route path="/manager/managerHome" element={<ManagerHome />} />
         <Route path="/admin" element={<AdminLayout/>}>
@@ -66,8 +70,8 @@ function App() {
           <Route path="manager-reservation" element={<AdminManagerReservationList/>} />
         </Route>
 
-        <Route path="/mypage" element={<MyPage/>}/>
 
+          <Route path="/admin/members" element={<AdminMembersPage/>}/>
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>
         <Route path="/myreservation" element={<MyReservation/>}/>

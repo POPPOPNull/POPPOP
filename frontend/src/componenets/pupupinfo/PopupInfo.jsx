@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import KakaoMap from "../usermain/Maps";
 import PPStyle from "./PopupInfo.module.css"
 import { MapMarker } from "react-kakao-maps-sdk";
+import { Link } from "react-router-dom";
 
 function PopupInfo(){
 
@@ -67,7 +68,9 @@ function PopupInfo(){
             <div className={PPStyle.lowerbuttonlayout}>
                 <div className={PPStyle.lowerbutton}>브랜드 홈페이지 링크</div>
                 <div className={PPStyle.lowerbutton}>SNS 링크</div>
-                <div className={PPStyle.lowerbutton}>예약</div>
+                <Link to="/reservations">
+                    <div className={PPStyle.lowerbutton}>예약</div>
+                </Link>
             </div>
 
         </>
