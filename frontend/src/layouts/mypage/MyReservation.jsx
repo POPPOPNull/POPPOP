@@ -9,6 +9,7 @@ function MyReservation (){
                 <div className="user-main">
                     <Tab/>
                     <MyResrvDetail/>
+                    <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>
         </>
