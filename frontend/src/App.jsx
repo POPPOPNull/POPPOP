@@ -23,6 +23,8 @@ import InsertReview from "./pages/user/InsertReview";
 
 import AdminMembersPage from "./pages/admin/adminMembers";
 import UserSearch from "./pages/user/UserSearch";
+import UserFavorite from "./pages/user/UserFavorite";
+
 
 
 
@@ -41,6 +43,7 @@ function App() {
           <Route path=":popupNo" element={<PopupDetails/>}/>
           <Route path=":popupNo/review" element={<InsertReview/>}/>
           <Route path="search" element={<UserSearch/>}/>
+          <Route path="favorite" element={<UserFavorite/>}></Route>
 
         </Route>
 
