@@ -1,10 +1,15 @@
+.caltitle, .subtitle {
+  margin-left: -300px;
+  font-size: large;
+  font-weight: 600;
+}
 /* 입력창 */
 .react-datepicker-wrapper input {
-  width: 328px; /* 250px × 1.3125 */
-  height: 53px; /* 40px × 1.3125 */
-  font-size: 21px; /* 16px × 1.3125 */
-  padding: 0 16px; /* 12px × 1.3125 */
-  border-radius: 10px; /* 8px × 1.3125 → 반올림 */
+  width: 328px; 
+  height: 53px; 
+  font-size: 21px; 
+  padding: 0 16px; 
+  border-radius: 10px; 
   border: 1px solid #ddd;
   background-color: #fff;
   cursor: pointer;
@@ -12,63 +17,66 @@
 
 /* 달력 전체 팝업 */
 .react-datepicker {
-  font-size: 18px; /* 14px × 1.3125 */
-  background-color: #fff;
-  color: #333;
-  border-radius: 16px; /* 12px × 1.3125 → 반올림 */
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15); /* 비율 맞춤 */
-  padding: 16px; /* 12px × 1.3125 */
-  width: 420px; /* 전체 너비 */
+  font-size: 18px; 
+  background-color: black;
+  color: white;
+  border-radius: 16px;
+  padding: 16px; 
+  width: 500px;
+  border: 1px solid black;
 }
 
 /* 달력 헤더 */
 .react-datepicker__header {
-  background-color: #fff;
+  background-color: black;
   border-bottom: none;
-  padding-bottom: 10px; /* 8px × 1.3125 */
+  padding-bottom: 10px;
 }
 
 .react-datepicker__current-month {
-  font-size: 21px; /* 16px × 1.3125 */
+  font-size: 21px; 
   font-weight: 600;
-  color: #222;
+  color: white;
 }
 
 .react-datepicker__day-name {
   color: #999;
   font-weight: 500;
-  width: 3.3rem; /* 2.5rem × 1.3125 */
+  width: 3.9rem;
   line-height: 3.3rem;
   text-align: center;
 }
 
 /* 날짜 셀 */
 .react-datepicker__day {
-  width: 3.3rem; /* 2.5rem × 1.3125 */
-  height: 3.3rem;
-  line-height: 3.3rem;
-  margin: 3px; /* 2px × 1.3125 ≈ 3px */
+  width: 3.9rem; 
+  height: 2.8rem;
+  line-height: 2.8rem;
+  margin: 3px; 
   text-align: center;
-  border-radius: 50%;
+
+  /* border-radius: 50%; */
   cursor: pointer;
+  color: white;
 }
 
 /* 오늘 날짜 */
 .react-datepicker__day--today {
   border: 2px solid #FFCF0D; /* 테두리 굵기 증가 */
-  color: #222;
+  color: white;
+  border-radius: 8px;
 }
 
 /* 선택된 날짜 */
 .react-datepicker__day--selected {
   background-color: #FFCF0D;
-  color: #000;
-  border-radius: 50%;
+  color: white;
+  border-radius: 8px;
 }
 
 /* 선택 불가 날짜 */
 .react-datepicker__day--disabled {
-  color: #ccc;
+  color: #595959;
   cursor: not-allowed;
   background-color: transparent;
 }

@@ -11,7 +11,6 @@ import MypopupdetPage from "./pages/manager/mypopupdet";
 import MyPopupRegPage from "./pages/manager/mypopupreg";
 import ReservationPage from "./pages/manager/reservation";
 import ManagerHome from "./pages/manager/managerHome";
-import MyPage from "./pages/user/MyPage"
 import MyInformation from "./pages/user/MyInfo"
 import MyReview from "./pages/user/MyReviews"
 import MyReservation from "./pages/user/MyReservations"
@@ -54,7 +53,6 @@ function App() {
         <Route path="/admin" element={<Admin/>}/>
 
           <Route path="/admin/members" element={<AdminMembersPage/>}/>
-        <Route path="/mypage" element={<MyPage/>}/>
 
         <Route path="/myinfo" element={<MyInformation/>}/>
         <Route path="/myreview" element={<MyReview/>}/>

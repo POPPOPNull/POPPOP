@@ -9,6 +9,7 @@ function Mypage (){
                 <div className="user-main">
                     <Tab/>
                     <MyInfoDetail/>
+                    <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>
         </>

@@ -9,7 +9,7 @@ function MyReview (){
                 <div className="user-main">
                     <Tab/>
                     <Review/>
-                    
+                    <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>
         </>

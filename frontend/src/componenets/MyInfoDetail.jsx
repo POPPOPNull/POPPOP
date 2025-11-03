@@ -43,7 +43,7 @@ function InfoDetail() {
                     <button type="submit">수정</button>
                 </div>
             </div>
-            <button style={{marginTop:"50px",marginLeft:"520px"}}>회원탈퇴</button>
+            <button style={{marginTop:"50px",marginLeft:"520px", marginBottom:"30px"}}>회원탈퇴</button>
         </div>
         </>
     )

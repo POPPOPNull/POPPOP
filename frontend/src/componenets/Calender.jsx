@@ -9,14 +9,26 @@ function Calendar() {
   const twoWeeksLater = new Date(new Date().setDate(new Date().getDate() + 14));
 
   return (
-    <DatePicker
+    <>
+      <div className='caltitle'>
+        📆 날짜를 선택해주세요
+      </div>
+      <DatePicker
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       locale={ko}
       minDate={new Date()}
-        maxDate={twoWeeksLater}
-        inline
-    />
+      maxDate={twoWeeksLater}
+      inline
+      />
+      <div className='subtitle'>
+        🎫 회차를 선택해주세요
+      </div>
+      <div>
+        <div>오후 12:00</div>
+        <div>오후 13:00</div>
+      </div>
+    </>
   );
 }
 
