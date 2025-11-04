@@ -103,4 +103,15 @@ public class PopupStoreController {
 
         return ResponseEntity.ok(popupStoreService.selectPopupStoreRandomly(random));
     }
+    // 내 위치랑 가까운 팝업스토어 조회
+//    @GetMapping("/popup-stores/maps")
+//    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreNear(
+//            @RequestParam("lat") double lat,
+//            @RequestParam("lng") double lng,
+//            @RequestParam(value="limit", defaultValue = "7") int limit) {
+//
+//        if (limit <= 0 || limit > 50) limit = 7;
+//        List<PopupStoreDTO> nearest = popupStoreService.selectPopupStoreNear(lat, lng, limit);
+//        return ResponseEntity.ok(nearest);
+//    }
 }

@@ -11,7 +11,7 @@ function PopupInfo(){
      const {popupNo} = useParams();
     
         const [popup, setPopup] = useState({});
-    
+
         const [coord, setCoord] = useState({
             lat:"",
             lng:""
@@ -68,7 +68,7 @@ function PopupInfo(){
             <div className={PPStyle.lowerbuttonlayout}>
                 <div className={PPStyle.lowerbutton}>브랜드 홈페이지 링크</div>
                 <div className={PPStyle.lowerbutton}>SNS 링크</div>
-                <Link to="/reservations">
+                <Link to={`/reservations/${popup.no}`}>
                     <div className={PPStyle.lowerbutton}>예약</div>
                 </Link>
             </div>

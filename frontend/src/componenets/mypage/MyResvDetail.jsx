@@ -1,4 +1,6 @@
 import "./MyResvDetail.css"
+import { useEffect,useState } from "react";
+import { useParams } from "react-router-dom";
 
 function ResvDetail() {
 
