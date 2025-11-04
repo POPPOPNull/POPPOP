@@ -29,6 +29,7 @@ import AdminManagerMain from "./layouts/adminmain/admin-manager-main";
 import AdminManagerMemberList from "./componenets/admin/adminManagerMemberList";
 import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
 import AdminManagerReservationList from "./componenets/admin/adminManagerReservationList";
+import AdminManagerReservationDetails from "./componenets/admin/adminManagerReservationDetails";
 import UserFavorite from "./pages/user/UserFavorite";
 
 
@@ -69,7 +70,7 @@ function App() {
           <Route path="manager-members" element={<AdminManagerMemberList/>} />
           <Route path="manager-popup" element={<AdminManagerPopupList/>} />
           <Route path="manager-reservation" element={<AdminManagerReservationList/>} />
-          {/* <Route path="manager-reservation/:popupId" element={<AdminManagerReservationDetails/>} /> */}
+          <Route path="manager-reservation/:popupNo" element={<AdminManagerReservationDetails/>} />
         </Route>
 
 

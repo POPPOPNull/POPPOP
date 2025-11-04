@@ -11,9 +11,14 @@
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
         <result property="popupName" column="popup_name"/>
+        <result property="phone" column="phone"/>
+        <result property="timeslotNo" column="timeslot_no"/>
+        <result property="reservationDate" column="reservation_date"/>
+        <result property="reservationTime" column="reservation_time"/>
     </resultMap>
 
     <resultMap id="reservationSummaryResultMap" type="com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO">
+        <result property="popupNo" column="popup_no"/>
         <result property="popupName" column="popup_name"/>
         <result property="status" column="status"/>
         <result property="reservationCount" column="reservation_count"/>
@@ -34,6 +39,7 @@
 
     <select id="selectReservationSummary" resultMap="reservationSummaryResultMap">
         select
+               p.popup_no,
                p.popup_name,
                case
                    when curdate() between p.popup_start_date and p.popup_end_date then '진행중'
@@ -52,11 +58,17 @@
         select
                r.reservation_no,
                m.name,
+               m.phone,
                r.reservation_status,
-               r.reservation_personnel
+               r.reservation_personnel,
+               t.reservation_date,
+               t.reservation_time,
+               r.popup_no
           from reservation r
           join member m on r.id = m.id
+          join popup_timeslot t on r.timeslot_no = t.timeslot_no
          where r.popup_no = #{popupNo}
+         order by t.reservation_date, t.reservation_time
     </select>
 
 
