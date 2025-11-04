@@ -12,6 +12,7 @@ import com.ohgiraffers.poppop.review.model.service.ReviewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,10 +72,29 @@ public class AdminController {
         return ResponseEntity.ok(popupList);
     }
 
-    // 팝업별 예약 조회\
+    // 팝업별 예약 조회(집계)
     @GetMapping("/manager-reservation")
     public ResponseEntity<List<ReservationSummaryDTO>> selectReservationSummary() {
         List<ReservationSummaryDTO> reservationSummary = reservationService.selectReservationSummary();
         return ResponseEntity.ok(reservationSummary);
+    }
+
+    // 팝업 스토어 별 예약 내역 조회
+    @GetMapping("/manager-reservation/{popupNo}")
+    public ResponseEntity<List<ReservationDTO>> selectReservationDetailsByPopup(@PathVariable int popupNo) {
+        List<ReservationDTO> reservationDetails =
+                reservationService.selectReservationDetailsByPopup(popupNo);
+        return ResponseEntity.ok(reservationDetails);
+    }
+
+    // 예약 취소
+    @GetMapping("/reservation/{reservationNo}")
+    public ResponseEntity<Void> deleteReservationDetails(@PathVariable int reservationNo) {
+        try {
+            reservationService.deleteReservationDetails(reservationNo);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
