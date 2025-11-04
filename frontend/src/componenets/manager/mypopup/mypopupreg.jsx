@@ -8,11 +8,12 @@ function MyPopupReg() {
     category: "",
     title: "",
     brandMain: "",
-    brandCollab: "",
     roadAddress: "",
     detailAddress: "",
     startDate: "",
     endDate: "",
+    description: "",
+    hashtags: "",
   });
 
   useEffect(() => {
@@ -81,15 +82,6 @@ function MyPopupReg() {
                 value={formData.brandMain}
                 onChange={(e) =>
                   setFormData({ ...formData, brandMain: e.target.value })
-                }
-              />
-              <input
-                className="mpr-input"
-                type="text"
-                placeholder="콜라보 X 브랜드"
-                value={formData.brandCollab}
-                onChange={(e) =>
-                  setFormData({ ...formData, brandCollab: e.target.value })
                 }
               />
             </div>
@@ -263,16 +255,34 @@ function MyPopupReg() {
               placeholder="홈페이지 링크(URL)를 입력해주세요"
             />
 
-            <h3 className="mpr-section-title">팝업 내용 *</h3>
-            <textarea
-              className="mpr-textarea"
-              placeholder="팝업 소개글을 입력해주세요"
-            />
+            <h3 className="mpr-section-title">해시태그</h3>
+            <input
+                className="mpr-input"
+                type="text"
+                placeholder="#성수 #팝업 형식으로 입력해주세요"
+                value={formData.hashtags || ""}
 
-            <h3 className="mpr-section-title">안내 및 주의사항</h3>
+                onChange={(e) => {
+                    const inputValue = e.target.value;
+                    setFormData({
+                    ...formData,
+                    hashtags: inputValue,
+                     hashtagsArray: inputValue
+                    .split("#")
+                    .map((tag) => tag.trim())
+                    .filter((tag) => tag !== ""),
+                });
+                }}
+                />
+
+            <h3 className="mpr-section-title">팝업설명/안내사항/주의사항</h3>
             <textarea
               className="mpr-textarea"
-              placeholder="안내 및 주의사항/공지사항을 입력해주세요"
+              placeholder="팝업설명/안내사항/주의사항을 함께 작성해주세요"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
             />
           </section>
 
@@ -306,12 +316,6 @@ function MyPopupReg() {
             <input className="mpr-input" type="file" />
 
             <div className="mpr-guide-box">
-              <div className="mpr-guide-text">
-                메인페이지 상단 게시 관련 안내
-              </div>
-              <button className="mpr-guide-btn" type="button">
-                광고 게시물 안내
-              </button>
             </div>
           </section>
         </div>
