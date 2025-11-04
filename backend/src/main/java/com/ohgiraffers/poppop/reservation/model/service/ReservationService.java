@@ -23,4 +23,16 @@ public class ReservationService {
     public List<ReservationSummaryDTO> selectReservationSummary() {
         return reservationMapper.selectReservationSummary();
     }
+
+    public List<ReservationDTO> selectReservationDetailsByPopup(int popupNo) {
+        return reservationMapper.selectReservationDetailsByPopup(popupNo);
+    }
+
+    public void deleteReservationDetails(int reservationNo) {
+        int result = reservationMapper.deleteReservationDetails(reservationNo);
+
+        if (result == 0) {
+            throw new IllegalArgumentException("해당 예약을 찾을 수 없어 취소에 실패했습니다.");
+        }
+    }
 }

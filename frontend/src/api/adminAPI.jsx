@@ -57,13 +57,35 @@ export async function selectAllPopup() {
     }
 }
 
-// 팝업 스토어 별 예약 조회
+// 팝업 스토어 별 예약 조회(집계)
 export async function selectReservationSummary() {
     try {
         const response = await axios.get(`${BACKEND_URL}/admin/manager-reservation`);
         return response.data;
     } catch (error) {
         console.error("API call error in selectReservationSummary", error);
+        throw error;
+    }
+}
+
+// 팝업 스토어 별 상세 예약 조회
+export async function selectReservationDetailsByPopup(popupNo) {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/admin/manager-reservation/${popupNo}`);
+        return response.data;
+    } catch (error) {
+        console.error(`API call error in getReservationDetailsByPopup ${popupNo}`, error);
+        throw error;
+    }
+}
+
+// 예약 취소
+export async function deleteReservation(reservationNo) {
+    try {
+        const response = await axios.delete(`${BACKEND_URL}/admin/reservation/${reservationNo}`);
+        return response.data;
+    } catch (error) {
+        console.error(`API call error in deleteReservation By reservationId ${reservationNo}`, error);
         throw error;
     }
 }

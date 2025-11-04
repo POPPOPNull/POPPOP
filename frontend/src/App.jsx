@@ -68,6 +68,7 @@ function App() {
           <Route path="manager-members" element={<AdminManagerMemberList/>} />
           <Route path="manager-popup" element={<AdminManagerPopupList/>} />
           <Route path="manager-reservation" element={<AdminManagerReservationList/>} />
+          {/* <Route path="manager-reservation/:popupId" element={<AdminManagerReservationDetails/>} /> */}
         </Route>
 
 
