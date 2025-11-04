@@ -105,7 +105,38 @@
   font-size: 14px;
   font-weight: 700;
   color: var(--text-main);
-  margin: 0 0 16px 0;
+  margin: 15px 0 16px 0;
+}
+.mpr-hashtag-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+  font-family: "Pretendard", sans-serif;
+}
+
+.mpr-hashtag-input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
+  transition: border-color 0.2s ease;
+}
+
+.mpr-hashtag-input:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.mpr-hashtag-input::placeholder {
+  color: #aaa;
+  font-size: 13px;
+  font-family: "Pretendard", sans-serif;
 }
 
 .mpr-field-col {
@@ -233,24 +264,16 @@
   border-color: #333;
   color: #fff;
 }
-
-.mpr-guide-box {
-  margin-top: 16px;
-  font-size: 13px;
-  color: var(--text-sub);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.mpr-section-title + .mpr-input {
+  margin-bottom: 16px; 
 }
 
-.mpr-guide-btn {
-  background-color: var(--red);
-  border: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  width: fit-content;
-  line-height: 1.2;
+.mpr-input[placeholder*="#성수"] {
+  margin-bottom: 20px; 
 }
+
+.mpr-section-title {
+  margin-top: 24px; 
+}
+
+
