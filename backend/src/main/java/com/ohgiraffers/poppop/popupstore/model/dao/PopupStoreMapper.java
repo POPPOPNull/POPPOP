@@ -14,7 +14,7 @@ public interface PopupStoreMapper {
 
     List<PopupStoreDTO> selectAllPopupStore();
 
-    List<PopupStoreDTO> selectPopupStoreToday(String startDate, String endDate, String status);
+    List<PopupStoreDTO> selectPopupStoreToday(String startDate, String endDate, String status, String searchWord);
 
     List<PopupStoreDTO> selectPopupStoreByKeyword(String searchWord);
 

@@ -50,6 +50,7 @@ function App() {
           <Route path=":popupNo/review" element={<InsertReview/>}/>
           <Route path="search" element={<UserSearch/>}/>
           <Route path="favorite" element={<UserFavorite/>}></Route>
+          
 
         </Route>
 

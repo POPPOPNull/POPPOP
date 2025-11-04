@@ -31,8 +31,8 @@ function PopupStores({popupstore}){
                         <div className={PSStyle.image}>{popupstore.no}</div>
                             <div className={PSStyle.explain}>
                                 <div>{popupstore.name}</div>
-                                <div>{popupstore.location}</div>
-                                <div>{popupstore.startDate} ~ {popupstore.endDate}</div>
+                                <div className={PSStyle.small}>{popupstore.location}</div>
+                                <div className={PSStyle.small}>{popupstore.startDate} ~ {popupstore.endDate}</div>
                             </div>
                     </div>
                 </Link>

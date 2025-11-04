@@ -1,16 +1,20 @@
 package com.ohgiraffers.poppop.popupstore.model.dto;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PopupStoreDTO {
 
+
+
+
     private int no;
     private String name;
     private String brandName;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private Time openTime;
     private Time closeTime;
     private String location;
@@ -20,12 +24,11 @@ public class PopupStoreDTO {
     private String rejectionReason;
     private String categoryName;
     private String id;
-    private String hashtags;
     private int clickCount;
 
     public PopupStoreDTO(){}
 
-    public PopupStoreDTO(int no, String name, String brandName, Date startDate, Date endDate, Time openTime, Time closeTime, String location, boolean reservableStatus, String explanation, String approvalStatus, String rejectionReason, String categoryName, String id, String hashtags, int clickCount) {
+    public PopupStoreDTO(int no, String name, String brandName, String startDate, String endDate, Time openTime, Time closeTime, String location, boolean reservableStatus, String explanation, String approvalStatus, String rejectionReason, String categoryName, String id, String hashtags, int clickCount) {
         this.no = no;
         this.name = name;
         this.brandName = brandName;
@@ -40,7 +43,6 @@ public class PopupStoreDTO {
         this.rejectionReason = rejectionReason;
         this.categoryName = categoryName;
         this.id = id;
-        this.hashtags = hashtags;
         this.clickCount = clickCount;
     }
 
@@ -68,19 +70,19 @@ public class PopupStoreDTO {
         this.brandName = brandName;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -156,13 +158,6 @@ public class PopupStoreDTO {
         this.id = id;
     }
 
-    public String getHashtags() {
-        return hashtags;
-    }
-
-    public void setHashtags(String hashtags) {
-        this.hashtags = hashtags;
-    }
 
     public int getClickCount() {
         return clickCount;
@@ -189,7 +184,6 @@ public class PopupStoreDTO {
                 ", rejectionReason='" + rejectionReason + '\'' +
                 ", categoryName='" + categoryName + '\'' +
                 ", id='" + id + '\'' +
-                ", hashtags=" + hashtags +
                 ", clickCount=" + clickCount +
                 '}';
     }

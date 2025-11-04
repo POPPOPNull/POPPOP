@@ -1,16 +1,32 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import TCSytle from "./TopComp.module.css"
-// import "swiper/modules";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "swiper/css"
-import { Autoplay, EffectCreative } from "swiper/modules";
+import { Autoplay, EffectCreative, Pagination } from "swiper/modules";
+import { useEffect, useState } from "react";
+import { selectPopupRandomly } from "../../../api/PopupStoreAPI";
+import PopupComp from "./PopupComp";
+import { Link } from "react-router-dom";
+
+
+
 
 
 
 
 
 function TopComp (){
+
+    const [popups,setPopups] = useState([])
+
+    useEffect(()=>{
+        selectPopupRandomly()
+        .then(data=>{
+            console.log("TCdata",data)
+            setPopups(data)
+        })
+    },[])
 
     return(
         <>
@@ -20,7 +36,7 @@ function TopComp (){
                     spaceBetween={-100}
                     slidesPerView={3}
                     loop={true}
-                    modules={[Autoplay,EffectCreative,]} 
+                    modules={[Autoplay,EffectCreative,Pagination]} 
                     autoplay={{
                         delay:2000
                     }}
@@ -48,12 +64,14 @@ function TopComp (){
                         }
                         }}
                     centeredSlides={true}
+                    pagination={true}
                 >
-                    <div>
-                        {[1,2,3,4,5,6,7].map(a=> <SwiperSlide className={TCSytle.slide}>임시</SwiperSlide>)}
-                    </div>
+                    <Link to={`user/${popups.no}`}>
+                        {popups.map(popups=> <SwiperSlide className={TCSytle.slide}><PopupComp key={popups.no} popupstore={popups}/></SwiperSlide>)}
+                    </Link>
                 </Swiper>
             </div>
+                <div className={TCSytle.gradation}></div>
         </>
     )
 }
