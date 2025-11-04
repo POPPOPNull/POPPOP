@@ -24,14 +24,14 @@ export function locationCoordExchange(location){
     
 }
 
-// 팝업스토어 오늘 기준 오픈예정상태에 따른 조회
-export function selectPopupstoreByOpenStatus(startDate,endDate,status){
-    return axios.get(`${BACKEND_URL}/popup-stores?startDate=${startDate}&endDate=${endDate}&status=${status}`)
+// 팝업스토어 오늘 기준 오픈예정상태 및 검색어에 따른 조회
+export function selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord){
+    return axios.get(`${BACKEND_URL}/popup-stores?startDate=${startDate}&endDate=${endDate}&status=${status}&searchWord=${searchWord}`)
     .then(response=>response.data)
 }
 // 팝업스토어 검색조회
 export function selectPopupStoreBySearchWord(searchWord){
-    return axios.get(`${BACKEND_URL}/popup-stores/search?searchWord=${searchWord}`)
+    return axios.get(`${BACKEND_URL}/popup-stores/search`,searchWord)
     .then(response=>response.data)
 }
 //팝업스토어 찜목록 조회

@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 1001px;
 }
 .searchbar{
     width: 750px;
@@ -79,6 +80,7 @@
     top: 0px;
     opacity: 30%;
     pointer-events: none;
+    z-index: 2000px
 }
 .searchbox{
     background-color: rgb(63, 62, 62);
@@ -96,4 +98,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+.select{
+    /* background-color: cyan; */
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    position: relative;
+    
 }
