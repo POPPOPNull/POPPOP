@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import PPStyle from "./Popups.module.css"
 import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
-import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
+import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
 import ReviewView from "../../componenets/pupupinfo/ReviewView";
 
 
@@ -23,9 +23,9 @@ function Popups(){
             setPopup(data)
         })    
         console.log(popup.location)
-
-        
     },[])
+
+
 
 
 
@@ -50,6 +50,10 @@ function Popups(){
                     <div className={PPStyle.popuplocation}>{popup.location}</div>
                     <div>{popup.hashtags}</div>
                     <PopupInfo/>
+                    <div className={PPStyle.reviewbtns}>
+                        <div>후기</div>
+                        <Link to={`/user/${popupNo}/review`}><div>후기작성하기</div></Link>
+                     </div>
                     <ReviewView/>
                     <MidComp1/>
                     <MidComp2/>

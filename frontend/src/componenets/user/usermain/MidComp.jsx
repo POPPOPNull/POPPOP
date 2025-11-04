@@ -1,8 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import MCStyle from "./MidComp.module.css"
-import { selectPopupRandomly } from "../../api/PopupStoreAPI";
+
 import { useState,useEffect } from "react";
 import PopupComp from "./PopupComp";
+import { selectPopupRandomly } from "../../../api/PopupStoreAPI";
 
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { selectPopupStoreDetails,locationCoordExchange } from "../../api/PopupStoreAPI"
 import { useParams } from "react-router-dom"
-import KakaoMap from "../usermain/Maps";
+import KakaoMap from "../user/usermain/Maps";
 import PPStyle from "./PopupInfo.module.css"
 import { MapMarker } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";

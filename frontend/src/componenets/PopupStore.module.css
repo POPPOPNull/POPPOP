@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     /* margin: 5px; */
+    text-decoration: none;
 }
 .image{
     background-color: #D9D9D9;

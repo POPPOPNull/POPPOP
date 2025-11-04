@@ -19,11 +19,13 @@ function PopupComp({popupstore}){
         console.log(popupstore.no,favorite)
         insertFavorite(popupstore.no,favorite)
     }
+
+    
     
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`} className={PSStyle.back}>
+                <div to={`/user/${popupstore.no}`} className={PSStyle.back} onClick={()=>{window.location.replace(`/user/${popupstore.no}`)}}>
                     <div className={PSStyle.layout}>
                         <div className={PSStyle.image}>{popupstore.no}</div>
                             <div className={PSStyle.explain}>
@@ -32,7 +34,7 @@ function PopupComp({popupstore}){
                                 <div>{popupstore.startDate} ~ {popupstore.endDate}</div>
                             </div>
                     </div>
-                </Link>
+                </div>
                         
             
         </>

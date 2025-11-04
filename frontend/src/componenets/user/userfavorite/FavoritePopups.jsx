@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import PopupStores from "../PopupStores"
-import {selectFavoritePopupStoreById } from "../../api/PopupStoreAPI"
+import PopupStores from "../../PopupStores"
+import {selectFavoritePopupStoreById } from "../../../api/PopupStoreAPI"
 import FPStyle from "./FP.module.css"
 
 
