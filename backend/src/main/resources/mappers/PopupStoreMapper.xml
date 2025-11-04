@@ -18,7 +18,6 @@
         <result property="rejectionReason" column="rejection_reason"/>
         <result property="categoryName" column="category_name"/>
         <result property="id" column="id"/>
-        <result property="hashtags" column="hashtags"/>
         <result property="clickCount" column="click_count"/>
     </resultMap>
 
@@ -81,9 +80,10 @@
         from popup_store
         where popup_no=#{popupNo}
     </select>
+    <!--오늘날짜 및 검색어 기준 팝업스토어 조회-->
     <select id="selectPopupStoreToday" resultMap="popupStoreResultMap">
         select
-        popup_no,
+        distinct p.popup_no,
         popup_name,
         brand_name,
         popup_start_date,
@@ -98,10 +98,11 @@
         id,
         click_count,
         category_name
-        from popup_store
+        from popup_store p
+        left join hashtag h on h.popup_no = p.popup_no
         <!--진행중-->
         <if test="status!=null and status=='open'">
-            where popup_end_date &gt; #{startDate}
+              where popup_end_date &gt; #{startDate}
               and popup_start_date &lt; #{endDate}
         </if>
         <!--오픈예정-->
@@ -115,11 +116,18 @@
         <if test="status!=null and status=='all'">
             where approval_status = "승인"
         </if>
+        and
+        (popup_name like concat('%',#{searchWord},'%')
+        or brand_name like concat('%',#{searchWord},'%')
+        or popup_location like concat('%',#{searchWord},'%')
+        or h.hashtag_name like concat('%',#{searchWord},'%')
+        )
+
     </select>
     <!--검색조회-->
     <select id="selectPopupStoreByKeyword" resultMap="popupStoreResultMap">
         select
-        popup_no,
+        p.popup_no,
         popup_name,
         brand_name,
         popup_start_date,
@@ -133,12 +141,14 @@
         rejection_reason,
         id,
         click_count,
-        category_name
-        from popup_store
+        category_name,
+        h.hashtag_name
+        from popup_store p
+        left join hashtag h on h.popup_no = p.popup_no
         where popup_name like concat('%',#{searchWord},'%')
            or brand_name like concat('%',#{searchWord},'%')
            or popup_location like concat('%',#{searchWord},'%')
-           or hashtags like concat('%',#{searchWord},'%')
+           or h.hashtag_name like concat('%',#{searchWord},'%')
     </select>
 
     <!-- 찜목록 조회 -->

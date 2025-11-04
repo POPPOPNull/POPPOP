@@ -23,5 +23,6 @@
     width: 900px;
     height: 300px;
     position: relative;
-    bottom: 0px
+    bottom: 0px;
+    z-index: 10px
 }

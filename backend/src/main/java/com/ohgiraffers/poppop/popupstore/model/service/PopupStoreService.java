@@ -30,8 +30,8 @@ public class PopupStoreService {
         return popupStoreMapper.selectPopupStoreDetails(popupNo);
     }
 
-    public List<PopupStoreDTO> selectPopupStoreToday(String startDate, String endDate, String status) {
-        return popupStoreMapper.selectPopupStoreToday(startDate,endDate,status);
+    public List<PopupStoreDTO> selectPopupStoreToday(String startDate, String endDate, String status, String searchWord) {
+        return popupStoreMapper.selectPopupStoreToday(startDate,endDate,status,searchWord);
     }
 
     public List<PopupStoreDTO> selectPopupStoreByKeyword(String searchWord) {

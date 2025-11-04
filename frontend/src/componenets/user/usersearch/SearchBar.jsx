@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
-import SearchInput from "./SearchInput"
 import USStyle from "./UserSearch.module.css"
-import { Link } from "react-router-dom"
+import { selectPopupstoreByOpenStatus } from "../../../api/PopupStoreAPI"
+import TPStyle from "./UserSearch.module.css"
+import Blank from "../usermain/Blank"
+import PopupStores from "../../PopupStores";
+
+
 
 
 function SearchBar(){
 
     const [isVisible,setIsVisible] = useState(false)
-    const [keyword, setKeyword] = useState("")
-    const [popup,setPopup] = useState([])
+    const [searchWord, setSearchWord] = useState("")
 
     const onClickOpen = () =>{
         setIsVisible(true)
@@ -18,22 +21,43 @@ function SearchBar(){
     }
 
     const onChangeKeyword = (e)=>{
-        setKeyword(e.target.value)
+        setSearchWord(e.target.value)
+    }
+
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth()+1;
+    const date = new Date().getDate();
+    const today = year+"-"+month+"-"+date;
+    const startDate = today
+    const endDate = today
+
+    const [status, setStatus] = useState("open")
+    const[popups, setPopups] = useState([])
+
+
+    const onChangeStatus = (e) =>{
+        setStatus(e.target.value)
     }
 
     const onCLickSearch = async ()=>{
-        const response = await fetch(`http://localhost:8080/popup-stores/search?searchWord=${keyword}`)
-        const result = response.json()
-        result.then(data=>{
-            setPopup(data)
-            console.log("검색어 팝업",popup)
-            
+        selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord)
+        .then(data=>{
+            console.log("popups",data)
+            setPopups(data)
         })
         
         setIsVisible(false)
-        
-
     }
+
+    useEffect(()=>{
+        selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord)
+        .then(data=>{
+            console.log("popups",data)
+            setPopups(data)
+        })
+    },[status])
+
+    
 
     
 
@@ -41,7 +65,7 @@ function SearchBar(){
     return(
         <>
             <div className={USStyle.layout}>
-                <div className={USStyle.searchbar} onClick={onClickOpen}>검색어를 입력해주세요</div>
+                <div className={USStyle.searchbar} onClick={onClickOpen}>{searchWord}</div>
             </div>
 
             {isVisible&&
@@ -52,16 +76,26 @@ function SearchBar(){
                         <input type="text" 
                         className={USStyle.searchbar}
                         onChange={onChangeKeyword}
+                        value={searchWord}
                         />                    
-                        <Link to={`/user/search/${keyword}`}>
-                            <button className={USStyle.searchbutton} onClick={onCLickSearch}>검색</button>
-                        </Link>
+                        <button className={USStyle.searchbutton} onClick={onCLickSearch}>검색</button>
                         <button className={USStyle.searchbutton} onClick={onClickClose}>닫기</button>
                     </div>
                 </div>
             </div>}
+            <Blank/>
 
 
+            <select onChange={onChangeStatus} className={TPStyle.select}>
+            <option value="all" >전체</option>
+            <option value="done" >종료</option>
+            <option value="open" defaultValue={true}>진행중</option>
+            <option value="scheduled">오픈 예정</option>
+        </select>
+
+        <div className={TPStyle.popuplayout}>
+            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup}/>)}
+        </div>
         </>
     )
 }

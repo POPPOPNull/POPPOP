@@ -70,15 +70,24 @@ public class PopupStoreController {
         return ResponseEntity
                 .ok(popupStoreService.selectPopupStoreDetails(popupNo));
     }
-    // 오늘 기준 팝업스토어 조회
+    // 오늘 및 검색어 기준  팝업스토어 조회
     @GetMapping("/popup-stores")
-    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreToday(@RequestParam String startDate,@RequestParam String endDate, @RequestParam String status){
+    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreToday(
+            @RequestParam String startDate,
+            @RequestParam String endDate,
+            @RequestParam String status,
+            @RequestParam(required = false) String searchWord){
         System.out.println("startDate = " + startDate);
         System.out.println("endDate = " + endDate);
         System.out.println("status = " + status);
+        System.out.println("searchWord = " + searchWord);
+        List<PopupStoreDTO> list = popupStoreService.selectPopupStoreToday(startDate,endDate,status,searchWord);
+        for(PopupStoreDTO a : list){
+            System.out.println(a.getStartDate());
+        }
 
 
-        return ResponseEntity.ok(popupStoreService.selectPopupStoreToday(startDate,endDate,status));
+        return ResponseEntity.ok(popupStoreService.selectPopupStoreToday(startDate,endDate,status,searchWord));
     }
 
     // 찜목록 조회

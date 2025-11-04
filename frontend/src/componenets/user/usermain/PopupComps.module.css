@@ -13,10 +13,14 @@
     color: white;
     position: relative;
     height: 30%;
+    width: 100%;
     align-items: center; 
+    
 }
 .explain{
     font-size: 12px;    
+    position: relative;
+    left: 5%;
 }
 
 .name{

@@ -11,7 +11,6 @@ useParams
 
 function UserSearchBody (){
 
-    const {searchWord} =useParams();
 
     return(
         <>
@@ -20,13 +19,8 @@ function UserSearchBody (){
                     <div className="blank"></div>
                     <SearchBar/>
                     <Blank/>
-                    <TodayPopup/>
 
-                    
-
-
-                    
-                
+                    <br />        
                     <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>
