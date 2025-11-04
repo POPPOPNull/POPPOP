@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react"
-import { selectPopupstoreByOpenStatus } from "../../api/PopupStoreAPI"
-import PopupStores from "../PopupStores";
+import { selectPopupstoreByOpenStatus } from "../../../api/PopupStoreAPI"
+import PopupStores from "../../PopupStores";
 import TPStyle from "./UserSearch.module.css"
 
 function TodayPopup(){

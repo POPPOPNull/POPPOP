@@ -1,4 +1,4 @@
-import FavoritePopups from "../../componenets/userfavorite/FavoritePopups";
+import FavoritePopups from "../../componenets/user/userfavorite/FavoritePopups";
 import "./FavoriteBody.css"
 
 

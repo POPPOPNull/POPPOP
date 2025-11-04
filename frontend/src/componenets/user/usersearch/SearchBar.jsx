@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import SearchInput from "./SearchInput"
 import USStyle from "./UserSearch.module.css"
 import { Link } from "react-router-dom"
-import { selectPopupStoreBySearchWord } from "../../api/PopupStoreAPI"
+
 
 function SearchBar(){
 

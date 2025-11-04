@@ -1,7 +1,7 @@
 import "./UserSearchBody.css"
-import Blank from "../../componenets/usermain/Blank";
-import SearchBar from "../../componenets/usersearch/SearchBar";
-import TodayPopup from "../../componenets/usersearch/TodayPopup";
+import Blank from "../../componenets/user/usermain/Blank";
+import SearchBar from "../../componenets/user/usersearch/SearchBar";
+import TodayPopup from "../../componenets/user/usersearch/TodayPopup";
 import { useParams } from "react-router-dom";
 useParams
 

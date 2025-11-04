@@ -25,3 +25,10 @@
 .popuplocation,.popupduration{
     font-size: 20px;
 }
+.reviewbtns{
+        display:flex;
+    /* background-color: white; */
+    width: 100%;
+    justify-content: center;
+    gap: 750px;
+}

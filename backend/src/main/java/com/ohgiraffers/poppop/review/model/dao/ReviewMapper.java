@@ -10,4 +10,6 @@ public interface ReviewMapper {
     List<ReviewDTO> selectReviewByPopupStore(int popupNo);
 
     List<ReviewDTO> selectAllReviews();
+
+    void insertReview(ReviewDTO review);
 }

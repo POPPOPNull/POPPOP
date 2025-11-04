@@ -15,12 +15,13 @@ function PopupStores({popupstore}){
     
     const onClickFavorite = ()=>{
         setFavorite({
-            memberId:"gunwoo",
+            memberId:"user-geonwoo",
             popupNo:popupstore.no
         })
         console.log(popupstore.no,favorite)
         insertFavorite(popupstore.no,favorite)
     }
+
     
     return(
         <>

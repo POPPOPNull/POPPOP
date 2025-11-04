@@ -6,7 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +26,18 @@ public class ReviewController {
     @GetMapping("/review/{popupNo}")
     public ResponseEntity<List<ReviewDTO>> selectReviewByPopupStore(@PathVariable int popupNo){
 
-        List<ReviewDTO> test = new ArrayList<>(reviewService.selectReviewByPopupStore(1));
-        System.out.println("test = " + test);
+
         return ResponseEntity.ok(reviewService.selectReviewByPopupStore(popupNo));
+    }
+
+    // 팝업스토어 리뷰 등록
+    @PostMapping("/review/insert")
+    public ResponseEntity<ReviewDTO> insertReview(@RequestBody ReviewDTO review){
+
+        System.out.println("review = " + review);
+
+        reviewService.insertReview(review);
+
+        return ResponseEntity.created(URI.create("")).build();
     }
 }
