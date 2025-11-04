@@ -1,14 +1,13 @@
 import "./main.css"
 
-import CategoryComp from "../../componenets/usermain/CategoryComp";
-import Blank from "../../componenets/usermain/Blank";
-import { BotComp } from "../../componenets/usermain/BotComp";
+import Blank from "../../componenets/user/usermain/Blank";
+import { BotComp } from "../../componenets/user/usermain/BotComp";
 
-import TopComp from "../../componenets/usermain/TopComp";
-import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
+import TopComp from "../../componenets/user/usermain/TopComp";
 import {useDrag, DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { memo } from "react";
+import CategoryComp from "../../componenets/user/usermain/CategoryComp";
+import { MidComp1, MidComp2 } from "../../componenets/user/usermain/MidComp";
 // import Test from "../../pages/dndtest/DndTest";
 
 

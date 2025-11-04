@@ -22,4 +22,8 @@ public class ReviewService {
     public List<ReviewDTO> selectAllReviews() {
         return reviewMapper.selectAllReviews();
     }
+
+    public void insertReview(ReviewDTO review) {
+        reviewMapper.insertReview(review);
+    }
 }

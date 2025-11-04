@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { selectReviewByPopupStore } from "../../api/ReviewAPI";
 import { Swiper, SwiperSlide } from "swiper/react";
 import RVStyle from "./Review.module.css"
+
 
 function ReviewView(){
 
@@ -23,16 +24,15 @@ function ReviewView(){
                 }
             
             console.log(review)
+            console.log(review.length)
         }
         
     )
-    },[])
+    },[review.length])
 
     return(
         <>
-        <br />
-        <div>후기</div>
-        <div>후기작성하기</div>
+        
         <Swiper
         slidesPerView={2}
         slidesOffsetAfter={30}

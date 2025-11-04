@@ -3,8 +3,10 @@ import { selectPopupStoreDetails } from "../../api/PopupStoreAPI"
 import { BrowserRouter, Link, Route, Routes, useParams } from "react-router-dom";
 import PPStyle from "./Popups.module.css"
 import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
-import { MidComp1,MidComp2 } from "../../componenets/usermain/MidComp";
-Link
+import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
+import UserReview from "../../componenets/user/userreview/UserReview";
+import ReviewView from "../../componenets/pupupinfo/ReviewView";
+
 
 
 
@@ -47,7 +49,10 @@ function ReviewInsert(){
                        <div className={PPStyle.popupduration}>{popup.startDate} ~ {popup.endDate}</div>
                        <div className={PPStyle.popuplocation}>{popup.location}</div>
                        <div>{popup.hashtags}</div>
+                       <UserReview/>
                        
+                       <div>후기</div>
+                       <ReviewView/>
                        <MidComp1/>
                        <MidComp2/>
                        <div className="footer">푸터자리입니다.</div>
