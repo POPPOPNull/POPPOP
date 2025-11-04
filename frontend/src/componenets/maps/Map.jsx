@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Map, useKakaoLoader } from "react-kakao-maps-sdk";
-import { locationCoordExchange } from "../api/PopupStoreAPI";
+import { locationCoordExchange } from "../../api/PopupStoreAPI";
 import axios from "axios";
 
 
