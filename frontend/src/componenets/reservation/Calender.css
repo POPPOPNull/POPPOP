@@ -1,4 +1,4 @@
-.caltitle, .subtitle {
+.caltitle, .subtitle, .numticket {
   margin-left: -300px;
   font-size: large;
   font-weight: 600;
@@ -84,4 +84,66 @@
 /* 마우스 오버 */
 .react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
   background-color: #fff3b8;
+}
+
+.timetable {
+  margin-top: 30px;
+  /* margin-bottom: 30px; */
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+.timeticket {
+  width: 160px;
+  height: 60px;
+  border: 2px solid white;
+  border-radius: 8px;
+  text-align: center;
+}
+.resv {
+  width: 500px;
+  height: 50px;
+  background-color: #FFCF0D;
+  border-radius: 8px;
+  font-size: 18px;
+}
+p {
+  margin: 0;
+}
+.numticket{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.counter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: white;
+  color: black;
+  margin-top: 30px;
+}
+.btn {
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.btn:hover {
+  color: #000;
+}
+
+.count {
+  min-width: 30px;
+  text-align: center;
 }
