@@ -21,4 +21,6 @@ public interface PopupStoreMapper {
     List<PopupStoreDTO> selectFavoritePopupStoreById(String id);
 
     List<PopupStoreDTO> selectPopupStoreRandomly(ArrayList<Integer> random);
+
+//    List<PopupStoreDTO> selectPopupStoreNear(double lat, double lng, int limit);
 }

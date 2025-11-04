@@ -3,7 +3,7 @@ import User from "./pages/user/usermain"
 import Manager from "./pages/manager/manager";
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 import PopupDetails from "./pages/user/PopupDetails"
-import KakaoMap from "./componenets/Map"
+// import KakaoMap from "./componenets/Map"
 import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
 import MyPopupRegPage from "./pages/manager/mypopupreg";
@@ -69,6 +69,7 @@ function App() {
           <Route path="manager-members" element={<AdminManagerMemberList/>} />
           <Route path="manager-popup" element={<AdminManagerPopupList/>} />
           <Route path="manager-reservation" element={<AdminManagerReservationList/>} />
+          {/* <Route path="manager-reservation/:popupId" element={<AdminManagerReservationDetails/>} /> */}
         </Route>
 
 
@@ -77,7 +78,7 @@ function App() {
         <Route path="/myreview" element={<MyReview/>}/>
         <Route path="/myreservation" element={<MyReservation/>}/>
         <Route path="/maps" element={<Maps/>}/>
-        <Route path="/reservations" element={<Reservations/>}/>
+        <Route path="/reservations/:popupNo" element={<Reservations/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
 

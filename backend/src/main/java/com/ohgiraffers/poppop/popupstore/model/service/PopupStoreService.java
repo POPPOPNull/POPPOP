@@ -17,6 +17,10 @@ public class PopupStoreService {
         this.popupStoreMapper = popupStoreMapper;
     }
 
+//    public List<PopupStoreDTO> selectPopupStoreNear(double lat, double lng, int limit) {
+//        return popupStoreMapper.selectPopupStoreNear(lat, lng, limit);
+//    }
+
     public void selectPopupStoreByPagePlacement() {
         popupStoreMapper.selectPopupStoreByPagePlacement();
 

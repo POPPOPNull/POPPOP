@@ -1,7 +1,7 @@
 import "../usermain/main.css";
 import "./mapbody.css";
 import { useEffect, useState } from "react";
-import KakaoMap from "../../componenets/Map";
+import KakaoMap from "../../componenets/maps/Map";
 import NearComp from "../../componenets/NearComp";
 
 function MapBody (){

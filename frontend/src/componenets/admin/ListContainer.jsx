@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, cloneElement } from "react";
 import { SearchContext } from "./searchProvider";
 import Pagination from "./pagination";
 
 // 모든 데이터를 받아서 리스트로 뿌려주는 컴포넌트
 
-function ListContainer({ fetchDataFunction, renderItem, tableHeaders, layoutClassName, transformItem }) {
+function ListContainer({ fetchDataFunction, renderItem, tableHeaders, layoutClassName, transformItem, onItemClick }) {
     const [allItems, setAllItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;    // 화면에 표시할 행 수
@@ -48,7 +48,16 @@ function ListContainer({ fetchDataFunction, renderItem, tableHeaders, layoutClas
                     {tableHeaders.map(header => <div key={header}>{header}</div>)}
                 </div>
                 {filteredItems.length > 0 ? (
-                    currentItems.map(item => renderItem(item, layoutClassName))
+                    currentItems.map((item, index ) => {
+                        
+                        const itemElement = renderItem(item, layoutClassName);
+
+                        return cloneElement(itemElement, {
+                            key: item.id || index,
+                            onClick: () => onItemClick && onItemClick(item),
+                            style: { ...itemElement.props.style, cursor: 'pointer' }
+                        });
+                    })
                 ) : (
                     <div className="mp-tr">
                         <div style={{ gridColumn: '1 / -1', textAlign: 'center' }}>

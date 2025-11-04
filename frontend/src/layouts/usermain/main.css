@@ -26,3 +26,15 @@
     bottom: 0px;
     z-index: 10px
 }
+
+}
+.logout {
+    all: unset;
+    color: white;
+    width: 70px;
+    height: 30px;
+    /* border: 2px solid #FFCF0D; */
+    border-radius: 15px;
+    margin-top: 70px;
+    margin-left: 780px;
+}
