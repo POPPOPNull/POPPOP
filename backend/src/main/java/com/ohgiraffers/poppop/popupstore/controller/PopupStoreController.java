@@ -123,4 +123,39 @@ public class PopupStoreController {
 //        List<PopupStoreDTO> nearest = popupStoreService.selectPopupStoreNear(lat, lng, limit);
 //        return ResponseEntity.ok(nearest);
 //    }
+
+    // 팝업스토어 카테고리 집계
+    @GetMapping("/popup-stores/category")
+    public ResponseEntity<List<String>> selectAllCategory(){
+
+        List<String> categoryList = popupStoreService.selectAllCategory();
+//        System.out.println("categoryList = " + categoryList);
+
+        return ResponseEntity.ok(categoryList);
+    }
+
+    // 카테고리별 팝업스토어 조회
+    @GetMapping("/popup-stores/category/{category}")
+    public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreByCategory(@PathVariable(required = false) String category){
+
+        List<PopupStoreDTO> popupList = popupStoreService.selectPopupStoreByCategory(category);
+        ArrayList<Integer> popupNo = new ArrayList<>();
+        for(PopupStoreDTO popup : popupList){
+            popupNo.add(popup.getNo());
+            System.out.println(popup.getNo());
+        }
+        // 팝업번호들
+        System.out.println(popupNo);
+
+        ArrayList<Integer> popups = new ArrayList<>();
+        for(int i =0; i<7;i++){
+            int random = (int)(Math.random()*popupNo.size());
+            int popup = popupNo.get(random);
+            popups.add(popup);
+        }
+        // 카테고리팝업에 default로 보여질 7개의 팝업번호 : popups
+        System.out.println("popups = " + popups);
+
+        return ResponseEntity.ok(popupList);
+    }
 }

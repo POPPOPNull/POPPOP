@@ -1,9 +1,39 @@
 import { useDrag } from "react-dnd";
 import CCStyle from "./MidComp.module.css"
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect, useState } from "react";
+import { selectAllCategory, selectPopupStoreByCategory } from "../../../api/PopupStoreAPI";
+import PopupComp from "./PopupComp";
 
 
 function CategoryComp(){
+
+    const [categoryList, setCategoryList] = useState(["전체"])
+    const [category, setCategory] = useState("전체");
+    const [popup, setPopup] = useState([])
+
+    const onClickCategory = e => {
+        setCategory(e.target.textContent)       
+    }
+
+    useEffect(()=>{
+        selectAllCategory()
+        .then(data=>{
+            console.log("카테고리 = ",data)
+            setCategoryList(data)
+            console.log("선택된 카테고리 : ",category)
+            
+            
+        })
+    },[category])
+
+    useEffect(()=>{
+        selectPopupStoreByCategory(category)
+        .then(data=>{
+            console.log("카테고리별 팝업스토어 : ",data)
+            setPopup(data)
+        })
+    },[category])
 
 
 
@@ -11,13 +41,9 @@ function CategoryComp(){
         <>
             <div className={CCStyle.explain}>카테고리</div>
             <div className={CCStyle.categorylayout}>
-                <div className={CCStyle.category}>카테고리1</div>
-                <div className={CCStyle.category}>카테고리2</div>
-                <div className={CCStyle.category}>카테고리3</div>
-                <div className={CCStyle.category}>카테고리4</div>
-                <div className={CCStyle.category}>카테고리5</div>
-                <div className={CCStyle.category}>카테고리6</div>
-                <div className={CCStyle.category}>카테고리7</div>
+                {categoryList.map(a=><div key={a} className={CCStyle.category} onClick={onClickCategory}>{a}</div>)}
+                
+                
             </div>
             <Swiper
                 className={CCStyle.layout}
@@ -26,13 +52,8 @@ function CategoryComp(){
                 slidesOffsetAfter={200}
                 
             >
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
-                <SwiperSlide className={CCStyle.slide}>카테고리별 팝업</SwiperSlide>
+                {popup.map(popupstore=><SwiperSlide className={CCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
+                
             
             </Swiper>
         </>

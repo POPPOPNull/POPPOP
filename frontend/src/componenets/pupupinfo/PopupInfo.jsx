@@ -35,8 +35,8 @@ function PopupInfo(){
             .then(data => {
                 console.log(data)
                 setCoord({
-                    lat:data.documents[0].y,
-                    lng:data.documents[0].x
+                    lng:data.documents[0].x,
+                    lat:data.documents[0].y
                 })
                 console.log(coord)
             })
