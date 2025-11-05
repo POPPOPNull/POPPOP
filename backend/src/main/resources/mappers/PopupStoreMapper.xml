@@ -21,6 +21,11 @@
         <result property="clickCount" column="click_count"/>
     </resultMap>
 
+    <!--카테고리 집계용 resultMap-->
+    <resultMap id="popupCategoryResultMap" type="String">
+        <id property="categoryName" column="category_name"/>
+    </resultMap>
+
 
     <select id="selectPopupStoreByPagePlacement" resultMap="popupStoreResultMap">
         select
@@ -121,6 +126,7 @@
         or brand_name like concat('%',#{searchWord},'%')
         or popup_location like concat('%',#{searchWord},'%')
         or h.hashtag_name like concat('%',#{searchWord},'%')
+        or category_name like concat('%',#{searchWord},'%')
         )
 
     </select>
@@ -228,4 +234,44 @@
 <!--        having distance < 50*1000-->
 <!--         order by distance;-->
 <!--    </select>-->
+
+    <!-- 카테고리 집계 -->
+    <select id="selectAllCategory" resultMap="popupCategoryResultMap">
+        select
+               distinct category_name
+               from popup_store
+               order by field(category_name,'전체') desc
+    </select>
+
+    <!--카테고리별 팝업조회-->
+    <select id="selectPopupStoreByCategory" resultMap="popupStoreResultMap">
+        select
+            popup_no,
+            popup_name,
+            brand_name,
+            popup_start_date,
+            popup_end_date,
+            open_time,
+            close_time,
+            popup_location,
+            reservable_status,
+            popup_explanation,
+            approval_status,
+            rejection_reason,
+            id,
+            click_count,
+            category_name
+            from popup_store
+<!--            where popup_no in-->
+<!--            <foreach item="popup" collection="popups" open="(" separator="," close=")">-->
+<!--                #{popup}-->
+<!--            </foreach>-->
+            <if test="category=='전체'">
+
+            </if>
+            <if test="category!=null and category!='전체'">
+                where category_name=#{category}
+            </if>
+
+    </select>
 </mapper>
