@@ -49,4 +49,12 @@ public class PopupStoreService {
     public List<PopupStoreDTO> selectPopupStoreRandomly(ArrayList<Integer> random) {
         return popupStoreMapper.selectPopupStoreRandomly(random);
     }
+
+    public List<String> selectAllCategory() {
+        return popupStoreMapper.selectAllCategory();
+    }
+
+    public List<PopupStoreDTO> selectPopupStoreByCategory(String category) {
+        return popupStoreMapper.selectPopupStoreByCategory(category);
+    }
 }

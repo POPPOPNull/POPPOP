@@ -52,3 +52,15 @@ export function selectPopupRandomly(){
     return axios.get(`${BACKEND_URL}/popup-stores/random/${arr}`)
     .then(response=>response.data)
 }
+
+//팝업스토어 카테고리 집계
+export function selectAllCategory(){
+    return axios.get(`${BACKEND_URL}/popup-stores/category`)
+    .then(response => response.data)
+}
+
+//팝업스토어 카테고리별 조회
+export function selectPopupStoreByCategory(category){
+    return axios.get(`${BACKEND_URL}/popup-stores/category/${category}`)
+    .then(response=>response.data)
+}
