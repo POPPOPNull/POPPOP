@@ -3,7 +3,7 @@ import MCStyle from "./MidComp.module.css"
 
 import { useState,useEffect } from "react";
 import PopupComp from "./PopupComp";
-import { selectPopupRandomly } from "../../../api/PopupStoreAPI";
+import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStoreAPI";
 
 
 
@@ -11,15 +11,23 @@ import { selectPopupRandomly } from "../../../api/PopupStoreAPI";
 export function MidComp1(){
 
     const [popups, setPopups] = useState([])
+    const [size, setSize] = useState();
+        
+    useEffect(()=>{
+        selectAllPopupStore()
+        .then(data=>{
+            setSize(data.length)
+        })
+    })
 
     useEffect(()=>{
-        selectPopupRandomly()
+        selectPopupRandomly(size)
         .then(data=>{
             console.log("randompopup",data)
             setPopups(data)
             
         })
-    },[])
+    },[size])
     
 
     return(
@@ -38,16 +46,24 @@ export function MidComp1(){
 }
 export function MidComp2(){
 
-        const [popups, setPopups] = useState([])
+    const [popups, setPopups] = useState([])
+    const [size, setSize] = useState();
+        
+    useEffect(()=>{
+        selectAllPopupStore()
+        .then(data=>{
+            setSize(data.length)
+        })
+    })
 
     useEffect(()=>{
-        selectPopupRandomly()
+        selectPopupRandomly(size)
         .then(data=>{
             console.log("randompopup",data)
             setPopups(data)
             
         })
-    },[])
+    },[size])
 
 
     return(
