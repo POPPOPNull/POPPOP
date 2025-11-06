@@ -26,7 +26,7 @@ function TopComp (){
             const length = data.length
         
 
-            const data2 = await selectPopupRandomly(length)
+            const data2 = await selectPopupRandomly(7,length)
             setPopups(data2)
         }
         fetchData();

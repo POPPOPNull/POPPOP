@@ -58,3 +58,14 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.more{
+    width: 90%;
+    border: white solid 3px;
+    text-align: center;
+    position: relative;
+    left: 5%;
+    color: white;
+    text-decoration: white;
+    
+}
