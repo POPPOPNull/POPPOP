@@ -19,22 +19,19 @@ import { Link } from "react-router-dom";
 function TopComp (){
 
     const [popups,setPopups] = useState([])
-    const [size, setSize] = useState();
 
     useEffect(()=>{
-        selectAllPopupStore()
-        .then(data=>{
-            setSize(data.length)
-        })
+        const fetchData = async() =>{
+            const data = await selectAllPopupStore()
+            const length = data.length
+        
+
+            const data2 = await selectPopupRandomly(length)
+            setPopups(data2)
+        }
+        fetchData();
     },[])
 
-    useEffect(()=>{
-        selectPopupRandomly(size)
-        .then(data=>{
-            console.log("TCdata",data)
-            setPopups(data)
-        })
-    },[size])
 
     
     
