@@ -7,8 +7,9 @@ function AdminManagerReservationList() {
     const navigate = useNavigate();
 
     const handleItemClick = (item) => {
-        if (item && item.popupId) {
-            navigate(`/admin/reservation/${item.popupId}`);
+        if (item && item.popupNo) {
+            // adminAPI 함수 사용 가능 여부 확인 필요
+            navigate(`/admin/manager-reservation/${item.popupNo}`);
         } else {
             console.error("팝업 번호를 찾을 수 없습니다.", item);
             alert("팝업 스토어 정보가 올바르지 않아, 페이지 이동을 할 수 없습니다.");
