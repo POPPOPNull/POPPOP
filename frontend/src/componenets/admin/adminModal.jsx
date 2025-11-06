@@ -9,7 +9,7 @@ function AdminModal({ isOpen, onClose, children }) {
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <button className="modal-close-button" onClick={onClose}>&items;</button>
+                <button className="modal-close-button" onClick={onClose}>닫기</button>
                 {children}
             </div>
         </div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 
 
 const restapikey = import.meta.env.VITE_KAKAOMAP_RESTAPI_KEY
@@ -41,10 +42,12 @@ export function selectFavoritePopupStoreById(id){
 }
 
 // 팝업스토어 랜덤조회
-export function selectPopupRandomly(){
+export function selectPopupRandomly(size){
+
+
     const arr = new Array();
     for(let i =arr.length;i<7;i++){
-        arr[i]=parseInt((Math.random()*50)+1)
+        arr[i]=parseInt((Math.random()*size)+1)
     }
     console.log("arr",arr)
 

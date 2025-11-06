@@ -5,7 +5,7 @@ import 'swiper/css/pagination';
 import "swiper/css"
 import { Autoplay, EffectCreative, Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
-import { selectPopupRandomly } from "../../../api/PopupStoreAPI";
+import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStoreAPI";
 import PopupComp from "./PopupComp";
 import { Link } from "react-router-dom";
 
@@ -19,14 +19,25 @@ import { Link } from "react-router-dom";
 function TopComp (){
 
     const [popups,setPopups] = useState([])
+    const [size, setSize] = useState();
 
     useEffect(()=>{
-        selectPopupRandomly()
+        selectAllPopupStore()
+        .then(data=>{
+            setSize(data.length)
+        })
+    },[])
+
+    useEffect(()=>{
+        selectPopupRandomly(size)
         .then(data=>{
             console.log("TCdata",data)
             setPopups(data)
         })
-    },[])
+    },[size])
+
+    
+    
 
     return(
         <>
