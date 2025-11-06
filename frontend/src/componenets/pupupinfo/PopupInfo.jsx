@@ -12,35 +12,32 @@ function PopupInfo(){
     
         const [popup, setPopup] = useState({});
 
+
         const [coord, setCoord] = useState({
             lat:"",
             lng:""
         })
+        
     
+
+
         useEffect(()=>{
-            selectPopupStoreDetails(popupNo)
-            .then(data=>{
-                console.log("data",data)
+            const fetchData = async () =>{
+                const data = await selectPopupStoreDetails(popupNo)
+                const location = data.location
                 setPopup(data)
-            })    
-            console.log(popup.location)
-    
-            
-        },[])
-    
-    
-        useEffect(()=>{
-    
-            locationCoordExchange(popup.location)
-            .then(data => {
-                console.log(data)
+                
+
+                const data2 = await locationCoordExchange(location)
                 setCoord({
-                    lng:data.documents[0].x,
-                    lat:data.documents[0].y
+                    lng:data2.documents[0].x,
+                    lat:data2.documents[0].y
                 })
-                console.log(coord)
-            })
-        },[popup])
+
+                
+            }
+            fetchData();
+        },[])
 
     return(
         <>

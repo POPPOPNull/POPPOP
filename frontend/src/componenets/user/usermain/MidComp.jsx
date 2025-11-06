@@ -11,23 +11,18 @@ import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStor
 export function MidComp1(){
 
     const [popups, setPopups] = useState([])
-    const [size, setSize] = useState();
-        
-    useEffect(()=>{
-        selectAllPopupStore()
-        .then(data=>{
-            setSize(data.length)
-        })
-    })
 
     useEffect(()=>{
-        selectPopupRandomly(size)
-        .then(data=>{
-            console.log("randompopup",data)
-            setPopups(data)
-            
-        })
-    },[size])
+        const fetchData = async()=>{
+            const data = await selectAllPopupStore()
+            const length = data.length
+
+            const data2 = await selectPopupRandomly(length)
+            setPopups(data2)
+
+        }
+        fetchData()
+    },[])
     
 
     return(
@@ -47,23 +42,18 @@ export function MidComp1(){
 export function MidComp2(){
 
     const [popups, setPopups] = useState([])
-    const [size, setSize] = useState();
-        
+    
     useEffect(()=>{
-        selectAllPopupStore()
-        .then(data=>{
-            setSize(data.length)
-        })
-    })
+        const fetchData = async()=>{
+            const data = await selectAllPopupStore()
+            const length = data.length
 
-    useEffect(()=>{
-        selectPopupRandomly(size)
-        .then(data=>{
-            console.log("randompopup",data)
-            setPopups(data)
-            
-        })
-    },[size])
+            const data2 = await selectPopupRandomly(length)
+            setPopups(data2)
+
+        }
+        fetchData()
+    },[])
 
 
     return(
