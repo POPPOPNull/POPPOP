@@ -4,7 +4,7 @@ import com.ohgiraffers.poppop.admin.model.service.AdminService;
 import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import com.ohgiraffers.poppop.popupstore.model.service.PopupStoreService;
-import com.ohgiraffers.poppop.reservation.model.dto.ReservationDTO;
+import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
 import com.ohgiraffers.poppop.review.model.dto.ReviewDTO;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -50,8 +51,8 @@ public class AdminController {
 
     // 전체 예약(user) 조회
     @GetMapping("/reservation")
-    public ResponseEntity<List<ReservationDTO>> selectAllReservation() {
-        List<ReservationDTO> reservation = reservationService.selectAllReservation();
+    public ResponseEntity<List<ReservationDetailsDTO>> selectAllReservation() {
+        List<ReservationDetailsDTO> reservation = reservationService.selectAllReservation();
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
@@ -69,6 +70,28 @@ public class AdminController {
         return ResponseEntity.ok(popupList);
     }
 
+    // 팝업 스토어 상세 조회
+    @GetMapping("/manager-popup/{popupNo}")
+    public ResponseEntity<PopupStoreDTO> selectPopupStoreDetails(@PathVariable int popupNo) {
+        PopupStoreDTO popup = popupStoreService.selectPopupStoreDetails(popupNo);
+        return ResponseEntity.ok(popup);
+    }
+
+    // 팝업 스토어 승인 처리
+    @PutMapping("/manager-popup/{popupNo}/approve")
+    public ResponseEntity<Void> approvePopup(@PathVariable int popupNo) {
+        popupStoreService.approvePopup(popupNo);
+        return ResponseEntity.ok().build();
+    }
+
+    // 팝업 스토어 반려 처리
+    @PutMapping("/manager-popup/{popupNo}/reject")
+    public ResponseEntity<Void> rejectPopup(@PathVariable int popupNo, @RequestBody Map<String, String> payload) {
+        String rejectionReason = payload.get("rejectionReason");
+        popupStoreService.rejectPopup(popupNo, rejectionReason);
+        return ResponseEntity.ok().build();
+    }
+
     // 팝업별 예약 조회(집계)
     @GetMapping("/manager-reservation")
     public ResponseEntity<List<ReservationSummaryDTO>> selectReservationSummary() {
@@ -78,8 +101,8 @@ public class AdminController {
 
     // 팝업 스토어 별 예약 내역 조회
     @GetMapping("/manager-reservation/{popupNo}")
-    public ResponseEntity<List<ReservationDTO>> selectReservationDetailsByPopup(@PathVariable int popupNo) {
-        List<ReservationDTO> reservationDetails =
+    public ResponseEntity<List<ReservationDetailsDTO>> selectReservationDetailsByPopup(@PathVariable int popupNo) {
+        List<ReservationDetailsDTO> reservationDetails =
                 reservationService.selectReservationDetailsByPopup(popupNo);
         return ResponseEntity.ok(reservationDetails);
     }

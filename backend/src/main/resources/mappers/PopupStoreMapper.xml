@@ -274,4 +274,19 @@
             </if>
 
     </select>
+
+<!--    팝업 스토어 승인-->
+    <update id="approvePopup" parameterType="int">
+        update popup_store
+           set approval_status = '승인'
+         where popup_no = #{popupNo}
+    </update>
+
+<!--    팝업 스토어 반려-->
+    <update id="rejectPopup" parameterType="map">
+        update popup_store
+        set approval_status = '반려',
+        rejection_reason = #{rejectionReason}
+        where popup_no = #{popupNo}
+    </update>
 </mapper>
