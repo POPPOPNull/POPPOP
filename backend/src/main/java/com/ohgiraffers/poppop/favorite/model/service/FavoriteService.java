@@ -12,7 +12,9 @@ public class FavoriteService {
         this.favoriteMapper = favoriteMapper;
     }
 
-    public void insetFavoritePopup(FavoriteDTO favorite) {
-        favoriteMapper.insertFavoritePopup(favorite);
+
+
+    public void insetFavoritePopup(int popupNo, String memberId) {
+        favoriteMapper.insertFavoritePopup(popupNo,memberId);
     }
 }

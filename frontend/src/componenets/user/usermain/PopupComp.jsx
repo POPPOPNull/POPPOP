@@ -6,15 +6,24 @@ import { HTML5Backend } from "react-dnd-html5-backend"
 
 
 
-function PopupComp({popupstore,id}){
+function PopupComp({popupstore}){
 
     const [{isDragging},drag,preview] = useDrag({
-        type:'popup',
-        item : {id},
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
-        }),
-    })
+            type:'popup',
+            item : {popupstore},
+            collect: (monitor) => ({
+                isDragging: monitor.isDragging(),
+                
+            })
+            ,
+            end : (item,monitor) =>{
+                if(monitor.didDrop()){
+                    console.log("드롭완료")
+                }else{
+                    console.log('드래그종료, 드롭 안됨',item)
+                }
+            }
+        })
 
     
 
@@ -28,7 +37,7 @@ function PopupComp({popupstore,id}){
         <>
             
                 <Link to={`/user/${popupstore.no}`} className={PSStyle.back} onClick={()=>{window.location.replace(`/user/${popupstore.no}`)}}>
-                    <div className={PSStyle.layout}>
+                    <div className={PSStyle.layout} ref={drag}>
                         <div className={PSStyle.image}>{popupstore.no}</div>
                             <div className={PSStyle.explain}>
                                 <div className={PSStyle.name}>{popupstore.name}</div>
