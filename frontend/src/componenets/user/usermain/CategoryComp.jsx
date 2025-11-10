@@ -1,4 +1,4 @@
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import CCStyle from "./MidComp.module.css"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";

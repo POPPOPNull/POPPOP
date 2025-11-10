@@ -31,6 +31,10 @@ import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
 import AdminManagerReservationList from "./componenets/admin/adminManagerReservationList";
 import AdminManagerReservationDetails from "./componenets/admin/adminManagerReservationDetails";
 import UserFavorite from "./pages/user/UserFavorite";
+import Test from "./layouts/usermain/Test";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 
 
 
@@ -42,6 +46,7 @@ function App() {
 
   return (
     <>
+    <DndProvider backend={HTML5Backend}>
     <BrowserRouter>
       <Routes>
         <Route index element={<User/>}/>
@@ -83,10 +88,10 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
 
-
-
+        <Route path="/test" element={<Test/>}></Route>
       </Routes>
     </BrowserRouter>
+    </DndProvider>
     </>
   )
 }
