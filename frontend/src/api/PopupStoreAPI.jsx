@@ -42,17 +42,21 @@ export function selectFavoritePopupStoreById(id){
 }
 
 // 팝업스토어 랜덤조회
-export function selectPopupRandomly(size){
+export function selectPopupRandomly(size,length){
 
 
-    const arr = new Array();
-    for(let i =arr.length;i<7;i++){
-        arr[i]=parseInt((Math.random()*size)+1)
+    const arr = new Set();
+    for(let i =0;i<size;i=arr.size){
+        const a = parseInt((Math.random()*length)+1)
+        arr.add(a)
     }
-    console.log("arr",arr)
+    console.log(arr)
+    const arr2 = Array.from(arr)
+    console.log(arr2)
 
 
-    return axios.get(`${BACKEND_URL}/popup-stores/random/${arr}`)
+
+    return axios.get(`${BACKEND_URL}/popup-stores/random/${arr2}`)
     .then(response=>response.data)
 }
 
