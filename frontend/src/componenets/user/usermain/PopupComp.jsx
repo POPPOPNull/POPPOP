@@ -1,24 +1,26 @@
 import { Link } from "react-router-dom"
 import PSStyle from "./PopupComps.module.css"
 import { useEffect,useState } from "react"
+import { DndProvider, useDrag } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"
 
 
-function PopupComp({popupstore}){
-    
 
-    const [favorite, setFavorite] =useState({
-        memberId:"gunwoo",
-        popupNo:null
+function PopupComp({popupstore,id}){
+
+    const [{isDragging},drag,preview] = useDrag({
+        type:'popup',
+        item : {id},
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
     })
+
     
-    const onClickFavorite = ()=>{
-        setFavorite({
-            memberId:"gunwoo",
-            popupNo:popupstore.no
-        })
-        console.log(popupstore.no,favorite)
-        insertFavorite(popupstore.no,favorite)
-    }
+
+
+    
+
 
     
     
@@ -35,6 +37,7 @@ function PopupComp({popupstore}){
                             </div>
                     </div>
                 </Link>
+            
                         
             
         </>

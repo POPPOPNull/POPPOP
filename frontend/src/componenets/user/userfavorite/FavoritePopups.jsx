@@ -8,7 +8,7 @@ import FPStyle from "./FP.module.css"
 function FavoritePopups(){
 
         const [popupStores, setPopupStores] = useState([])
-        const [id ,setId] = useState("user_geonwoo")
+        const [id ,setId] = useState("user-geonwoo")
     
         useEffect(()=>{
             selectFavoritePopupStoreById(id).then(data=>{

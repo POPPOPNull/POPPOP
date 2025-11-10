@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./buttonbar.css"
 import { NavLink } from "react-router-dom";
+import { useDrop } from "react-dnd";
 
+function Favorite({item,insertFavorite,children}){
+
+    const ref = useRef(null)
+      
+    const [,drop]=useDrop({
+        accept:'popup',
+    })
+}
 
 function Buttons () {
 
