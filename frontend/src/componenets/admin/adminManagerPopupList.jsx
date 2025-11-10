@@ -1,10 +1,42 @@
 import ListContainer from "./ListContainer";
 import { selectAllPopup } from "../../api/adminAPI";
+import { useEffect, useContext } from "react";
+import { SearchContext } from "./searchProvider";
+import { useNavigate } from "react-router-dom";
 
-function AdminManagerPopupList(){    
+function AdminManagerPopupList(){
+
+    const navigate = useNavigate();
+
+    const handleItemClick = (item) => {
+        if (item && item.no) {
+            navigate(`/admin/manager-popup/${item.no}`);
+        }
+    };
+
+    // 검색 카테고리 목록
+    const { setAvailableCategory, setSearchCategory } = useContext(SearchContext);
 
     // 테이블 헤더 정보
-    const headers = ['팝업 번호', '팝업 이름', '브랜드', '진행 상태', '승인 상태', '가맹점 아이디'];
+    const headers = [
+        { header: '팝업 번호', accessor: 'no' },
+        { header: '팝업 이름', accessor: 'name' },
+        { header: '브랜드', accessor: 'brandName' },
+        { header: '진행 상태', accessor: 'status' },
+        { header: '승인 상태', accessor: 'approvalStatus' },
+        { header: '가맹점 아이디', accessor: 'id' }
+    ];
+
+    // 컴포넌트 마운트 시 SearchContext 카테고리 목록 설정
+    useEffect(() => {
+        setAvailableCategory(headers);
+
+        // 컴포넌트 언마운트 시 정리
+        return () => {
+            setAvailableCategory([]);
+            setSearchCategory('전체');
+        };
+    }, []);
 
     // 팝업 데이터 하나를 받아 status 속성을 추가하여 반환하는 함수
     const transformPopup = (managerPopup) => {
@@ -54,6 +86,8 @@ function AdminManagerPopupList(){
             tableHeaders={headers}                  // 테이블 헤더
             layoutClassName="layout-manager-popup"
             transformItem={transformPopup}
+            itemKey="no"
+            onItemClick={handleItemClick}
         />
     );
 }

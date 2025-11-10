@@ -1,10 +1,32 @@
 import ListContainer from "./ListContainer";
 import { selectAllManager } from "../../api/adminAPI";
+import { useEffect, useContext } from "react";
+import { SearchContext } from "./searchProvider";
 
-function AdminManagerMemberList(){    
+function AdminManagerMemberList(){
+
+    // 검색 카테고리 목록
+    const { setAvailableCategory, setSearchCategory } = useContext(SearchContext);
 
     // 테이블 헤더 정보
-    const headers = ['아이디', '이름', '연락처', '이메일', '사업자 번호'];
+    const headers = [
+        { header: '아이디', accessor: 'id' },
+        { header: '이름', accessor: 'name' },
+        { header: '연락처', accessor: 'phone' },
+        { header: '이메일', accessor: 'email' },
+        { header: '사업자 번호', accessor: 'businessNo' }
+    ];
+
+    // 컴포넌트 마운트 시 SearchContext 카테고리 목록 설정
+    useEffect(() => {
+        setAvailableCategory(headers);
+
+        // 컴포넌트 언마운트 시 정리
+        return () => {
+            setAvailableCategory([]);
+            setSearchCategory('전체');
+        };
+    }, []);
 
     // 행 렌더링 방식 규정 함수
     const renderManagerMember = (managerMember, layoutClassName) => (
@@ -23,6 +45,7 @@ function AdminManagerMemberList(){
             renderItem={renderManagerMember}               // 행 렌더링 방식
             tableHeaders={headers}                  // 테이블 헤더
             layoutClassName="layout-manager-members"
+            itemKey="id"
         />
     );
 }

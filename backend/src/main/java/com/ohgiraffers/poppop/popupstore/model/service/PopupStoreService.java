@@ -4,8 +4,7 @@ import com.ohgiraffers.poppop.popupstore.model.dao.PopupStoreMapper;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PopupStoreService {
@@ -56,5 +55,16 @@ public class PopupStoreService {
 
     public List<PopupStoreDTO> selectPopupStoreByCategory(String category) {
         return popupStoreMapper.selectPopupStoreByCategory(category);
+    }
+
+    public void approvePopup(int popupNo) {
+        popupStoreMapper.approvePopup(popupNo);
+    }
+
+    public void rejectPopup(int popupNo, String rejectionReason) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("popupNo", popupNo);
+        params.put("rejectionReason", rejectionReason);
+        popupStoreMapper.rejectPopup(params);
     }
 }

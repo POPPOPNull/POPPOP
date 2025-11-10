@@ -60,7 +60,7 @@
 
 /* 팝업 예약 상세 조회 */
 .layout-reservation-details {
-  grid-template-columns: 1.5fr 1.5fr 2.0fr 2.0fr 1.5fr 1.5fr;
+  grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.0fr;
 }
 
 /* 공통 */
@@ -73,7 +73,7 @@
 
 /* 모든 컬럼의 자식 div들은 기본 왼쪽 정렬 */
 .list-row > div, .list-header > div {
-  text-align: left;
+  text-align: center;
   padding: 0 5px;
 }
 

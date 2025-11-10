@@ -1,8 +1,32 @@
 import ListContainer from "./ListContainer";
 import { selectAllReservation } from "../../api/adminAPI";
+import { useEffect, useContext } from "react";
+import { SearchContext } from "./searchProvider";
 
 function AdminReservationList () {
-    const headers = ['예약 번호', '예약 상태', '예약 인원', '취소 사유', '팝업 이름', '예약자 ID'];
+
+    // 검색 카테고리 목록
+    const { setAvailableCategory, setSearchCategory } = useContext(SearchContext);
+
+    const headers = [
+        { header: '예약 번호', accessor: 'reservationNo' },
+        { header: '예약 상태', accessor: 'reservationStatus' },
+        { header: '예약 인원', accessor: 'reservationPersonnel' },
+        { header: '취소 사유', accessor: 'cancelReason' },
+        { header: '팝업 이름', accessor: 'popupName' },
+        { header: '예약자 ID', accessor: 'memberId' }
+    ];
+
+    // 컴포넌트 마운트 시 SearchContext 카테고리 목록 설정
+    useEffect(() => {
+        setAvailableCategory(headers);
+
+        // 컴포넌트 언마운트 시 정리
+        return () => {
+            setAvailableCategory([]);
+            setSearchCategory('전체');
+        };
+    }, []);
 
     const renderReservation = (reservation, layoutClassName) => (
         <div key={reservation.reservationNo} className={`list-row ${layoutClassName}`}>
@@ -21,6 +45,7 @@ function AdminReservationList () {
             renderItem={renderReservation}
             tableHeaders={headers}
             layoutClassName="layout-reservation"
+            itemKey="no"
         />
     );
 }

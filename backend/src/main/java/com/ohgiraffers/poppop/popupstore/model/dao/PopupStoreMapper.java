@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Mapper
 public interface PopupStoreMapper {
@@ -27,4 +29,8 @@ public interface PopupStoreMapper {
     List<PopupStoreDTO> selectPopupStoreByCategory(String category);
 
 //    List<PopupStoreDTO> selectPopupStoreNear(double lat, double lng, int limit);
+
+    int approvePopup(int popupNo);
+
+    int rejectPopup(Map<String, Object> params);
 }
