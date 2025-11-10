@@ -23,9 +23,10 @@ public class FavoriteController {
 
     // 찜목록 추가
     @PostMapping("/favorite")
-    public ResponseEntity<?> insertFavoritePopup(@RequestBody FavoriteDTO favorite){
-        System.out.println(favorite);
-        favoriteService.insetFavoritePopup(favorite);
+    public ResponseEntity<?> insertFavoritePopup(@RequestParam int popupNo, @RequestParam String memberId){
+        System.out.println(popupNo);
+        System.out.println(memberId);
+        favoriteService.insetFavoritePopup(popupNo,memberId);
 
         return ResponseEntity.created(URI.create("/user")).build();
     }

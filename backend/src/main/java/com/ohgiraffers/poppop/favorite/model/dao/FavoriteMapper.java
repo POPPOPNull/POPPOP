@@ -5,5 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FavoriteMapper {
-    void insertFavoritePopup(FavoriteDTO favorite);
+
+    void insertFavoritePopup(int popupNo, String memberId);
 }
