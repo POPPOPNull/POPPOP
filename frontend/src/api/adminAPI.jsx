@@ -57,6 +57,39 @@ export async function selectAllPopup() {
     }
 }
 
+// 팝업 스토어 상세 조회
+export async function selectPopupDetails(popupNo) {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/admin/manager-popup/${popupNo}`);
+        return response.data;
+    } catch (error) {
+        console.error(`API call error in selectPopupDetails ${popupNo}`, error);
+        throw error;
+    }
+}
+
+// 팝업 스토어 승인 처리
+export async function approvePopup(popupNo) {
+    try {
+        const response = await axios.put(`${BACKEND_URL}/admin/manager-popup/${popupNo}/approve`);
+        return response.data;
+    } catch (error) {
+        console.error(`API call error in approvePopup ${popupNo}`, error);
+        throw error;
+    }
+}
+
+// 팝업 스토어 반려 처리
+export async function rejectPopup(popupNo, rejectionReason) {
+    try {
+        const response = await axios.put(`${BACKEND_URL}/admin/manager-popup/${popupNo}/reject`, { rejectionReason });
+        return response.data;
+    } catch (error) {
+        console.error(`API call error in rejectPopup ${popupNo}`, error);
+        throw error;
+    }
+}
+
 // 팝업 스토어 별 예약 조회(집계)
 export async function selectReservationSummary() {
     try {

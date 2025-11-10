@@ -3,44 +3,38 @@ package com.ohgiraffers.poppop.reservation.model.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ReservationDTO {
+public class ReservationDetailsDTO {
 
     private int reservationNo;
     private String reservationStatus;
     private int reservationPersonnel;
-    private String cancelReason;
     private int popupNo;
     private String memberId;
     private String popupName;
     private String phone;
-    private String timeslotNo;
     private LocalDate reservationDate;
     private LocalTime reservationTime;
     private String name;
 
-    public ReservationDTO() {}
+    public ReservationDetailsDTO() {}
 
-    public ReservationDTO(int reservationNo,
-                          String reservationStatus,
-                          int reservationPersonnel,
-                          String cancelReason,
-                          int popupNo,
-                          String memberId,
-                          String popupName,
-                          String phone,
-                          String timeslotNo,
-                          LocalDate reservationDate,
-                          LocalTime reservationTime,
-                          String name) {
+    public ReservationDetailsDTO(int reservationNo,
+                                 String reservationStatus,
+                                 int reservationPersonnel,
+                                 int popupNo,
+                                 String memberId,
+                                 String popupName,
+                                 String phone,
+                                 LocalDate reservationDate,
+                                 LocalTime reservationTime,
+                                 String name) {
         this.reservationNo = reservationNo;
         this.reservationStatus = reservationStatus;
         this.reservationPersonnel = reservationPersonnel;
-        this.cancelReason = cancelReason;
         this.popupNo = popupNo;
         this.memberId = memberId;
         this.popupName = popupName;
         this.phone = phone;
-        this.timeslotNo = timeslotNo;
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
         this.name = name;
@@ -68,14 +62,6 @@ public class ReservationDTO {
 
     public void setReservationPersonnel(int reservationPersonnel) {
         this.reservationPersonnel = reservationPersonnel;
-    }
-
-    public String getCancelReason() {
-        return cancelReason;
-    }
-
-    public void setCancelReason(String cancelReason) {
-        this.cancelReason = cancelReason;
     }
 
     public int getPopupNo() {
@@ -110,14 +96,6 @@ public class ReservationDTO {
         this.phone = phone;
     }
 
-    public String getTimeslotNo() {
-        return timeslotNo;
-    }
-
-    public void setTimeslotNo(String timeslotNo) {
-        this.timeslotNo = timeslotNo;
-    }
-
     public LocalDate getReservationDate() {
         return reservationDate;
     }
@@ -148,12 +126,10 @@ public class ReservationDTO {
                 "reservationNo=" + reservationNo +
                 ", reservationStatus='" + reservationStatus + '\'' +
                 ", reservationPersonnel=" + reservationPersonnel +
-                ", cancelReason='" + cancelReason + '\'' +
                 ", popupNo=" + popupNo +
                 ", memberId='" + memberId + '\'' +
                 ", popupName='" + popupName + '\'' +
                 ", phone='" + phone + '\'' +
-                ", timeslotNo='" + timeslotNo + '\'' +
                 ", reservationDate=" + reservationDate +
                 ", reservationTime=" + reservationTime +
                 ", name='" + name + '\'' +

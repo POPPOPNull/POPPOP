@@ -6,7 +6,22 @@ export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
     const [searchText, setSearchText] = useState('');
-    const value = { searchText, setSearchText };
+
+    // 검색 카테고리 상태
+    const [searchCategory, setSearchCategory] = useState('전체');
+
+    // 현재 페이지의 검색 카테고리 목록을 저장할 상태
+    const [availableCategory, setAvailableCategory] = useState([]);
+
+    // 검색 활성화 여부 상태 추가
+    const [isSearchEnabled, setIsSearchEnabled] = useState(true);
+
+    const value = { 
+        searchText, setSearchText,
+        searchCategory, setSearchCategory,
+        availableCategory, setAvailableCategory,
+        isSearchEnabled, setIsSearchEnabled
+     };
 
     return (
         <SearchContext.Provider value={value}>

@@ -1,7 +1,7 @@
 package com.ohgiraffers.poppop.reservation.model.service;
 
 import com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper;
-import com.ohgiraffers.poppop.reservation.model.dto.ReservationDTO;
+import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class ReservationService {
         this.reservationMapper = reservationMapper;
     }
 
-    public List<ReservationDTO> selectAllReservation() {
+    public List<ReservationDetailsDTO> selectAllReservation() {
         return reservationMapper.selectAllReservation();
     }
 
@@ -24,7 +24,7 @@ public class ReservationService {
         return reservationMapper.selectReservationSummary();
     }
 
-    public List<ReservationDTO> selectReservationDetailsByPopup(int popupNo) {
+    public List<ReservationDetailsDTO> selectReservationDetailsByPopup(int popupNo) {
         return reservationMapper.selectReservationDetailsByPopup(popupNo);
     }
 
