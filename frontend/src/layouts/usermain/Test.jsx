@@ -8,15 +8,13 @@ import {useDrag, DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import CategoryComp from "../../componenets/user/usermain/CategoryComp";
 import { MidComp1, MidComp2 } from "../../componenets/user/usermain/MidComp";
-import Container from "./Container";
-import ComponentContainer from "./TestContainer";
-// import Test from "../../pages/dndtest/DndTest";
+import Container from "./TestContainer";
 
 
 
 
 
-function User (){
+function Test (){
 
 
 
@@ -27,13 +25,13 @@ function User (){
             <div className="user-main-layout">
                 <div className="user-main">
                     <div className="blank"></div>
-                    <Blank/>
+                    <h1>dnd 테스트 페이지
+                    </h1>
                     <TopComp/>
-                        {/* <CategoryComp/>
-                        <MidComp1/>
-                        <MidComp2/> */}
+                    
+                    <DndProvider backend={HTML5Backend}>
                         <Container/>
-
+                    </DndProvider>
                     
                     <BotComp/>
 
@@ -47,4 +45,4 @@ function User (){
     )
 }
 
-export default User;
+export default Test;
