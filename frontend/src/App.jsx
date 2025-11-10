@@ -4,11 +4,11 @@ import Manager from "./pages/manager/manager";
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 import PopupDetails from "./pages/user/PopupDetails"
 // import KakaoMap from "./componenets/Map"
+import Dashboard from "./pages/manager/dashboard"; 
 import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
-import MyPopupRegPage from "./pages/manager/mypopupreg";
-import ReservationPage from "./pages/manager/reservation";
-import ManagerHome from "./pages/manager/managerHome";
+import PopupRegister from "./pages/manager/popup-register";
+import ReservationPage from "./pages/manager/reservations";
 import MyInformation from "./pages/user/MyInfo"
 import MyReview from "./pages/user/MyReviews"
 import MyReservation from "./pages/user/MyReservations"
@@ -62,11 +62,11 @@ function App() {
         </Route>
 
         <Route path="/manager" element={<Manager/>}/>
+        <Route path="/manager/dashboard" element={<Dashboard />} />
         <Route path="/manager/mypopup" element={<MyPopupPage />} />
         <Route path="/manager/mypopupdet" element={<MypopupdetPage />} />
-        <Route path="/manager/mypopupreg" element={<MyPopupRegPage />} />
-        <Route path="/manager/reservation" element={<ReservationPage />} />
-        <Route path="/manager/managerHome" element={<ManagerHome />} />
+        <Route path="/manager/popup-register" element={<PopupRegister />} />
+        <Route path="/manager/reservations" element={<ReservationPage />} /> 
         <Route path="/admin" element={<AdminLayout/>}>
           <Route index element={<AdminMain/>} />
           <Route path="members" element={<AdminMembers/>} />
