@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import BCStyle from "./MidComp.module.css"
-import { selectAllPopupStore } from "../../../api/PopupStoreAPI"
+import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStoreAPI"
 import PopupStores from "../../PopupStores"
+import { Link } from "react-router-dom"
+
 
 
 export function BotComp() {
@@ -9,10 +11,14 @@ export function BotComp() {
     const [popupStores, setPopupStores] = useState([])
 
     useEffect(()=>{
-        selectAllPopupStore().then(data=>{
-            console.log(data)
-            setPopupStores(data)
-        })
+        const fetchData = async () =>{
+            const data = await selectAllPopupStore()
+            const length = data.length
+
+            const data2 = await selectPopupRandomly(10,length)
+            setPopupStores(data2)
+        }
+        fetchData()
     },[])
 
 
@@ -33,6 +39,9 @@ export function BotComp() {
             <div className={BCStyle.botlayout}>
                 {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore}/>)}
             </div>
+            <Link to={"/user/search"}>
+                <div className={BCStyle.more}>더보기</div>
+            </Link>
         </>
     )
 }
