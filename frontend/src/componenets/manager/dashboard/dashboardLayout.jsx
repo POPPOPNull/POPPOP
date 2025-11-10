@@ -1,7 +1,8 @@
 import DashboardTop from "./dashboardTop";
 import DashboardGrid from "./dashboardGrid";
-import "../../../pages/manager/manager-page.css";
+// import "../../../pages/manager/manager-page.css";
 import { useState } from "react";
+import "./dashboard.css";
 
 function DashboardLayout() {
   const [searchText, setSearchText] = useState("");

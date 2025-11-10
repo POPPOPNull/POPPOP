@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ManagerSidebar from "../../../layouts/managermain/manager-sidebar";
 import "./mypopupreg.css";
 
 function MyPopupReg() {
+    const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
     category: "",
@@ -232,16 +234,12 @@ function MyPopupReg() {
               </div>
 
               <div className="mpr-row">
-                <input
+                {/* <input
                   className="mpr-input"
                   type="text"
                   placeholder="예약 시간 단위 (ex) 30분, 1시간"
-                />
-                <input
-                  className="mpr-input"
-                  type="text"
-                  placeholder="타임별 인원 (ex) 100명"
-                />
+                /> */}
+            
               </div>
             </div>
           </section>
@@ -313,11 +311,16 @@ function MyPopupReg() {
 
           <section className="mpr-section">
             <h3 className="mpr-section-title">팝업스토어 이미지 *</h3>
-            <input className="mpr-input" type="file" />
 
             <div className="mpr-guide-box">
-            </div>
-          </section>
+            <p className="mpr-email-guide">
+                첨부할 포스터나 이미지를 이메일로 보내주세요! 📩<br />
+            <strong>이메일 주소:</strong> 
+            <span className="mpr-email">poppop.admin@gmail.com</span>
+         </p>
+        </div>
+        </section>
+
         </div>
       </div>
     </div>

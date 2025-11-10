@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./managerHome.css";
 
 function ManagerHome() {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="mh-wrap">
@@ -29,9 +31,20 @@ function ManagerHome() {
 
           {hover && (
             <div className="mh-menu">
-              <button>POPPOP 소개</button>
-              <button>팝업스토어 등록</button>
-              <button>나의 팝업 스토어</button>
+              {/* POPPOP 소개 → /manager */}
+              <button onClick={() => navigate("/manager")}>
+                POPPOP 소개
+              </button>
+
+              {/* 팝업스토어 등록 → /manager/popup-register */}
+              <button onClick={() => navigate("/manager/popup-register")}>
+                팝업스토어 등록
+              </button>
+
+              {/* 나의 팝업 스토어 → /manager/mypopup */}
+              <button onClick={() => navigate("/manager/mypopup")}>
+                나의 팝업 스토어
+              </button>
             </div>
           )}
         </div>

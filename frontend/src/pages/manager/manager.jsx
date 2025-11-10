@@ -1,19 +1,8 @@
 import "./manager-page.css";
-import ManagerSidebar from "../../layouts/managermain/manager-sidebar";
-import Dashboard from "./dashboard"; 
+import ManagerHome from "../../componenets/manager/managerMain/managerHome";
 
 function Manager() {
-  return (
-    <div className="manager-page">
-      <div className="main-layout">
-        <ManagerSidebar />
 
-        <div className="manager-main-content">
-          <Dashboard />
-        </div>
-      </div>
-    </div>
-  );
+  return <ManagerHome />;
 }
-
 export default Manager;
