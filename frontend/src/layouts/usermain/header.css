@@ -1,0 +1,29 @@
+
+.header{
+    width: 900px;
+    height: 100px;
+    background-color: white;
+    opacity: 17%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: calc(50% - 450px);
+    filter: blur(3px);
+    z-index: 1001;
+}
+.logo{
+    color: #FFCF0D;
+    font-size: 40px;
+    font-weight: 700;
+    width: 900px;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: calc(50% - 450px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1002;
+    
+}

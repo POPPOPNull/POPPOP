@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.poppop.admin.model.dao.AdminMapper">
+    <resultMap id="memberResultMap" type="com.ohgiraffers.poppop.member.model.dto.MemberDTO">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="role" column="role"/>
+        <result property="email" column="email"/>
+        <result property="gender" column="gender"/>
+        <result property="businessNo" column="business_no"/>
+        <result property="birthDate" column="birth_date"/>
+    </resultMap>
+
+    <select id="countUsers" resultType="int">
+        select count(*) from `member`
+    </select>
+
+    <select id="selectAllMembers" resultMap="memberResultMap">
+        select
+              id,
+              name,
+              phone,
+              role,
+              email,
+              gender,
+              business_no,
+              birth_date
+          from member
+        <if test="role != null and role != ''">
+         where role like #{role}
+        </if>
+    </select>
+
+    <select id="findById" parameterType="string" resultType="com.ohgiraffers.poppop.admin.model.dto.AdminDTO">
+        select
+               id,
+               password
+          from admin
+         where id = #{id}
+    </select>
+
+</mapper>

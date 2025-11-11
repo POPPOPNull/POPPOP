@@ -1,0 +1,28 @@
+.back{
+    display: flex;
+    height: 100%;
+    align-items: end;
+    
+}
+
+.layout{
+    display: flex;
+    /* flex-direction: column; */
+    background-color: black;
+    opacity: 50%;
+    color: white;
+    position: relative;
+    height: 30%;
+    width: 100%;
+    align-items: center; 
+    
+}
+.explain{
+    font-size: 12px;    
+    position: relative;
+    left: 5%;
+}
+
+.name{
+    font-size: 20px;
+}
