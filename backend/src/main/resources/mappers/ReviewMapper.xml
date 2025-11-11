@@ -14,7 +14,8 @@
     <select id="selectReviewByPopupStore" resultMap="reviewResultMap">
         select
                review_content,
-               id
+               id,
+               review_date
           from review
          where popup_no = #{popupNo}
          order by review_no desc

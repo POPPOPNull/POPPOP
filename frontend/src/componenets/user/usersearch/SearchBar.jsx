@@ -5,7 +5,20 @@ import TPStyle from "./UserSearch.module.css"
 import Blank from "../usermain/Blank"
 import PopupStores from "../../PopupStores";
 
-
+function NoSearchResult({props}){
+    return(
+        <>
+            <div></div>
+            <div className={TPStyle.nosearchresult}>
+                
+                <div>
+                    <div><img src="/public/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
+                    검색어 "{props}" 에 해당하는 팝업스토어가 존재하지 않습니다.
+                </div>
+            </div>
+        </>
+    )
+}
 
 
 function SearchBar(){
@@ -48,6 +61,19 @@ function SearchBar(){
         })
         
         setIsVisible(false)
+    
+    }
+
+    const onEnterKeyDown = async (e)=>{
+        if(e.keyCode==13){
+            selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord)
+        .then(data=>{
+            console.log("popups",data)
+            setPopups(data)
+        })
+        
+        setIsVisible(false)
+        }
     }
 
     useEffect(()=>{
@@ -77,6 +103,8 @@ function SearchBar(){
                         <input type="text" 
                         className={USStyle.searchbar}
                         onChange={onChangeKeyword}
+                        onKeyDown={onEnterKeyDown}
+                        autoFocus={true}
                         value={searchWord}
                         />                    
                         <button className={USStyle.searchbutton} onClick={onCLickSearch}>검색</button>
@@ -95,7 +123,7 @@ function SearchBar(){
         </select>
 
         <div className={TPStyle.popuplayout}>
-            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag}/>)}
+            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag}/>)}
         </div>
         </>
     )
