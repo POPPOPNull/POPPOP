@@ -33,4 +33,7 @@ public interface PopupStoreMapper {
     int approvePopup(int popupNo);
 
     int rejectPopup(Map<String, Object> params);
+
+    // 매니저: 팝업 등록 요청
+//    int insertPopupStore(PopupStoreDTO popupStoreDTO);
 }
