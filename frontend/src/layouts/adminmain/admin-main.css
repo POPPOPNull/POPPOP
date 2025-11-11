@@ -52,62 +52,37 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
+    gap: 180px;
+}
+
+.kpi-card {
+    display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
-}
-
-.adminKPI-layout-up{
-    width: 100%;
-    height: 60px;
-    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    font-family: 'pretendard', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
+    padding: 20px;
 }
 
-.adminKPI-total-left{
-    margin-left: 20px;
-    line-height: 0.5;
-}
-
-.adminKPI-total-left-text1{
-    padding-top: 20px;
+.kpi-title {
     font-size: 16px;
+    color: #888;
+    margin: 0;
 }
 
-.adminKPI-total-right{
-    margin-right: 20px;
-    line-height: 1.5;
-}
-
-.adminKPI-layout-down{
-    width: 95%;
-    height: 60px;
+.kpi-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-    gap : 20px;
+    align-items: baseline;
 }
 
-.adminKPI-box1{
-    width: 360px;
-    height: 40px;
-    background-color: #f4f6fa;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 20px;
-    font-family: 'pretendard', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
-    gap: 15px;
+.kpi-unit {
+    font-size: 16px;
+    font-weight: normal;
+    margin-left: 5px;
 }
-
 
 .admin-chart-layout{
     width: 100%;

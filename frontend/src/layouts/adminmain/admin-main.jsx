@@ -1,23 +1,14 @@
 import "./admin-main.css"
-import AdminKPI1 from "../../componenets/admin/adminKPI1"
 import AdminChart from "../../componenets/admin/adminChart"
 import AdminLineChart from "../../componenets/admin/adminLineChart"
 import AdminBarChart from "../../componenets/admin/adminBarChart"
-import AdminKPITotalLeft from "../../componenets/admin/adminKPITotalLeft"
-import AdminKPITotalRight from "../../componenets/admin/adminKPITotalRight"
+import KPIData from "../../componenets/admin/adminKPIData"
 
 function AdminMain (){
     return(
         <>
             <div className="adminKPI-layout">
-                <div className="adminKPI-layout-up">
-                    <AdminKPITotalLeft/>
-                    <AdminKPITotalRight/>
-                </div>
-                <div className="adminKPI-layout-down">
-                    <AdminKPI1/><AdminKPI1/><AdminKPI1/><AdminKPI1/>
-                </div>
-                
+                <KPIData/>                
             </div>
             <div className="admin-chart-layout">
                 <div className="admin-chart-box">
