@@ -122,3 +122,14 @@ export async function deleteReservation(reservationNo) {
         throw error;
     }
 }
+
+// user 대시보드 KPI 카드 데이터 조회
+export async function selectUserKpiData() {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/admin/kpi/user`);
+        return response.data;
+    } catch (error) {
+        console.error("API call error in selectUserKpiData", error);
+        throw error;
+    }
+}

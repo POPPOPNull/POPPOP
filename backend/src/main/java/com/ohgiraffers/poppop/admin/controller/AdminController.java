@@ -1,6 +1,8 @@
 package com.ohgiraffers.poppop.admin.controller;
 
+import com.ohgiraffers.poppop.admin.model.dto.UserKpiDTO;
 import com.ohgiraffers.poppop.admin.model.service.AdminService;
+import com.ohgiraffers.poppop.admin.model.service.KpiService;
 import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import com.ohgiraffers.poppop.popupstore.model.service.PopupStoreService;
@@ -24,15 +26,18 @@ public class AdminController {
     private final ReviewService reviewService;
     private final ReservationService reservationService;
     private final PopupStoreService popupStoreService;
+    private final KpiService kpiService;
 
     public AdminController(AdminService adminService,
                            ReviewService reviewService,
                            ReservationService reservationService,
-                           PopupStoreService popupStoreService) {
+                           PopupStoreService popupStoreService,
+                           KpiService kpiService) {
         this.adminService = adminService;
         this.reviewService = reviewService;
         this.reservationService = reservationService;
         this.popupStoreService = popupStoreService;
+        this.kpiService = kpiService;
     }
 
     // 전체 회원(user) 조회
@@ -116,5 +121,12 @@ public class AdminController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // User 대시보드 KPI 데이터 조회
+    @GetMapping("/kpi/user")
+    public ResponseEntity<UserKpiDTO> selectUserKpiData() {
+        UserKpiDTO userKpi = kpiService.selectUserKpiData();
+        return ResponseEntity.ok(userKpi);
     }
 }
