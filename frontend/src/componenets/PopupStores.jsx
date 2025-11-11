@@ -28,7 +28,6 @@ function PopupStores({popupstore,setIsDrag}){
 
         useEffect(()=>{
             setIsDrag(isDragging)
-            console.log(isDragging)
         },[isDragging,setIsDrag])
     
     return(
