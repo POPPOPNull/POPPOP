@@ -3,6 +3,7 @@ package com.ohgiraffers.poppop.popupstore.model.service;
 import com.ohgiraffers.poppop.popupstore.model.dao.PopupStoreMapper;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -67,4 +68,15 @@ public class PopupStoreService {
         params.put("rejectionReason", rejectionReason);
         popupStoreMapper.rejectPopup(params);
     }
+
+//    @Transactional
+//    public void requestPopupRegister(PopupStoreDTO dto, String managerId) {
+//
+//        // 로그인한 매니저 ID
+//        dto.setId(managerId);
+//
+//        dto.setApprovalStatus("대기");
+//
+//        popupStoreMapper.insertPopupStore(dto);
+//    }
 }
