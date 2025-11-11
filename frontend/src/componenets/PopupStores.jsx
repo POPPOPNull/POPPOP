@@ -5,7 +5,9 @@ import { insertFavorite } from "../api/FavoriteAPI"
 import { useDrag, useDrop } from "react-dnd"
 
 
-function PopupStores({popupstore}){
+function PopupStores({popupstore,setIsDrag}){
+
+        
 
         const [{isDragging},drag,preview] = useDrag({
             type:'popup',
@@ -19,31 +21,15 @@ function PopupStores({popupstore}){
                 if(monitor.didDrop()){
                     console.log("드롭완료")
                 }else{
-                    console.log('드래그종료, 드롭 안됨',item)
+                    console.log('드래그종료, 드롭 안됨',item.popupstore.no)
                 }
             }
         })
 
-
-        
-
-
-    
-
-    const [favorite, setFavorite] =useState({
-        memberId:"gunwoo",
-        popupNo:null
-    })
-    
-    const onClickFavorite = ()=>{
-        setFavorite({
-            memberId:"user-geonwoo",
-            popupNo:popupstore.no
-        })
-        console.log(popupstore.no,favorite)
-        insertFavorite(popupstore.no,favorite)
-    }
-
+        useEffect(()=>{
+            setIsDrag(isDragging)
+            console.log(isDragging)
+        },[isDragging,setIsDrag])
     
     return(
         <>
@@ -58,7 +44,7 @@ function PopupStores({popupstore}){
                             </div>
                     </div>
                 </Link>
-                        <div className={PSStyle.favorite} onClick={onClickFavorite}>♡</div>
+                        <div className={PSStyle.favorite}>♡</div>
             
         </>
     )

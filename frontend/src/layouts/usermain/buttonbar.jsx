@@ -13,11 +13,11 @@ function Favorite({item,children}){
         accept:'popup',
         hover(item){
             console.log("호버중")
-            console.log(item.popupstore.no,"user-geonwoo")
+            console.log(item.popupstore.no,"user1")
         },
         drop(item){
             console.log("아이템",item.popupstore.no)
-            insertFavorite(item.popupstore.no,"user-geonwoo")
+            insertFavorite(item.popupstore.no,"user1")
         }
         
     })

@@ -6,16 +6,16 @@ public class ReviewDTO {
     private String content;
     private int popupNo;
     private String memberId;
-    private String popupName;
+    private String reviewDate;
 
     public ReviewDTO (){}
 
-    public ReviewDTO(int reviewNo, String content, int popupNo, String memberId, String popupName) {
+    public ReviewDTO(int reviewNo, String content, int popupNo, String memberId, String reviewDate) {
         this.reviewNo = reviewNo;
         this.content = content;
         this.popupNo = popupNo;
         this.memberId = memberId;
-        this.popupName = popupName;
+        this.reviewDate = reviewDate;
     }
 
     public int getReviewNo() {
@@ -50,12 +50,12 @@ public class ReviewDTO {
         this.memberId = memberId;
     }
 
-    public String getPopupName() {
-        return popupName;
+    public String getReviewDate() {
+        return reviewDate;
     }
 
-    public void setPopupName(String popupName) {
-        this.popupName = popupName;
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ReviewDTO {
                 ", content='" + content + '\'' +
                 ", popupNo=" + popupNo +
                 ", memberId='" + memberId + '\'' +
-                ", popupName='" + popupName + '\'' +
+                ", reviewDate='" + reviewDate + '\'' +
                 '}';
     }
 }

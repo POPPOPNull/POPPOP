@@ -10,6 +10,7 @@ import PopupStores from "../../PopupStores";
 
 function SearchBar(){
 
+    const [isDrag,setIsDrag] = useState(false)
     const [isVisible,setIsVisible] = useState(false)
     const [searchWord, setSearchWord] = useState("")
 
@@ -89,12 +90,12 @@ function SearchBar(){
             <select onChange={onChangeStatus} className={TPStyle.select}>
             <option value="all" >전체</option>
             <option value="done" >종료</option>
-            <option value="open" defaultValue={true}>진행중</option>
+            <option value="open" defaultValue={true} selected={true}>진행중</option>
             <option value="scheduled">오픈 예정</option>
         </select>
 
         <div className={TPStyle.popuplayout}>
-            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup}/>)}
+            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag}/>)}
         </div>
         </>
     )
