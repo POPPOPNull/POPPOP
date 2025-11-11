@@ -1,4 +1,26 @@
 .botlayout{
     display: flex;
     flex-wrap: wrap;
+    /* height: 600px; */
+}
+.dropdelete{
+    background-color: red;
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    position: absolute;
+    left: calc(50% - 40px);
+    bottom: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.nofavorite{
+    width: 900px;
+    background-color: rgb(51, 51, 51);
+    text-align: center;
+    justify-content: center;
+    height: 600px;
 }

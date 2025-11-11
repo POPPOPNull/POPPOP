@@ -34,7 +34,7 @@ function ReviewInsert(){
        return(
            <>
                <div className="user-main-layout">
-                   <div className="user-main">
+                   <div className="main">
                        <div className="blank"></div>
                        <div className={PPStyle.poster}>이미지준비중</div>
                        <div className={PPStyle.imagebuttonlayout}>

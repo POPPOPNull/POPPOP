@@ -5,6 +5,7 @@ import com.ohgiraffers.poppop.favorite.model.service.FavoriteService;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,15 @@ public class FavoriteController {
         System.out.println(popupNo);
         System.out.println(memberId);
         favoriteService.insetFavoritePopup(popupNo,memberId);
+
+        return ResponseEntity.created(URI.create("/user")).build();
+    }
+
+    // 찜목록 삭제
+    @DeleteMapping("/favorite")
+    public ResponseEntity<?> deleteFavoritePopup(@RequestParam int popupNo,@RequestParam String id){
+
+        favoriteService.deleteFavorite(popupNo,id);
 
         return ResponseEntity.created(URI.create("/user")).build();
     }

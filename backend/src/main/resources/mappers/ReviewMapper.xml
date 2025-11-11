@@ -8,7 +8,7 @@
         <result property="content" column="review_content"/>
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
-        <result property="popupName" column="popup_name"/>
+        <result property="reviewDate" column="review_date"/>
     </resultMap>
 
     <select id="selectReviewByPopupStore" resultMap="reviewResultMap">
@@ -36,13 +36,15 @@
         (
         review_content,
         popup_no,
-        id
+        id,
+        review_date
         )
         value
         (
         #{content},
         #{popupNo},
         #{memberId}
+        ,now()
         )
     </insert>
 </mapper>

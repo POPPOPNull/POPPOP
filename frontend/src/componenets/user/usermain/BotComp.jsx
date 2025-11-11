@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 
 export function BotComp() {
 
+    const [isDrag,setIsDrag] = useState(false)
     const [popupStores, setPopupStores] = useState([])
 
     useEffect(()=>{
@@ -37,7 +38,7 @@ export function BotComp() {
                 <div className={BCStyle.date}>today+6</div>
             </div>
             <div className={BCStyle.botlayout}>
-                {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore}/>)}
+                {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag}/>)}
             </div>
             <Link to={"/user/search"}>
                 <div className={BCStyle.more}>더보기</div>

@@ -26,7 +26,7 @@ function UserReview(){
         setReview({
             popupNo:popupNo,
             content:content,
-            memberId:"user-geonwoo"
+            memberId:"user1"
         })
         console.log(content)
     },[content])

@@ -7,9 +7,6 @@ import java.util.Date;
 
 public class PopupStoreDTO {
 
-
-
-
     private int no;
     private String name;
     private String brandName;
@@ -18,17 +15,22 @@ public class PopupStoreDTO {
     private Time openTime;
     private Time closeTime;
     private String location;
-    private boolean reservableStatus;
+    private double latitude;
+    private double longitude;
+    private int reservableStatus;
     private String explanation;
     private String approvalStatus;
     private String rejectionReason;
-    private String categoryName;
     private String id;
     private int clickCount;
-
+    private String categoryName;
+    private int advanceReservation;
+    private String homepageLink;
+    private int capacity;
+    private String hashtagName;
     public PopupStoreDTO(){}
 
-    public PopupStoreDTO(int no, String name, String brandName, String startDate, String endDate, Time openTime, Time closeTime, String location, boolean reservableStatus, String explanation, String approvalStatus, String rejectionReason, String categoryName, String id, String hashtags, int clickCount) {
+    public PopupStoreDTO(int no, String name, String brandName, String startDate, String endDate, Time openTime, Time closeTime, String location, double latitude, double longitude, int reservableStatus, String explanation, String approvalStatus, String rejectionReason, String id, int clickCount, String categoryName, int advanceReservation, String homepageLink, int capacity, String hashtagName) {
         this.no = no;
         this.name = name;
         this.brandName = brandName;
@@ -37,13 +39,19 @@ public class PopupStoreDTO {
         this.openTime = openTime;
         this.closeTime = closeTime;
         this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.reservableStatus = reservableStatus;
         this.explanation = explanation;
         this.approvalStatus = approvalStatus;
         this.rejectionReason = rejectionReason;
-        this.categoryName = categoryName;
         this.id = id;
         this.clickCount = clickCount;
+        this.categoryName = categoryName;
+        this.advanceReservation = advanceReservation;
+        this.homepageLink = homepageLink;
+        this.capacity = capacity;
+        this.hashtagName = hashtagName;
     }
 
     public int getNo() {
@@ -110,11 +118,27 @@ public class PopupStoreDTO {
         this.location = location;
     }
 
-    public boolean isReservableStatus() {
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getReservableStatus() {
         return reservableStatus;
     }
 
-    public void setReservableStatus(boolean reservableStatus) {
+    public void setReservableStatus(int reservableStatus) {
         this.reservableStatus = reservableStatus;
     }
 
@@ -142,14 +166,6 @@ public class PopupStoreDTO {
         this.rejectionReason = rejectionReason;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
     public String getId() {
         return id;
     }
@@ -157,7 +173,6 @@ public class PopupStoreDTO {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public int getClickCount() {
         return clickCount;
@@ -167,24 +182,70 @@ public class PopupStoreDTO {
         this.clickCount = clickCount;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getAdvanceReservation() {
+        return advanceReservation;
+    }
+
+    public void setAdvanceReservation(int advanceReservation) {
+        this.advanceReservation = advanceReservation;
+    }
+
+    public String getHomepageLink() {
+        return homepageLink;
+    }
+
+    public void setHomepageLink(String homepageLink) {
+        this.homepageLink = homepageLink;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getHashtagName() {
+        return hashtagName;
+    }
+
+    public void setHashtagName(String hashtagName) {
+        this.hashtagName = hashtagName;
+    }
+
     @Override
     public String toString() {
         return "PopupStoreDTO{" +
                 "no=" + no +
                 ", name='" + name + '\'' +
                 ", brandName='" + brandName + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 ", openTime=" + openTime +
                 ", closeTime=" + closeTime +
                 ", location='" + location + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 ", reservableStatus=" + reservableStatus +
                 ", explanation='" + explanation + '\'' +
                 ", approvalStatus='" + approvalStatus + '\'' +
                 ", rejectionReason='" + rejectionReason + '\'' +
-                ", categoryName='" + categoryName + '\'' +
                 ", id='" + id + '\'' +
                 ", clickCount=" + clickCount +
+                ", categoryName='" + categoryName + '\'' +
+                ", advanceReservation=" + advanceReservation +
+                ", homepageLink='" + homepageLink + '\'' +
+                ", capacity=" + capacity +
+                ", hashtagName='" + hashtagName + '\'' +
                 '}';
     }
 }

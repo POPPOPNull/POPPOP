@@ -12,4 +12,8 @@
     <insert id="insertFavoritePopup">
         insert into favorite (popup_no,id) value (#{popupNo},#{memberId})
     </insert>
+
+    <delete id="deleteFavorite">
+        delete from favorite where popup_no = #{popupNo} and id = #{id}
+    </delete>
 </mapper>

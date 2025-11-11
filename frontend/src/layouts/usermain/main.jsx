@@ -25,20 +25,12 @@ function User (){
     return(
         <>
             <div className="user-main-layout">
-                <div className="user-main">
-                    <div className="blank"></div>
+                <div className="main">
+                    <div className="blank"/>
                     <Blank/>
                     <TopComp/>
-                        {/* <CategoryComp/>
-                        <MidComp1/>
-                        <MidComp2/> */}
-                        <Container/>
-
-                    
+                    <Container/>
                     <BotComp/>
-
-                    
-                
                     <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>
