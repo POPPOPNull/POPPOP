@@ -49,10 +49,10 @@ public class AuthService {
     public String adminLogin(String id, String rawPassword) {
         AdminDTO admin = adminMapper.findById(id);
 
-        if (!admin.getPassword().equals(rawPassword)) {
-            throw new RuntimeException("Invalid admin password");
+        if (admin != null && passwordEncoder.matches(rawPassword, admin.getPassword())) {
+            System.out.println("로그인 성공! " + admin.toString());
+            return jwtTokenProvider.createToken(admin.getId(), admin.getRole());
         }
-        System.out.println("로그인 성공! " + admin.toString());
-        return jwtTokenProvider.createToken(admin.getId(), "ADMIN");
+        throw new RuntimeException("Invalid admin credentials");
     }
 }

@@ -15,7 +15,7 @@ function LoginComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await JwtAPI.post('/admin/login', { id, password });
+            const response = await JwtAPI.post('/auth/admin/login', { id, password });
             
             const token = response.data.accessToken;
             
@@ -25,7 +25,7 @@ function LoginComponent() {
             
             login(token); 
             
-            navigate('/'); // App.jsx의 RedirectBasedOnRole로 이동하여 역할 기반 리디렉션 수행
+            navigate('/admin'); // App.jsx의 RedirectBasedOnRole로 이동하여 역할 기반 리디렉션 수행
 
         } catch (error) {
             alert('Admin 로그인 실패');

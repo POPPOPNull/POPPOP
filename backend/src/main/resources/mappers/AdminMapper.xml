@@ -37,7 +37,8 @@
     <select id="findById" parameterType="string" resultType="com.ohgiraffers.poppop.admin.model.dto.AdminDTO">
         select
                id,
-               password
+               password,
+               role
           from admin
          where id = #{id}
     </select>

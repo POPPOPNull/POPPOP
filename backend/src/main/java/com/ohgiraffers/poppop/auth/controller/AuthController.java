@@ -68,5 +68,12 @@ public class AuthController {
         return ResponseEntity.ok(new TokenResponse(token));
     }
 
+    // Admin 로그인
+    @PostMapping("/admin/login")
+    public ResponseEntity<TokenResponse> adminLogin(@RequestBody LoginRequest dto) {
+        String token = authService.adminLogin(dto.getId(), dto.getPassword());
+        return ResponseEntity.ok(new TokenResponse(token));
+    }
+
 }
 
