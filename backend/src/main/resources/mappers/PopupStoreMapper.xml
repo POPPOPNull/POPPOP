@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.poppop.popupstore.model.dao.PopupStoreMapper">
+    <resultMap id="popupStoreResultMap" type="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
+        <id property="no" column="popup_no"/>
+        <result property="name" column="popup_name"/>
+        <result property="brandName" column="brand_name"/>
+        <result property="startDate" column="popup_start_date"/>
+        <result property="endDate" column="popup_end_date"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="location" column="popup_location"/>
+        <result property="reservableStatus" column="reservable_status"/>
+        <result property="explanation" column="popup_explanation"/>
+        <result property="approvalStatus" column="approval_status"/>
+        <result property="rejectionReason" column="rejection_reason"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="id" column="id"/>
+        <result property="clickCount" column="click_count"/>
+    </resultMap>
+
+    <!--카테고리 집계용 resultMap-->
+    <resultMap id="popupCategoryResultMap" type="String">
+        <id property="categoryName" column="category_name"/>
+    </resultMap>
+
+
+    <select id="selectPopupStoreByPagePlacement" resultMap="popupStoreResultMap">
+        select
+               popup_no,
+               popup_name,
+               brand_name,
+               popup_start_date,
+               popup_end_date,
+               open_time,
+               close_time,
+               popup_location,
+               reservable_status,
+               popup_explanation,
+               approval_status,
+               rejection_reason,
+               category_name,
+               id,
+               hashtags,
+               click_count
+    </select>
+    <select id="selectAllPopupStore" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name
+        from popup_store
+    </select>
+    <select id="selectPopupStoreDetails" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name
+        from popup_store
+        where popup_no=#{popupNo}
+    </select>
+    <!--오늘날짜 및 검색어 기준 팝업스토어 조회-->
+    <select id="selectPopupStoreToday" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name
+        from popup_store
+        <!--진행중-->
+        <if test="status!=null and status=='open'">
+              where popup_end_date &gt; #{startDate}
+              and popup_start_date &lt; #{endDate}
+        </if>
+        <!--오픈예정-->
+        <if test="status!=null and status=='scheduled'">
+            where popup_start_date &gt; #{startDate}
+        </if>
+        <!--종료-->
+        <if test="status!=null and status=='done'">
+            where popup_end_date &lt; #{endDate}
+        </if>
+        <if test="status!=null and status=='all'">
+            where approval_status = "승인"
+        </if>
+        and
+        (popup_name like concat('%',#{searchWord},'%')
+        or brand_name like concat('%',#{searchWord},'%')
+        or popup_location like concat('%',#{searchWord},'%')
+        or hashtag_name like concat('%',#{searchWord},'%')
+        or category_name like concat('%',#{searchWord},'%')
+        )
+
+    </select>
+    <!--검색조회-->
+    <select id="selectPopupStoreByKeyword" resultMap="popupStoreResultMap">
+        select
+        p.popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name,
+        h.hashtag_name
+        from popup_store p
+        left join hashtag h on h.popup_no = p.popup_no
+        where popup_name like concat('%',#{searchWord},'%')
+           or brand_name like concat('%',#{searchWord},'%')
+           or popup_location like concat('%',#{searchWord},'%')
+           or h.hashtag_name like concat('%',#{searchWord},'%')
+    </select>
+
+    <!-- 찜목록 조회 -->
+    <select id="selectFavoritePopupStoreById" resultMap="popupStoreResultMap">
+        select
+        p.popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        p.id,
+        click_count,
+        category_name
+                from popup_store p
+                join favorite f on p.popup_no = f.popup_no
+                where f.id = #{id}
+
+    </select>
+    <!--랜덤 조회-->
+    <select id="selectPopupStoreRandomly" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name
+            from popup_store
+            where popup_no in
+        <foreach item="popupNo" collection="random" open="(" separator="," close=")">
+            #{popupNo}
+        </foreach>
+            order by field(popup_no,
+        <foreach item="popupNo" collection="random" open="" separator="," close="">
+            #{popupNo}
+        </foreach>
+        )
+    </select>
+
+    <!--가까운 팝업 조회-->
+<!--    위도 경도값 넣어서 계산 db 수정 후 작업-->
+<!--    <select id="selectPopupStoreNear" resultMap="popupStoreResultMap">-->
+<!--        select-->
+<!--               popup_no,-->
+<!--               popup_name,-->
+<!--               brand_name,-->
+<!--               popup_start_date,-->
+<!--               popup_end_date,-->
+<!--               open_time,-->
+<!--               close_time,-->
+<!--               popup_location,-->
+<!--               reservable_status,-->
+<!--               popup_explanation,-->
+<!--               approval_status,-->
+<!--               rejection_reason,-->
+<!--               category_name,-->
+<!--               id,-->
+<!--               hashtags,-->
+<!--               click_count-->
+<!--          from popup_store-->
+<!--        having distance < 50*1000-->
+<!--         order by distance;-->
+<!--    </select>-->
+
+    <!-- 카테고리 집계 -->
+    <select id="selectAllCategory" resultMap="popupCategoryResultMap">
+        select
+               distinct category_name
+               from popup_store
+               order by field(category_name,'전체') desc
+    </select>
+
+    <!--카테고리별 팝업조회-->
+    <select id="selectPopupStoreByCategory" resultMap="popupStoreResultMap">
+        select
+            popup_no,
+            popup_name,
+            brand_name,
+            popup_start_date,
+            popup_end_date,
+            open_time,
+            close_time,
+            popup_location,
+            reservable_status,
+            popup_explanation,
+            approval_status,
+            rejection_reason,
+            id,
+            click_count,
+            category_name
+            from popup_store
+<!--            where popup_no in-->
+<!--            <foreach item="popup" collection="popups" open="(" separator="," close=")">-->
+<!--                #{popup}-->
+<!--            </foreach>-->
+            <if test="category=='전체'">
+
+            </if>
+            <if test="category!=null and category!='전체'">
+                where category_name=#{category}
+            </if>
+
+    </select>
+
+<!--    팝업 스토어 승인-->
+    <update id="approvePopup" parameterType="int">
+        update popup_store
+           set approval_status = '승인'
+         where popup_no = #{popupNo}
+    </update>
+
+<!--    팝업 스토어 반려-->
+    <update id="rejectPopup" parameterType="map">
+        update popup_store
+        set approval_status = '반려',
+        rejection_reason = #{rejectionReason}
+        where popup_no = #{popupNo}
+    </update>
+
+    <!-- 매니저 팝업스토어 등록요청 -->
+    <insert id="insertPopupStore"
+            parameterType="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
+        INSERT INTO popup_store (
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        category_name,
+        id,
+        click_count
+        )
+        VALUES (
+        #{name},
+        #{brandName},
+        #{startDate},
+        #{endDate},
+        #{openTime},
+        #{closeTime},
+        #{location},
+        #{reservableStatus},
+        #{explanation},
+        '대기',         -- 매니저는 일단 '대기'
+        #{categoryName},
+        #{id},
+        0
+        )
+    </insert>
+</mapper>

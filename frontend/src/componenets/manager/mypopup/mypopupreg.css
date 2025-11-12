@@ -1,0 +1,299 @@
+:root {
+  --bg-page: #f5f6f8;
+  --card-bg: #ffffff;
+  --border-card: #e4e4e4;
+  --text-main: #333;
+  --text-sub: #555;
+  --radius-card: 12px;
+  --red: #eba9cf;
+  --font: "Pretendard", sans-serif;
+}
+
+/* 전체 레이아웃: 사이드바 + 오른쪽 컨텐츠 */
+.mpr-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  font-family: var(--font);
+  color: var(--text-main);
+  box-sizing: border-box;
+}
+
+/* ===== 사이드바 영역 ===== */
+.mpr-sidebar-wrap {
+  background-color: #fff;
+
+  /* 사이드바 폭 */
+  width: 260px;
+  min-width: 260px;
+
+  border-right: 1px solid #dcdcdc;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 오른쪽 전체 영역 ===== */
+.mpr-content-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--bg-page);
+
+  height: 100vh;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+/* ===== 상단 헤더 (제목 + 등록 버튼) ===== */
+.mpr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+ 
+  position: sticky;
+  top: 32px; 
+  z-index: 10;
+  background-color: var(--bg-page);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.mpr-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.mpr-submit-btn {
+  background-color: var(--red);
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+/* ===== 스크롤되는 폼 영역 ===== */
+.mpr-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 32px;
+  box-sizing: border-box;
+}
+
+/* ====== 카드(섹션) ====== */
+.mpr-section {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-card);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.mpr-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 15px 0 16px 0;
+}
+.mpr-hashtag-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+  font-family: "Pretendard", sans-serif;
+}
+
+.mpr-hashtag-input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
+  transition: border-color 0.2s ease;
+}
+
+.mpr-hashtag-input:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.mpr-hashtag-input::placeholder {
+  color: #aaa;
+  font-size: 13px;
+  font-family: "Pretendard", sans-serif;
+}
+
+.mpr-field-col {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.mpr-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.mpr-input,
+.mpr-select,
+.mpr-textarea {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: var(--font);
+  color: var(--text-main);
+  box-sizing: border-box;
+}
+
+.mpr-input:focus,
+.mpr-select:focus,
+.mpr-textarea:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.mpr-textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-size: 14px;
+}
+
+/* 한 줄에 나란히 정렬되는 줄 */
+.mpr-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.mpr-row.space-between {
+  justify-content: space-between;
+}
+
+.mpr-tilde {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1;
+}
+.mpr-small-btn {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.mpr-small-btn:hover {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.mpr-time {
+  max-width: 140px;
+}
+
+.mpr-hours-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.mpr-hours-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.mpr-hours-day {
+  width: 32px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.mpr-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mpr-tag-btn {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  padding: 8px 14px;
+  font-size: 13px;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.mpr-tag-btn:hover {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+.mpr-section-title + .mpr-input {
+  margin-bottom: 16px; 
+}
+
+.mpr-input[placeholder*="#성수"] {
+  margin-bottom: 20px; 
+}
+
+.mpr-section-title {
+  margin-top: 24px; 
+}
+
+.mpr-email-guide {
+  font-size: 14px;
+  color: #555;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 16px 20px;
+  line-height: 1.6;
+}
+
+.mpr-email {
+  color: #000;
+  font-weight: 600;
+}
+
+.mpr-email-guide strong {
+  font-weight: 700;
+  color: #333;
+}
+
+
