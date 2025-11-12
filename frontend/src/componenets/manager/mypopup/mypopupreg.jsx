@@ -19,7 +19,23 @@ function MyPopupReg() {
     hashtags: "",
   });
 
+  const [openTime, setOpenTime] = useState("");
+  const [closeTime, setCloseTime] = useState("");
+  const [dailyHours, setDailyHours] = useState(
+    ["월","화","수","목","금","토","일"].map(() => ({ open: "", close: "" }))
+  );
+
   const [submitting, setSubmitting] = useState(false); //중복 클릭 방지용
+
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const handleTagToggle = (tag) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag)
+        ? prev.filter((t) => t !== tag) // 이미 선택돼 있으면 해제
+        : [...prev, tag] // 없으면 추가
+    );
+  };
 
   // 등록 처리 
   const handleSubmit = async () => {
@@ -31,11 +47,15 @@ function MyPopupReg() {
       return;
     }
 
+    // 🔹추가 : 선택된 태그도 payload에 포함 (선택사항)
+    // 원하면 백엔드 DB에 같이 보낼 수 있음
+    const features = selectedTags.join(", ");
+
   // useEffect(() => {
     
   // }, []);
 
-    // DTO에 맞춰 데이터 정리 (카테고리 한글 그대로)
+    // DTO에 맞춰 데이터 정리 
     const payload = {
       popupName: formData.title.trim(),
       brandName: formData.brandMain.trim(),
@@ -46,9 +66,23 @@ function MyPopupReg() {
       popupExplanation: formData.description.trim(),
       hashtags: formData.hashtags.trim(),
       reservableStatus: 1, // 기본 예약 가능
+      specialNotes: {
+      parking: selectedTags.includes("주차 가능"),
+      noparking: selectedTags.includes("주차불가"),
+      free_admission: selectedTags.includes("입장료 무료"),
+      paid_admission: selectedTags.includes("입장료 유료"),
+      pet_allowed: selectedTags.includes("반려동물"),
+      pet_not_allowed: selectedTags.includes("반려동물 입장금지"),
+      kid_zone: selectedTags.includes("키즈존"),
+      nokids_zone: selectedTags.includes("노키즈존"),
+      food_beverage_banned: selectedTags.includes("식음료 반입 금지"),
+      adult: selectedTags.includes("19세 이상"),
+      wifi: selectedTags.includes("와이파이"),
+      photography_possible: selectedTags.includes("사진촬영 가능"),
+    },
     };
 
-    const token = localStorage.getItem("accessToken"); // JWT 토큰 키 확인 필요
+    const token = localStorage.getItem("accessToken"); // JWT 토큰 키 확인 
     if (!token) {
       alert("로그인이 필요합니다.");
       navigate("/login");
@@ -89,7 +123,6 @@ function MyPopupReg() {
         
         <div className="mpr-header">
           <h2 className="mpr-title">POPUP 등록</h2>
-          <button className="mpr-submit-btn">등록</button>
            
           <button
             className="mpr-submit-btn"
@@ -207,60 +240,91 @@ function MyPopupReg() {
           </section>
 
           <section className="mpr-section">
-            <h3 className="mpr-section-title">영업시간</h3>
+      <h3 className="mpr-section-title">영업시간</h3>
 
-            <div className="mpr-hours-wrap">
-              
-              <div className="mpr-hours-row">
-                <div className="mpr-hours-day">전체</div>
+      <div className="mpr-hours-wrap">
+        <div className="mpr-hours-row">
+          <div className="mpr-hours-day">전체</div>
 
-                <input
-                  className="mpr-input mpr-time"
-                  type="time"
-                  placeholder="오픈시간"
-                />
-                <input
-                  className="mpr-input mpr-time"
-                  type="time"
-                  placeholder="마감시간"
-                />
+          <input
+            className="mpr-input mpr-time"
+            type="time"
+            placeholder="오픈시간"
+            value={openTime}
+            onChange={(e) => setOpenTime(e.target.value)}
+          />
+          <input
+            className="mpr-input mpr-time"
+            type="time"
+            placeholder="마감시간"
+            value={closeTime}
+            onChange={(e) => setCloseTime(e.target.value)}
+          />
 
-                <button className="mpr-small-btn" type="button">
-                  일괄적용
-                </button>
-              </div>
+          <button
+            className="mpr-small-btn"
+            type="button"
+            onClick={() => {
+              //일괄적용: 모든 요일에 동일한 시간 복사
+              setDailyHours(dailyHours.map(() => ({ open: openTime, close: closeTime })));
+              alert("모든 요일에 동일한 시간이 적용되었습니다!");
+            }}
+          >
+            일괄적용
+          </button>
+        </div>
 
-              {["월","화","수","목","금","토","일"].map((day) => (
-                <div className="mpr-hours-row" key={day}>
-                  <div className="mpr-hours-day">{day}</div>
+        {["월", "화", "수", "목", "금", "토", "일"].map((day, idx) => (
+          <div className="mpr-hours-row" key={day}>
+            <div className="mpr-hours-day">{day}</div>
 
-                  <input
-                    className="mpr-input mpr-time"
-                    type="time"
-                    placeholder="오픈시간"
-                  />
-                  <input
-                    className="mpr-input mpr-time"
-                    type="time"
-                    placeholder="마감시간"
-                  />
+            <input
+              className="mpr-input mpr-time"
+              type="time"
+              placeholder="오픈시간"
+              value={dailyHours[idx].open}
+              onChange={(e) => {
+                const updated = [...dailyHours];
+                updated[idx].open = e.target.value;
+                setDailyHours(updated);
+              }}
+            />
+            <input
+              className="mpr-input mpr-time"
+              type="time"
+              placeholder="마감시간"
+              value={dailyHours[idx].close}
+              onChange={(e) => {
+                const updated = [...dailyHours];
+                updated[idx].close = e.target.value;
+                setDailyHours(updated);
+              }}
+            />
 
-                  <button className="mpr-small-btn" type="button">
-                    휴무일
-                  </button>
-                </div>
-              ))}
-            </div>
+            <button
+              className="mpr-small-btn"
+              type="button"
+              onClick={() => {
+                const updated = [...dailyHours];
+                updated[idx] = { open: "", close: "" }; 
+                setDailyHours(updated);
+              }}
+            >
+              휴무일
+            </button>
+          </div>
+        ))}
+      </div>
 
-            <div className="mpr-field-col">
-              <label className="mpr-label">휴일 공지사항</label>
-              <input
-                className="mpr-input"
-                type="text"
-                placeholder="정기휴무 및 휴일이 있다면 작성해주세요. (예: 1/1 휴무)"
-              />
-            </div>
-          </section>
+        <div className="mpr-field-col">
+          <label className="mpr-label">휴일 공지사항</label>
+          <input
+            className="mpr-input"
+            type="text"
+            placeholder="정기휴무 및 휴일이 있다면 작성해주세요. (예: 1/1 휴무)"
+          />
+        </div>
+      </section>
 
           <section className="mpr-section">
             <h3 className="mpr-section-title">사전예약정보 *</h3>
@@ -366,15 +430,23 @@ function MyPopupReg() {
                 "와이파이",
                 "사진촬영 가능",
               ].map((tag) => (
-                <button className="mpr-tag-btn" type="button" key={tag}>
+                <button
+                  key={tag}
+                  type="button"
+                  className={`mpr-tag-btn ${
+                    selectedTags.includes(tag) ? "selected" : ""
+                  }`}
+                  onClick={() => handleTagToggle(tag)} // 🔹추가
+                >
                   {tag}
                 </button>
               ))}
             </div>
           </section>
+          
 
           <section className="mpr-section">
-            <h3 className="mpr-section-title">팝업스토어 이미지 *</h3>
+            <h3 className="mpr-section-title">팝업스토어 이미지 </h3>
 
             <div className="mpr-guide-box">
             <p className="mpr-email-guide">
