@@ -296,4 +296,26 @@
   color: #333;
 }
 
+.mpr-tag-btn {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  border-radius: 20px;
+  padding: 8px 14px;
+  margin: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mpr-tag-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.mpr-tag-btn.selected {
+  background-color: #eba9cf; 
+  border-color: #eba9cf;
+  color: #000;
+  font-weight: 600;
+}
+
 
