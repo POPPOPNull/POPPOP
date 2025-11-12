@@ -12,11 +12,9 @@
     <insert id="insertFavoritePopup">
         insert into favorite (popup_no,id) value (#{popupNo},#{memberId})
     </insert>
-<<<<<<< HEAD
 
     <delete id="deleteFavorite">
         delete from favorite where popup_no = #{popupNo} and id = #{id}
     </delete>
-=======
->>>>>>> JWT/master
+
 </mapper>

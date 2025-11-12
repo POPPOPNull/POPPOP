@@ -23,12 +23,9 @@ public class ReviewService {
         return reviewMapper.selectAllReviews();
     }
 
-<<<<<<< HEAD
-    public void insertReview(ReviewDTO review) {
-        reviewMapper.insertReview(review);
-=======
+
     public void insertReview(String content,int popupNo, String id) {
         reviewMapper.insertReview(content,popupNo,id);
->>>>>>> JWT/master
+
     }
 }

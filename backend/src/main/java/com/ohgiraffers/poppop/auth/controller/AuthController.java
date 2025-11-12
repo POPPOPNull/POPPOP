@@ -1,9 +1,6 @@
 package com.ohgiraffers.poppop.auth.controller;
 
-<<<<<<< HEAD
-public class AuthController {
-}
-=======
+
 import com.ohgiraffers.poppop.auth.model.service.AuthService;
 import com.ohgiraffers.poppop.jwt.dto.MemberJoinRequest;
 import com.ohgiraffers.poppop.jwt.dto.LoginRequest;
@@ -80,5 +77,3 @@ public class AuthController {
     }
 
 }
-
->>>>>>> JWT/master

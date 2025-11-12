@@ -1,15 +1,15 @@
 package com.ohgiraffers.poppop.admin.controller;
 
-<<<<<<< HEAD
+
 import com.ohgiraffers.poppop.admin.model.dto.UserKpiDTO;
 import com.ohgiraffers.poppop.admin.model.service.AdminService;
 import com.ohgiraffers.poppop.admin.model.service.KpiService;
-=======
+
 import com.ohgiraffers.poppop.admin.model.service.AdminService;
 import com.ohgiraffers.poppop.auth.model.service.AuthService;
 import com.ohgiraffers.poppop.jwt.dto.LoginRequest;
 import com.ohgiraffers.poppop.jwt.dto.TokenResponse;
->>>>>>> JWT/master
+
 import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import com.ohgiraffers.poppop.popupstore.model.service.PopupStoreService;
@@ -29,39 +29,29 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminController {
 
-<<<<<<< HEAD
-=======
+
     private final AuthService authService;
->>>>>>> JWT/master
     private final AdminService adminService;
     private final ReviewService reviewService;
     private final ReservationService reservationService;
     private final PopupStoreService popupStoreService;
-<<<<<<< HEAD
     private final KpiService kpiService;
 
-    public AdminController(AdminService adminService,
-                           ReviewService reviewService,
-                           ReservationService reservationService,
-                           PopupStoreService popupStoreService,
-                           KpiService kpiService) {
-=======
+
 
     public AdminController(AuthService authService,
                            AdminService adminService,
                            ReviewService reviewService,
                            ReservationService reservationService,
-                           PopupStoreService popupStoreService) {
+                           PopupStoreService popupStoreService,
+                           KpiService kpiService) {
         this.authService = authService;
->>>>>>> JWT/master
         this.adminService = adminService;
         this.reviewService = reviewService;
         this.reservationService = reservationService;
         this.popupStoreService = popupStoreService;
-<<<<<<< HEAD
         this.kpiService = kpiService;
-=======
->>>>>>> JWT/master
+
     }
 
     // 전체 회원(user) 조회
@@ -147,13 +137,14 @@ public class AdminController {
         }
     }
 
-<<<<<<< HEAD
+
     // User 대시보드 KPI 데이터 조회
     @GetMapping("/kpi/user")
     public ResponseEntity<UserKpiDTO> selectUserKpiData() {
         UserKpiDTO userKpi = kpiService.selectUserKpiData();
         return ResponseEntity.ok(userKpi);
-=======
+    }
+
     // Admin 전용 로그인 엔드포인트
     @PostMapping("/admin/login")
     public ResponseEntity<TokenResponse> adminLogin(@RequestBody LoginRequest dto) {
@@ -166,6 +157,6 @@ public class AdminController {
     public ResponseEntity<String> adminMain() {
         // JWT의 ROLE이 'ADMIN'인 경우에만 접근 가능 (SecurityConfig에서 설정)
         return ResponseEntity.ok("Admin 메인페이지");
->>>>>>> JWT/master
+
     }
 }

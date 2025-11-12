@@ -4,12 +4,9 @@ import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import com.ohgiraffers.poppop.popupstore.model.service.PopupStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
-=======
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.http.ResponseEntity;import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
->>>>>>> JWT/master
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,10 +93,7 @@ public class PopupStoreController {
     }
 
     // 찜목록 조회
-<<<<<<< HEAD
-    @GetMapping("/popup-stores/favorite/{id}")
-    public ResponseEntity<List<PopupStoreDTO>> selectFavoritePopupStoreById(@PathVariable String id){
-=======
+
     @GetMapping("/popup-stores/favorite")
     public ResponseEntity<List<PopupStoreDTO>> selectFavoritePopupStoreById(@AuthenticationPrincipal UserDetails userDetails){
 
@@ -108,7 +102,7 @@ public class PopupStoreController {
         }
         String id = userDetails.getUsername();
 
->>>>>>> JWT/master
+
         return ResponseEntity.ok(popupStoreService.selectFavoritePopupStoreById(id));
     }
 

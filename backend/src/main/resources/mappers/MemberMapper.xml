@@ -3,11 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.member.model.dao.MemberMapper">
-<<<<<<< HEAD
-    <resultMap id="memberResultMap" type="com.ohgiraffers.poppop.member.model.dto.MemberDTO">
 
-    </resultMap>
-=======
 
     <resultMap id="memberResultMap" type="com.ohgiraffers.poppop.member.model.dto.MemberDTO">
         <id property="id" column="id"/>
@@ -56,5 +52,5 @@
           from member
          where id = #{id}
     </select>
->>>>>>> JWT/master
+
 </mapper>

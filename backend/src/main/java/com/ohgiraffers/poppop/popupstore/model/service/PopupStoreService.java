@@ -69,18 +69,7 @@ public class PopupStoreService {
         popupStoreMapper.rejectPopup(params);
     }
 
-<<<<<<< HEAD
-//    @Transactional
-//    public void requestPopupRegister(PopupStoreDTO dto, String managerId) {
-//
-//        // 로그인한 매니저 ID
-//        dto.setId(managerId);
-//
-//        dto.setApprovalStatus("대기");
-//
-//        popupStoreMapper.insertPopupStore(dto);
-//    }
-=======
+
     @Transactional
     public void requestPopupRegister(PopupStoreDTO dto, String managerId) {
 
@@ -91,5 +80,5 @@ public class PopupStoreService {
 
         popupStoreMapper.insertPopupStore(dto);
     }
->>>>>>> JWT/master
+
 }

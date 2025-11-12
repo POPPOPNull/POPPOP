@@ -6,28 +6,18 @@ public class ReviewDTO {
     private String content;
     private int popupNo;
     private String memberId;
-<<<<<<< HEAD
     private String reviewDate;
 
     public ReviewDTO (){}
 
     public ReviewDTO(int reviewNo, String content, int popupNo, String memberId, String reviewDate) {
-=======
-    private String popupName;
 
-    public ReviewDTO (){}
-
-    public ReviewDTO(int reviewNo, String content, int popupNo, String memberId, String popupName) {
->>>>>>> JWT/master
         this.reviewNo = reviewNo;
         this.content = content;
         this.popupNo = popupNo;
         this.memberId = memberId;
-<<<<<<< HEAD
         this.reviewDate = reviewDate;
-=======
-        this.popupName = popupName;
->>>>>>> JWT/master
+
     }
 
     public int getReviewNo() {
@@ -62,21 +52,13 @@ public class ReviewDTO {
         this.memberId = memberId;
     }
 
-<<<<<<< HEAD
     public String getReviewDate() {
         return reviewDate;
     }
 
     public void setReviewDate(String reviewDate) {
         this.reviewDate = reviewDate;
-=======
-    public String getPopupName() {
-        return popupName;
-    }
 
-    public void setPopupName(String popupName) {
-        this.popupName = popupName;
->>>>>>> JWT/master
     }
 
     @Override
@@ -86,11 +68,8 @@ public class ReviewDTO {
                 ", content='" + content + '\'' +
                 ", popupNo=" + popupNo +
                 ", memberId='" + memberId + '\'' +
-<<<<<<< HEAD
                 ", reviewDate='" + reviewDate + '\'' +
-=======
-                ", popupName='" + popupName + '\'' +
->>>>>>> JWT/master
+
                 '}';
     }
 }

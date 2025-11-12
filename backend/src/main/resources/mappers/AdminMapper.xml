@@ -34,8 +34,7 @@
         </if>
     </select>
 
-<<<<<<< HEAD
-=======
+
     <select id="findById" parameterType="string" resultType="com.ohgiraffers.poppop.admin.model.dto.AdminDTO">
         select
                id,
@@ -45,5 +44,5 @@
          where id = #{id}
     </select>
 
->>>>>>> JWT/master
+
 </mapper>

@@ -2,8 +2,7 @@ package com.ohgiraffers.poppop.admin.model.dto;
 
 public class AdminDTO {
 
-<<<<<<< HEAD
-=======
+
     private String id;
     private String password;
     private String role;
@@ -48,5 +47,4 @@ public class AdminDTO {
                 ", role='" + role + '\'' +
                 '}';
     }
->>>>>>> JWT/master
 }
