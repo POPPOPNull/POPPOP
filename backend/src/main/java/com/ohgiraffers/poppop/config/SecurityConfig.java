@@ -36,12 +36,14 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 안 함
                 .authorizeHttpRequests(auth -> auth
                         // 로그인 및 회원가입 허용
-                        .requestMatchers("**","/auth/login", "/admin/login", "/user/signup", "/manager/signup","/manager","/maps","/popup-stores/search","popup-stores/**")
+                        .requestMatchers("**","/auth/login", "/admin/login", "/user/signup", "/manager/signup","/manager","/maps","/popup-stores/search","popup-stores/**","/user/**")
                         .permitAll()
                         // 권한별 접근 제한
+
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/user/**").hasAnyRole( "USER")
+
 
                         .anyRequest().authenticated()
                 )

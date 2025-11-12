@@ -7,7 +7,6 @@ function UserReview(){
     
     const {popupNo}=useParams();
 
-    const [review, setReview] = useState({})
     const [content, setContent] = useState();
 
     const onChangeContent=(e)=>{
@@ -17,19 +16,11 @@ function UserReview(){
         
     }
     const onClickRegist=()=>{
-        insertReview(review)
-        window.location.reload()
+        insertReview(content,popupNo)
         
     }
 
-    useEffect(()=>{
-        setReview({
-            popupNo:popupNo,
-            content:content,
-            memberId:"user-geonwoo"
-        })
-        console.log(content)
-    },[content])
+
 
 
 

@@ -9,7 +9,7 @@ export function selectReviewByPopupStore(popupNo){
 }
 
 // 리뷰 등록
-export function insertReview(review){
-    return API.post(`${BACKEND_URL}/review/insert`,review)
+export function insertReview(content,popupNo){
+    return API.post(`${BACKEND_URL}/review/insert?content=${content}&popupNo=${popupNo}`,{content:content,popupNo:popupNo})
     .then(response=>response.data)
 }
