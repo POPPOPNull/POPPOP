@@ -1,0 +1,37 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+
+GET http://localhost:8080/user/list
+#Content-Type: application/json
+
+###
+POST http://localhost:8080/user/user
+Content-Type: application/json
+
+{
+   "id": 34321,
+  "name": "testSample123123"
+}
+
+###
+
+PUT http://localhost:8080/user/user/#{id}
+Content-Type: application/json
+
+{
+    "id" : 77777,
+    "name" : "test1"
+}
+
+###
+GET http://localhost:8080/page-placement/top
+Content-Type: application/json
+
+###
+POST http://localhost:8080/favorite?popupNo=1
+
+###
+GET http://localhost:8080/popup-store/random

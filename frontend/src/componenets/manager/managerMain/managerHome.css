@@ -1,0 +1,159 @@
+:root {
+  --yellow: #FFD400;
+  --black: #000;
+  --white: #fff;
+}
+
+/* 전체 */
+.mh-wrap {
+  position: relative;
+  background-color: var(--black);
+  color: var(--white);
+  min-height: 100vh; /* 전체 화면 */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 80px 40px; 
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: "Pretendard", system-ui, sans-serif;
+}
+
+/* 상단 영역 */
+.mh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* 로고 */
+.mh-logo-wrap {
+  position: relative;
+  padding-bottom: 230px; 
+}
+
+.mh-logo {
+  font-size: 50px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--yellow);
+}
+
+/* hover 시 알약 버튼 나타남 */
+.mh-menu {
+  position: absolute;
+  top: 85px;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  gap: 13px;
+}
+
+/* hover 시 보이기 */
+.mh-logo-wrap:hover .mh-menu {
+  display: flex;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* 알약 버튼 스타일 */
+.mh-menu button {
+  background: var(--yellow);
+  border: none;
+  border-radius: 999px;
+  color: var(--black);
+  font-weight: 700;
+  font-size:18px;
+  padding: 20px 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.mh-menu button:hover {
+  transform: scale(1.05);
+}
+
+/* 로그아웃 */
+.mh-logout {
+  color: var(--yellow);
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 30px;     
+  line-height: 1.2;
+}
+
+.mh-logout:hover {
+  filter: brightness(1.2);
+}
+
+/* 중앙 메인 */
+.mh-main {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center;
+  transform: translateY(-80px); 
+}
+
+.mh-title {
+  font-size: 60px;
+  margin-bottom: 10px;
+  text-shadow:
+    2px 2px 0 #000,    
+    4px 4px 0 #f5f5f5,    
+    3px 3px 0 rgba(0, 0, 0, 0.2); 
+}
+
+.mh-brand {
+  font-size: 70px;
+  font-weight: 800;
+  color: var(--yellow);
+  margin-bottom: 5px;
+}
+
+.mh-desc {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #f5f5f5;
+}
+
+/* 알약 3개 버튼 등장 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 이모티콘 레이어 */
+.mh-emoji-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+  z-index: 1;
+}
+
+.mh-emoji-layer .emo {
+  position: absolute;
+  font-size: 28px;
+  animation: floaty 8s ease-in-out infinite;
+  opacity: 0.9;
+  text-shadow: 0 0 6px rgba(0,0,0,0.5);
+  user-select: none;
+  line-height: 1;
+  display: inline-block;
+  will-change: transform;
+}
+
+/* 이모티콘 위치 지정 */
+.emo-1 { top: 20%; left: 25%; }
+.emo-2 { top: 25%; right: 50%; }
+.emo-3 { top: 50%; left: 10%; }
+.emo-4 { top: 35%; right: 10%; }
+.emo-5 { top: 15%; right: 25%; }
+.emo-6 { bottom: 25%; right: 20%; }
+.emo-7 { bottom: 10%; left: 55%; }
+.emo-8 { bottom: 20%; left: 20%; }
