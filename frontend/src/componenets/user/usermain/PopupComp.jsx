@@ -36,14 +36,13 @@ function PopupComp({popupstore}){
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`} className={PSStyle.back} onClick={()=>{window.location.replace(`/user/${popupstore.no}`)}}>
+                <Link to={`/user/${popupstore.no}`} className={PSStyle.back} >
                     <div className={PSStyle.layout} ref={drag}>
-                        <div className={PSStyle.image}>{popupstore.no}</div>
-                            <div className={PSStyle.explain}>
-                                <div className={PSStyle.name}>{popupstore.name}</div>
-                                <div>{popupstore.location}</div>
-                                <div>{popupstore.startDate} ~ {popupstore.endDate}</div>
-                            </div>
+                        <div className={PSStyle.explain}>
+                            <div className={PSStyle.name}>{popupstore.name}</div>
+                            <div>{popupstore.location}</div>
+                            <div>{popupstore.startDate} ~ {popupstore.endDate}</div>
+                        </div>
                     </div>
                 </Link>
             

@@ -34,7 +34,7 @@ export function MidComp1(){
             spaceBetween={10}
             slidesOffsetAfter={200}
             >
-            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
+            {popups.map(popupstore =><SwiperSlide className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
             </Swiper>
         </>
     )

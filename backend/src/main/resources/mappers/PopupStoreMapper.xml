@@ -88,7 +88,7 @@
     <!--오늘날짜 및 검색어 기준 팝업스토어 조회-->
     <select id="selectPopupStoreToday" resultMap="popupStoreResultMap">
         select
-        distinct p.popup_no,
+        popup_no,
         popup_name,
         brand_name,
         popup_start_date,
@@ -103,8 +103,7 @@
         id,
         click_count,
         category_name
-        from popup_store p
-        left join hashtag h on h.popup_no = p.popup_no
+        from popup_store
         <!--진행중-->
         <if test="status!=null and status=='open'">
               where popup_end_date &gt; #{startDate}
@@ -125,7 +124,7 @@
         (popup_name like concat('%',#{searchWord},'%')
         or brand_name like concat('%',#{searchWord},'%')
         or popup_location like concat('%',#{searchWord},'%')
-        or h.hashtag_name like concat('%',#{searchWord},'%')
+        or hashtag_name like concat('%',#{searchWord},'%')
         or category_name like concat('%',#{searchWord},'%')
         )
 

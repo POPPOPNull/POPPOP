@@ -36,7 +36,9 @@ function Popups(){
             <div className="user-main-layout">
                 <div className="user-main">
                     <div className="blank"></div>
-                    <div className={PPStyle.poster}>이미지준비중</div>
+                    <div className={PPStyle.poster}>
+                        <img src="\public\images\plant.png" alt="" />
+                    </div>
                     <div className={PPStyle.imagebuttonlayout}>
                         <Link to={`/user/${popupNo}`} className={PPStyle.imagebuttons}>
                             <div>정보</div>
