@@ -9,14 +9,13 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);      // { id, role, ... } or null
   const [loading, setLoading] = useState(true);
 
-  // 예시: 로컬스토리지에 토큰/유저가 있다고 가정해 복원
   useEffect(() => {
-    const saved = localStorage.getItem('myapp_user');
+    const saved = localStorage.getItem('token');
     if (saved) {
       try {
         setUser(JSON.parse(saved));
       } catch (e) {
-        localStorage.removeItem('myapp_user');
+        localStorage.removeItem('token');
       }
     }
     setLoading(false);
@@ -24,12 +23,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userObj) => {
     setUser(userObj);
-    localStorage.setItem('myapp_user', JSON.stringify(userObj));
+    localStorage.setItem('token', JSON.stringify(userObj));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('myapp_user');
+    localStorage.removeItem('token');
   };
 
   const value = {

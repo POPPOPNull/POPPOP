@@ -9,9 +9,11 @@ const JwtAPI = axios.create({
 
 // 모든 요청 시 JWT 토큰을 Authorization 헤더에 추가하는 인터셉터
 JwtAPI.interceptors.request.use((config) => {
-    const token = localStorage.getItem('accessToken');
+
+    const token = localStorage.getItem('token');
+
     console.log("localStorage keys:", Object.keys(localStorage));
-    console.log("accessToken:", localStorage.getItem('accessToken'));
+    console.log("token:", localStorage.getItem('token'));
     console.log(token);
 
     if (token) {

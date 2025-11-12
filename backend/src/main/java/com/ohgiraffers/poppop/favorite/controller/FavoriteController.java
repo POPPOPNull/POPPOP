@@ -35,6 +35,7 @@ public class FavoriteController {
 
         System.out.println(popupNo);
         System.out.println(memberId);
+
         favoriteService.insetFavoritePopup(popupNo,memberId);
 
         return ResponseEntity.created(URI.create("/user")).build();

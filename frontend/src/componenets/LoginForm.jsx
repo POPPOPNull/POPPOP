@@ -23,8 +23,11 @@ function LoginComponent() {
 
             const token = response.data.accessToken;
             
-            console.log("토큰:", token);
-            
+            console.log("토큰:", {token});
+            localStorage.setItem('token', token);
+
+            console.log(localStorage.getItem('token'));
+
             login(token); 
             
             navigate('/'); // App.jsx의 RedirectBasedOnRole로 이동하여 역할 기반 리디렉션 수행

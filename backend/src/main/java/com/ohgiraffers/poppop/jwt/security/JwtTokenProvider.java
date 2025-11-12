@@ -3,6 +3,7 @@ package com.ohgiraffers.poppop.jwt.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,30 +13,43 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class JwtTokenProvider {
 
+    private final Key secretKey;
+
+    public JwtTokenProvider(@Value("${jwt.secret}") String secretKeyString) {
+
+        this.secretKey = new SecretKeySpec(
+                secretKeyString.getBytes(StandardCharsets.UTF_8), // 키 문자열을 바이트 배열로 변환
+                SignatureAlgorithm.HS256.getJcaName() // 사용할 서명 알고리즘 이름 지정 (HMACSHA256)
+        );
+    }
+
     public String createToken(String id, String role) {
         // Claims에 id와 role을 넣어 토큰 생성
         Claims claims = Jwts.claims().setSubject(id);
         claims.put("role", role);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 3600000); // 1시간 토큰 유효
+        Date validity = new Date(now.getTime() + 36000000); // 1시간 토큰 유효
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(validity)
-                .signWith(Keys.secretKeyFor(SignatureAlgorithm.HS256))
+                .signWith(secretKey,SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public Authentication getAuthentication(String token) {
         // 1. 토큰에서 Claim(Payload)을 추출 (ID와 ROLE 포함)
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(Keys.secretKeyFor(SignatureAlgorithm.HS256)) // 실제 구현 시 SecretKey 사용
+                .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -57,7 +71,7 @@ public class JwtTokenProvider {
     public String getUsername(String token) {
         // 1. 토큰 파서를 빌드 (validateToken 및 getAuthentication에서 사용된 키와 동일)
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(Keys.secretKeyFor(SignatureAlgorithm.HS256))
+                .setSigningKey(secretKey)
                 .build()
                 // 2. 토큰을 파싱하고 Claim 본문(Payload)을 가져옴
                 .parseClaimsJws(token)
@@ -80,7 +94,7 @@ public class JwtTokenProvider {
         try {
             // 토큰 파싱 시 유효하지 않다면 예외 발생
             Jwts.parserBuilder()
-                    .setSigningKey(Keys.secretKeyFor(SignatureAlgorithm.HS256)) // SecretKey를 사용하여 검증
+                    .setSigningKey(secretKey) // secretKey를 사용하여 검증
                     .build()
                     .parseClaimsJws(token);
             return true;
