@@ -6,7 +6,20 @@ function Logout() {
 
     return (
         <>
-            <button onClick={logout} style={{marginTop:"100px"}}>로그아웃</button>
+            <button 
+            onClick={logout} 
+            style={{
+                marginTop:"100px",
+                color:" var(--yellow)",
+                fontWeight:"800",
+                cursor:"pointer",
+                fontSize:"30px",
+                lineHeight:"1.2",
+                background:"none"
+                
+            }}
+            >
+            logout</button>
         </>
     )
 }
