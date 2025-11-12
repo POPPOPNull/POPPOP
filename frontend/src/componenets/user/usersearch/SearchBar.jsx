@@ -123,7 +123,7 @@ function SearchBar(){
         </select>
 
         <div className={TPStyle.popuplayout}>
-            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag}/>)}
+            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag} posterNo={popup.no}/>)}
         </div>
         </>
     )
