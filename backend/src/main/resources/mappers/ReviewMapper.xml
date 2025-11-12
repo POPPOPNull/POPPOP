@@ -8,14 +8,22 @@
         <result property="content" column="review_content"/>
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
+<<<<<<< HEAD
         <result property="reviewDate" column="review_date"/>
+=======
+        <result property="popupName" column="popup_name"/>
+>>>>>>> JWT/master
     </resultMap>
 
     <select id="selectReviewByPopupStore" resultMap="reviewResultMap">
         select
                review_content,
+<<<<<<< HEAD
                id,
                review_date
+=======
+               id
+>>>>>>> JWT/master
           from review
          where popup_no = #{popupNo}
          order by review_no desc
@@ -37,15 +45,23 @@
         (
         review_content,
         popup_no,
+<<<<<<< HEAD
         id,
         review_date
+=======
+        id
+>>>>>>> JWT/master
         )
         value
         (
         #{content},
         #{popupNo},
+<<<<<<< HEAD
         #{memberId}
         ,now()
+=======
+        #{id}
+>>>>>>> JWT/master
         )
     </insert>
 </mapper>

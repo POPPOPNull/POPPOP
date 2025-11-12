@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react"
 import PopupStores from "../../PopupStores"
 import {selectFavoritePopupStoreById } from "../../../api/PopupStoreAPI"
@@ -13,19 +14,30 @@ function NoFavorite(){
     )
 }
 
+=======
+import { useEffect, useState } from "react"
+import PopupStores from "../../PopupStores"
+import {selectFavoritePopupStoreById } from "../../../api/PopupStoreAPI"
+import FPStyle from "./FP.module.css"
+>>>>>>> JWT/master
 
 
 
 function FavoritePopups(){
 
         const [popupStores, setPopupStores] = useState([])
+<<<<<<< HEAD
         const [id ,setId] = useState("user1")
         const [isDrag, setIsDrag] = useState(false)
+=======
+        const [id ,setId] = useState("user-geonwoo")
+>>>>>>> JWT/master
     
         useEffect(()=>{
             selectFavoritePopupStoreById(id).then(data=>{
                 console.log(data)
                 setPopupStores(data)
+<<<<<<< HEAD
             })     
         },[isDrag])  
 
@@ -40,16 +52,26 @@ function FavoritePopups(){
             }
             
         })
+=======
+            })
+        },[])  
+>>>>>>> JWT/master
     
     
     
     return(
         <>
+<<<<<<< HEAD
             
             <div className={FPStyle.botlayout}>
                 {popupStores.length==0?<NoFavorite/>:popupStores.map(popupstores =><PopupStores key={popupstores.no} popupstore={popupstores} setIsDrag={setIsDrag}/>)}
             </div>
                 {isDrag&&<div className={FPStyle.dropdelete} ref={drop}>삭제</div>}
+=======
+            <div className={FPStyle.botlayout}>
+                {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore}/>)}
+            </div>
+>>>>>>> JWT/master
         </>
     )
 }

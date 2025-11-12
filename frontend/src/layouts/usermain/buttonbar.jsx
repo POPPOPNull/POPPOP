@@ -13,11 +13,19 @@ function Favorite({item,children}){
         accept:'popup',
         hover(item){
             console.log("호버중")
+<<<<<<< HEAD
             console.log(item.popupstore.no,"user1")
         },
         drop(item){
             console.log("아이템",item.popupstore.no)
             insertFavorite(item.popupstore.no,"user1")
+=======
+            console.log(item.popupstore.no,"user-geonwoo")
+        },
+        drop(item){
+            console.log("아이템",item.popupstore.no)
+            insertFavorite(item.popupstore.no,"user-geonwoo")
+>>>>>>> JWT/master
         }
         
     })
@@ -39,7 +47,11 @@ function Buttons () {
                 <Favorite>
                     <div className="buttonbar"><NavLink to="/user/favorite" style={{ color: "white", textDecoration: "none" }}>관심</NavLink></div>
                 </Favorite>
+<<<<<<< HEAD
                 <div className="buttonbar"><NavLink to="/maps" style={{ color: "white", textDecoration: "none" }}>주변</NavLink></div>
+=======
+                <div className="buttonbar"><NavLink to="/user/maps" style={{ color: "white", textDecoration: "none" }}>주변</NavLink></div>
+>>>>>>> JWT/master
                 <div className="buttonbar"><NavLink to="/myinfo" style={{ color: "white", textDecoration: "none" }}>마이페이지</NavLink></div>
             </div>
         </>    

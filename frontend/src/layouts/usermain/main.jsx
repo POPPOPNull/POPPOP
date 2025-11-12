@@ -25,12 +25,29 @@ function User (){
     return(
         <>
             <div className="user-main-layout">
+<<<<<<< HEAD
                 <div className="main">
                     <div className="blank"/>
                     <Blank/>
                     <TopComp/>
                     <Container/>
                     <BotComp/>
+=======
+                <div className="user-main">
+                    <div className="blank"></div>
+                    <Blank/>
+                    <TopComp/>
+                        {/* <CategoryComp/>
+                        <MidComp1/>
+                        <MidComp2/> */}
+                        <Container/>
+
+                    
+                    <BotComp/>
+
+                    
+                
+>>>>>>> JWT/master
                     <div className="footer">푸터자리입니다.</div>
                 </div>
             </div>

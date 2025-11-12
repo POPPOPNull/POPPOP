@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import axios from "axios";
+=======
+import API from './JwtAPI';
+>>>>>>> JWT/master
 
 const BACKEND_URL = 'http://localhost:8080';
 
 //찜추가
+<<<<<<< HEAD
 export function insertFavorite(popupNo,id){
     return axios.post(`${BACKEND_URL}/favorite?popupNo=${popupNo}&memberId=${id}`,{popupNo : popupNo, memberId : id})
     .then(response=>response.data)
@@ -12,4 +17,26 @@ export function insertFavorite(popupNo,id){
 export function deleteFavorite(popupNo,id){
     return axios.delete(`${BACKEND_URL}/favorite?popupNo=${popupNo}&id=${id}`)
     .then(response=>response.data)
+=======
+export function insertFavorite(popupNo){
+const token = localStorage.getItem('token');
+
+    if (!token) {
+        console.warn('FavoriteAPI: Token is missing at the time of call.');
+        return Promise.reject(new Error('No access token. Please log in.'));
+    }
+
+    // ⭐ 추가 디버깅: 여기에서 토큰 값이 정상적으로 찍히는지 확인
+    console.log('FavoriteAPI: Token found and proceeding with API call.');
+
+    return API.post(
+        `/favorite?popupNo=${popupNo}`,
+        {popupNo : popupNo}
+    )
+    .then(response => response.data)
+    .catch(err => {
+        console.error('insertFavorite error:', err);
+        throw err; 
+    });
+>>>>>>> JWT/master
 }

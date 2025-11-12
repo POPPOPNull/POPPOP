@@ -2,7 +2,11 @@
     background-color: #474444;
     border-radius: 16px;
     padding: 5px;
+<<<<<<< HEAD
     height: 300px;
+=======
+    height: 100px;
+>>>>>>> JWT/master
     
     
 }
@@ -23,8 +27,11 @@
     gap: 750px;
     
 }
+<<<<<<< HEAD
 .noreviewyet{
     background-color: #302e2e;
     height: 300px;
 }
+=======
+>>>>>>> JWT/master
 

@@ -35,5 +35,9 @@ public interface PopupStoreMapper {
     int rejectPopup(Map<String, Object> params);
 
     // 매니저: 팝업 등록 요청
+<<<<<<< HEAD
 //    int insertPopupStore(PopupStoreDTO popupStoreDTO);
+=======
+    int insertPopupStore(PopupStoreDTO popupStoreDTO);
+>>>>>>> JWT/master
 }

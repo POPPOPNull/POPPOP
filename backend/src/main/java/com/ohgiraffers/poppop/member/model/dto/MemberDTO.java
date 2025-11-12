@@ -5,7 +5,11 @@ import java.util.Date;
 public class MemberDTO {
 
     private String id;
+<<<<<<< HEAD
     private String pwd;
+=======
+    private String password;
+>>>>>>> JWT/master
     private String name;
     private String phone;
     private String role;
@@ -16,9 +20,15 @@ public class MemberDTO {
 
     public MemberDTO() {}
 
+<<<<<<< HEAD
     public MemberDTO(String id, String pwd, String name, String phone, String role, String email, String businessNo, String gender, Date birthDate) {
         this.id = id;
         this.pwd = pwd;
+=======
+    public MemberDTO(String id, String password, String name, String phone, String role, String email, String businessNo, String gender, Date birthDate) {
+        this.id = id;
+        this.password = password;
+>>>>>>> JWT/master
         this.name = name;
         this.phone = phone;
         this.role = role;
@@ -36,12 +46,21 @@ public class MemberDTO {
         this.id = id;
     }
 
+<<<<<<< HEAD
     public String getPwd() {
         return pwd;
     }
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+=======
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+>>>>>>> JWT/master
     }
 
     public String getName() {
@@ -104,7 +123,11 @@ public class MemberDTO {
     public String toString() {
         return "MemberDTO{" +
                 "id='" + id + '\'' +
+<<<<<<< HEAD
                 ", pwd='" + pwd + '\'' +
+=======
+                ", password='" + password + '\'' +
+>>>>>>> JWT/master
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", role='" + role + '\'' +

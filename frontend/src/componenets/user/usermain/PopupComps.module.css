@@ -2,6 +2,12 @@
     display: flex;
     height: 100%;
     align-items: end;
+<<<<<<< HEAD
+=======
+    background-image: url('/public/images/plant.png');
+    border-radius: 10px;
+    background-size: cover;
+>>>>>>> JWT/master
     
 }
 
@@ -17,12 +23,25 @@
     align-items: center; 
     
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> JWT/master
 .explain{
     font-size: 12px;    
     position: relative;
     left: 5%;
+<<<<<<< HEAD
+=======
+    bottom: 0px;
+    opacity: 100%;
+>>>>>>> JWT/master
 }
 
 .name{
     font-size: 20px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> JWT/master

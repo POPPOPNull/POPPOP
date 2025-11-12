@@ -4,6 +4,7 @@ import { selectReviewByPopupStore } from "../../api/ReviewAPI";
 import { Swiper, SwiperSlide } from "swiper/react";
 import RVStyle from "./Review.module.css"
 
+<<<<<<< HEAD
 function NoReviewYet(){
     return(
         <>
@@ -11,6 +12,8 @@ function NoReviewYet(){
         </>
     )
 }
+=======
+>>>>>>> JWT/master
 
 function ReviewView(){
 
@@ -23,7 +26,17 @@ function ReviewView(){
         selectReviewByPopupStore(popupNo)
         .then(data=>{
             console.log("data:",data)
+<<<<<<< HEAD
             setReview(data)           
+=======
+            
+                if(data.length!=0){
+                    setReview(data)
+                } else{
+                    setReview([{content:"아직리뷰가없어요"}])
+                }
+            
+>>>>>>> JWT/master
             console.log(review)
             console.log(review.length)
         }
@@ -35,6 +48,7 @@ function ReviewView(){
         <>
         
         <Swiper
+<<<<<<< HEAD
         slidesPerView={3}
         slidesOffsetAfter={30}
         spaceBetween={10}
@@ -46,6 +60,18 @@ function ReviewView(){
                                 <div>{reviews.memberId}</div>
                                 <div>{reviews.content}</div>
                                 <div>{reviews.reviewDate}</div>
+=======
+        slidesPerView={2}
+        slidesOffsetAfter={30}
+        spaceBetween={10}
+        >
+            {review.map(
+                reviews => 
+                        <SwiperSlide className={RVStyle.reviews}>
+                            <div className={RVStyle.reviewsdetail}>
+                                <div>{reviews.content}</div>
+                                <div>{reviews.memberId}</div>
+>>>>>>> JWT/master
                             </div>
                         </SwiperSlide>
                             )}

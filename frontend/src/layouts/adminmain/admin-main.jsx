@@ -1,14 +1,34 @@
 import "./admin-main.css"
+<<<<<<< HEAD
 import AdminChart from "../../componenets/admin/adminChart"
 import AdminLineChart from "../../componenets/admin/adminLineChart"
 import AdminBarChart from "../../componenets/admin/adminBarChart"
 import KPIData from "../../componenets/admin/adminKPIData"
+=======
+import AdminKPI1 from "../../componenets/admin/adminKPI1"
+import AdminChart from "../../componenets/admin/adminChart"
+import AdminLineChart from "../../componenets/admin/adminLineChart"
+import AdminBarChart from "../../componenets/admin/adminBarChart"
+import AdminKPITotalLeft from "../../componenets/admin/adminKPITotalLeft"
+import AdminKPITotalRight from "../../componenets/admin/adminKPITotalRight"
+>>>>>>> JWT/master
 
 function AdminMain (){
     return(
         <>
             <div className="adminKPI-layout">
+<<<<<<< HEAD
                 <KPIData/>                
+=======
+                <div className="adminKPI-layout-up">
+                    <AdminKPITotalLeft/>
+                    <AdminKPITotalRight/>
+                </div>
+                <div className="adminKPI-layout-down">
+                    <AdminKPI1/><AdminKPI1/><AdminKPI1/><AdminKPI1/>
+                </div>
+                
+>>>>>>> JWT/master
             </div>
             <div className="admin-chart-layout">
                 <div className="admin-chart-box">

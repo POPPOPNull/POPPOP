@@ -34,7 +34,11 @@ function ReviewInsert(){
        return(
            <>
                <div className="user-main-layout">
+<<<<<<< HEAD
                    <div className="main">
+=======
+                   <div className="user-main">
+>>>>>>> JWT/master
                        <div className="blank"></div>
                        <div className={PPStyle.poster}>이미지준비중</div>
                        <div className={PPStyle.imagebuttonlayout}>

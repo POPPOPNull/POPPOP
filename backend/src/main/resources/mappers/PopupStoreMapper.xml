@@ -12,12 +12,16 @@
         <result property="openTime" column="open_time"/>
         <result property="closeTime" column="close_time"/>
         <result property="location" column="popup_location"/>
+<<<<<<< HEAD
         <result property="latitude" column="latitude"/>
         <result property="longitude" column="longitude"/>
+=======
+>>>>>>> JWT/master
         <result property="reservableStatus" column="reservable_status"/>
         <result property="explanation" column="popup_explanation"/>
         <result property="approvalStatus" column="approval_status"/>
         <result property="rejectionReason" column="rejection_reason"/>
+<<<<<<< HEAD
         <result property="id" column="id"/>
         <result property="clickCount" column="click_count"/>
         <result property="categoryName" column="category_name"/>
@@ -25,6 +29,11 @@
         <result property="homepageLink" column="homepage_link"/>
         <result property="capacity" column="capacity"/>
         <result property="hashtagName" column="hashtag_name"/>
+=======
+        <result property="categoryName" column="category_name"/>
+        <result property="id" column="id"/>
+        <result property="clickCount" column="click_count"/>
+>>>>>>> JWT/master
     </resultMap>
 
     <!--카테고리 집계용 resultMap-->
@@ -33,6 +42,28 @@
     </resultMap>
 
 
+<<<<<<< HEAD
+=======
+    <select id="selectPopupStoreByPagePlacement" resultMap="popupStoreResultMap">
+        select
+               popup_no,
+               popup_name,
+               brand_name,
+               popup_start_date,
+               popup_end_date,
+               open_time,
+               close_time,
+               popup_location,
+               reservable_status,
+               popup_explanation,
+               approval_status,
+               rejection_reason,
+               category_name,
+               id,
+               hashtags,
+               click_count
+    </select>
+>>>>>>> JWT/master
     <select id="selectAllPopupStore" resultMap="popupStoreResultMap">
         select
         popup_no,
@@ -43,19 +74,26 @@
         open_time,
         close_time,
         popup_location,
+<<<<<<< HEAD
         latitude,
         longitude,
+=======
+>>>>>>> JWT/master
         reservable_status,
         popup_explanation,
         approval_status,
         rejection_reason,
         id,
         click_count,
+<<<<<<< HEAD
         category_name,
         advance_reservation,
         homepage_link,
         capacity,
         hashtag_name
+=======
+        category_name
+>>>>>>> JWT/master
         from popup_store
     </select>
     <select id="selectPopupStoreDetails" resultMap="popupStoreResultMap">
@@ -68,19 +106,26 @@
         open_time,
         close_time,
         popup_location,
+<<<<<<< HEAD
         latitude,
         longitude,
+=======
+>>>>>>> JWT/master
         reservable_status,
         popup_explanation,
         approval_status,
         rejection_reason,
         id,
         click_count,
+<<<<<<< HEAD
         category_name,
         advance_reservation,
         homepage_link,
         capacity,
         hashtag_name
+=======
+        category_name
+>>>>>>> JWT/master
         from popup_store
         where popup_no=#{popupNo}
     </select>
@@ -95,19 +140,26 @@
         open_time,
         close_time,
         popup_location,
+<<<<<<< HEAD
         latitude,
         longitude,
+=======
+>>>>>>> JWT/master
         reservable_status,
         popup_explanation,
         approval_status,
         rejection_reason,
         id,
         click_count,
+<<<<<<< HEAD
         category_name,
         advance_reservation,
         homepage_link,
         capacity,
         hashtag_name
+=======
+        category_name
+>>>>>>> JWT/master
         from popup_store
         <!--진행중-->
         <if test="status!=null and status=='open'">
@@ -137,7 +189,11 @@
     <!--검색조회-->
     <select id="selectPopupStoreByKeyword" resultMap="popupStoreResultMap">
         select
+<<<<<<< HEAD
         popup_no,
+=======
+        p.popup_no,
+>>>>>>> JWT/master
         popup_name,
         brand_name,
         popup_start_date,
@@ -145,8 +201,11 @@
         open_time,
         close_time,
         popup_location,
+<<<<<<< HEAD
         latitude,
         longitude,
+=======
+>>>>>>> JWT/master
         reservable_status,
         popup_explanation,
         approval_status,
@@ -154,6 +213,7 @@
         id,
         click_count,
         category_name,
+<<<<<<< HEAD
         advance_reservation,
         homepage_link,
         capacity,
@@ -163,6 +223,15 @@
            or brand_name like concat('%',#{searchWord},'%')
            or popup_location like concat('%',#{searchWord},'%')
            or hashtag_name like concat('%',#{searchWord},'%')
+=======
+        h.hashtag_name
+        from popup_store p
+        left join hashtag h on h.popup_no = p.popup_no
+        where popup_name like concat('%',#{searchWord},'%')
+           or brand_name like concat('%',#{searchWord},'%')
+           or popup_location like concat('%',#{searchWord},'%')
+           or h.hashtag_name like concat('%',#{searchWord},'%')
+>>>>>>> JWT/master
     </select>
 
     <!-- 찜목록 조회 -->
@@ -176,19 +245,26 @@
         open_time,
         close_time,
         popup_location,
+<<<<<<< HEAD
         latitude,
         longitude,
+=======
+>>>>>>> JWT/master
         reservable_status,
         popup_explanation,
         approval_status,
         rejection_reason,
         p.id,
         click_count,
+<<<<<<< HEAD
         category_name,
         advance_reservation,
         homepage_link,
         capacity,
         hashtag_name
+=======
+        category_name
+>>>>>>> JWT/master
                 from popup_store p
                 join favorite f on p.popup_no = f.popup_no
                 where f.id = #{id}
@@ -205,19 +281,26 @@
         open_time,
         close_time,
         popup_location,
+<<<<<<< HEAD
         latitude,
         longitude,
+=======
+>>>>>>> JWT/master
         reservable_status,
         popup_explanation,
         approval_status,
         rejection_reason,
         id,
         click_count,
+<<<<<<< HEAD
         category_name,
         advance_reservation,
         homepage_link,
         capacity,
         hashtag_name
+=======
+        category_name
+>>>>>>> JWT/master
             from popup_store
             where popup_no in
         <foreach item="popupNo" collection="random" open="(" separator="," close=")">
@@ -266,6 +349,7 @@
     <!--카테고리별 팝업조회-->
     <select id="selectPopupStoreByCategory" resultMap="popupStoreResultMap">
         select
+<<<<<<< HEAD
         popup_no,
         popup_name,
         brand_name,
@@ -287,6 +371,23 @@
         homepage_link,
         capacity,
         hashtag_name
+=======
+            popup_no,
+            popup_name,
+            brand_name,
+            popup_start_date,
+            popup_end_date,
+            open_time,
+            close_time,
+            popup_location,
+            reservable_status,
+            popup_explanation,
+            approval_status,
+            rejection_reason,
+            id,
+            click_count,
+            category_name
+>>>>>>> JWT/master
             from popup_store
 <!--            where popup_no in-->
 <!--            <foreach item="popup" collection="popups" open="(" separator="," close=")">-->
@@ -317,6 +418,7 @@
     </update>
 
     <!-- 매니저 팝업스토어 등록요청 -->
+<<<<<<< HEAD
 <!--    <insert id="insertPopupStore"-->
 <!--            parameterType="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">-->
 <!--        INSERT INTO popup_store (-->
@@ -350,4 +452,39 @@
 <!--        0-->
 <!--        )-->
 <!--    </insert>-->
+=======
+    <insert id="insertPopupStore"
+            parameterType="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
+        INSERT INTO popup_store (
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        category_name,
+        id,
+        click_count
+        )
+        VALUES (
+        #{name},
+        #{brandName},
+        #{startDate},
+        #{endDate},
+        #{openTime},
+        #{closeTime},
+        #{location},
+        #{reservableStatus},
+        #{explanation},
+        '대기',         -- 매니저는 일단 '대기'
+        #{categoryName},
+        #{id},
+        0
+        )
+    </insert>
+>>>>>>> JWT/master
 </mapper>

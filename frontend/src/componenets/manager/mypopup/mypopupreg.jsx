@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import axios from "axios"; 
+>>>>>>> JWT/master
 import ManagerSidebar from "../../../layouts/managermain/manager-sidebar";
 import "./mypopupreg.css";
 
@@ -18,9 +22,69 @@ function MyPopupReg() {
     hashtags: "",
   });
 
+<<<<<<< HEAD
   useEffect(() => {
     
   }, []);
+=======
+  const [submitting, setSubmitting] = useState(false); //중복 클릭 방지용
+
+  // 등록 처리 
+  const handleSubmit = async () => {
+    if (submitting) return;
+
+    // 필수값 확인
+    if (!formData.category || !formData.title || !formData.brandMain || !formData.roadAddress || !formData.startDate || !formData.endDate || !formData.description) {
+      alert("필수 항목을 모두 입력해주세요.");
+      return;
+    }
+
+  // useEffect(() => {
+    
+  // }, []);
+
+    // DTO에 맞춰 데이터 정리 (카테고리 한글 그대로)
+    const payload = {
+      popupName: formData.title.trim(),
+      brandName: formData.brandMain.trim(),
+      popupLocation: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
+      popupStartDate: formData.startDate,
+      popupEndDate: formData.endDate,
+      categoryNo: formData.category, 
+      popupExplanation: formData.description.trim(),
+      hashtags: formData.hashtags.trim(),
+      reservableStatus: 1, // 기본 예약 가능
+    };
+
+    const token = localStorage.getItem("accessToken"); // JWT 토큰 키 확인 필요
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      const res = await axios.post(
+        "http://localhost:8080/api/manager/popup-stores",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert(res.data || "등록이 완료되었습니다. (승인 대기)");
+      // 필요 시 페이지 이동
+      // navigate("/manager/mypopup");
+    } catch (err) {
+      console.error(err);
+      alert("등록 중 오류가 발생했습니다.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+>>>>>>> JWT/master
 
   return (
     <div className="mpr-layout">
@@ -35,7 +99,20 @@ function MyPopupReg() {
         <div className="mpr-header">
           <h2 className="mpr-title">POPUP 등록</h2>
           <button className="mpr-submit-btn">등록</button>
+<<<<<<< HEAD
         </div>
+=======
+           
+          <button
+            className="mpr-submit-btn"
+            onClick={handleSubmit}
+            disabled={submitting}
+          >
+            {submitting ? "등록 중..." : "등록"}
+          </button>
+        </div>
+      
+>>>>>>> JWT/master
 
         
         <div className="mpr-scroll-area">

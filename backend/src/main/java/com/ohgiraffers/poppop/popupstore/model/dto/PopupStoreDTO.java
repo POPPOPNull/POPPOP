@@ -7,6 +7,12 @@ import java.util.Date;
 
 public class PopupStoreDTO {
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> JWT/master
     private int no;
     private String name;
     private String brandName;
@@ -15,6 +21,7 @@ public class PopupStoreDTO {
     private Time openTime;
     private Time closeTime;
     private String location;
+<<<<<<< HEAD
     private double latitude;
     private double longitude;
     private int reservableStatus;
@@ -31,6 +38,19 @@ public class PopupStoreDTO {
     public PopupStoreDTO(){}
 
     public PopupStoreDTO(int no, String name, String brandName, String startDate, String endDate, Time openTime, Time closeTime, String location, double latitude, double longitude, int reservableStatus, String explanation, String approvalStatus, String rejectionReason, String id, int clickCount, String categoryName, int advanceReservation, String homepageLink, int capacity, String hashtagName) {
+=======
+    private boolean reservableStatus;
+    private String explanation;
+    private String approvalStatus;
+    private String rejectionReason;
+    private String categoryName;
+    private String id;
+    private int clickCount;
+
+    public PopupStoreDTO(){}
+
+    public PopupStoreDTO(int no, String name, String brandName, String startDate, String endDate, Time openTime, Time closeTime, String location, boolean reservableStatus, String explanation, String approvalStatus, String rejectionReason, String categoryName, String id, String hashtags, int clickCount) {
+>>>>>>> JWT/master
         this.no = no;
         this.name = name;
         this.brandName = brandName;
@@ -39,12 +59,16 @@ public class PopupStoreDTO {
         this.openTime = openTime;
         this.closeTime = closeTime;
         this.location = location;
+<<<<<<< HEAD
         this.latitude = latitude;
         this.longitude = longitude;
+=======
+>>>>>>> JWT/master
         this.reservableStatus = reservableStatus;
         this.explanation = explanation;
         this.approvalStatus = approvalStatus;
         this.rejectionReason = rejectionReason;
+<<<<<<< HEAD
         this.id = id;
         this.clickCount = clickCount;
         this.categoryName = categoryName;
@@ -52,6 +76,11 @@ public class PopupStoreDTO {
         this.homepageLink = homepageLink;
         this.capacity = capacity;
         this.hashtagName = hashtagName;
+=======
+        this.categoryName = categoryName;
+        this.id = id;
+        this.clickCount = clickCount;
+>>>>>>> JWT/master
     }
 
     public int getNo() {
@@ -118,6 +147,7 @@ public class PopupStoreDTO {
         this.location = location;
     }
 
+<<<<<<< HEAD
     public double getLatitude() {
         return latitude;
     }
@@ -139,6 +169,13 @@ public class PopupStoreDTO {
     }
 
     public void setReservableStatus(int reservableStatus) {
+=======
+    public boolean isReservableStatus() {
+        return reservableStatus;
+    }
+
+    public void setReservableStatus(boolean reservableStatus) {
+>>>>>>> JWT/master
         this.reservableStatus = reservableStatus;
     }
 
@@ -166,6 +203,17 @@ public class PopupStoreDTO {
         this.rejectionReason = rejectionReason;
     }
 
+<<<<<<< HEAD
+=======
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+>>>>>>> JWT/master
     public String getId() {
         return id;
     }
@@ -174,6 +222,10 @@ public class PopupStoreDTO {
         this.id = id;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> JWT/master
     public int getClickCount() {
         return clickCount;
     }
@@ -182,6 +234,7 @@ public class PopupStoreDTO {
         this.clickCount = clickCount;
     }
 
+<<<<<<< HEAD
     public String getCategoryName() {
         return categoryName;
     }
@@ -222,12 +275,15 @@ public class PopupStoreDTO {
         this.hashtagName = hashtagName;
     }
 
+=======
+>>>>>>> JWT/master
     @Override
     public String toString() {
         return "PopupStoreDTO{" +
                 "no=" + no +
                 ", name='" + name + '\'' +
                 ", brandName='" + brandName + '\'' +
+<<<<<<< HEAD
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", openTime=" + openTime +
@@ -235,10 +291,18 @@ public class PopupStoreDTO {
                 ", location='" + location + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+=======
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", openTime=" + openTime +
+                ", closeTime=" + closeTime +
+                ", location='" + location + '\'' +
+>>>>>>> JWT/master
                 ", reservableStatus=" + reservableStatus +
                 ", explanation='" + explanation + '\'' +
                 ", approvalStatus='" + approvalStatus + '\'' +
                 ", rejectionReason='" + rejectionReason + '\'' +
+<<<<<<< HEAD
                 ", id='" + id + '\'' +
                 ", clickCount=" + clickCount +
                 ", categoryName='" + categoryName + '\'' +
@@ -246,6 +310,11 @@ public class PopupStoreDTO {
                 ", homepageLink='" + homepageLink + '\'' +
                 ", capacity=" + capacity +
                 ", hashtagName='" + hashtagName + '\'' +
+=======
+                ", categoryName='" + categoryName + '\'' +
+                ", id='" + id + '\'' +
+                ", clickCount=" + clickCount +
+>>>>>>> JWT/master
                 '}';
     }
 }

@@ -52,6 +52,7 @@
     align-items: center;
     justify-content: center;
     display: flex;
+<<<<<<< HEAD
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
     gap: 180px;
 }
@@ -84,6 +85,65 @@
     margin-left: 5px;
 }
 
+=======
+    flex-direction: column;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+.adminKPI-layout-up{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.adminKPI-total-left{
+    margin-left: 20px;
+    line-height: 0.5;
+}
+
+.adminKPI-total-left-text1{
+    padding-top: 20px;
+    font-size: 16px;
+}
+
+.adminKPI-total-right{
+    margin-right: 20px;
+    line-height: 1.5;
+}
+
+.adminKPI-layout-down{
+    width: 95%;
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap : 20px;
+}
+
+.adminKPI-box1{
+    width: 360px;
+    height: 40px;
+    background-color: #f4f6fa;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+    font-family: 'pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+}
+
+
+>>>>>>> JWT/master
 .admin-chart-layout{
     width: 100%;
     height: 300px;

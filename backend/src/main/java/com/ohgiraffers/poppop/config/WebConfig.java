@@ -10,6 +10,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
 
+<<<<<<< HEAD
+=======
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:5173")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true);
+>>>>>>> JWT/master
         registry.addMapping("/popup-stores/**")
                 .allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET","POST","PUT","DELETE")

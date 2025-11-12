@@ -11,5 +11,9 @@ public interface ReviewMapper {
 
     List<ReviewDTO> selectAllReviews();
 
+<<<<<<< HEAD
     void insertReview(ReviewDTO review);
+=======
+    void insertReview(String content, int popupNo, String id);
+>>>>>>> JWT/master
 }

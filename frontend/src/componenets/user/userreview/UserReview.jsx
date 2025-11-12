@@ -7,7 +7,10 @@ function UserReview(){
     
     const {popupNo}=useParams();
 
+<<<<<<< HEAD
     const [review, setReview] = useState({})
+=======
+>>>>>>> JWT/master
     const [content, setContent] = useState();
 
     const onChangeContent=(e)=>{
@@ -17,6 +20,7 @@ function UserReview(){
         
     }
     const onClickRegist=()=>{
+<<<<<<< HEAD
         insertReview(review)
         window.location.reload()
         
@@ -30,6 +34,13 @@ function UserReview(){
         })
         console.log(content)
     },[content])
+=======
+        insertReview(content,popupNo)
+        
+    }
+
+
+>>>>>>> JWT/master
 
 
 

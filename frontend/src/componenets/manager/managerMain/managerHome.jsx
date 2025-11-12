@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./managerHome.css";
+<<<<<<< HEAD
+=======
+import Logout from "../../Logout";
+>>>>>>> JWT/master
 
 function ManagerHome() {
   const [hover, setHover] = useState(false);
@@ -50,7 +54,13 @@ function ManagerHome() {
         </div>
 
         {/* 로그아웃 */}
+<<<<<<< HEAD
         <div className="mh-logout">logout</div>
+=======
+        <div className="mh-logout">
+          <Logout/>
+        </div>
+>>>>>>> JWT/master
       </div>
 
       <div className="mh-main">

@@ -5,6 +5,7 @@ import TPStyle from "./UserSearch.module.css"
 import Blank from "../usermain/Blank"
 import PopupStores from "../../PopupStores";
 
+<<<<<<< HEAD
 function NoSearchResult({props}){
     return(
         <>
@@ -19,11 +20,17 @@ function NoSearchResult({props}){
         </>
     )
 }
+=======
+
+>>>>>>> JWT/master
 
 
 function SearchBar(){
 
+<<<<<<< HEAD
     const [isDrag,setIsDrag] = useState(false)
+=======
+>>>>>>> JWT/master
     const [isVisible,setIsVisible] = useState(false)
     const [searchWord, setSearchWord] = useState("")
 
@@ -61,6 +68,7 @@ function SearchBar(){
         })
         
         setIsVisible(false)
+<<<<<<< HEAD
     
     }
 
@@ -74,6 +82,8 @@ function SearchBar(){
         
         setIsVisible(false)
         }
+=======
+>>>>>>> JWT/master
     }
 
     useEffect(()=>{
@@ -103,8 +113,11 @@ function SearchBar(){
                         <input type="text" 
                         className={USStyle.searchbar}
                         onChange={onChangeKeyword}
+<<<<<<< HEAD
                         onKeyDown={onEnterKeyDown}
                         autoFocus={true}
+=======
+>>>>>>> JWT/master
                         value={searchWord}
                         />                    
                         <button className={USStyle.searchbutton} onClick={onCLickSearch}>검색</button>
@@ -118,12 +131,20 @@ function SearchBar(){
             <select onChange={onChangeStatus} className={TPStyle.select}>
             <option value="all" >전체</option>
             <option value="done" >종료</option>
+<<<<<<< HEAD
             <option value="open" defaultValue={true} selected={true}>진행중</option>
+=======
+            <option value="open" defaultValue={true}>진행중</option>
+>>>>>>> JWT/master
             <option value="scheduled">오픈 예정</option>
         </select>
 
         <div className={TPStyle.popuplayout}>
+<<<<<<< HEAD
             {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag}/>)}
+=======
+            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup}/>)}
+>>>>>>> JWT/master
         </div>
         </>
     )
