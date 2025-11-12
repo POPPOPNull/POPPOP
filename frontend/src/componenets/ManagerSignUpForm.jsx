@@ -7,8 +7,8 @@ const initialUserValues = {
   id: '',
   password: '',
   confirmPassword: '',
-  businessId: '',
   name: '',
+  businessNo: '',
   email: '',
   phone: '',
 };
@@ -111,9 +111,9 @@ function ManagerSignUpComponent() {
                     <br/>
                     <input className="inputsignup"
                         type="number"
-                        name="businessId"   
+                        name="businessNo"   
                         placeholder="사업자등록번호"
-                        value={values.businessId} 
+                        value={values.businessNo} 
                         onChange={handleChange}
                         required
                     />

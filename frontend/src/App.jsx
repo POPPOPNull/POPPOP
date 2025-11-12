@@ -71,7 +71,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<RedirectBasedOnRole/>}/>
+
         <Route path="/user" >
+
           <Route path=":popupNo" element={<PopupDetails/>}/>
           <Route path=":popupNo/review" element={<InsertReview/>}/>
           <Route path="search" element={<UserSearch/>}/>

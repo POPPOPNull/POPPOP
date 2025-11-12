@@ -1,4 +1,4 @@
-import axios from "axios";
+import API from './JwtAPI';
 import { useState } from "react";
 import API from './JwtAPI';
 
@@ -21,7 +21,7 @@ export function selectPopupStoreDetails(popupNo){
 
 // 주소 -> 좌표 변환 // axios 보류
 export function locationCoordExchange(location){
-    return axios.get(`https://dapi.kakao.com/v2/local/search/address?query=${location}`,{headers:{Authorization: 'KakaoAK'+' '+restapikey}})
+    return API.get(`https://dapi.kakao.com/v2/local/search/address?query=${location}`,{headers:{Authorization: 'KakaoAK'+' '+restapikey}})
     .then(response=>response.data)
     
 }
@@ -29,6 +29,11 @@ export function locationCoordExchange(location){
 // 팝업스토어 오늘 기준 오픈예정상태 및 검색어에 따른 조회
 export function selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord){
     return API.get(`${BACKEND_URL}/popup-stores?startDate=${startDate}&endDate=${endDate}&status=${status}&searchWord=${searchWord}`)
+    .then(response=>response.data)
+}
+// 팝업스토어 검색조회
+export function selectPopupStoreBySearchWord(searchWord){
+    return API.get(`${BACKEND_URL}/popup-stores/search`,searchWord)
     .then(response=>response.data)
 }
 // 팝업스토어 검색조회 -> 미사용

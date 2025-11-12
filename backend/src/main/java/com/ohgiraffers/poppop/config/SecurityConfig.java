@@ -39,9 +39,11 @@ public class SecurityConfig {
                         .requestMatchers("**","/auth/login", "/admin/login", "/user/signup", "/manager/signup","/manager","/maps","/popup-stores/search","popup-stores/**","/user/**")
                         .permitAll()
                         // 권한별 접근 제한
-//                        .requestMatchers("/admin/**").hasRole("ADMIN")
-//                        .requestMatchers("/manager/**").hasRole("MANAGER")
-                        .requestMatchers("/user/**").hasRole( "USER")
+
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/manager/**").hasRole("MANAGER")
+                        .requestMatchers("/user/**").hasAnyRole( "USER")
+
 
                         .anyRequest().authenticated()
                 )

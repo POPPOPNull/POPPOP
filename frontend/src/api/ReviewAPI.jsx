@@ -1,4 +1,3 @@
-import axios from "axios";
 import API from './JwtAPI';
 
 const BACKEND_URL = 'http://localhost:8080';
