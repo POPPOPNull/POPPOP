@@ -5,9 +5,9 @@ import { insertFavorite } from "../api/FavoriteAPI"
 import { useDrag, useDrop } from "react-dnd"
 
 
-function PopupStores({popupstore,setIsDrag}){
+function PopupStores({popupstore,setIsDrag,posterNo}){
 
-        
+        const imageUrl =  `public/poster/poster_${posterNo}.png`
 
         const [{isDragging},drag,preview] = useDrag({
             type:'popup',
@@ -35,7 +35,10 @@ function PopupStores({popupstore,setIsDrag}){
             
                 <Link to={`/user/${popupstore.no}`}>
                     <div className={PSStyle.layout} ref={drag}>
-                        <div className={PSStyle.image}>{popupstore.no}</div>
+                        <div className={PSStyle.image}>
+                            <img src={imageUrl} alt="" />
+                            {popupstore.no}
+                        </div>
                             <div className={PSStyle.explain}>
                                 <div>{popupstore.name}</div>
                                 <div className={PSStyle.small}>{popupstore.location}</div>

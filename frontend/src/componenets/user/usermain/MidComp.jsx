@@ -32,9 +32,10 @@ export function MidComp1(){
             slidesPerView={3}
             className={MCStyle.layout}
             spaceBetween={10}
+            slidesOffsetBefore={30}
             slidesOffsetAfter={200}
             >
-            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
+            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore} posterNo={popupstore.no}/></SwiperSlide>)}
             </Swiper>
         </>
     )
@@ -63,9 +64,10 @@ export function MidComp2(){
             slidesPerView={3}
             className={MCStyle.layout}
             spaceBetween={10}
+            slidesOffsetBefore={30}
             slidesOffsetAfter={200}
             >
-            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
+            {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore} posterNo={popupstore.no}/></SwiperSlide>)}
             </Swiper>
         </>
     )

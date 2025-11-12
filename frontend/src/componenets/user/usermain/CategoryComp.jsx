@@ -69,10 +69,11 @@ function CategoryComp({popupstore}){
                 className={CCStyle.layout}
                 slidesPerView={3}
                 spaceBetween={10}
+                slidesOffsetBefore={30}
                 slidesOffsetAfter={200}
                 
             >
-                {popup.map(popupstore=><SwiperSlide className={CCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore}/></SwiperSlide>)}
+                {popup.map(popupstore=><SwiperSlide className={CCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore} posterNo={popupstore.no}/></SwiperSlide>)}
                 
             
             </Swiper>
