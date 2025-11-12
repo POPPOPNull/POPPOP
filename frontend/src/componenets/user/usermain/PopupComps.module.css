@@ -2,6 +2,9 @@
     display: flex;
     height: 100%;
     align-items: end;
+    background-image: url('/public/images/plant.png');
+    border-radius: 10px;
+    background-size: cover;
     
 }
 
@@ -17,10 +20,13 @@
     align-items: center; 
     
 }
+
 .explain{
     font-size: 12px;    
     position: relative;
     left: 5%;
+    bottom: 0px;
+    opacity: 100%;
 }
 
 .name{

@@ -71,8 +71,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<RedirectBasedOnRole/>}/>
-        <Route path="/user" element={<RedirectBasedOnRole />}>
-          <Route index element={<User/>}/>
+        <Route path="/user" >
           <Route path=":popupNo" element={<PopupDetails/>}/>
           <Route path=":popupNo/review" element={<InsertReview/>}/>
           <Route path="search" element={<UserSearch/>}/>
@@ -80,7 +79,7 @@ function App() {
         </Route>
 
         <Route element={<ProtectedRoute requiredRoles={['USER']} />}>
-          <Route path="favorite" element={<UserFavorite/>}/>
+          <Route path="/user/favorite" element={<UserFavorite/>}/>
           <Route path="/myinfo" element={<MyInformation/>}/>
           <Route path="/myreview" element={<MyReview/>}/>
           <Route path="/myreservation" element={<MyReservation/>}/>
