@@ -288,4 +288,39 @@
         rejection_reason = #{rejectionReason}
         where popup_no = #{popupNo}
     </update>
+
+    <!-- 매니저 팝업스토어 등록요청 -->
+    <insert id="insertPopupStore"
+            parameterType="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
+        INSERT INTO popup_store (
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        category_name,
+        id,
+        click_count
+        )
+        VALUES (
+        #{name},
+        #{brandName},
+        #{startDate},
+        #{endDate},
+        #{openTime},
+        #{closeTime},
+        #{location},
+        #{reservableStatus},
+        #{explanation},
+        '대기',         -- 매니저는 일단 '대기'
+        #{categoryName},
+        #{id},
+        0
+        )
+    </insert>
 </mapper>
