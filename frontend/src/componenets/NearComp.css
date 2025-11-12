@@ -1,0 +1,20 @@
+.layout{
+    /* background-color: blue; */
+    
+    height: 400px;
+    clip-path: polygon();
+}
+
+.slide{
+    background-color: #d9d9d9;
+    border-radius: 16px;
+    height: 100%;
+    color: black;
+
+}
+
+.explain{
+    font-size: 25px;
+    height: 50px;
+    
+}

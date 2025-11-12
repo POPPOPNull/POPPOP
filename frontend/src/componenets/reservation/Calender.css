@@ -1,0 +1,149 @@
+.caltitle, .subtitle, .numticket {
+  margin-left: -300px;
+  font-size: large;
+  font-weight: 600;
+}
+/* 입력창 */
+.react-datepicker-wrapper input {
+  width: 328px; 
+  height: 53px; 
+  font-size: 21px; 
+  padding: 0 16px; 
+  border-radius: 10px; 
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* 달력 전체 팝업 */
+.react-datepicker {
+  font-size: 18px; 
+  background-color: black;
+  color: white;
+  border-radius: 16px;
+  padding: 16px; 
+  width: 500px;
+  border: 1px solid black;
+}
+
+/* 달력 헤더 */
+.react-datepicker__header {
+  background-color: black;
+  border-bottom: none;
+  padding-bottom: 10px;
+}
+
+.react-datepicker__current-month {
+  font-size: 21px; 
+  font-weight: 600;
+  color: white;
+}
+
+.react-datepicker__day-name {
+  color: #999;
+  font-weight: 500;
+  width: 3.9rem;
+  line-height: 3.3rem;
+  text-align: center;
+}
+
+/* 날짜 셀 */
+.react-datepicker__day {
+  width: 3.9rem; 
+  height: 2.8rem;
+  line-height: 2.8rem;
+  margin: 3px; 
+  text-align: center;
+
+  /* border-radius: 50%; */
+  cursor: pointer;
+  color: white;
+}
+
+/* 오늘 날짜 */
+.react-datepicker__day--today {
+  border: 2px solid #FFCF0D; /* 테두리 굵기 증가 */
+  color: white;
+  border-radius: 8px;
+}
+
+/* 선택된 날짜 */
+.react-datepicker__day--selected {
+  background-color: #FFCF0D;
+  color: white;
+  border-radius: 8px;
+}
+
+/* 선택 불가 날짜 */
+.react-datepicker__day--disabled {
+  color: #595959;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+/* 마우스 오버 */
+.react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
+  background-color: #fff3b8;
+}
+
+.timetable {
+  margin-top: 30px;
+  /* margin-bottom: 30px; */
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+.timeticket {
+  width: 160px;
+  height: 60px;
+  border: 2px solid white;
+  border-radius: 8px;
+  text-align: center;
+}
+.resv {
+  width: 500px;
+  height: 50px;
+  background-color: #FFCF0D;
+  border-radius: 8px;
+  font-size: 18px;
+}
+p {
+  margin: 0;
+}
+.numticket{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.counter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: white;
+  color: black;
+  margin-top: 30px;
+}
+.btn {
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.btn:hover {
+  color: #000;
+}
+
+.count {
+  min-width: 30px;
+  text-align: center;
+}

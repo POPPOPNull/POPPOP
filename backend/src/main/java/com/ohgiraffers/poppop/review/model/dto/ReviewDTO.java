@@ -1,0 +1,75 @@
+package com.ohgiraffers.poppop.review.model.dto;
+
+public class ReviewDTO {
+
+    private int reviewNo;
+    private String content;
+    private int popupNo;
+    private String memberId;
+    private String reviewDate;
+
+    public ReviewDTO (){}
+
+    public ReviewDTO(int reviewNo, String content, int popupNo, String memberId, String reviewDate) {
+
+        this.reviewNo = reviewNo;
+        this.content = content;
+        this.popupNo = popupNo;
+        this.memberId = memberId;
+        this.reviewDate = reviewDate;
+
+    }
+
+    public int getReviewNo() {
+        return reviewNo;
+    }
+
+    public void setReviewNo(int reviewNo) {
+        this.reviewNo = reviewNo;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getPopupNo() {
+        return popupNo;
+    }
+
+    public void setPopupNo(int popupNo) {
+        this.popupNo = popupNo;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
+
+    }
+
+    @Override
+    public String toString() {
+        return "ReviewDTO{" +
+                "reviewNo=" + reviewNo +
+                ", content='" + content + '\'' +
+                ", popupNo=" + popupNo +
+                ", memberId='" + memberId + '\'' +
+                ", reviewDate='" + reviewDate + '\'' +
+
+                '}';
+    }
+}

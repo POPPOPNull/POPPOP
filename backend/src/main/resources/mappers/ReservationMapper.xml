@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper">
+    <resultMap id="reservationResultMap" type="com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO">
+        <id property="reservationNo" column="reservation_no"/>
+        <result property="reservationStatus" column="reservation_status"/>
+        <result property="reservationPersonnel" column="reservation_personnel"/>
+        <result property="popupNo" column="popup_no"/>
+        <result property="memberId" column="id"/>
+        <result property="popupName" column="popup_name"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="reservationDate" column="reservation_date"/>
+        <result property="reservationTime" column="reservation_time"/>
+    </resultMap>
+
+    <resultMap id="reservationSummaryResultMap" type="com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO">
+        <result property="popupNo" column="popup_no"/>
+        <result property="popupName" column="popup_name"/>
+        <result property="status" column="status"/>
+        <result property="reservationCount" column="reservation_count"/>
+        <result property="totalPersonnel" column="total_personnel"/>
+    </resultMap>
+
+    <select id="selectAllReservation" resultMap="reservationResultMap">
+        select
+               r.reservation_no,
+               r.reservation_status,
+               r.reservation_personnel,
+               r.cancel_reason,
+               p.popup_name,
+               r.id
+          from reservation r
+          join popup_store p on r.popup_no = p.popup_no
+    </select>
+
+    <select id="selectReservationSummary" resultMap="reservationSummaryResultMap">
+        select
+               p.popup_no,
+               p.popup_name,
+               case
+                   when curdate() between p.popup_start_date and p.popup_end_date then '진행중'
+                   when curdate() > p.popup_end_date then '종료'
+                   else '오픈예정'
+               end as status,
+               count(r.reservation_no) as reservation_count,
+               ifnull(sum(r.reservation_personnel), 0) as total_personnel
+          from popup_store p
+          left join reservation r on p.popup_no = r.popup_no
+         group by p.popup_no, p.popup_name, p.popup_start_date, p.popup_end_date
+         order by p.popup_no
+    </select>
+
+    <select id="selectReservationDetailsByPopup" resultMap="reservationResultMap">
+        select
+               r.reservation_no,
+               r.id,
+               m.name,
+               m.phone,
+               r.reservation_status,
+               r.reservation_personnel,
+               r.reservation_date,
+               r.reservation_time,
+               r.popup_no
+          from reservation r
+          join member m on r.id = m.id
+          join popup_store p on r.popup_no = p.popup_no
+         where r.popup_no = #{popupNo}
+         order by r.reservation_date, r.reservation_time
+    </select>
+
+
+    <delete id="deleteReservationDetails" parameterType="int">
+        delete
+          from reservation
+         where reservation_no = #{reservationNo}
+    </delete>
+</mapper>

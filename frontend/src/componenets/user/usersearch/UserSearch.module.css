@@ -1,0 +1,119 @@
+.layout{
+    background-color: rgb(105, 99, 99);
+    height: 50px;
+    width: 900px;
+    position: fixed;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1001px;
+}
+.searchbar{
+    width: 750px;
+    height: 30px;
+    font-size: 15px;
+    border: #3d3d3d solid 3px;
+    border-radius: 50px;
+    background-color: #6e6d6d;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;  
+    color: white;
+
+}
+.popuplayout{
+    
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 999;
+}
+.searchinputbg{
+    width: 900px;
+    background-color: rgb(0, 0, 0);
+    height: 300px;
+    position: fixed;
+    top: 100px;
+    border-bottom: red 5px solid;
+    display: flex;
+    justify-content: space-around;  
+    z-index: 2000px;
+      
+}
+.back{
+    width: 900px;
+    height: 100%;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    opacity: 30%;
+    pointer-events: none;
+}
+
+.searchinputlayout{
+    width: 900px;
+    background-color: rgb(112, 107, 107);
+    height: 80px;
+    
+    top: 100px;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+
+    
+}
+.searchbutton{
+    width: 50px;
+    height: 50px;
+}
+/* .display{
+    display:none;
+} */
+
+.searchbg{
+    background-color: black;
+    width: 900px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    opacity: 30%;
+    pointer-events: none;
+    z-index: 2000px
+}
+.searchbox{
+    background-color: rgb(63, 62, 62);
+    position: fixed;
+    width: 900px;
+    height: 200px;
+    
+    
+}
+
+.searchlayout{
+    background-color: #696969;
+    width: 900px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.select{
+    /* background-color: cyan; */
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    /* position: relative; */
+    
+}
+
+.nosearchresult{
+    background-color: #3d3d3d;
+    text-align: center;
+    width: 900px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

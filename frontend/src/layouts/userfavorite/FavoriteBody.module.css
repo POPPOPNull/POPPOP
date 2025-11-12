@@ -1,0 +1,27 @@
+.usermainlayout{
+    background-color: #000000;
+    color: white;
+    width: 100%;
+    height: 900px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    display: flex;
+    justify-content: center;
+}
+
+.main{
+    background-color: black;
+    color: white;
+    width: 900px;
+    
+}
+.blank{
+    height: 100px;
+}
+.footer{
+    background-color: brown;
+    width: 900px;
+    height: 300px;
+    position: relative;
+    bottom: 0px
+}

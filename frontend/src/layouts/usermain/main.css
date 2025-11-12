@@ -1,0 +1,40 @@
+.user-main-layout{
+    background-color: #000000;
+    color: white;
+    width: 100%;
+    /* height: 900px; */
+    overflow-y: scroll;
+    scrollbar-width: none;
+    display: flex;
+    justify-content: center;
+}
+
+.main{
+    background-color: black;
+    color: white;
+    width: 900px;
+    height: 1000px;
+}
+.blank{
+    height: 100px;
+}
+.footer{
+    background-color: brown;
+    width: 900px;
+    height: 300px;
+    position: relative;
+    bottom: 0px;
+    z-index: 10px
+}
+
+
+.logout {
+    all: unset;
+    color: white;
+    width: 70px;
+    height: 30px;
+    /* border: 2px solid #FFCF0D; */
+    border-radius: 15px;
+    margin-top: 70px;
+    margin-left: 780px;
+}
