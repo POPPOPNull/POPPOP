@@ -49,7 +49,14 @@ public class FavoriteController {
 
     // 찜목록 삭제
     @DeleteMapping("/favorite")
-    public ResponseEntity<?> deleteFavoritePopup(@RequestParam int popupNo,@RequestParam String id){
+    public ResponseEntity<?> deleteFavoritePopup(@RequestParam int popupNo, @AuthenticationPrincipal UserDetails userDetails){
+
+        if (userDetails == null) {
+            return ResponseEntity.status(401).body("Unauthorized");
+        }
+        String id = userDetails.getUsername();
+
+
 
         favoriteService.deleteFavorite(popupNo,id);
 

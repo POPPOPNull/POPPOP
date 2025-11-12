@@ -38,7 +38,7 @@ export function BotComp() {
                 <div className={BCStyle.date}>today+6</div>
             </div>
             <div className={BCStyle.botlayout}>
-                {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag}/>)}
+                {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag} posterNo={popupstore.no}/>)}
             </div>
             <Link to={"/user/search"}>
                 <div className={BCStyle.more}>더보기</div>

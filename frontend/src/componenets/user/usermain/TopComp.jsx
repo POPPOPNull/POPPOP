@@ -75,7 +75,7 @@ function TopComp (){
                     pagination={true}
                 >
                     <Link to={`user/${popups.no}`}>
-                        {popups.map(popups=> <SwiperSlide className={TCSytle.slide}><PopupComp key={popups.no} popupstore={popups}/></SwiperSlide>)}
+                        {popups.map(popups=> <SwiperSlide className={TCSytle.slide}><PopupComp key={popups.no} popupstore={popups} posterNo={popups.no}/></SwiperSlide>)}
                     </Link>
                 </Swiper>
             </div>
