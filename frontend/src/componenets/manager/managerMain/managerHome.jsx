@@ -28,7 +28,7 @@ function ManagerHome() {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <h1 className="mh-logo">POPPOP</h1>
+          <h1 className="mh-logo">POPPOP BIZ</h1>
 
           {hover && (
             <div className="mh-menu">
@@ -60,7 +60,7 @@ function ManagerHome() {
         <h2 className="mh-title">대한민국 유일의 팝업스토어 전문 플랫폼</h2>
         <h1 className="mh-brand">POPPOP</h1>
         <p className="mh-desc">
-          대한민국 유일의 팝업스토어 전문 플랫폼 팝찹에서는<br/>
+          대한민국 유일의 팝업스토어 전문 플랫폼 팝팝에서는<br/>
           고객경험 마케팅의 최정상에 자리잡은 팝업스토어의 홍보, 성과관리 등<br />
           필요한 서비스와 솔루션을 제공합니다 ✨
         </p>

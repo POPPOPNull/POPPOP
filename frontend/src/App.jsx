@@ -23,10 +23,7 @@ import InsertReview from "./pages/user/InsertReview";
 
 import AdminLayout from "./pages/admin/adminLayout";
 import AdminMain from "./layouts/adminmain/admin-main";
-import AdminMembers from "./layouts/adminmain/admin-members";
-import AdminReview from "./layouts/adminmain/admin-review";
 import UserSearch from "./pages/user/UserSearch";
-import AdminReservation from "./layouts/adminmain/admin-reservation";
 import AdminManagerMain from "./layouts/adminmain/admin-manager-main";
 import AdminManagerMemberList from "./componenets/admin/adminManagerMemberList";
 import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
@@ -37,6 +34,9 @@ import AdminManagerPopupDetails from "./componenets/admin/adminManagerPopupDetai
 import Test from "./layouts/usermain/Test";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import AdminMemberList from "./componenets/admin/adminMemberList.jsx";
+import AdminReviewList from "./componenets/admin/adminReviewList.jsx";
+import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
 
 import { AuthProvider, useAuth, ProtectedRoute } from "./hooks/UseAuth.jsx";
 
@@ -66,6 +66,7 @@ const RedirectBasedOnRole = () => {
 function App() {
   return (
     <AuthProvider>
+
       <DndProvider backend={HTML5Backend}>
         <BrowserRouter>
           <Routes>

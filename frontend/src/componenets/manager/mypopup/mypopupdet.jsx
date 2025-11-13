@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./mypopupdet.css";
+import ManagerSearchBar from "../ManagerSearchBar";
 
 function MyPopupDet() {
 
@@ -20,7 +21,6 @@ function MyPopupDet() {
         totalCount: 3500,
         todayCount: 123,
         closedDays: "10월 3일–6일",
-        billing: "과금",
     });
 
     // 예약자 목록 (테이블)
@@ -33,38 +33,23 @@ function MyPopupDet() {
     ]);
   }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // 일단 콘솔로
-    console.log("검색:", keyword);
-  };
 
   return (
     <div className="mypopupdet-wrapper">
     
       <div className="mypopupdet-header">
-        <div className="mypopupdet-header-left">
+    
+      <div className="mypopupdet-search-area">
+        <ManagerSearchBar
+          value={keyword}
+          onChange={setKeyword}
+          placeholder="예약 내역 검색"
+        />
+      </div>
 
-          <form className="mypopupdet-search-form" onSubmit={handleSearch}>
-            <input
-              className="mypopupdet-search-input"
-              type="text"
-              placeholder="검색내용"
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button className="mypopupdet-search-btn" type="submit">
-              검색
-            </button>
-          </form>
-        </div>
-
-        <div className="mypopupdet-header-right">
-          전체 예약자 수{" "}
-          <strong>
-            {popupInfo ? popupInfo.totalCount : 0}명
-          </strong>
-        </div>
+      <div className="mypopupdet-total-wrap">
+        전체 예약자 수 <strong>{popupInfo ? popupInfo.totalCount : 0}명</strong>
+      </div>
       </div>
 
     
@@ -107,11 +92,6 @@ function MyPopupDet() {
               <div className="mypopupdet-info-value">
                 휴무일 : {popupInfo.closedDays}
               </div>
-            </div>
-
-            <div className="mypopupdet-info-row">
-              <div className="mypopupdet-info-label">과금</div>
-              <div className="mypopupdet-info-value">{popupInfo.billing}</div>
             </div>
 
           </div>
