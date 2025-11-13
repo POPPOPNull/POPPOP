@@ -2,7 +2,9 @@ import { Outlet } from 'react-router-dom';
 import { SearchProvider } from '../../componenets/admin/searchProvider';
 import AdminSidebar from '../../layouts/adminmain/admin-sidebar';
 import AdminSearchBar from '../../componenets/admin/adminSearchBar';
+import Logout from '../../componenets/Logout';
 import "../../layouts/adminmain/list-layout.css";
+
 
 function AdminLayout() {
     return (
@@ -13,7 +15,7 @@ function AdminLayout() {
                 <main className='admin-main-layout'>
                     <AdminSearchBar/>
                     <hr style={{ margin: '20px 0'}}/>
-
+                    <Logout/>
                     <Outlet />
                 </main>
             </div>

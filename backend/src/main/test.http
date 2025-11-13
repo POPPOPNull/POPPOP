@@ -35,3 +35,21 @@ POST http://localhost:8080/favorite?popupNo=1
 
 ###
 GET http://localhost:8080/popup-store/random
+
+###
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "id": "user10",
+  "password": "pass10"
+}
+
+###
+GET http://localhost:8080/auth/refresh
+
+###
+200 OK
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6InVzZXIxMCIsInR5cGUiOiJNRU1CRVIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2MzAxOTM3NSwiZXhwIjoxNzYzMDIxMTc1fQ.V4F2gAjISmamNJtTgjFzRKqhh6pOdbkdIIQzjVQlUU8"
+}

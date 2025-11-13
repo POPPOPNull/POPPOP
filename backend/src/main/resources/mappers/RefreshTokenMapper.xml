@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.poppop.auth.model.dao.RefreshTokenMapper">
+
+    <resultMap id="RefreshTokenMap" type="com.ohgiraffers.poppop.auth.model.dto.RefreshToken">
+        <id property="id" column="id"/>
+        <result property="principalId" column="principal_id"/>
+        <result property="principalType" column="principal_type"/>
+        <result property="token" column="token"/>
+        <result property="expiryDate" column="expiry_date"/>
+    </resultMap>
+
+    <insert id="insertRefreshToken" parameterType="com.ohgiraffers.poppop.auth.model.dto.RefreshToken">
+        insert into
+        refresh_token
+        (
+        principal_id,
+        principal_type,
+        token,
+        expiry_date
+        )
+        values
+        (
+        #{principalId},
+        #{principalType},
+        #{token},
+        #{expiryDate}
+        )
+    </insert>
+
+    <select id="findByToken" resultMap="RefreshTokenMap" parameterType="string">
+        select * from refresh_token
+         where token = #{token}
+    </select>
+
+    <delete id="deleteByToken" parameterType="string">
+        delete from refresh_token
+         where token = #{token}
+    </delete>
+
+    <delete id="deleteByPrincipal">
+        delete from refresh_token
+         where principal_id = #{principalId}
+           and principal_type = #{principalType}
+    </delete>
+</mapper>

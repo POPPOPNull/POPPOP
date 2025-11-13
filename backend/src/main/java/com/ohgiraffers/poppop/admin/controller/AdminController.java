@@ -146,11 +146,11 @@ public class AdminController {
     }
 
     // Admin 전용 로그인 엔드포인트
-    @PostMapping("/admin/login")
-    public ResponseEntity<TokenResponse> adminLogin(@RequestBody LoginRequest dto) {
-        String token = authService.adminLogin(dto.getId(), dto.getPassword());
-        return ResponseEntity.ok(new TokenResponse(token));
-    }
+//    @PostMapping("/admin/login")
+//    public ResponseEntity<TokenResponse> adminLogin(@RequestBody LoginRequest dto) {
+//        String token = authService.adminLogin(dto.getId(), dto.getPassword());
+//        return ResponseEntity.ok(new TokenResponse(token));
+//    }
 
     // Admin 전용 페이지 접속 확인 (JWT 인증 필요)
     @GetMapping("/admin/main")
