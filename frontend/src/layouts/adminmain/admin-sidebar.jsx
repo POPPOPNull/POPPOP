@@ -3,17 +3,27 @@ import { Link } from "react-router-dom";
 import "./admin-sidebar.css";
 
 const poppopMenus = [
-    { name: "메인", icon: "/public/icons/home.png", subMenus: [{name : "대시보드", path: "/admin"}] },
-    { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [{name: "회원 전체 조회", path: "/admin/members"}]},
-    { name: "리뷰내역", icon: "/public/icons/feedback-review.png", subMenus: [{name: "리뷰 전체 조회", path: "/admin/reviews"}]},
-    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: [{name: "예약 내역 전체 조회", path: "/admin/reservation"}]},
-];
+    { name: "메인", icon: "/public/icons/home.png", subMenus: [
+        {name : "대시보드(사용자)", path: "/admin"},
+        {name : "대시보드(가맹점)", path: "/admin/manager-main"}
+        ]
+    },
 
-const poptnerMenus = [
-    { name: "메인", icon: "/public/icons/home.png", subMenus: [{name: "대시보드", path: "/admin/manager-main"}] },
-    { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [{name: "회원 전체 조회", path: "/admin/manager-members"}]},
-    { name: "팝업목록", icon: "/public/icons/shop.png", subMenus: [{name: "팝업 전체 조회", path: "/admin/manager-popup"}]},
-    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: [{name: "팝업 예약 조회", path: "/admin/manager-reservation"}]},
+    { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [
+        {name: "사용자 회원 목록", path: "/admin/members"},
+        {naem: "가맹점 회원 목록", path: "/admin/manager-members"}
+        ]
+    },
+
+    { name: "리뷰내역", icon: "/public/icons/feedback-review.png", subMenus: [{name: "리뷰 전체 조회", path: "/admin/reviews"}]},
+
+    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: [
+        {name: "사용자 예약 내역", path: "/admin/reservation"},
+        {name: "가맹점 예약 내역", path: "/admin/manager-reservation"}
+        ]
+    },
+
+    { name: "팝업목록", icon: "/public/icons/shop.png", subMenus: [{name: "팝업 스토어 목록", path: "/admin/manager-popup"}]},
 ];
 
 function AdminSidebar(){
@@ -63,11 +73,6 @@ function AdminSidebar(){
             <div className="admin-side-logo1">POPPOP</div>
             <div className="admin-sidebutton-layout">
                 {renderMenus(poppopMenus, 'POPPOP')}
-            </div>
-
-            <div className="admin-side-logo2">POPTNER</div>
-            <div className="admin-sidebutton-layout">
-                {renderMenus(poptnerMenus, 'POPTNER')}
             </div>
         </div>
         </>
