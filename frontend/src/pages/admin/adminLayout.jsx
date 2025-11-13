@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { SearchProvider } from '../../componenets/admin/searchProvider';
 import AdminSidebar from '../../layouts/adminmain/admin-sidebar';
 import AdminSearchBar from '../../componenets/admin/adminSearchBar';
+import "../../layouts/adminmain/list-layout.css";
 
 function AdminLayout() {
     return (
