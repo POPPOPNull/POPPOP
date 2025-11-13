@@ -15,7 +15,11 @@ function ManagerSidebar() {
   const [isMyPopupOpen, setIsMyPopupOpen] = useState(isMyPopupPath);
 
   useEffect(() => {
-    if (isMyPopupPath) setIsMyPopupOpen(true);
+    if (isMyPopupPath) {
+      setIsMyPopupOpen(true);
+    } else {
+      setIsMyPopupOpen(false);
+    }
   }, [isMyPopupPath]);
 
   return (
@@ -26,7 +30,7 @@ function ManagerSidebar() {
             onClick={() => navigate("/manager")}
             style={{ cursor: "pointer" }}
         >
-        POPPOP
+        POPPOP BIZ
         </div>
       </div>
 
@@ -38,15 +42,21 @@ function ManagerSidebar() {
             "admin-side-button" + (isActive ? " active" : "")
           }
         >
+          <img src="/icons/home.png" alt="home" className="side-icon" />
           POPPOP 소개
         </NavLink>
 
         <NavLink
           to="/manager/popup-register"
           className={({ isActive }) =>
-            "admin-side-button" + (isActive ? " active" : "")
+            "admin-side-button" +
+            (isActive && !isMyPopupOpen ? " active" : "")  
+            //isMyPopupOpen이 false일 때만 active 적용 : 다른 메뉴 클릭시 이전 메뉴 비 활성화 됨
           }
         >
+          <img
+            src="/icons/store-buyer.png" alt="store-buyer" className="side-icon"
+          />
           팝업스토어 등록
         </NavLink>
 
@@ -56,6 +66,7 @@ function ManagerSidebar() {
           }
           onClick={() => setIsMyPopupOpen((prev) => !prev)}
         >
+          <img src="/icons/shop.png" alt="shop" className="side-icon" />
           나의 팝업스토어
           <span
             className="arrow-icon"

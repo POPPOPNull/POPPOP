@@ -1,5 +1,6 @@
 import "./mypopup.css";
 import { useState } from "react";
+import ManagerSearchBar from "../ManagerSearchBar";
 
 const MOCK = [
   { id: 1, title: "비비고 X 세븐틴", state: "운영 중", date: "25.09.30–10.29", location: "서울시 마포구", category: "식품" },
@@ -27,25 +28,23 @@ function MyPopup() {
       <div className="mp-top">
         <div className="mp-user">
           <span className="badge">manager01</span>
-          <a className="logout" href="#">로그아웃</a>
         </div>
 
-        <div className="mp-controls">
+        {/* <div className="mp-controls">
           <select value={sortKey} onChange={e => setSortKey(e.target.value)} className="sel">
             <option value="latest">정렬</option>
             <option value="title">제목</option>
             <option value="state">상태</option>
           </select>
-
-          <input
-            className="search"
-            placeholder="검색 내용"
-            value={q}
-            onChange={e => setQ(e.target.value)}
-          />
-          <button className="btn-search">검색</button>
-        </div>
+        </div> */}
       </div>
+
+      
+        <ManagerSearchBar
+          value={q}
+          onChange={setQ}
+          placeholder="팝업스토어 검색"
+        />
 
       <div className="mp-card">
         <div className="mp-table">
