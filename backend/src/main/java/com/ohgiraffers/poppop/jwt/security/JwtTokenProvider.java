@@ -32,12 +32,18 @@ public class JwtTokenProvider {
         );
     }
 
-    public String createToken(String id, String role) {
-        // Claims에 id와 role을 넣어 토큰 생성
-        Claims claims = Jwts.claims().setSubject(id);
+    private long accessTokenValidity = 1000 * 30;
+
+    public String createToken(String principalId, String principalType, String role) {
+
+        Claims claims = Jwts.claims(); // setSubject 대신에 클레임에 Id와 타입
+        claims.put("id", principalId);
+        claims.put("type", principalType);
         claims.put("role", role);
+
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 36000000); // 1시간 토큰 유효
+        Date validity = new Date(now.getTime() + accessTokenValidity);
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
@@ -47,14 +53,14 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        // 1. 토큰에서 Claim(Payload)을 추출 (ID와 ROLE 포함)
+
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
 
-        String id = claims.getSubject(); // 토큰 생성 시 setSubject로 설정한 ID
+        String id = claims.get("id", String.class);
         String role = claims.get("role", String.class); // 토큰 생성 시 claims.put("role", role)로 설정한 역할
 
         // 2. 권한 정보 생성
@@ -77,8 +83,7 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
 
-        // 3. 토큰 생성 시 setSubject로 저장했던 ID를 반환
-        return claims.getSubject();
+        return claims.get("id", String.class);
     }
 
     public String resolveToken(HttpServletRequest request) {

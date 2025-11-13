@@ -35,15 +35,12 @@ function LoginComponent() {
             const token = response.data.accessToken;
             
             console.log("토큰:", {token});
-            localStorage.setItem('token', token);
-
-            console.log(localStorage.getItem('token'));
 
             login(token); 
             
             const payload = parseJwt(token);
             
-    const userRole = payload?.role || payload?.roles || payload?.authorities;
+            const userRole = payload?.role;
 
     if (userRole) {
       

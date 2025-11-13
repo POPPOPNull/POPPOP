@@ -1,49 +1,95 @@
-import { useState, useEffect, useContext } from 'react';
-// 필요한 경우, 인증 컨텍스트나 API 클라이언트 등을 가져옵니다.
-// import { AuthContext } from '../context/AuthContext';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useLocation, Navigate, Outlet } from 'react-router-dom';
 
-/**
- * 사용자 인증 상태를 관리하는 커스텀 훅
- */
-export const useAuth = () => {
-  const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+const AuthContext = createContext(null);
 
-  // 예시: 컴포넌트 마운트 시 인증 상태를 확인
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);      // { id, role, type } or null
+  const [loading, setLoading] = useState(true);
+
+  // JWT payload 파싱 함수
+  const parseJwt = (token) => {
+    try {
+      const base64Payload = token.split('.')[1];
+      const payload = JSON.parse(atob(base64Payload));
+      return payload;
+    } catch (e) {
+      console.error('토큰 파싱 실패', e);
+      return null;
+    }
+  };
+
+  // 🔹 새로고침 시 localStorage에서 accessToken을 읽어서 로그인 상태 복원
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        setUser({ id: payload.sub, role: payload.role });
-        setIsAuthenticated(true);
-      } catch (err) {
-        console.error('토큰 파싱 실패:', err);
-        localStorage.removeItem('token');
+    const savedToken = localStorage.getItem('accessToken');   // ✅ 토큰 키 통일
+    if (savedToken) {
+      const payload = parseJwt(savedToken);
+      if (payload) {
+        setUser({
+          id: payload.id,       // 토큰에 넣어둔 클레임에 맞게
+          role: payload.role,
+          type: payload.type,
+          token: savedToken,
+        });
+      } else {
+        localStorage.removeItem('accessToken');
       }
     }
-    setIsLoading(false);
+    setLoading(false);
   }, []);
 
-   const login = (token) => {
-    localStorage.setItem('token', token);
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    setUser({ id: payload.sub, role: payload.role });
-    setIsAuthenticated(true);
+  // 로그인 시: accessToken 받았다고 가정
+  const login = (token) => {
+    localStorage.setItem('accessToken', token);   // ✅ 항상 여기 저장
+    const payload = parseJwt(token);
+    if (payload) {
+      setUser({
+        id: payload.id,
+        role: payload.role,
+        type: payload.type,
+        token,
+      });
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
     setUser(null);
-    setIsAuthenticated(false);
+    localStorage.removeItem('accessToken');
   };
 
-  return {
+  const value = {
     user,
-    isAuthenticated,
-    isLoading,
+    role: user?.role ?? null,
+    loading,
     login,
     logout,
+    isAuthenticated: !!user,
   };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+// 컴포넌트에서 사용
+export const useAuth = () => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+  return ctx;
+};
+
+// 보호된 라우트
+export const ProtectedRoute = ({ requiredRoles = [] }) => {
+  const { isAuthenticated, role, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) return <div>로딩 중...</div>;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" state={{ from: location }} replace />;
+  }
+
+  if (requiredRoles.length > 0 && !requiredRoles.includes(role)) {
+    return <div>권한이 없습니다.</div>;
+  }
+
+  return <Outlet />;
 };
