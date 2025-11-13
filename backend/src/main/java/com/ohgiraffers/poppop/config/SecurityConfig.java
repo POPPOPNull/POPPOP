@@ -29,27 +29,53 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
-        http
-                .httpBasic(AbstractHttpConfigurer::disable) // Http Basic 비활성화
-                .csrf(AbstractHttpConfigurer::disable)      // CSRF 비활성화 (JWT 사용 시)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 안 함
-                .authorizeHttpRequests(auth -> auth
-                        // 로그인 및 회원가입 허용
-                                       
-                        .requestMatchers("**","/auth/login", "/auth/admin/login", "/user/signup", "/manager/signup","/manager","/maps","/popup-stores/search","popup-stores/**","/user/**")
-                        .permitAll()
-                        // 권한별 접근 제한
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   UserDetailsService userDetailsService) throws Exception {
 
+        http
+                // 기본 인증/폼 로그인/CSRF 비활성화 (JWT 방식)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+
+                // 세션 사용 X
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+
+                .authorizeHttpRequests(auth -> auth
+                        // ✅ 인증 없이 접근 가능한 URL들
+                        .requestMatchers(
+                                "/auth/login",
+                                "/auth/admin/login",
+                                "/auth/user/join",
+                                "/auth/manager/join",
+                                "/auth/refresh",
+                                "/", "/index.html",
+                                "/css/**", "/js/**", "/images/**",
+                                "/maps",
+                                "/popup-stores/search",
+                                "/popup-stores/**"
+                        ).permitAll()
+
+                        // ✅ 권한 필요한 URL들
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
-                        .requestMatchers("/user/**").hasAnyRole( "USER")
+                        .requestMatchers("/user/**").hasRole("USER")
 
-
+                        // 나머지는 전부 인증 필요
                         .anyRequest().authenticated()
                 )
-                // JWT 인증 필터 적용
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
+//                .authorizeHttpRequests(auth -> auth
+//                        .anyRequest().permitAll()
+//                )
+                .cors(cors -> {});
+
+        // ✅ JwtAuthenticationFilter는 나중에 다시 붙일 거라면 여기
+        http.addFilterBefore(
+                new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),
+                UsernamePasswordAuthenticationFilter.class
+        );
 
         return http.build();
     }
@@ -59,9 +85,8 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 }
