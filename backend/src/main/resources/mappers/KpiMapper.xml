@@ -21,7 +21,7 @@
     select count(distinct session_id) from user_event_data
 </select>
 
-<!--    신규 가입 수 (오늘 날짜를 기준으로 -->
+<!--    신규 가입 수 (오늘 날짜를 기준으로 회원 가입 날짜가 2주 이내인 회원)-->
     <select id="selectNewMembers" resultType="long">
         select count(*)
           from user_event_data

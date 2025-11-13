@@ -23,10 +23,7 @@ import InsertReview from "./pages/user/InsertReview";
 
 import AdminLayout from "./pages/admin/adminLayout";
 import AdminMain from "./layouts/adminmain/admin-main";
-import AdminMembers from "./layouts/adminmain/admin-members";
-import AdminReview from "./layouts/adminmain/admin-review";
 import UserSearch from "./pages/user/UserSearch";
-import AdminReservation from "./layouts/adminmain/admin-reservation";
 import AdminManagerMain from "./layouts/adminmain/admin-manager-main";
 import AdminManagerMemberList from "./componenets/admin/adminManagerMemberList";
 import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
@@ -40,6 +37,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import ProtectedRoute from './routes/ProtectedRoutes';
 import { useAuth } from './hooks/UseAuth.jsx';
 import { AuthProvider } from "./context/AuthContext";
+import AdminMemberList from "./componenets/admin/adminMemberList.jsx";
+import AdminReviewList from "./componenets/admin/adminReviewList.jsx";
+import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
 
 const RedirectBasedOnRole = () => {
     const { role, loading } = useAuth();
@@ -107,9 +107,9 @@ function App() {
         <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
           <Route path="/admin" element={<AdminLayout/>}>
             <Route index element={<AdminMain/>} />
-            <Route path="members" element={<AdminMembers/>} />
-            <Route path="reviews" element={<AdminReview/>} />
-            <Route path="reservation" element={<AdminReservation/>} />
+            <Route path="members" element={<AdminMemberList/>} />
+            <Route path="reviews" element={<AdminReviewList/>} />
+            <Route path="reservation" element={<AdminReservationList/>} />
             <Route path="manager-main" element={<AdminManagerMain/>} />
             <Route path="manager-members" element={<AdminManagerMemberList/>} />
             <Route path="manager-popup" element={<AdminManagerPopupList/>} />
