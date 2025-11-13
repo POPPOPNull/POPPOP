@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; 
+// import { requestPopupRegister } from "../../../api/PopupStoreAPI";
+import API from "../../../api/JwtAPI";
 import ManagerSidebar from "../../../layouts/managermain/manager-sidebar";
 import "./mypopupreg.css";
 
@@ -16,100 +17,126 @@ function MyPopupReg() {
     startDate: "",
     endDate: "",
     description: "",
-    hashtags: "",
+    // hashtags: "",
   });
 
-  const [openTime, setOpenTime] = useState("");
-  const [closeTime, setCloseTime] = useState("");
-  const [dailyHours, setDailyHours] = useState(
-    ["월","화","수","목","금","토","일"].map(() => ({ open: "", close: "" }))
-  );
-
-  const [submitting, setSubmitting] = useState(false); //중복 클릭 방지용
-
-  const [selectedTags, setSelectedTags] = useState([]);
-
-  const handleTagToggle = (tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag)
-        ? prev.filter((t) => t !== tag) // 이미 선택돼 있으면 해제
-        : [...prev, tag] // 없으면 추가
+    const [openTime, setOpenTime] = useState("");
+    const [closeTime, setCloseTime] = useState("");
+    const [dailyHours, setDailyHours] = useState(
+      ["월","화","수","목","금","토","일"].map(() => ({ open: "", close: "" }))
     );
-  };
 
-  // 등록 처리 
-  const handleSubmit = async () => {
-    if (submitting) return;
+    const [submitting, setSubmitting] = useState(false); //중복 클릭 방지용
+    const [selectedTags, setSelectedTags] = useState([]);
 
-    // 필수값 확인
-    if (!formData.category || !formData.title || !formData.brandMain || !formData.roadAddress || !formData.startDate || !formData.endDate || !formData.description) {
-      alert("필수 항목을 모두 입력해주세요.");
-      return;
-    }
+    //해시태그
+    const [hashtagsInput, setHashtagsInput] = useState("");
+    const [hashtagsList, setHashtagsList] = useState([]);
 
-    // 🔹추가 : 선택된 태그도 payload에 포함 (선택사항)
-    // 원하면 백엔드 DB에 같이 보낼 수 있음
-    const features = selectedTags.join(", ");
+    const isComposingRef = useRef(false);
+
+    const normalizeTag = (raw) =>
+      raw.replaceAll(",", " ")
+        .trim()
+        .replace(/^#+/, "")
+        .replace(/\s+/g, "");
+
+    const addTag = (raw) => {
+      const tag = normalizeTag(raw);
+      if (!tag) return;
+      if (hashtagsList.length >= 10) {
+        alert("해시태그는 최대 10개까지만 추가할 수 있습니다.");
+        return;
+      }
+      if (hashtagsList.includes(tag)) return;
+      setHashtagsList((prev) => [...prev, tag]);
+    };
+
+    const removeTag = (tag) => {
+      setHashtagsList((prev) => prev.filter((t) => t !== tag));
+    };
+
+    // 입력값만 반영 
+    const handleHashtagChange = (e) => {
+      const value = e.target.value.replace(/^#+/, "");
+      setHashtagsInput(value);
+    };
+
+    // 조합 시작/종료 표시
+    const handleCompositionStart = () => {
+      isComposingRef.current = true;
+    };
+    const handleCompositionEnd = (e) => {
+      isComposingRef.current = false;
+      // 종료 시 최종 문자열 반영
+      setHashtagsInput(e.target.value.replace(/^#+/, ""));
+    };
+
+    // Enter/쉼표/스페이스에서만 commit 
+    const handleHashtagKeyDown = (e) => {
+      // backspace로 마지막 태그 삭제 UX
+      if (e.key === "Backspace" && hashtagsInput === "" && hashtagsList.length) {
+        e.preventDefault();
+        setHashtagsList((prev) => prev.slice(0, -1));
+        return;
+      }
+
+      // 조합 중이면 아무 것도 하지 않음
+      if (isComposingRef.current) return;
+
+      if (e.key === "Enter" || e.key === "," || e.key === " ") {
+        e.preventDefault();
+        const val = hashtagsInput.trim();
+        if (val) addTag(val);
+        setHashtagsInput("");
+      }
+    };
+
+    // 등록 처리 
+    const handleSubmit = async () => {
+      if (submitting) return;
+
+      // 필수값 확인
+      if (!formData.category || !formData.title || !formData.brandMain || !formData.roadAddress || !formData.startDate || !formData.endDate || !formData.description) {
+        alert("필수 항목을 모두 입력해주세요.");
+        return;
+      }
 
   // useEffect(() => {
     
   // }, []);
 
-    // DTO에 맞춰 데이터 정리 
-    const payload = {
-      popupName: formData.title.trim(),
-      brandName: formData.brandMain.trim(),
-      popupLocation: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
-      popupStartDate: formData.startDate,
-      popupEndDate: formData.endDate,
-      categoryNo: formData.category, 
-      popupExplanation: formData.description.trim(),
-      hashtags: formData.hashtags.trim(),
-      reservableStatus: 1, // 기본 예약 가능
-      specialNotes: {
-      parking: selectedTags.includes("주차 가능"),
-      noparking: selectedTags.includes("주차불가"),
-      free_admission: selectedTags.includes("입장료 무료"),
-      paid_admission: selectedTags.includes("입장료 유료"),
-      pet_allowed: selectedTags.includes("반려동물"),
-      pet_not_allowed: selectedTags.includes("반려동물 입장금지"),
-      kid_zone: selectedTags.includes("키즈존"),
-      nokids_zone: selectedTags.includes("노키즈존"),
-      food_beverage_banned: selectedTags.includes("식음료 반입 금지"),
-      adult: selectedTags.includes("19세 이상"),
-      wifi: selectedTags.includes("와이파이"),
-      photography_possible: selectedTags.includes("사진촬영 가능"),
-    },
+    // DTO에 맞춰 데이터 
+      const payload = {
+        name: formData.title.trim(),
+        brandName: formData.brandMain.trim(),
+        startDate: formData.startDate,                     
+        endDate: formData.endDate,                         
+        openTime: openTime ? `${openTime}:00` : null,      
+        closeTime: closeTime ? `${closeTime}:00` : null,
+        location: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
+        reservableStatus: 1,
+        explanation: formData.description.trim(),
+        categoryName: formData.category,                   
+        //칩을 "#태그" 공백 구분 문자열로
+        hashtags: hashtagsList.length ? hashtagsList.map((t) => `#${t}`).join(" ") : "",
+        // specialNotes 등은 필요 시 이후 추가
+      };
+
+      try {
+        setSubmitting(true); 
+        const res = await API.post("/api/manager/popup-stores", payload);
+        alert(res.data || "등록이 완료되었습니다. (승인 대기)");
+        // navigate("/manager/mypopup");
+
+      } catch (err) {
+        console.error(err);
+        alert(err?.response?.data || "등록 중 오류가 발생했습니다.");
+        
+      } finally {
+        setSubmitting(false); 
+      }
     };
-
-    const token = localStorage.getItem("accessToken"); // JWT 토큰 키 확인 
-    if (!token) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-      const res = await axios.post(
-        "http://localhost:8080/api/manager/popup-stores",
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      alert(res.data || "등록이 완료되었습니다. (승인 대기)");
-      // 필요 시 페이지 이동
-      // navigate("/manager/mypopup");
-    } catch (err) {
-      console.error(err);
-      alert("등록 중 오류가 발생했습니다.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   return (
     <div className="mpr-layout">
@@ -382,24 +409,40 @@ function MyPopupReg() {
             />
 
             <h3 className="mpr-section-title">해시태그</h3>
-            <input
-                className="mpr-input"
-                type="text"
-                placeholder="#성수 #팝업 형식으로 입력해주세요"
-                value={formData.hashtags || ""}
 
-                onChange={(e) => {
-                    const inputValue = e.target.value;
-                    setFormData({
-                    ...formData,
-                    hashtags: inputValue,
-                     hashtagsArray: inputValue
-                    .split("#")
-                    .map((tag) => tag.trim())
-                    .filter((tag) => tag !== ""),
-                });
-                }}
-                />
+            <div className="mpr-hashtags">
+              <div className="mpr-chips">
+                {hashtagsList.map((tag) => (
+                  <span className="mpr-chip" key={tag}>
+                    #{tag}
+                    <button
+                      type="button"
+                      className="mpr-chip-x"
+                      onClick={() => removeTag(tag)}
+                      aria-label={`${tag} 제거`}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+
+                <input
+                    className="mpr-input mpr-chip-input"
+                    type="text"
+                    placeholder="#태그 입력 후 Enter"
+                    value={hashtagsInput}
+                    onChange={handleHashtagChange}
+                    onKeyDown={handleHashtagKeyDown}
+                    onCompositionStart={handleCompositionStart}
+                    onCompositionEnd={handleCompositionEnd}
+                  />
+
+                </div>
+
+              <p className="mpr-hint">
+                엔터/쉼표/스페이스로 태그를 추가할 수 있어요. (최대 10개)
+              </p>
+            </div>
 
             <h3 className="mpr-section-title">팝업설명/안내사항/주의사항</h3>
             <textarea

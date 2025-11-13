@@ -1,0 +1,55 @@
+/* 전체 검색 영역 */
+.mgr-search-wrap {
+  display: flex;
+  /* justify-content: flex-end; 페이지 오른쪽 정렬 */
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* 긴 검색바 (아이콘 + 인풋) */
+.mgr-searchbar-long {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%; 
+  background-color: #ffffff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  border: 1px solid #e3e6ee;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.mgr-searchbar-long.disabled {
+  background-color: #f0f0f0;
+  box-shadow: none;
+}
+
+.mgr-searchbar-long:not(.disabled):focus-within {
+  border-color: #ff5f9c;
+  box-shadow: 0 4px 10px rgba(255, 95, 156, 0.3);
+}
+
+/* 아이콘 */
+.mgr-searchbar-icon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+/* 인풋 */
+.mgr-searchbar-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 20px;
+  background: transparent;
+  color: #444;
+}
+
+.mgr-searchbar-input::placeholder {
+  color: #b0b3bb;
+}

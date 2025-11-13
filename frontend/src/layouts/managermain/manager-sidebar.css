@@ -18,26 +18,10 @@
   justify-content: flex-start;
   padding-left: 20px;
   font-family: 'pretendard', sans-serif;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 1000;
   letter-spacing: 0px;
   text-transform: uppercase;
-}
-
-.admin-side-logo2 {
-  color: black;
-  width: 230px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 20px;
-  font-family: 'pretendard', sans-serif;
-  font-size: 30px;
-  font-weight: 1000;
-  letter-spacing: 0px;
-  text-transform: uppercase;
-  padding-top: 150px;
 }
 
 /* ===== 버튼 영역 ===== */
@@ -54,19 +38,20 @@
 .admin-side-button {
   color: #929498;
   font-family: 'pretendard', sans-serif;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 500;
   height: 50px;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   cursor: pointer;
   padding-left: 20px;
   text-decoration: none; /* 밑줄 제거 */
   box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .admin-side-button:hover {
@@ -137,3 +122,19 @@
   color: #f4002d;
   font-weight: 600;
 }
+
+/* 아이콘 */
+.admin-side-button {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* 아이콘 ↔ 글자 간격 */
+  cursor: pointer;
+}
+
+.side-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
