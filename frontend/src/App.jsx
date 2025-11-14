@@ -115,9 +115,9 @@ function App() {
             <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminMain />} />
-                <Route path="members" element={<AdminMembers />} />
-                <Route path="reviews" element={<AdminReview />} />
-                <Route path="reservation" element={<AdminReservation />} />
+                {/* <Route path="members" element={<AdminMembers />} /> */}
+                {/* <Route path="reviews" element={<AdminReview />} /> */}
+                {/* <Route path="reservation" element={<AdminReservation />} /> */}
                 <Route path="manager-main" element={<AdminManagerMain />} />
                 <Route path="manager-members" element={<AdminManagerMemberList />} />
                 <Route path="manager-popup" element={<AdminManagerPopupList />} />
