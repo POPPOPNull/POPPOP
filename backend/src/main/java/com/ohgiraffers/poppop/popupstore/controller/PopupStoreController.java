@@ -8,10 +8,7 @@ import org.springframework.http.ResponseEntity;import org.springframework.securi
 import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -116,10 +113,6 @@ public class PopupStoreController {
 ////            random.add(randomNo);
 ////        }
 ////        System.out.println(random);
-
-
-
-
         return ResponseEntity.ok(popupStoreService.selectPopupStoreRandomly(random));
     }
     // 내 위치랑 가까운 팝업스토어 조회
@@ -167,5 +160,12 @@ public class PopupStoreController {
         System.out.println("popups = " + popups);
 
         return ResponseEntity.ok(popupList);
+    }
+
+    // 날짜별 팝업스토어 조회
+    @GetMapping("popup-stores/date/{date}")
+    public ResponseEntity<List<PopupStoreDTO>> selectPopupByDate(@PathVariable String date){
+        System.out.println(date);
+        return ResponseEntity.ok(popupStoreService.selectPopupByDate(date));
     }
 }

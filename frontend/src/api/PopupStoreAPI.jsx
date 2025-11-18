@@ -83,3 +83,9 @@ export function selectPopupStoreByCategory(category){
     return API.get(`${BACKEND_URL}/popup-stores/category/${category}`)
     .then(response=>response.data)
 }
+
+// 날짜별 팝업스토어 조회
+export function selectPopupByDate(date){
+    return API.get(`${BACKEND_URL}/popup-stores/date/${date}`)
+    .then(response=>response.data)
+}
