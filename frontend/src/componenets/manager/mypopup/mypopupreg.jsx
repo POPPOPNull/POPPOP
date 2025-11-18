@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-// import { requestPopupRegister } from "../../../api/PopupStoreAPI";
-import API from "../../../api/JwtAPI";
+import { registerPopup } from "../../../api/ManagerAPI";
 import ManagerSidebar from "../../../layouts/managermain/manager-sidebar";
 import "./mypopupreg.css";
 
 function MyPopupReg() {
     const navigate = useNavigate();
-  
+
+
   const [formData, setFormData] = useState({
     category: "",
     title: "",
@@ -28,6 +28,14 @@ function MyPopupReg() {
 
     const [submitting, setSubmitting] = useState(false); //중복 클릭 방지용
     const [selectedTags, setSelectedTags] = useState([]);
+
+    const handleTagToggle = (tag) => {
+      setSelectedTags((prev) =>
+        prev.includes(tag)
+          ? prev.filter((item) => item !== tag) // 선택되어 있으면 제거
+          : [...prev, tag] // 선택 안 되어 있으면 추가
+      );
+    };
 
     //해시태그
     const [hashtagsInput, setHashtagsInput] = useState("");
@@ -92,50 +100,59 @@ function MyPopupReg() {
       }
     };
 
-    // 등록 처리 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
       if (submitting) return;
 
       // 필수값 확인
-      if (!formData.category || !formData.title || !formData.brandMain || !formData.roadAddress || !formData.startDate || !formData.endDate || !formData.description) {
+      if (
+        !formData.category ||
+        !formData.title ||
+        !formData.brandMain ||
+        !formData.roadAddress ||
+        !formData.startDate ||
+        !formData.endDate ||
+        !formData.description
+      ) {
         alert("필수 항목을 모두 입력해주세요.");
         return;
       }
 
-  // useEffect(() => {
-    
-  // }, []);
-
-    // DTO에 맞춰 데이터 
+      // DTO에 맞춰 데이터
       const payload = {
         name: formData.title.trim(),
         brandName: formData.brandMain.trim(),
-        startDate: formData.startDate,                     
-        endDate: formData.endDate,                         
-        openTime: openTime ? `${openTime}:00` : null,      
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        openTime: openTime ? `${openTime}:00` : null,
         closeTime: closeTime ? `${closeTime}:00` : null,
         location: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
         reservableStatus: 1,
         explanation: formData.description.trim(),
-        categoryName: formData.category,                   
-        //칩을 "#태그" 공백 구분 문자열로
-        hashtags: hashtagsList.length ? hashtagsList.map((t) => `#${t}`).join(" ") : "",
+        categoryName: formData.category,
+        // 칩을 "#태그" 공백 구분 문자열로
+        hashtags: hashtagsList.length
+          ? hashtagsList.map((t) => `#${t}`).join(" ")
+          : "",
         // specialNotes 등은 필요 시 이후 추가
       };
 
-      try {
-        setSubmitting(true); 
-        const res = await API.post("/api/manager/popup-stores", payload);
-        alert(res.data || "등록이 완료되었습니다. (승인 대기)");
-        // navigate("/manager/mypopup");
+      setSubmitting(true);
 
-      } catch (err) {
-        console.error(err);
-        alert(err?.response?.data || "등록 중 오류가 발생했습니다.");
-        
-      } finally {
-        setSubmitting(false); 
-      }
+      registerPopup(payload)
+        .then((data) => {
+          // ManagerAPI에서 response.data 를 return 했으니 data 로 들어옴
+          alert(data || "등록이 완료되었습니다. (승인 대기)");
+          // 등록 후 이동 원하면 주석 해제
+          // navigate("/manager/mypopup");
+        })
+        .catch((err) => {
+          console.error("팝업 등록 에러:", err);
+          const msg = err?.response?.data || "등록 중 오류가 발생했습니다.";
+          alert(msg);
+        })
+        .finally(() => {
+          setSubmitting(false);
+        });
     };
 
   return (
