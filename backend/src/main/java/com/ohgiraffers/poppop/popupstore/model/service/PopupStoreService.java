@@ -81,6 +81,7 @@ public class PopupStoreService {
         popupStoreMapper.insertPopupStore(dto);
     }
 
+
     public List<PopupStoreDTO> selectPopupStoreRandomlyByDate(ArrayList<Integer> random, Object date) {
         return popupStoreMapper.selectPopupStoreRandomlyByDate(random,date);
     }
@@ -89,4 +90,5 @@ public class PopupStoreService {
     public List<PopupStoreDTO> selectPopupByDate(String date) {
         return popupStoreMapper.selectPopupByDate(date);
     }
+
 }
