@@ -41,7 +41,7 @@ function TopComp (){
             <div className={TCSytle.layout}>
                 <Swiper
                     className={TCSytle.swiper}
-                    spaceBetween={-100}
+                    spaceBetween={-50}
                     slidesPerView={3}
                     loop={true}
                     modules={[Autoplay,EffectCreative,Pagination]} 

@@ -7,12 +7,23 @@ import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
 import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
 import ReviewView from "../../componenets/pupupinfo/ReviewView";
 
+function Poster(){
+    
+
+}
+
 
 
 
 function Popups(){
 
     const {popupNo} = useParams();
+
+    const popupURL = `/public/poster/poster_${popupNo}.png`
+    console.log("popupUrl:",popupURL)
+
+    
+    
 
     const [popup, setPopup] = useState({});
 
@@ -23,6 +34,7 @@ function Popups(){
             setPopup(data)
         })    
         console.log(popup.location)
+        
     },[])
 
 
@@ -37,7 +49,7 @@ function Popups(){
                 <div className="user-main">
                     <div className="blank"></div>
                     <div className={PPStyle.poster}>
-                        <img src="\public\images\plant.png" alt="" />
+                        <img src={popupURL} alt={popupNo} />
                     </div>
                     <div className={PPStyle.imagebuttonlayout}>
                         <Link to={`/user/${popupNo}`} className={PPStyle.imagebuttons}>

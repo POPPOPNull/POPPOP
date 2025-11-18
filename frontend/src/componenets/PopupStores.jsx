@@ -7,7 +7,7 @@ import { useDrag, useDrop } from "react-dnd"
 
 function PopupStores({popupstore,setIsDrag,posterNo}){
 
-        const imageUrl =  `public/poster/poster_${posterNo}.png`
+        const imageUrl =  `/public/poster/poster_${posterNo}.png`
 
         const [{isDragging},drag,preview] = useDrag({
             type:'popup',
@@ -36,8 +36,7 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
                 <Link to={`/user/${popupstore.no}`}>
                     <div className={PSStyle.layout} ref={drag}>
                         <div className={PSStyle.image}>
-                            <img src={imageUrl} alt="" />
-                            {popupstore.no}
+                            <img src={imageUrl} alt={popupstore.no} className={PSStyle.img}/>
                         </div>
                             <div className={PSStyle.explain}>
                                 <div>{popupstore.name}</div>
