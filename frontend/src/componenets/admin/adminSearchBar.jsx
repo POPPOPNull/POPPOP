@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SearchContext } from "./searchProvider";
+import { SearchContext } from "./SearchProvider";
 
 function AdminSearchBar(){    
 

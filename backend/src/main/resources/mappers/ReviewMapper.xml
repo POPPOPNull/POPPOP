@@ -9,6 +9,7 @@
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
         <result property="reviewDate" column="review_date"/>
+        <result property="popupName" column="popup_name"/>
 
     </resultMap>
 

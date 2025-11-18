@@ -3,6 +3,41 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.admin.model.dao.KpiMapper">
+<!--    MonthlyVisitor ResultMap-->
+<resultMap id="monthlyVisitorStatsResultMap" type="com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO">
+    <result property="visitYear" column="visit_year"/>
+    <result property="visitMonth" column="visit_month"/>
+    <result property="visitorCount" column="visitor_count"/>
+    <result property="signupCount" column="signup_count"/>
+</resultMap>
+<!--    월별 회원 가입률-->
+    <select id="selectMonthlyVisitorStats" resultMap="monthlyVisitorStatsResultMap">
+        select
+               year(time_stamp) as visit_year,
+               month(time_stamp) as visit_month,
+               count(distinct session_id) as visitor_count,
+               count(case when event_type = '회원 가입' then 1 end) as signup_count
+          from user_event_data
+         group by year(time_stamp), month(time_stamp)
+         order by visit_year asc, visit_month asc
+    </select>
+
+<!--    YearlyVisitor ResultMap-->
+<resultMap id="yearlyVisitorStatsResultMap" type="com.ohgiraffers.poppop.admin.model.dto.YearlyVisitorStatsDTO">
+    <result property="visitYear" column="visit_year"/>
+    <result property="visitorCount" column="visitor_count"/>
+    <result property="signupCount" column="signup_count"/>
+</resultMap>
+<!--    연별 회원 가입률-->
+    <select id="selectYearlyVisitorStats" resultMap="yearlyVisitorStatsResultMap">
+        select
+               year(time_stamp) as visit_year,
+               count(distinct session_id) as visitor_count,
+               count(case when event_type = '회원 가입' then 1 end) as signup_count
+          from user_event_data
+         group by year(time_stamp)
+         order by visit_year asc
+    </select>
 
 <!--    전체 회원 수-->
     <select id="selectTotalMembers" resultType="long">

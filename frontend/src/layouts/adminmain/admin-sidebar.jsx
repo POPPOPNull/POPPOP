@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./admin-sidebar.css";
+import "./Admin-sidebar.css";
 
 const poppopMenus = [
     { name: "메인", icon: "/public/icons/home.png", subMenus: [
@@ -11,7 +11,7 @@ const poppopMenus = [
 
     { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [
         {name: "사용자 회원 목록", path: "/admin/members"},
-        {naem: "가맹점 회원 목록", path: "/admin/manager-members"}
+        {name: "가맹점 회원 목록", path: "/admin/manager-members"}
         ]
     },
 
