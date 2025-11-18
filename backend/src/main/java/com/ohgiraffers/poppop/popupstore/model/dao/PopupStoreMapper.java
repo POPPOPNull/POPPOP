@@ -37,4 +37,7 @@ public interface PopupStoreMapper {
 
     int insertPopupStore(PopupStoreDTO popupStoreDTO);
 
+    List<PopupStoreDTO> selectPopupStoreRandomlyByDate(ArrayList<Integer> random, Object date);
+
+    List<PopupStoreDTO> selectPopupByDate(String date);
 }

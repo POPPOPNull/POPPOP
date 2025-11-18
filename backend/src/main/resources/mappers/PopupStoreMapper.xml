@@ -256,6 +256,83 @@
         )
     </select>
 
+    <!--날짜별 팝업 조회-->
+    <select id="selectPopupByDate" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+
+        latitude,
+        longitude,
+
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+
+        category_name,
+        advance_reservation,
+        homepage_link,
+        capacity,
+        hashtag_name
+        from popup_store
+        where popup_start_date &lt; #{date}
+        and popup_end_date &gt; #{date}
+    </select>
+
+
+    <!-- 날짜별 팝업 랜덤 조회-->
+    <select id="selectPopupStoreRandomlyByDate" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+
+        latitude,
+        longitude,
+
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+
+        category_name,
+        advance_reservation,
+        homepage_link,
+        capacity,
+        hashtag_name
+
+        from popup_store
+        where popup_no in
+        <foreach item="popupNo" collection="random" open="(" separator="," close=")">
+            #{popupNo}
+        </foreach>
+        and popup_start_date &lt; concat(#{year},"-",#{month},"-",#{date})
+        and popup_end_date &gt; concat(#{year},"-",#{month},"-",#{date})
+        order by field(popup_no,
+        <foreach item="popupNo" collection="random" open="" separator="," close="">
+            #{popupNo}
+        </foreach>
+        )
+    </select>
+
+
+
     <!--가까운 팝업 조회-->
 <!--    위도 경도값 넣어서 계산 db 수정 후 작업-->
 <!--    <select id="selectPopupStoreNear" resultMap="popupStoreResultMap">-->
