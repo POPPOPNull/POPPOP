@@ -1,7 +1,7 @@
 import ListContainer from "./ListContainer";
 import { selectAllReservation } from "../../api/adminAPI";
 import { useEffect, useContext } from "react";
-import { SearchContext } from "./searchProvider";
+import { SearchContext } from "./SearchProvider";
 
 function AdminReservationList () {
 

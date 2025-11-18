@@ -24,8 +24,7 @@ import InsertReview from "./pages/user/InsertReview";
 import AdminLayout from "./pages/admin/adminLayout";
 import AdminMain from "./layouts/adminmain/admin-main";
 import UserSearch from "./pages/user/UserSearch";
-import AdminManagerMain from "./layouts/adminmain/admin-manager-main";
-import AdminManagerMemberList from "./componenets/admin/adminManagerMemberList";
+import AdminManagerMemberList from "./componenets/admin/AdminManagerMemberList.jsx";
 import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
 import AdminManagerReservationList from "./componenets/admin/adminManagerReservationList";
 import AdminManagerReservationDetails from "./componenets/admin/adminManagerReservationDetails";
@@ -115,10 +114,9 @@ function App() {
             <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminMain />} />
-                {/* <Route path="members" element={<AdminMembers />} /> */}
-                {/* <Route path="reviews" element={<AdminReview />} /> */}
-                {/* <Route path="reservation" element={<AdminReservation />} /> */}
-                <Route path="manager-main" element={<AdminManagerMain />} />
+                <Route path="members" element={<AdminMemberList />} />
+                <Route path="reviews" element={<AdminReviewList />} />
+                <Route path="reservation" element={<AdminReservationList />} />
                 <Route path="manager-members" element={<AdminManagerMemberList />} />
                 <Route path="manager-popup" element={<AdminManagerPopupList />} />
                 <Route path="manager-popup/:popupNo" element={<AdminManagerPopupDetails />} />

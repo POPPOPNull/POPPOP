@@ -1,4 +1,4 @@
-import './pagination.css';
+import './Pagination.css';
 
 function Pagination({ totalPages, currentPage, paginate }) {
     const pageNumbers = [];

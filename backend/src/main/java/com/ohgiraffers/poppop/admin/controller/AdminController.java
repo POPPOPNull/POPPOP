@@ -1,7 +1,9 @@
 package com.ohgiraffers.poppop.admin.controller;
 
 
+import com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO;
 import com.ohgiraffers.poppop.admin.model.dto.UserKpiDTO;
+import com.ohgiraffers.poppop.admin.model.dto.YearlyVisitorStatsDTO;
 import com.ohgiraffers.poppop.admin.model.service.AdminService;
 import com.ohgiraffers.poppop.admin.model.service.KpiService;
 
@@ -57,43 +59,37 @@ public class AdminController {
     // 전체 회원(user) 조회
     @GetMapping("/members")
     public ResponseEntity<List<MemberDTO>> selectAllMembers() {
-        List<MemberDTO> memberList = adminService.selectAllMembers();
-        return ResponseEntity.ok(memberList);
+        return ResponseEntity.ok(adminService.selectAllMembers());
     }
 
     // 전체 리뷰 조회
     @GetMapping("/reviews")
     public ResponseEntity<List<ReviewDTO>> selectAllReviews() {
-        List<ReviewDTO> reviews = reviewService.selectAllReviews();
-        return new ResponseEntity<>(reviews, HttpStatus.OK);
+        return ResponseEntity.ok(reviewService.selectAllReviews());
     }
 
     // 전체 예약(user) 조회
     @GetMapping("/reservation")
     public ResponseEntity<List<ReservationDetailsDTO>> selectAllReservation() {
-        List<ReservationDetailsDTO> reservation = reservationService.selectAllReservation();
-        return new ResponseEntity<>(reservation, HttpStatus.OK);
+        return ResponseEntity.ok(reservationService.selectAllReservation());
     }
 
     // 전체 회원(manager) 조회
     @GetMapping("/manager-members")
     public ResponseEntity<List<MemberDTO>> selectAllManagers() {
-        List<MemberDTO> managerList = adminService.selectAllManagers();
-        return ResponseEntity.ok(managerList);
+        return ResponseEntity.ok(adminService.selectAllManagers());
     }
 
     // 전체 팝업 스토어 조회
     @GetMapping("/manager-popup")
     public ResponseEntity<List<PopupStoreDTO>> selectAllPopupStore() {
-        List<PopupStoreDTO> popupList = popupStoreService.selectAllPopupStore();
-        return ResponseEntity.ok(popupList);
+        return ResponseEntity.ok(popupStoreService.selectAllPopupStore());
     }
 
     // 팝업 스토어 상세 조회
     @GetMapping("/manager-popup/{popupNo}")
     public ResponseEntity<PopupStoreDTO> selectPopupStoreDetails(@PathVariable int popupNo) {
-        PopupStoreDTO popup = popupStoreService.selectPopupStoreDetails(popupNo);
-        return ResponseEntity.ok(popup);
+        return ResponseEntity.ok(popupStoreService.selectPopupStoreDetails(popupNo));
     }
 
     // 팝업 스토어 승인 처리
@@ -114,16 +110,13 @@ public class AdminController {
     // 팝업별 예약 조회(집계)
     @GetMapping("/manager-reservation")
     public ResponseEntity<List<ReservationSummaryDTO>> selectReservationSummary() {
-        List<ReservationSummaryDTO> reservationSummary = reservationService.selectReservationSummary();
-        return ResponseEntity.ok(reservationSummary);
+        return ResponseEntity.ok(reservationService.selectReservationSummary());
     }
 
     // 팝업 스토어 별 예약 내역 조회
     @GetMapping("/manager-reservation/{popupNo}")
     public ResponseEntity<List<ReservationDetailsDTO>> selectReservationDetailsByPopup(@PathVariable int popupNo) {
-        List<ReservationDetailsDTO> reservationDetails =
-                reservationService.selectReservationDetailsByPopup(popupNo);
-        return ResponseEntity.ok(reservationDetails);
+        return ResponseEntity.ok(reservationService.selectReservationDetailsByPopup(popupNo));
     }
 
     // 예약 취소
@@ -137,12 +130,10 @@ public class AdminController {
         }
     }
 
-
     // User 대시보드 KPI 데이터 조회
     @GetMapping("/kpi/user")
     public ResponseEntity<UserKpiDTO> selectUserKpiData() {
-        UserKpiDTO userKpi = kpiService.selectUserKpiData();
-        return ResponseEntity.ok(userKpi);
+        return ResponseEntity.ok(kpiService.selectUserKpiData());
     }
 
     // Admin 전용 로그인 엔드포인트
@@ -158,5 +149,16 @@ public class AdminController {
         // JWT의 ROLE이 'ADMIN'인 경우에만 접근 가능 (SecurityConfig에서 설정)
         return ResponseEntity.ok("Admin 메인페이지");
 
+    }
+
+    // User 대시보드 꺾은 선 차트 회원가입률 조회
+    @GetMapping("/kpi/monthly-visitor-stats")
+    public ResponseEntity<List<MonthlyVisitorStatsDTO>> selectMonthlyVisitorStats() {
+        return ResponseEntity.ok(kpiService.selectMonthlyVisitorStats());
+    }
+
+    @GetMapping("/kpi/yearly-visitor-stats")
+    public ResponseEntity<List<YearlyVisitorStatsDTO>> selectYearlyVisitorStats() {
+        return ResponseEntity.ok(kpiService.selectYearlyVisitorStats());
     }
 }

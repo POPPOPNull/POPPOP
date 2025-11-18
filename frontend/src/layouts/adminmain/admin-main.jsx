@@ -1,4 +1,4 @@
-import "./admin-main.css"
+import "./Admin-main.css"
 import AdminChart from "../../componenets/admin/adminChart"
 import AdminLineChart from "../../componenets/admin/adminLineChart"
 import AdminBarChart from "../../componenets/admin/adminBarChart"

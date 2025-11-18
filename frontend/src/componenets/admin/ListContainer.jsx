@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, cloneElement } from "react";
-import { SearchContext } from "./searchProvider";
+import { SearchContext } from "./SearchProvider";
 import Pagination from "./pagination";
 
 // 모든 데이터를 받아서 리스트로 뿌려주는 컴포넌트
