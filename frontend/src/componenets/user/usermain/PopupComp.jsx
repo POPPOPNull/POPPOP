@@ -8,7 +8,7 @@ import { HTML5Backend } from "react-dnd-html5-backend"
 
 function PopupComp({popupstore,posterNo}){
 
-    const posterUrl = `public/poster/poster_${posterNo}.png`
+    const posterUrl = `/public/poster/poster_${posterNo}.png`
 
     const [{isDragging},drag,preview] = useDrag({
             type:'popup',
@@ -38,16 +38,20 @@ function PopupComp({popupstore,posterNo}){
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`}>
+                <Link to={`/user/${popupstore.no}`} onClick={()=>{location.href(`/user/${popupstore.no}`)}}>
                 <div className={PSStyle.back}>
-                    <img src={posterUrl} alt="" className={PSStyle.img}/>
-                    {/* <div className={PSStyle.layout} ref={drag}>
+                    <img src={posterUrl} alt={posterNo} />
+
+
+                    <div className={PSStyle.layout} ref={drag} >
                         <div className={PSStyle.explain}>
                             <div className={PSStyle.name}>{popupstore.name}</div>
                             <div>{popupstore.location}</div>
                             <div>{popupstore.startDate} ~ {popupstore.endDate}</div>
                         </div>
-                    </div> */}
+                    </div>
+
+
                 </div>
                 </Link>
             
