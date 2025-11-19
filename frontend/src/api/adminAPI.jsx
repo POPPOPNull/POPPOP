@@ -124,3 +124,23 @@ export function selectUserKpiData() {
         throw error;
     });
 }
+
+// user 대시보드 꺾은 선 차트 월별 회원가입률 조회
+export function selectMonthlyVisitorStats() {
+    return API.get(`${BACKEND_URL}/admin/kpi/monthly-visitor-stats`)
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error("API call error in selectMonthlyVisitorStats");
+        throw error;
+    });
+}
+
+// user 대시보드 꺾은 선 차트 월별 활동회원 비율 조회
+export function selectMonthlyMemberActivityStats() {
+    return API.get(`${BACKEND_URL}/admin/kpi/monthly-member-activity`)
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error("API call error in selectMonthlyMemberActivityStats", error);
+        throw error;
+    });
+}
