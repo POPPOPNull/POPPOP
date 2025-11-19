@@ -10,8 +10,6 @@
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
         <result property="popupName" column="popup_name"/>
-        <result property="name" column="name"/>
-        <result property="phone" column="phone"/>
         <result property="reservationDate" column="reservation_date"/>
         <result property="reservationTime" column="reservation_time"/>
     </resultMap>
@@ -57,8 +55,6 @@
         select
                r.reservation_no,
                r.id,
-               m.name,
-               m.phone,
                r.reservation_status,
                r.reservation_personnel,
                r.reservation_date,
@@ -77,4 +73,25 @@
           from reservation
          where reservation_no = #{reservationNo}
     </delete>
+
+    <insert id="insertReservation" parameterType="com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO">
+        INSERT INTO reservation
+        (
+        popup_no,
+        id,
+        reservation_personnel,
+        reservation_date,
+        reservation_time,
+        reservation_status
+        )
+        VALUES
+        (
+        #{popupNo},
+        #{memberId},
+        #{reservationPersonnel},
+        #{reservationDate},
+        #{reservationTime},
+        '예약완료'
+        )
+    </insert>
 </mapper>

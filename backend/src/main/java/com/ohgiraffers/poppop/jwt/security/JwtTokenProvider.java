@@ -32,7 +32,7 @@ public class JwtTokenProvider {
         );
     }
 
-    private long accessTokenValidity = 1000 * 30;
+    private long accessTokenValidity = 1000 * 60 * 30; //30분
 
     public String createToken(String principalId, String principalType, String role) {
 

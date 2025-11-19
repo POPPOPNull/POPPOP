@@ -1,5 +1,7 @@
 package com.ohgiraffers.poppop.reservation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,10 +13,12 @@ public class ReservationDetailsDTO {
     private int popupNo;
     private String memberId;
     private String popupName;
-    private String phone;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservationDate;
+
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime reservationTime;
-    private String name;
 
     public ReservationDetailsDTO() {}
 
@@ -24,20 +28,16 @@ public class ReservationDetailsDTO {
                                  int popupNo,
                                  String memberId,
                                  String popupName,
-                                 String phone,
                                  LocalDate reservationDate,
-                                 LocalTime reservationTime,
-                                 String name) {
+                                 LocalTime reservationTime) {
         this.reservationNo = reservationNo;
         this.reservationStatus = reservationStatus;
         this.reservationPersonnel = reservationPersonnel;
         this.popupNo = popupNo;
         this.memberId = memberId;
         this.popupName = popupName;
-        this.phone = phone;
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
-        this.name = name;
     }
 
     public int getReservationNo() {
@@ -88,14 +88,6 @@ public class ReservationDetailsDTO {
         this.popupName = popupName;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public LocalDate getReservationDate() {
         return reservationDate;
     }
@@ -112,13 +104,6 @@ public class ReservationDetailsDTO {
         this.reservationTime = reservationTime;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public String toString() {
@@ -129,10 +114,8 @@ public class ReservationDetailsDTO {
                 ", popupNo=" + popupNo +
                 ", memberId='" + memberId + '\'' +
                 ", popupName='" + popupName + '\'' +
-                ", phone='" + phone + '\'' +
                 ", reservationDate=" + reservationDate +
                 ", reservationTime=" + reservationTime +
-                ", name='" + name + '\'' +
                 '}';
     }
 }
