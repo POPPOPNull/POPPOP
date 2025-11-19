@@ -8,6 +8,7 @@ import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
 import PopupRegister from "./pages/manager/popup-register";
 import ReservationPage from "./pages/manager/reservations";
+import MyPopupLayout from "./pages/manager/MyPopupLayout";
 import MyInformation from "./pages/user/MyInfo"
 import MyReview from "./pages/user/MyReviews"
 import MyReservation from "./pages/user/MyReservations"
@@ -99,9 +100,15 @@ function App() {
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
               <Route path="/manager/dashboard" element={<Dashboard />} />
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
-              <Route path="/manager/mypopupdet" element={<MypopupdetPage />} />
+              {/* 선택된 팝업 전용 레이아웃 */}
+              <Route path="/manager/mypopup/:popupNo" element={<MyPopupLayout />}>
+                <Route index element={<Dashboard />} />                {/* 기본 탭 */}
+                <Route path="detail" element={<MypopupdetPage />} />   {/* 상세 */}
+                <Route path="reservations" element={<ReservationPage />} /> {/* 예약 */}
+              </Route>
+              {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
               <Route path="/manager/popup-register" element={<PopupRegister />} />
-              <Route path="/manager/reservations" element={<ReservationPage />} />
+              {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
 
             <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
