@@ -108,7 +108,7 @@ public class JwtTokenProvider {
             System.out.println("Invalid JWT signature.");
         } catch (ExpiredJwtException e) {
             // 만료된 JWT 토큰
-            System.out.println("Expired JWT token.");
+            System.out.println("만료된 JWT token.");
         } catch (UnsupportedJwtException e) {
             // 지원되지 않는 JWT 토큰
             System.out.println("Unsupported JWT token.");

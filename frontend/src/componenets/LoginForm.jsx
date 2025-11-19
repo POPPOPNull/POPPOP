@@ -87,7 +87,11 @@ function LoginComponent() {
                         <span>|</span>
                         <Link to="/user/signup" className="loginhelp"> 회원가입</Link>
                     </div>
-                        <Link to="/manager/signup" className="managerJoin">Biz 회원가입</Link>
+                    <div className="managerJoin">
+                        <Link to="/manager" className="managerLink">Biz 메인 </Link>
+                        <span>|</span>
+                        <Link to="/manager/signup" className="managerLink"> Biz 회원가입</Link>
+                    </div>
                     <br/>
                     <button className="btnlogin" type="submit">로그인</button>
                 </form>

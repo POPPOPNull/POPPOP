@@ -21,11 +21,11 @@ public class RefreshTokenService {
 
     @Transactional
     public RefreshToken createAndSave(String principalId, String principalType) {
-        // 토큰 생성 (충분히 랜덤하게)
+        // 토큰 생성
         String token = UUID.randomUUID().toString() + "-" + UUID.randomUUID().toString();
         LocalDateTime expiry = LocalDateTime.now().plusSeconds(refreshValiditySeconds);
 
-        // 기존 토큰 제거 (한 계정 당 하나만 허용할 경우)
+        // 기존 토큰 제거
         refreshTokenMapper.deleteByPrincipal(principalId, principalType);
 
         RefreshToken r = new RefreshToken();
@@ -53,6 +53,11 @@ public class RefreshTokenService {
     }
 
     public boolean isExpired(RefreshToken refreshToken) {
+
+        System.out.println("expiryDate = " + refreshToken.getExpiryDate());
+        System.out.println("now        = " + LocalDateTime.now());
+        System.out.println("isExpired? = " + refreshToken.getExpiryDate().isBefore(LocalDateTime.now()));
+
         return refreshToken.getExpiryDate().isBefore(LocalDateTime.now());
     }
 }

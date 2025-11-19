@@ -113,10 +113,10 @@ public class AuthController {
                 .body(new TokenResponse(accessToken));
 
     } catch (RuntimeException e) {
-            // 🔴 로그인 실패 (아이디/비번 틀림 등)
+            // 로그인 실패
             return ResponseEntity.status(401).body(e.getMessage());
         } catch (Exception e) {
-            // 🔴 그 외 예기치 않은 서버 내부 에러
+            // 서버 내부 에러
             e.printStackTrace();
             return ResponseEntity.status(500).body("Internal server error");
         }
@@ -154,10 +154,10 @@ public class AuthController {
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(new TokenResponse(accessToken));
     } catch (RuntimeException e) {
-            // 🔴 로그인 실패 (아이디/비번 틀림 등)
+            // 로그인 실패
             return ResponseEntity.status(401).body(e.getMessage());
         } catch (Exception e) {
-            // 🔴 그 외 예기치 않은 서버 내부 에러
+            // 서버 내부 에러
             e.printStackTrace();
             return ResponseEntity.status(500).body("Internal server error");
         }

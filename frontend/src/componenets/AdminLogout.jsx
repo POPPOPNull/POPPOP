@@ -1,18 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/UseAuth.jsx';
 
-function Logout() {
+function AdminLogout() {
     
     const { logout } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-    
-    alert("로그아웃되었습니다.");
 
-    logout();
+        logout();
 
-  };
+        navigate('/admin/login');
+    };
 
     return (
         <>
@@ -34,4 +33,4 @@ function Logout() {
     )
 }
 
-export default Logout;
+export default AdminLogout;

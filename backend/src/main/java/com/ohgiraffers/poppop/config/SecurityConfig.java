@@ -44,7 +44,6 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-                        // ✅ 인증 없이 접근 가능한 URL들
                         .requestMatchers(
                                 "/auth/login",
                                 "/auth/admin/login",
@@ -58,7 +57,6 @@ public class SecurityConfig {
                                 "/popup-stores/**"
                         ).permitAll()
 
-                        // ✅ 권한 필요한 URL들
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/user/**").hasRole("USER")
@@ -71,7 +69,6 @@ public class SecurityConfig {
 //                )
                 .cors(cors -> {});
 
-        // ✅ JwtAuthenticationFilter는 나중에 다시 붙일 거라면 여기
         http.addFilterBefore(
                 new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),
                 UsernamePasswordAuthenticationFilter.class

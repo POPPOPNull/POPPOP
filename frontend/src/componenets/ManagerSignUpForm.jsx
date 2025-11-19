@@ -2,6 +2,7 @@ import "./signupform.css"
 import React from 'react';
 import { useForm } from '../hooks/UseForm'; 
 import { useNavigate } from "react-router-dom";
+import API from '../api/JwtAPI';
 
 const initialUserValues = {
   id: '',
@@ -32,24 +33,9 @@ function ManagerSignUpComponent() {
 
     setIsSubmitting(true);
 
-    const API_BASE_URL = 'http://localhost:8080'; 
-    const ENDPOINT = '/auth/manager/join';
-
     try {
       
-      const response = await fetch(`${API_BASE_URL}${ENDPOINT}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json(); 
-        throw new Error(errorData.message || '회원가입에 실패했습니다.');
-      }
-
-      // 성공
-      await new Promise(resolve => setTimeout(resolve, 800)); // 0.8초 딜레이
+      const response = await API.post('/auth/manager/join', values);
       
       console.log('manager 회원가입 정보:', values);
       alert('회원가입이 성공적으로 완료되었습니다.');
