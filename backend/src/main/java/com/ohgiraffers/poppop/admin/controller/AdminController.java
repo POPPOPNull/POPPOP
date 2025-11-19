@@ -1,6 +1,7 @@
 package com.ohgiraffers.poppop.admin.controller;
 
 
+import com.ohgiraffers.poppop.admin.model.dto.MonthlyMemberActivityDTO;
 import com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO;
 import com.ohgiraffers.poppop.admin.model.dto.UserKpiDTO;
 import com.ohgiraffers.poppop.admin.model.dto.YearlyVisitorStatsDTO;
@@ -160,5 +161,11 @@ public class AdminController {
     @GetMapping("/kpi/yearly-visitor-stats")
     public ResponseEntity<List<YearlyVisitorStatsDTO>> selectYearlyVisitorStats() {
         return ResponseEntity.ok(kpiService.selectYearlyVisitorStats());
+    }
+
+    // User 대시보드 꺾은 선 차트 활동회원 비율 조회
+    @GetMapping("/kpi/monthly-member-activity")
+    public ResponseEntity<List<MonthlyMemberActivityDTO>> selectMontlyMemberActivityStats() {
+        return ResponseEntity.ok(kpiService.selectMonthlyMemberActivityStats());
     }
 }

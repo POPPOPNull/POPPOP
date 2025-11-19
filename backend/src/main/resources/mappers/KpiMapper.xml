@@ -39,6 +39,52 @@
          order by visit_year asc
     </select>
 
+<!--    MonthlyMemberActivityStats ResultMap-->
+<resultMap id="monthlyMemberActivityStatsResultMap" type="com.ohgiraffers.poppop.admin.model.dto.MonthlyMemberActivityDTO">
+    <result property="visitYear" column="visit_year"/>
+    <result property="visitMonth" column="visit_month"/>
+    <result property="activeMembers" column="active_members"/>
+    <result property="totalMembersAtEndOfMonth" column="total_members_at_end_of_month"/>
+</resultMap>
+<!--    월별 활동 회원 수-->
+    <select id="selectMonthlyActiveMembers" resultMap="monthlyMemberActivityStatsResultMap">
+        select
+               year(e.time_stamp) as visit_year,
+               month(e.time_stamp) as visit_month,
+               count(distinct s.id) as active_members
+          from session_info s
+          join user_event_data e on s.session_id = e.session_id
+         where s.id is not null
+         group by year(e.time_stamp), month(e.time_stamp)
+         order by visit_year asc, visit_month asc
+    </select>
+<!--    월별 누적 총 회원 수(해당 월 말 기준)-->
+    <select id="selectMonthlyTotalMembersCumulative" resultMap="monthlyMemberActivityStatsResultMap">
+        <![CDATA[
+        with recursive monthseries as (
+            select
+                   date_format(min(signup_date), '%Y-%m-01') as month_start,
+                   last_day(min(signup_date)) as month_end
+              from member
+             union all
+            select
+                   date_add(month_start, interval 1 month),
+                   last_day(date_add(month_start, interval 1 month))
+              from monthseries
+             where month_start < date_format(curdate(), '%Y-%m-01')
+        )
+        select
+               year(ms.month_start) as visit_year,
+               month(ms.month_start) as visit_month,
+               0 as active_members,
+               count(m.id) as total_members_at_end_of_month
+          from monthseries ms
+          left join member m on m.signup_date <= ms.month_end
+         group by year(ms.month_start), month(ms.month_start)
+         order by visit_year asc, visit_month asc
+        ]]>
+    </select>
+
 <!--    전체 회원 수-->
     <select id="selectTotalMembers" resultType="long">
         select count(*) from member
