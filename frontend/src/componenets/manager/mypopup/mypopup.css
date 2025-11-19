@@ -113,3 +113,63 @@
   margin-top:12px; 
   font-weight:700;
 }
+
+/* ====== 팝업 상세  ====== */
+.mp-popup-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text, #1a1a1a);
+}
+
+.mp-popup-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.mp-popup-value {
+  font-weight: 700;
+  color: #000;
+}
+
+
+.btn-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #3a63f3;            
+  background: #ffffff;
+  border: 1px solid #d4dcf8;
+  border-radius: 999px;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+
+}
+
+.btn-detail:hover {
+  background: #f3f6ff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-detail:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+
+.btn-detail:hover {
+  background: #e5e8ef;
+}
+
+.btn-detail:active {
+  background: #d9dde6;
+}
+

@@ -2,7 +2,7 @@
 .mypopupdet-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   width: 100%;
   background-color: #f5f6f8;
   min-height: 100vh;
@@ -11,27 +11,20 @@
   font-family: "Pretendard", sans-serif;
 }
 
+.mypopupdet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;     
+}
+
+.mypopupdet-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
 /* ====== 헤더 ====== */
-
-.mypopupdet-search-input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 200px;
-  font-size: 14px;
-}
-
-.mypopupdet-search-btn {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
 .mypopupdet-search-btn:hover {
   background-color: #555;
 }
@@ -138,19 +131,63 @@
 /* 검색바 — 제목 바로 아래 */
 .mypopupdet-search-area {
   width: 100%;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
-/* 전체 예약자 수 — 검색바 아래, 오른쪽 */
 .mypopupdet-total-wrap {
   width: 100%;
   text-align: right;
   margin-bottom: 5px;
-  font-size: 20px;
+  font-size: 16px;
   color: #555;
 }
 
-.mypopupdet-total-wrap strong {
-  color: #000;
-  font-weight: 700;
+/* 상단: manager + 탭 줄 */
+.mypopupdet-toprow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
+
+.mypopupdet-top-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #555;
+}
+
+.mypopupdet-selected strong {
+  font-weight: 700;
+  color: #000;
+}
+
+/* 탭 영역 */
+.mypopupdet-tabs {
+  display: flex;
+  gap: 12px;             
+  margin-bottom: 16px;
+}
+
+.mypopupdet-tab-item {
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #666;
+  background-color: #f5f6f8;
+  transition: 0.15s ease-in-out;
+}
+
+.mypopupdet-tab-item:hover {
+  background-color: #e9edf5;
+}
+
+.mypopupdet-tab-item.active {
+  background-color: #111;
+  color: #fff;
+  font-weight: 700; 
+}
+

@@ -60,60 +60,16 @@ function ManagerSidebar() {
           팝업스토어 등록
         </NavLink>
 
-        <div
-          className={
-            "admin-side-button" + (isMyPopupOpen ? " active" : "")
+        <NavLink
+          to="/manager/mypopup"  // 나의 팝업스토어 메인 페이지
+          className={({ isActive }) =>
+            "admin-side-button" + (isActive ? " active" : "")
           }
-          onClick={() => setIsMyPopupOpen((prev) => !prev)}
         >
           <img src="/icons/shop.png" alt="shop" className="side-icon" />
           나의 팝업스토어
-          <span
-            className="arrow-icon"
-            style={{
-              transform: isMyPopupOpen ? "rotate(90deg)" : "rotate(0deg)",
-            }}
-          >
-            &gt;
-          </span>
-        </div>
+        </NavLink>
 
-        {isMyPopupOpen && (
-          <div className="admin-submenu-layout">
-            <NavLink
-              to="/manager/dashboard"
-              className={({ isActive }) =>
-                "admin-submenu-item" + (isActive ? " active" : "")
-              }
-            >
-              대시보드
-            </NavLink>
-            <NavLink
-                to="/manager/reservations"
-                className={({ isActive }) =>
-                "admin-submenu-item" + (isActive ? " active" : "")
-                }
-            >
-                예약 내역
-            </NavLink>
-            <NavLink
-              to="/manager/mypopup"
-              className={({ isActive }) =>
-                "admin-submenu-item" + (isActive ? " active" : "")
-              }
-            >
-              내 팝업 스토어
-            </NavLink>
-              <NavLink
-                to="/manager/mypopupdet"
-                className={({ isActive }) =>
-                "admin-submenu-item" + (isActive ? " active" : "")
-                }
-            >
-            내 팝업스토어 상세보기
-            </NavLink>
-          </div>
-        )}
       </div>
     </div>
   );

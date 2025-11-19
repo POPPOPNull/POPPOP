@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./mypopupdet.css";
 import ManagerSearchBar from "../ManagerSearchBar";
+import { NavLink, useParams } from "react-router-dom";
 
 function MyPopupDet() {
 
@@ -10,6 +11,8 @@ function MyPopupDet() {
   const [reservations, setReservations] = useState([]);
 
   const [keyword, setKeyword] = useState("");
+
+  const { popupNo } = useParams();
 
   useEffect(() => {
 
@@ -38,7 +41,50 @@ function MyPopupDet() {
     <div className="mypopupdet-wrapper">
     
       <div className="mypopupdet-header">
-    
+
+      <div className="mypopupdet-total-wrap">
+        전체 예약자 수 <strong>{popupInfo ? popupInfo.totalCount : 0}명</strong>
+      </div>
+      </div>
+
+      <div className="mypopupdet-toprow">
+        <div className="mypopupdet-top-left">
+          <span className="badge">manager01</span>
+          <span className="mypopupdet-selected">
+            선택된 팝업 <strong>#{popupNo}</strong>
+          </span>
+        </div>
+
+        <div className="mypopupdet-tabs">
+          <NavLink
+            to={`/manager/mypopup/${popupNo}/detail`}
+            className={({ isActive }) =>
+              "mypopupdet-tab-item" + (isActive ? " active" : "")
+            }
+          >
+            상세보기
+          </NavLink>
+          <NavLink
+            end
+            to={`/manager/mypopup/${popupNo}`}
+            className={({ isActive }) =>
+              "mypopupdet-tab-item" + (isActive ? " active" : "")
+            }
+          >
+            대시보드
+          </NavLink>
+
+          <NavLink
+            to={`/manager/mypopup/${popupNo}/reservations`}
+            className={({ isActive }) =>
+              "mypopupdet-tab-item" + (isActive ? " active" : "")
+            }
+          >
+            예약 내역
+          </NavLink>
+        </div>
+      </div>
+
       <div className="mypopupdet-search-area">
         <ManagerSearchBar
           value={keyword}
@@ -46,12 +92,6 @@ function MyPopupDet() {
           placeholder="예약 내역 검색"
         />
       </div>
-
-      <div className="mypopupdet-total-wrap">
-        전체 예약자 수 <strong>{popupInfo ? popupInfo.totalCount : 0}명</strong>
-      </div>
-      </div>
-
     
       {popupInfo && (
         <section className="mypopupdet-info-card">

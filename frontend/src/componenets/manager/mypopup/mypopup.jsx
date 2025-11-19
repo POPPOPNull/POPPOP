@@ -1,5 +1,6 @@
 import "./mypopup.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";  
 import ManagerSearchBar from "../ManagerSearchBar";
 
 const MOCK = [
@@ -12,6 +13,7 @@ const MOCK = [
 function MyPopup() {
   const [q, setQ] = useState("");
   const [sortKey, setSortKey] = useState("latest");
+  const navigate = useNavigate();  
 
   let filtered = MOCK.filter(r =>
     [r.title, r.state, r.location, r.category]
@@ -22,6 +24,14 @@ function MyPopup() {
 
   if (sortKey === "title") filtered.sort((a, b) => a.title.localeCompare(b.title));
   if (sortKey === "state") filtered.sort((a, b) => a.state.localeCompare(b.state));
+
+  const goDashboard = (id) => {
+    navigate(`/manager/mypopup/${id}`);
+  };
+
+  const goDetail = (id) => {
+    navigate(`/manager/mypopup/${id}/detail`);
+  };
 
   return (
     <div className="mp-wrap">
@@ -54,7 +64,7 @@ function MyPopup() {
             <div>날짜</div>
             <div>위치</div>
             <div>카테고리</div>
-            <div className="center">편집</div>
+            <div className="center">관리</div>
           </div>
 
           {filtered.map(row => (
@@ -64,8 +74,13 @@ function MyPopup() {
               <div>{row.date}</div>
               <div>{row.location}</div>
               <div>{row.category}</div>
-              <div className="center">
-                <button className="btn-edit" onClick={() => alert(`편집: ${row.title}`)}>편집</button>
+              <div className="center mp-actions">
+                <button
+                  className="btn-detail"
+                  onClick={() => goDetail(row.id)}
+                >
+                  상세
+                </button>
               </div>
             </div>
           ))}
