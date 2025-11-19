@@ -16,4 +16,7 @@ public interface ReservationMapper {
     List<ReservationDetailsDTO> selectReservationDetailsByPopup(int popupNo);
 
     int deleteReservationDetails(int reservationNo);
+
+    int insertReservation(ReservationDetailsDTO dto);
+
 }

@@ -21,15 +21,15 @@ function ResvDetail() {
             <table>
                 <thead>
                     <tr>
-                        <th style={{width:"14%"}}>예약 날짜</th>
-                        <th style={{width:"35%"}}>팝업명</th>
-                        <th style={{width:"40%"}}>예약 정보</th>
-                        <th style={{width:"11%"}}>상태</th>
+                        {/* <th style={{width:"14%"}}>예약 날짜</th> */}
+                        <th style={{width:"40%"}}>팝업명</th>
+                        <th style={{width:"45%"}}>예약 정보</th>
+                        <th style={{width:"15%"}}>상태</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2025.10.31</td>
+                        {/* <td>2025.10.31</td> */}
                         <td className="popup-info">
                             <div className="poster">
                                 <img src="/images/plant.png" alt="팝업포스터"/>
