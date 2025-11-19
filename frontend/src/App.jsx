@@ -1,4 +1,3 @@
-// App.jsx
 import "./App.css"
 import User from "./pages/user/usermain"
 import Manager from "./pages/manager/manager";
@@ -37,7 +36,8 @@ import AdminMemberList from "./componenets/admin/adminMemberList.jsx";
 import AdminReviewList from "./componenets/admin/adminReviewList.jsx";
 import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
 
-import { AuthProvider, useAuth, ProtectedRoute } from "./hooks/UseAuth.jsx";
+import { AuthProvider, useAuth } from "./hooks/UseAuth.jsx";
+import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
 
 // 역할에 따라 첫 화면 리다이렉트
 const RedirectBasedOnRole = () => {
@@ -46,7 +46,6 @@ const RedirectBasedOnRole = () => {
   if (loading) return <div>로딩 중...</div>;
 
   if (!role) {
-    // 비로그인 상태 → 기본 메인(User) 노출
     return <User />;
   }
 
@@ -69,10 +68,9 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <BrowserRouter>
           <Routes>
-            {/* 첫 진입: 역할에 따라 분기 */}
+        
             <Route index element={<RedirectBasedOnRole />} />
 
-            {/* 유저 공개 라우트 */}
             <Route path="/user">
               <Route index element={<User />} />
 
@@ -83,7 +81,6 @@ function App() {
               <Route path="maps" element={<Maps />} />
             </Route>
 
-            {/* 유저 보호 라우트 (로그인 + USER 권한 필요) */}
             <Route element={<ProtectedRoute requiredRoles={['USER']} />}>
               <Route path="/user/favorite" element={<UserFavorite />} />
               <Route path="/myinfo" element={<MyInformation />} />
@@ -92,16 +89,13 @@ function App() {
               <Route path="/reservations/:popupNo" element={<Reservations />} />
             </Route>
 
-            {/* 인증 관련 페이지 */}
             <Route path="/auth/login" element={<Login />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/user/signup" element={<SignUp />} />
             <Route path="/manager/signup" element={<ManagerSignUp />} />
 
-            {/* 매니저 공개 메인 페이지 */}
             <Route path="/manager" element={<Manager />} />
 
-            {/* 매니저 보호 라우트 */}
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
               <Route path="/manager/dashboard" element={<Dashboard />} />
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
@@ -110,7 +104,6 @@ function App() {
               <Route path="/manager/reservations" element={<ReservationPage />} />
             </Route>
 
-            {/* 관리자 보호 라우트 */}
             <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminMain />} />

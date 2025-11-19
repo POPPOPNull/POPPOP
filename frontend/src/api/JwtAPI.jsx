@@ -1,4 +1,3 @@
-// JwtAPI.jsx (예시)
 import axios from 'axios';
 
 const JwtAPI = axios.create({
@@ -8,6 +7,10 @@ const JwtAPI = axios.create({
 
 // 요청 인터셉터: accessToken 있으면 Authorization 헤더 달기
 JwtAPI.interceptors.request.use((config) => {
+  if(config.url?.includes('/auth/refresh')){
+    return config;
+  }
+  
   const token = localStorage.getItem('accessToken');
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
@@ -21,18 +24,15 @@ JwtAPI.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // 🔹 1. 로그인 요청에서 401이면, refresh 시도 X
     if (originalRequest?.url?.includes('/auth/login') ||
         originalRequest?.url?.includes('/auth/admin/login')) {
       return Promise.reject(error);
     }
 
-    // 🔹 2. 이미 refresh 시도했던 요청이면 무한루프 방지
     if (originalRequest._retry) {
       return Promise.reject(error);
     }
 
-    // 🔹 3. 보호된 API 호출에서 401 나면 → refresh 시도
     if (error.response && error.response.status === 401) {
       try {
         originalRequest._retry = true;
@@ -53,6 +53,7 @@ JwtAPI.interceptors.response.use(
         return JwtAPI(originalRequest);
       } catch (refreshError) {
         console.log('Refresh Token 갱신 실패. 강제 로그아웃 처리.');
+        console.log('refresh 실패 응답:', refreshError.response?.data);
 
         localStorage.removeItem('accessToken');
         window.location.href = '/auth/login';

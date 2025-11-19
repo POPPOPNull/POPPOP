@@ -19,9 +19,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // 🔹 새로고침 시 localStorage에서 accessToken을 읽어서 로그인 상태 복원
+  // 새로고침 시 localStorage에서 accessToken을 읽어서 로그인 상태 복원
   useEffect(() => {
-    const savedToken = localStorage.getItem('accessToken');   // ✅ 토큰 키 통일
+    const savedToken = localStorage.getItem('accessToken');
     if (savedToken) {
       const payload = parseJwt(savedToken);
       if (payload) {
@@ -38,9 +38,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // 로그인 시: accessToken 받았다고 가정
+  // 로그인 시
   const login = (token) => {
-    localStorage.setItem('accessToken', token);   // ✅ 항상 여기 저장
+    localStorage.setItem('accessToken', token);
     const payload = parseJwt(token);
     if (payload) {
       setUser({
@@ -74,22 +74,4 @@ export const useAuth = () => {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');
   return ctx;
-};
-
-// 보호된 라우트
-export const ProtectedRoute = ({ requiredRoles = [] }) => {
-  const { isAuthenticated, role, loading } = useAuth();
-  const location = useLocation();
-
-  if (loading) return <div>로딩 중...</div>;
-
-  if (!isAuthenticated) {
-    return <Navigate to="/auth/login" state={{ from: location }} replace />;
-  }
-
-  if (requiredRoles.length > 0 && !requiredRoles.includes(role)) {
-    return <div>권한이 없습니다.</div>;
-  }
-
-  return <Outlet />;
 };

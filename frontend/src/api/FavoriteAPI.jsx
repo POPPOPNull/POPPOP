@@ -21,7 +21,6 @@ const token = localStorage.getItem('token');
         return Promise.reject(new Error('No access token. Please log in.'));
     }
 
-    // ⭐ 추가 디버깅: 여기에서 토큰 값이 정상적으로 찍히는지 확인
     console.log('FavoriteAPI: Token found and proceeding with API call.');
 
     return API.post(
