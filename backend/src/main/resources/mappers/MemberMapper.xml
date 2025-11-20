@@ -53,4 +53,10 @@
          where id = #{id}
     </select>
 
+    <select id="countById" parameterType="string" resultType="int">
+        select count(*)
+          from member
+         where id = #{id}
+    </select>
+
 </mapper>

@@ -35,28 +35,6 @@ public class AuthService {
         System.out.println(member.toString());
     }
 
-//    /** Manager/User 공통 로그인 */
-//    public String login(String id, String rawPassword) {
-//        MemberDTO member = memberMapper.findById(id);
-//        if (member != null && passwordEncoder.matches(rawPassword, member.getPassword())) {
-//            // 로그인 성공, JWT 토큰 생성 및 반환
-//            System.out.println("로그인 성공! " + member.toString());
-//            return jwtTokenProvider.createToken(member.getId(), member.getRole());
-//        }
-//        throw new RuntimeException("Invalid credentials");
-//    }
-//
-//    /** Admin 로그인  */
-//    public String adminLogin(String id, String rawPassword) {
-//        AdminDTO admin = adminMapper.findById(id);
-//
-//        if (admin != null && passwordEncoder.matches(rawPassword, admin.getPassword())) {
-//            System.out.println("로그인 성공! " + admin.toString());
-//            return jwtTokenProvider.createToken(admin.getId(), admin.getRole());
-//        }
-//        throw new RuntimeException("Invalid admin credentials");
-//    }
-
     public LoginSuccessInfo login(String id, String rawPassword) {
         MemberDTO member = memberMapper.findById(id);
         if (member != null && passwordEncoder.matches(rawPassword, member.getPassword())) {

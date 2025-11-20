@@ -28,9 +28,27 @@
     width: 275px;
     height: 45px;
     color: white;
-    background-color: #d9d9d9;
+    background-color: #FFCF0D;
     border-radius: 8px;
     font-size: medium;
     border-style: none;
     margin-top:40px ;
+}
+.id-message {
+  font-size: 15px;
+  margin-top: 1px;
+}
+
+.id-message.success {
+  color: #FFCF0D;
+}
+
+.id-message.error {
+  color: red;
+}
+
+.error-text {
+  color: red;
+  margin-bottom: 8px;
+  font-size: 13px;
 }
