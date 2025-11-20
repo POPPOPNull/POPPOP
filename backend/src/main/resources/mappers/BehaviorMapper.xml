@@ -2,8 +2,43 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ohgiraffers.poppop.behavior.model.dao.BehaviorDAO">
+<mapper namespace="com.ohgiraffers.poppop.behavior.model.dao.BehaviorMapper">
     <resultMap id="behaviorResultMap" type="com.ohgiraffers.poppop.behavior.model.dto.BehaviorDTO">
 
     </resultMap>
+
+    <!--리뷰 로그 수집-->
+    <insert id="insertLogByReview">
+        insert into user_event_data
+        (
+        event_type,
+        event_value,
+        session_id,
+        time_stamp
+        )
+        value
+        (
+        "후기 작성",
+        #{popupNo},
+        #{sessionId},
+        now()
+        )
+    </insert>
+    <!--관심목록 추가 로그 수집-->
+    <insert id="insertLogByFavorite">
+        insert into user_event_data
+        (
+        event_type,
+        event_value,
+        session_id,
+        time_stamp
+        )
+        value
+        (
+        "관심목록 추가",
+        #{popupNo},
+        #{sessionId},
+        now()
+        )
+    </insert>
 </mapper>

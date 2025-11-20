@@ -3,6 +3,8 @@ package com.ohgiraffers.poppop.favorite.controller;
 import com.ohgiraffers.poppop.favorite.model.dto.FavoriteDTO;
 import com.ohgiraffers.poppop.favorite.model.service.FavoriteService;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +33,9 @@ public class FavoriteController {
     // 찜목록 추가
     @PostMapping("/favorite")
 
-    public ResponseEntity<?> insertFavoritePopup(@RequestParam int popupNo, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<?> insertFavoritePopup(@RequestParam int popupNo, @AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
 
         if (userDetails == null) {
             return ResponseEntity.status(401).body("Unauthorized");
@@ -42,7 +46,7 @@ public class FavoriteController {
         System.out.println(memberId);
 
 
-        favoriteService.insetFavoritePopup(popupNo,memberId);
+        favoriteService.insetFavoritePopup(popupNo,memberId,sessionId);
 
         return ResponseEntity.created(URI.create("/user")).build();
     }

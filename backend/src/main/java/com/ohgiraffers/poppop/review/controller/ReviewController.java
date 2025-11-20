@@ -2,6 +2,8 @@ package com.ohgiraffers.poppop.review.controller;
 
 import com.ohgiraffers.poppop.review.model.dto.ReviewDTO;
 import com.ohgiraffers.poppop.review.model.service.ReviewService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Controller;
@@ -39,8 +41,10 @@ public class ReviewController {
     // 팝업스토어 리뷰 등록
     @PostMapping("/review/insert")
 
-    public ResponseEntity<ReviewDTO> insertReview(@RequestParam String content, @RequestParam int popupNo, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<ReviewDTO> insertReview(@RequestParam String content, @RequestParam int popupNo, @AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request){
 
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
         if (userDetails == null) {
             return ResponseEntity.status(401).build();
         }
@@ -49,7 +53,7 @@ public class ReviewController {
         System.out.println("id = " + id);
         System.out.println("popupNo = " + popupNo);
 
-        reviewService.insertReview(content,popupNo,id);
+        reviewService.insertReview(content,popupNo,id,sessionId);
 
 
         return ResponseEntity.created(URI.create("")).build();
