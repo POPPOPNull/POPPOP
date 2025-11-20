@@ -57,6 +57,8 @@ public class SecurityConfig {
                                 "/popup-stores/**"
                         ).permitAll()
 
+                        .requestMatchers("/manager/mypopup").permitAll()
+
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/user/**").hasRole("USER")

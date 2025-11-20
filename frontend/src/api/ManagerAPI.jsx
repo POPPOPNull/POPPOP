@@ -4,7 +4,7 @@ const BACKEND_URL = "http://localhost:8080";
 
 // 팝업 등록 API
 export function registerPopup(formData) {
-  return API.post(`${BACKEND_URL}/api/manager/popup-stores`, formData)
+  return API.post(`${BACKEND_URL}/manager/popup-stores`, formData)
     .then((response) => {
       console.log("팝업 등록 성공:", response.data);
       return response.data;
@@ -15,6 +15,18 @@ export function registerPopup(formData) {
     });
 }
 
+//팝업 조회
+export function getMyPopupList() {
+  return API.get(`${BACKEND_URL}/manager/mypopup`)
+    .then((response) => {
+      console.log("나의 팝업스토어 목록 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("나의 팝업스토어 목록 조회 오류:", error);
+      throw error;
+    });
+}
 
 // export async function registerPopup(formData) {
 //   try {

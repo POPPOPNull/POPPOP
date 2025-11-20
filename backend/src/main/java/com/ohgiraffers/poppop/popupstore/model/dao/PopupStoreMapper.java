@@ -40,4 +40,6 @@ public interface PopupStoreMapper {
     List<PopupStoreDTO> selectPopupStoreRandomlyByDate(ArrayList<Integer> random, Object date);
 
     List<PopupStoreDTO> selectPopupByDate(String date);
+
+    List<PopupStoreDTO> selectMyPopupList(String managerId);
 }
