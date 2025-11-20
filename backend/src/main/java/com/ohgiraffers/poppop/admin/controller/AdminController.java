@@ -1,10 +1,7 @@
 package com.ohgiraffers.poppop.admin.controller;
 
 
-import com.ohgiraffers.poppop.admin.model.dto.MonthlyMemberActivityDTO;
-import com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO;
-import com.ohgiraffers.poppop.admin.model.dto.UserKpiDTO;
-import com.ohgiraffers.poppop.admin.model.dto.YearlyVisitorStatsDTO;
+import com.ohgiraffers.poppop.admin.model.dto.*;
 import com.ohgiraffers.poppop.admin.model.service.AdminService;
 import com.ohgiraffers.poppop.admin.model.service.KpiService;
 
@@ -152,20 +149,9 @@ public class AdminController {
 
     }
 
-    // User 대시보드 꺾은 선 차트 회원가입률 조회
-    @GetMapping("/kpi/monthly-visitor-stats")
-    public ResponseEntity<List<MonthlyVisitorStatsDTO>> selectMonthlyVisitorStats() {
-        return ResponseEntity.ok(kpiService.selectMonthlyVisitorStats());
-    }
-
-    @GetMapping("/kpi/yearly-visitor-stats")
-    public ResponseEntity<List<YearlyVisitorStatsDTO>> selectYearlyVisitorStats() {
-        return ResponseEntity.ok(kpiService.selectYearlyVisitorStats());
-    }
-
-    // User 대시보드 꺾은 선 차트 활동회원 비율 조회
-    @GetMapping("/kpi/monthly-member-activity")
-    public ResponseEntity<List<MonthlyMemberActivityDTO>> selectMontlyMemberActivityStats() {
-        return ResponseEntity.ok(kpiService.selectMonthlyMemberActivityStats());
+    // User 대시보드 꺾은 선 차트 방문자 수(전체, 회원, 비회원) 조회
+    @GetMapping("/kpi/daily-visitor-stats")
+    public ResponseEntity<List<DailyVisitorDTO>> selectDailyVisitorStats() {
+        return ResponseEntity.ok(kpiService.selectDailyVisitorStats());
     }
 }
