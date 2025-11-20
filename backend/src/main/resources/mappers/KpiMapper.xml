@@ -3,87 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.admin.model.dao.KpiMapper">
-<!--    MonthlyVisitor ResultMap-->
-<resultMap id="monthlyVisitorStatsResultMap" type="com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO">
-    <result property="visitYear" column="visit_year"/>
-    <result property="visitMonth" column="visit_month"/>
-    <result property="visitorCount" column="visitor_count"/>
-    <result property="signupCount" column="signup_count"/>
+<resultMap id="dailyVisitorResultMap" type="com.ohgiraffers.poppop.admin.model.dto.DailyVisitorDTO">
+    <result property="visitDate" column="visit_date"/>
+    <result property="totalVisitors" column="total_visitors"/>
+    <result property="memberVisitors" column="member_visitors"/>
+    <result property="nonMemberVisitors" column="non_member_visitors"/>
 </resultMap>
-<!--    월별 회원 가입률-->
-    <select id="selectMonthlyVisitorStats" resultMap="monthlyVisitorStatsResultMap">
-        select
-               year(time_stamp) as visit_year,
-               month(time_stamp) as visit_month,
-               count(distinct session_id) as visitor_count,
-               count(case when event_type = '회원 가입' then 1 end) as signup_count
-          from user_event_data
-         group by year(time_stamp), month(time_stamp)
-         order by visit_year asc, visit_month asc
-    </select>
-
-<!--    YearlyVisitor ResultMap-->
-<resultMap id="yearlyVisitorStatsResultMap" type="com.ohgiraffers.poppop.admin.model.dto.YearlyVisitorStatsDTO">
-    <result property="visitYear" column="visit_year"/>
-    <result property="visitorCount" column="visitor_count"/>
-    <result property="signupCount" column="signup_count"/>
-</resultMap>
-<!--    연별 회원 가입률-->
-    <select id="selectYearlyVisitorStats" resultMap="yearlyVisitorStatsResultMap">
-        select
-               year(time_stamp) as visit_year,
-               count(distinct session_id) as visitor_count,
-               count(case when event_type = '회원 가입' then 1 end) as signup_count
-          from user_event_data
-         group by year(time_stamp)
-         order by visit_year asc
-    </select>
-
-<!--    MonthlyMemberActivityStats ResultMap-->
-<resultMap id="monthlyMemberActivityStatsResultMap" type="com.ohgiraffers.poppop.admin.model.dto.MonthlyMemberActivityDTO">
-    <result property="visitYear" column="visit_year"/>
-    <result property="visitMonth" column="visit_month"/>
-    <result property="activeMembers" column="active_members"/>
-    <result property="totalMembersAtEndOfMonth" column="total_members_at_end_of_month"/>
-</resultMap>
-<!--    월별 활동 회원 수-->
-    <select id="selectMonthlyActiveMembers" resultMap="monthlyMemberActivityStatsResultMap">
-        select
-               year(e.time_stamp) as visit_year,
-               month(e.time_stamp) as visit_month,
-               count(distinct s.id) as active_members
-          from session_info s
-          join user_event_data e on s.session_id = e.session_id
-         where s.id is not null
-         group by year(e.time_stamp), month(e.time_stamp)
-         order by visit_year asc, visit_month asc
-    </select>
-<!--    월별 누적 총 회원 수(해당 월 말 기준)-->
-    <select id="selectMonthlyTotalMembersCumulative" resultMap="monthlyMemberActivityStatsResultMap">
-        <![CDATA[
-        with recursive monthseries as (
-            select
-                   date_format(min(signup_date), '%Y-%m-01') as month_start,
-                   last_day(min(signup_date)) as month_end
-              from member
-             union all
-            select
-                   date_add(month_start, interval 1 month),
-                   last_day(date_add(month_start, interval 1 month))
-              from monthseries
-             where month_start < date_format(curdate(), '%Y-%m-01')
-        )
-        select
-               year(ms.month_start) as visit_year,
-               month(ms.month_start) as visit_month,
-               0 as active_members,
-               count(m.id) as total_members_at_end_of_month
-          from monthseries ms
-          left join member m on m.signup_date <= ms.month_end
-         group by year(ms.month_start), month(ms.month_start)
-         order by visit_year asc, visit_month asc
-        ]]>
-    </select>
+<!--    일별 방문자 수(전체,회원,비회원)-->
+<select id="selectDailyVisitorStats" resultMap="dailyVisitorResultMap">
+    select
+           date(e.time_stamp) as visit_date,
+           count(distinct e.session_id) as total_visitors,
+           count(distinct case when s.id is not null then e.session_id end) as member_visitors,
+           count(distinct case when s.id is null then e.session_id end) as non_member_visitors
+      from user_event_data e
+      left join session_info s on e.session_id = s.session_id
+     where e.time_stamp >= date_sub(curdate(), interval 7 day)
+     group by date(e.time_stamp)
+     order by visit_date asc
+</select>
 
 <!--    전체 회원 수-->
     <select id="selectTotalMembers" resultType="long">

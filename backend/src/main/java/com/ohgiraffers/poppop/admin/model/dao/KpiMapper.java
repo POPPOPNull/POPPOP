@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.admin.model.dao;
 
+import com.ohgiraffers.poppop.admin.model.dto.DailyVisitorDTO;
 import com.ohgiraffers.poppop.admin.model.dto.MonthlyMemberActivityDTO;
 import com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO;
 import com.ohgiraffers.poppop.admin.model.dto.YearlyVisitorStatsDTO;
@@ -18,6 +19,5 @@ public interface KpiMapper {
 
     List<MonthlyVisitorStatsDTO> selectMonthlyVisitorStats();
     List<YearlyVisitorStatsDTO> selectYearlyVisitorStats();
-    List<MonthlyMemberActivityDTO> selectMonthlyActiveMembers();
-    List<MonthlyMemberActivityDTO> selectMonthlyTotalMembersCumulative();
+    List<DailyVisitorDTO> selectDailyVisitorStats();
 }
