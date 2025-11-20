@@ -12,4 +12,5 @@ public interface MemberMapper {
 
     MemberDTO findById(@Param("id") String id);
 
+    int countById(@Param("id") String id);
 }

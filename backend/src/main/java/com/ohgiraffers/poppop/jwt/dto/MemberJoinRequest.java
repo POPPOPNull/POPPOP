@@ -11,12 +11,12 @@ public class MemberJoinRequest {
     private String role;
     private String email;
     private String businessNo;
-    private char gender;
+    private String gender;
     private Date birthdate;
 
     public MemberJoinRequest() {}
 
-    public MemberJoinRequest(String id, String password, String name, String phone, String role, String email, String businessNo, char gender, Date birthdate) {
+    public MemberJoinRequest(String id, String password, String name, String phone, String role, String email, String businessNo, String gender, Date birthdate) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -84,11 +84,11 @@ public class MemberJoinRequest {
         this.businessNo = businessNo;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

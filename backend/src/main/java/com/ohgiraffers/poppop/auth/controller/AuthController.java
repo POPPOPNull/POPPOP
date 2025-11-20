@@ -13,12 +13,16 @@ import com.ohgiraffers.poppop.jwt.dto.TokenResponse;
 import com.ohgiraffers.poppop.jwt.security.JwtTokenProvider;
 import com.ohgiraffers.poppop.member.model.dao.MemberMapper;
 import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
+import com.ohgiraffers.poppop.member.model.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -27,16 +31,19 @@ public class AuthController {
     private final AuthService authService;
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshTokenService refreshTokenService;
+    private final MemberService  memberService;
 
     private final long refreshCookieMaxAge = 60L * 60 * 24 * 30;
 
     @Autowired
     public AuthController(AuthService authService,
                           JwtTokenProvider jwtTokenProvider,
-                          RefreshTokenService refreshTokenService) {
+                          RefreshTokenService refreshTokenService,
+                          MemberService memberService) {
         this.authService = authService;
         this.jwtTokenProvider = jwtTokenProvider;
         this.refreshTokenService = refreshTokenService;
+        this.memberService = memberService;
     }
 
     // Manager 회원가입 - role을 MANAGER로
@@ -50,7 +57,7 @@ public class AuthController {
         member.setPhone(dto.getPhone());
         member.setEmail(dto.getEmail());
         member.setBusinessNo(dto.getBusinessNo());
-//        member.setGender(dto.getGender());
+        member.setGender(dto.getGender());
         member.setBirthDate(dto.getBirthdate());
 
         member.setRole("MANAGER");
@@ -69,20 +76,13 @@ public class AuthController {
         member.setPhone(dto.getPhone());
         member.setRole(dto.getRole());
         member.setEmail(dto.getEmail());
-//        member.setGender(dto.getGender());
+        member.setGender(dto.getGender());
         member.setBirthDate(dto.getBirthdate());
 
         member.setRole("USER");
         authService.joinMember(member);
         return ResponseEntity.ok().build();
     }
-
-    // Manager/User 공통 로그인
-//    @PostMapping("/login")
-//    public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest dto) {
-//        String token = authService.login(dto.getId(), dto.getPassword());
-//        return ResponseEntity.ok(new TokenResponse(token));
-//    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest dto, HttpServletResponse response) {
@@ -121,13 +121,6 @@ public class AuthController {
             return ResponseEntity.status(500).body("Internal server error");
         }
     }
-
-//    // Admin 로그인
-//    @PostMapping("/admin/login")
-//    public ResponseEntity<TokenResponse> adminLogin(@RequestBody LoginRequest dto) {
-//        String token = authService.adminLogin(dto.getId(), dto.getPassword());
-//        return ResponseEntity.ok(new TokenResponse(token));
-//    }
 
     @PostMapping("/admin/login")
     public ResponseEntity<?> adminLogin(@RequestBody LoginRequest dto, HttpServletResponse response) {
@@ -227,4 +220,13 @@ public class AuthController {
                 .body("Logged out");
     }
 
+    @GetMapping("/idcheck")
+    public Map<String, Object> checkId(@RequestParam String id) {
+        boolean available = memberService.idAvailable(id);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("available", available);
+
+        return result;
+    }
 }

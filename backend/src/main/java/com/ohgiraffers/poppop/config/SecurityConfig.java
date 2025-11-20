@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 "/auth/user/join",
                                 "/auth/manager/join",
                                 "/auth/refresh",
+                                "/auth/idcheck",
                                 "/", "/index.html",
                                 "/css/**", "/js/**", "/images/**",
                                 "/maps",
