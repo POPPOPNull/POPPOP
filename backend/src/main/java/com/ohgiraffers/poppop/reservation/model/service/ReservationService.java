@@ -36,14 +36,18 @@ public class ReservationService {
             throw new IllegalArgumentException("해당 예약을 찾을 수 없어 취소에 실패했습니다.");
         }
     }
+
     public void insertReservation (ReservationDetailsDTO dto){
 
-        System.out.println("memberId = " + dto.getMemberId());
-        System.out.println("popupNo = " + dto.getPopupNo());
-        System.out.println("인원 = " + dto.getReservationPersonnel());
-        System.out.println("예약날짜 = " + dto.getReservationDate());
-        System.out.println("예약시간 = " + dto.getReservationTime());
-
         reservationMapper.insertReservation(dto);
+    }
+
+    public List<ReservationDetailsDTO> getReservationsByMemberId(String memberId) {
+        return reservationMapper.selectReservationByMemberId(memberId);
+    }
+
+    public boolean cancelReservation(int reservationNo, String memberId) {
+        int result = reservationMapper.cancelReservation(reservationNo, memberId);
+        return result > 0;
     }
 }

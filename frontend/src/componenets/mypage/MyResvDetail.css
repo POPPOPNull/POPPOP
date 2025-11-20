@@ -75,7 +75,31 @@ table td {
     margin: 0;
     font-size: 15px;
 }
-.reserve-info p {
+/* .reserve-info p {
     margin: 4px 0;
     line-height: 1.4;
+} */
+.info {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 6px;
+}
+.label {
+    display: inline-block;
+    width: 100px;
+    font-weight: 600;
+}
+.value {
+    flex: 1;
+    text-align: left;
+}
+.cancelBtn {
+    margin-left: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    background: white;
+    border: none;
+    border-radius: 4px;
+    /* color: white; */
+    cursor: pointer;
 }
