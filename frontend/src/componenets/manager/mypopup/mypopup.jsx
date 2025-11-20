@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";  
 import ManagerSearchBar from "../ManagerSearchBar";
 import { getMyPopupList } from "../../../api/ManagerAPI";
+import { jwtDecode } from "jwt-decode";
+
+
 
 function mapState(p) {
   // approvalStatus 기준 + 날짜/예약 상태로 예시 로직
@@ -22,6 +25,19 @@ function mapState(p) {
 
 
 function MyPopup() {
+
+  const token = localStorage.getItem("accessToken");
+  let managerId = "";
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      console.log("decoded token:", decoded); 
+      managerId = decoded.id; 
+    } catch (err) {
+      console.error("토큰 디코딩 오류:", err);
+    }
+  }
   const [q, setQ] = useState("");
   const [sortKey, setSortKey] = useState("latest");
   const navigate = useNavigate();  
@@ -100,8 +116,10 @@ function MyPopup() {
     <div className="mp-wrap">
       <div className="mp-top">
         <div className="mp-user">
-          <span className="badge">manager01</span>
-        </div>
+  <span className="badge">
+    {managerId || "알 수 없음"}
+  </span>
+</div>
       </div>
 
       
