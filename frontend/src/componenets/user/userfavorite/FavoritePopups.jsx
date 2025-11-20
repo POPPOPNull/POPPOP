@@ -19,15 +19,16 @@ function NoFavorite(){
 function FavoritePopups(){
 
         const [popupStores, setPopupStores] = useState([])
-        const [id ,setId] = useState("user1")
+        const [id ,setId] = useState("")
         const [isDrag, setIsDrag] = useState(false)
+        const [isDrop, setIsDrop] = useState(false)
     
         useEffect(()=>{
             selectFavoritePopupStoreById(id).then(data=>{
                 console.log(data)
                 setPopupStores(data)
             })     
-        },[isDrag])  
+        },[])
 
         const [,drop] = useDrop({
             accept : 'popup',
@@ -35,8 +36,9 @@ function FavoritePopups(){
                 console.log(item.popupstore.no,'삭제할래?')
             },
             drop(item){
-                deleteFavorite(item.popupstore.no,"user1")
+                deleteFavorite(item.popupstore.no)
                 console.log('삭제 완')
+                setIsDrop(!isDrop)
             }
             
         })
@@ -47,7 +49,7 @@ function FavoritePopups(){
         <>
             
             <div className={FPStyle.botlayout}>
-                {popupStores.length==0?<NoFavorite/>:popupStores.map(popupstores =><PopupStores key={popupstores.no} popupstore={popupstores} setIsDrag={setIsDrag}/>)}
+                {popupStores.length==0?<NoFavorite/>:popupStores.map(popupstores =><PopupStores key={popupstores.no} popupstore={popupstores} posterNo={popupstores.no} setIsDrag={setIsDrag}/>)}
             </div>
                 {isDrag&&<div className={FPStyle.dropdelete} ref={drop}>삭제</div>}
         </>
