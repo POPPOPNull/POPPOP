@@ -1,37 +1,100 @@
 import "./mypopup.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";  
 import { useNavigate } from "react-router-dom";  
 import ManagerSearchBar from "../ManagerSearchBar";
+import { getMyPopupList } from "../../../api/ManagerAPI";
 
-const MOCK = [
-  { id: 1, title: "비비고 X 세븐틴", state: "운영 중", date: "25.09.30–10.29", location: "서울시 마포구", category: "식품" },
-  { id: 2, title: "퓌", state: "운영 중", date: "25.09.30–11.08", location: "서울시 성동구", category: "뷰티" },
-  { id: 3, title: "닥터 X 빠더너스", state: "운영 대기", date: "25.11.10–11.23", location: "서울시 성동구", category: "뷰티" },
-  { id: 4, title: "Dr.G X 이영지", state: "운영 종료", date: "25.09.01–09.30", location: "서울시 마포구", category: "뷰티" },
-];
+function mapState(p) {
+  // approvalStatus 기준 + 날짜/예약 상태로 예시 로직
+  if (p.approvalStatus === "반려") return "반려";
+  if (p.approvalStatus === "대기") return "승인 대기";
+
+  // 여기서부터는 승인된 팝업이라고 가정
+  const todayStr = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+
+  if (todayStr < p.startDate) return "오픈 예정";
+  if (todayStr > p.endDate) return "종료";
+
+  // 기간 안이면 예약 가능 여부로
+  if (p.reservableStatus === 1) return "예약 가능";
+  return "예약 불가";
+}
+
 
 function MyPopup() {
   const [q, setQ] = useState("");
   const [sortKey, setSortKey] = useState("latest");
   const navigate = useNavigate();  
+  const [list, setList] = useState([]); 
+  const [loading, setLoading] = useState(true);  
+  const [error, setError] = useState(null); 
 
-  let filtered = MOCK.filter(r =>
-    [r.title, r.state, r.location, r.category]
-      .join(" ")
-      .toLowerCase()
-      .includes(q.toLowerCase())
-  );
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setLoading(true);      // 🔹 요청 시작할 때 true (선택)
+      setError(null);
 
-  if (sortKey === "title") filtered.sort((a, b) => a.title.localeCompare(b.title));
-  if (sortKey === "state") filtered.sort((a, b) => a.state.localeCompare(b.state));
+      const data = await getMyPopupList();
+      console.log("📦 /manager/mypopup response in React:", data);
 
-  const goDashboard = (id) => {
-    navigate(`/manager/mypopup/${id}`);
+      const rows = data.map((p) => ({
+        id: p.no,
+        title: p.name,
+        state: mapState(p),
+        date: `${p.startDate} ~ ${p.endDate}`,
+        location: p.location || p.popupLocation,
+        category: p.categoryName,
+      }));
+
+      setList(rows);
+    } catch (e) {
+      console.error("조회 오류:", e);
+      setError("내 팝업스토어 목록을 불러오는 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);     
+    }
   };
 
-  const goDetail = (id) => {
-    navigate(`/manager/mypopup/${id}/detail`);
-  };
+  fetchData();
+}, []);
+
+  let filtered = [...list];
+
+  if (q.trim()) {
+    const keyword = q.trim().toLowerCase();
+    filtered = filtered.filter((row) =>
+      row.title.toLowerCase().includes(keyword)
+    );
+  }
+
+      if (sortKey === "title") filtered.sort((a, b) => a.title.localeCompare(b.title));
+      if (sortKey === "state") filtered.sort((a, b) => a.state.localeCompare(b.state));
+
+      const goDashboard = (id) => {
+        navigate(`/manager/mypopup/${id}`);
+      };
+
+      const goDetail = (id) => {
+        navigate(`/manager/mypopup/${id}/detail`);
+      };
+
+
+      if (loading) {
+        return (
+          <div className="mp-wrap">
+            <div>나의 팝업스토어 목록을 불러오는 중...</div>
+          </div>
+        );
+      }
+
+      if (error) {
+        return (
+          <div className="mp-wrap">
+            <div style={{ color: "red", fontSize: 14 }}>{error}</div>
+          </div>
+        );
+      }
 
   return (
     <div className="mp-wrap">
@@ -39,14 +102,6 @@ function MyPopup() {
         <div className="mp-user">
           <span className="badge">manager01</span>
         </div>
-
-        {/* <div className="mp-controls">
-          <select value={sortKey} onChange={e => setSortKey(e.target.value)} className="sel">
-            <option value="latest">정렬</option>
-            <option value="title">제목</option>
-            <option value="state">상태</option>
-          </select>
-        </div> */}
       </div>
 
       
@@ -85,6 +140,13 @@ function MyPopup() {
             </div>
           ))}
         </div>
+
+        {filtered.length === 0 && (
+            <div style={{ padding: "16px 14px", color: "#888" }}>
+              등록된 팝업스토어가 없어요.
+            </div>
+          )}
+
 
         <div className="mp-page">1</div>
       </div>

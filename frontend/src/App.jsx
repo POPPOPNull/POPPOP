@@ -100,9 +100,8 @@ function App() {
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
               <Route path="/manager/dashboard" element={<Dashboard />} />
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
-              {/* 선택된 팝업 전용 레이아웃 */}
               <Route path="/manager/mypopup/:popupNo" element={<MyPopupLayout />}>
-                <Route index element={<Dashboard />} />                {/* 기본 탭 */}
+                <Route index element={<Dashboard />} />                
                 <Route path="detail" element={<MypopupdetPage />} />   {/* 상세 */}
                 <Route path="reservations" element={<ReservationPage />} /> {/* 예약 */}
               </Route>

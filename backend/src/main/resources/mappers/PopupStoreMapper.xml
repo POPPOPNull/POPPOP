@@ -457,4 +457,38 @@
         )
     </insert>
 
+    <!-- 매니저 팝업스토어 목록 조회 -->
+    <select id="selectMyPopupList"
+            parameterType="string"
+            resultMap="popupStoreResultMap">
+
+        SELECT
+        ps.popup_no,
+        ps.popup_name,
+        ps.brand_name,
+        ps.popup_start_date,
+        ps.popup_end_date,
+        ps.open_time,
+        ps.close_time,
+        ps.popup_location,
+        ps.latitude,
+        ps.longitude,
+        ps.reservable_status,
+        ps.popup_explanation,
+        ps.approval_status,
+        ps.rejection_reason,
+        ps.id,
+        ps.click_count,
+        ps.category_name,
+        ps.advance_reservation,
+        ps.homepage_link,
+        ps.capacity,
+        ps.hashtag_name
+
+        FROM popup_store ps
+        WHERE ps.id = #{managerId}
+        ORDER BY ps.popup_no DESC;
+    </select>
+
+
 </mapper>

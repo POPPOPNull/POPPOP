@@ -91,4 +91,18 @@ public class PopupStoreService {
         return popupStoreMapper.selectPopupByDate(date);
     }
 
+//    public List<PopupStoreDTO> getMyPopupList(String managerId) {
+//        return popupStoreMapper.selectMyPopupList(managerId);
+//    }
+
+    public List<PopupStoreDTO> getMyPopupList(String managerId) {
+        List<PopupStoreDTO> list = popupStoreMapper.selectMyPopupList(managerId);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
+
 }
+
+

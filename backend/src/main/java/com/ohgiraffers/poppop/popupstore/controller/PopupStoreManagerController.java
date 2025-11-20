@@ -9,8 +9,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/manager")
+@RequestMapping("/manager")
 public class PopupStoreManagerController {
 
     private final PopupStoreService popupStoreService;
@@ -20,7 +23,7 @@ public class PopupStoreManagerController {
         this.popupStoreService = popupStoreService;
     }
 
-    // 🟡 팝업 등록
+    //팝업 등록 POST /manager/popup-stores
     @PostMapping("/popup-stores")
     public ResponseEntity<?> requestPopupRegister(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -38,6 +41,21 @@ public class PopupStoreManagerController {
         popupStoreService.requestPopupRegister(dto, managerId);
 
         return ResponseEntity.ok("팝업 등록 요청 완료 (승인 대기)");
+    }
+
+    //나의 팝업스토어 목록 조회  →  GET /manager/mypopup
+    @GetMapping("/mypopup")
+    public ResponseEntity<List<PopupStoreDTO>> getMyPopupList(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String managerId = userDetails.getUsername();
+        List<PopupStoreDTO> list = popupStoreService.getMyPopupList(managerId);
+
+        return ResponseEntity.ok(list);   // list가 비어 있어도 그냥 [] 로 나감
     }
 }
 
