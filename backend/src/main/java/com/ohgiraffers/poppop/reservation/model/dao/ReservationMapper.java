@@ -3,6 +3,7 @@ package com.ohgiraffers.poppop.reservation.model.dao;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface ReservationMapper {
 
     int insertReservation(ReservationDetailsDTO dto);
 
+    List<ReservationDetailsDTO> selectReservationByMemberId(@Param("memberId") String memberId);
+
+    int cancelReservation(@Param("reservationNo") int reservationNo,
+                          @Param("memberId") String memberId);
 }

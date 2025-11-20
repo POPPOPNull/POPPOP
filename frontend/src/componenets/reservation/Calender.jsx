@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Calender.css';
 import { ko } from "date-fns/locale";
 import JwtAPI from '../../api/JwtAPI';
 
-function Calendar( { popupNo }) {
+function Calendar() {
+  const { popupNo } = useParams();
   const [startDate, setStartDate] = useState(new Date());
   const twoWeeksLater = new Date(new Date().setDate(new Date().getDate() + 14));
 

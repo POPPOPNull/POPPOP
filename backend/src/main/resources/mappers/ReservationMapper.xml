@@ -94,4 +94,27 @@
         '예약완료'
         )
     </insert>
+
+    <select id="selectReservationByMemberId" parameterType="string" resultMap="reservationResultMap">
+        select
+               r.reservation_no,
+               r.reservation_status,
+               r.reservation_personnel,
+               p.popup_name,
+               p.popup_no,
+               r.id,
+               r.reservation_date,
+               r.reservation_time
+          from reservation r
+          join popup_store p on r.popup_no = p.popup_no
+         where r.id = #{memberId}
+         order by r.reservation_no desc
+    </select>
+
+    <update id="cancelReservation">
+        update reservation
+           set reservation_status = '예약취소'
+         where reservation_no = #{reservationNo}
+           and id = #{memberId}
+    </update>
 </mapper>
