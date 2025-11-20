@@ -13,11 +13,11 @@
 <select id="selectDailyVisitorStats" resultMap="dailyVisitorResultMap">
     select
            date(e.time_stamp) as visit_date,
-           count(distinct e.session_id) as total_visitors,
-           count(distinct case when s.id is not null then e.session_id end) as member_visitors,
-           count(distinct case when s.id is null then e.session_id end) as non_member_visitors
+           count(distinct e.session_id) as total_visitors
+<!--           count(distinct case when is not null then e.session_id end) as member_visitors,-->
+<!--           count(distinct case when is null then e.session_id end) as non_member_visitors-->
       from user_event_data e
-      left join session_info s on e.session_id = s.session_id
+<!--      left join session_info s on e.session_id = s.session_id-->
      where e.time_stamp >= date_sub(curdate(), interval 7 day)
      group by date(e.time_stamp)
      order by visit_date asc
@@ -50,10 +50,9 @@
 
 <!--    활동 회원 수 (오늘 날짜를 기준으로 행동 로그 데이터 날짜가 한 달 이내인 회원)-->
     <select id="selectActiveMembers" resultType="long">
-        select count(distinct s.id)
-          from session_info s
-          join user_event_data e on s.session_id = e.session_id
+        select count(distinct e.session_id)
+          from user_event_data e
+<!--          join user_event_data e on s.session_id = e.session_id-->
          where e.time_stamp >= date_sub(curdate(), interval 1 month)
-           and s.id is not null
     </select>
 </mapper>

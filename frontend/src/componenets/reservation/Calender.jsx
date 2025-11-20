@@ -57,7 +57,7 @@ function Calendar() {
 
     const response = await JwtAPI.post('/reservations', body);
     alert('예약이 완료되었습니다!');
-      console.log(res.data);
+      console.log(response.data);
   };
 
   return (
