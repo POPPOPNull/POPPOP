@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.member.model.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MemberDTO {
@@ -12,12 +13,12 @@ public class MemberDTO {
     private String email;
     private String businessNo;
     private String gender;
-    private Date birthDate;
+    private LocalDate birthDate;
 
     public MemberDTO() {}
 
 
-    public MemberDTO(String id, String password, String name, String phone, String role, String email, String businessNo, String gender, Date birthDate) {
+    public MemberDTO(String id, String password, String name, String phone, String role, String email, String businessNo, String gender, LocalDate birthDate) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -95,11 +96,11 @@ public class MemberDTO {
         this.gender = gender;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

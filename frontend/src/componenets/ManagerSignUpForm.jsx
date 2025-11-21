@@ -271,7 +271,7 @@ function ManagerSignUpComponent() {
                     </div>
                     <br/>
                     <button className="btnsignup" type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? '가입 처리 중...' : '회원가입 완료!'}
+                        {isSubmitting ? '가입 처리 중...' : '회원가입'}
                     </button>
                 </form>
                 </>
