@@ -50,4 +50,18 @@
         now()
         )
     </insert>
+
+    <select id="selectReviewById" parameterType="string" resultMap="reviewResultMap">
+        select
+               r.review_no,
+               r.review_content,
+               r.popup_no,
+               r.id,
+               p.popup_name,
+               r.review_date
+          from review r
+          join popup_store p on r.popup_no = p.popup_no
+         where r.id = #{memberId}
+         order by r.review_date desc
+    </select>
 </mapper>

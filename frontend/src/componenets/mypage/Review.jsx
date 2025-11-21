@@ -1,8 +1,22 @@
 import React from "react";
-import "./Review.css"
+import { useEffect,useState } from "react";
+import "./Review.css";
+import { selectReviewById } from '../../api/ReviewAPI';
 
 function Review(){
-    
+    const [reviews, setReviews] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        selectReviewById()
+            .then(data => {
+                 console.log("내 리뷰 :", data);
+                setReviews(data || []);
+            })
+            .catch(() => 
+                setError("리뷰를 불러오는 데 실패했습니다.")
+            );
+    }, []);
 
     return(
         <>
@@ -10,19 +24,23 @@ function Review(){
             <div className="reviewsearch">
                 <input className="myreviewsearch" type="text" placeholder="팝업스토어명, 키워드 검색"/>
             </div>
-
-            <div className="myreviews">
-            <div className="userreview">
-                <div className="myreviewpopup">BEAUTY POPUP</div>
-                <div className="myreviewdate">2025-11-03</div>
-                <div className="myreviewcontent">직원분이 친절하고 체험도 재밌었어요</div>
-            </div>
-                <div className="myreviewbutton">
-                    <button>수정</button>
-                    <button>삭제</button>
-                </div>
-            </div>
-
+                {reviews.length === 0 ? (
+                    <p className="noreview">작성한 리뷰가 없습니다.</p>
+                ) : (
+                    reviews.map((review) => (
+                        <div key={review.reviewNo} className="myreviews">
+                            <div className="userreview">
+                                <div className="myreviewpopup">{review.popupName}</div>
+                                <div className="myreviewdate">{review.reviewDate}</div>
+                                <div className="myreviewcontent">{review.content}</div>
+                            </div>
+                            <div className="myreviewbutton">
+                                <button>수정</button>
+                                <button>삭제</button>
+                            </div>
+                        </div>
+                    ))
+                )}
         </div>
         </>
     )

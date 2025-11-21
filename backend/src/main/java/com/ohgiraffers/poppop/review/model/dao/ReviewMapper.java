@@ -14,4 +14,5 @@ public interface ReviewMapper {
 
     void insertReview(String content, int popupNo, String id);
 
+    List<ReviewDTO> selectReviewById(String memberId);
 }
