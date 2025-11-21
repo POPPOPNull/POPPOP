@@ -55,7 +55,8 @@ public class SecurityConfig {
                                 "/css/**", "/js/**", "/images/**",
                                 "/maps",
                                 "/popup-stores/search",
-                                "/popup-stores/**"
+                                "/popup-stores/**",
+                                "/behavior/**"
                         ).permitAll()
 
                         .requestMatchers("/manager/mypopup").permitAll()
