@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.jwt.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MemberJoinRequest {
@@ -12,11 +13,11 @@ public class MemberJoinRequest {
     private String email;
     private String businessNo;
     private String gender;
-    private Date birthdate;
+    private LocalDate birthdate;
 
     public MemberJoinRequest() {}
 
-    public MemberJoinRequest(String id, String password, String name, String phone, String role, String email, String businessNo, String gender, Date birthdate) {
+    public MemberJoinRequest(String id, String password, String name, String phone, String role, String email, String businessNo, String gender, LocalDate birthdate) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -92,11 +93,11 @@ public class MemberJoinRequest {
         this.gender = gender;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -110,7 +111,7 @@ public class MemberJoinRequest {
                 ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", businessNo='" + businessNo + '\'' +
-                ", gender=" + gender +
+                ", gender='" + gender + '\'' +
                 ", birthdate=" + birthdate +
                 '}';
     }

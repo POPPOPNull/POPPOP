@@ -1,6 +1,8 @@
 package com.ohgiraffers.poppop.mypage.controller;
 
 import com.ohgiraffers.poppop.jwt.security.JwtTokenProvider;
+import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
+import com.ohgiraffers.poppop.mypage.model.service.MyPageService;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,12 +19,27 @@ import java.util.List;
 @Controller
 public class MyPageController {
 
+    private final MyPageService myPageService;
     private final ReservationService reservationService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public MyPageController(ReservationService reservationService, JwtTokenProvider jwtTokenProvider) {
+    public MyPageController(MyPageService myPageService, ReservationService reservationService, JwtTokenProvider jwtTokenProvider) {
+
+        this.myPageService = myPageService;
         this.reservationService = reservationService;
         this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @GetMapping("/myinfo")
+    public ResponseEntity<?> selectInfo(@AuthenticationPrincipal UserDetails userDetails) {
+
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인이 필요합니다.");
+        }
+        String memberId = userDetails.getUsername();
+
+        return ResponseEntity.ok(myPageService.selectInfo(memberId));
     }
 
     @GetMapping("/myreservation")
@@ -35,10 +52,7 @@ public class MyPageController {
 
         String memberId = userDetails.getUsername();
 
-        List<ReservationDetailsDTO> reservations =
-                reservationService.getReservationsByMemberId(memberId);
-
-        return ResponseEntity.ok(reservations);
+        return ResponseEntity.ok(reservationService.getReservationsByMemberId(memberId));
     }
 
     @PutMapping("/myreservation/{reservationNo}/cancel")
