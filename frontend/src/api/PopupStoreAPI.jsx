@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import API from './JwtAPI';
+import { logDataBySelect } from "./BehaviorAPI";
 
 
 
@@ -63,7 +64,6 @@ export function selectPopupRandomly(size,length){
         const a = parseInt((Math.random()*length)+1)
         arr.add(a)
     }
-    console.log(arr)
     const arr2 = Array.from(arr)
     console.log(arr2)
 

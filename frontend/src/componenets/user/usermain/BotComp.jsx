@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import BCStyle from "./MidComp.module.css"
-import { selectAllPopupStore, selectPopupByDate, selectPopupRandomly } from "../../../api/PopupStoreAPI"
+import {  selectPopupByDate } from "../../../api/PopupStoreAPI"
 import PopupStores from "../../PopupStores"
 import { Link } from "react-router-dom"
+import { logDataBySelect } from "../../../api/BehaviorAPI"
 
 
 
@@ -10,6 +11,7 @@ export function BotComp() {
 
     const [isDrag,setIsDrag] = useState(false)
     const [popupStores, setPopupStores] = useState([])
+    const [popupNo, setPopupNo] = useState([])
 
     const [searchDay, setSearchDay] = useState(new Date())
     const [classIndex, setClassIndex] = useState(0)
@@ -21,10 +23,6 @@ export function BotComp() {
 
     const day7 = ['일','월','화','수','목','금','토']
 
-    const onClickDate = (e)=>{
-        
-    }
-    
 
     
     
@@ -52,22 +50,23 @@ export function BotComp() {
             const popups = new Set();
             for(let i = popups.size; i<10;i=popups.size){
                 const a = parseInt(Math.random()*length)
-                // console.log(a)
-                // console.log("size",popups.size)
-                // console.log("i",i)
                 popups.add(data[a])
             }
-            // console.log("popups",popups)
+            // today에 오픈중인 팝업 10개 조회
             const popupArray = Array.from(popups)
             setPopupStores(popupArray)
 
+            // 팝업 번호 담을 배열
+            const array = new Array();
 
-    
+            for(let i = 0;i<popupArray.length;i++){
+                array.push(popupArray[i].no)
+            }
+            console.log(array)
+
+            logDataBySelect(array)
         }
-        fetchData()
-        console.log(today)
-        console.log(classIndex)
-        
+        fetchData()       
     },[searchDay])
 
 
@@ -85,7 +84,7 @@ export function BotComp() {
                                 </div>)}
             </div>
             <div className={BCStyle.botlayout}>
-                {popupStores.map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag} posterNo={popupstore.no}/>)}
+                {(popupStores).map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag} posterNo={popupstore.no}/>)}
             </div>
             <Link to={"/user/search"}>
                 <div className={BCStyle.more}>더보기</div>

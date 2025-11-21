@@ -4,6 +4,7 @@ import MCStyle from "./MidComp.module.css"
 import { useState,useEffect } from "react";
 import PopupComp from "./PopupComp";
 import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStoreAPI";
+import { logDataBySelect } from "../../../api/BehaviorAPI";
 
 
 
@@ -19,6 +20,12 @@ export function MidComp1(){
 
             const data2 = await selectPopupRandomly(7,length)
             setPopups(data2)
+            const array = new Array()
+            for (let i = 0 ; i < data2.length;i++){
+                array.push(data2[i].no)
+            }
+            console.log("중단1",array)
+            logDataBySelect(array)
 
         }
         fetchData()
@@ -51,6 +58,12 @@ export function MidComp2(){
 
             const data2 = await selectPopupRandomly(7,length)
             setPopups(data2)
+            const array = new Array()
+            for (let i = 0 ; i < data2.length;i++){
+                array.push(data2[i].no)
+            }
+            console.log("중단2",array)
+            logDataBySelect(array)
 
         }
         fetchData()

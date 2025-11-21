@@ -6,6 +6,10 @@ import PPStyle from "./Popups.module.css"
 import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
 import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
 import ReviewView from "../../componenets/pupupinfo/ReviewView";
+import { logDataByPopupDetail } from "../../api/BehaviorAPI";
+// import Footer from "../../componenets/user/Footer";
+// import Blank from "../../componenets/user/usermain/Blank";
+
 
 function Poster(){
     
@@ -22,21 +26,29 @@ function Popups(){
     const popupURL = `/public/poster/poster_${popupNo}.png`
     console.log("popupUrl:",popupURL)
 
-    
-    
-
     const [popup, setPopup] = useState({});
 
-    useEffect(()=>{
-        selectPopupStoreDetails(popupNo)
-        .then(data=>{
-            console.log("data",data)
-            setPopup(data)
-        })    
-        console.log(popup.location)
+    // useEffect(()=>{
+    //     selectPopupStoreDetails(popupNo)
+    //     .then(data=>{
+    //         console.log("data",data)
+    //         setPopup(data)
+    //     })    
         
-    },[])
+        
+    // },[])
 
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            const data = await selectPopupStoreDetails(popupNo)
+            setPopup(data)
+
+            await logDataByPopupDetail(popupNo)
+
+        }
+        fetchData()
+    },[])
 
 
 
@@ -71,7 +83,8 @@ function Popups(){
                     <ReviewView/>
                     <MidComp1/>
                     <MidComp2/>
-                    <div className="footer">푸터자리입니다.</div>
+                    {/* <Blank/>
+                    <Footer/> */}
                 </div>
             </div>
         </>

@@ -3,6 +3,7 @@ import PSStyle from "./PopupComps.module.css"
 import { useEffect,useState } from "react"
 import { DndProvider, useDrag } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
+import { logDataByPopupDetail } from "../../../api/BehaviorAPI"
 
 
 
@@ -27,6 +28,13 @@ function PopupComp({popupstore,posterNo}){
             }
         })
 
+        const onClickLog = () => {
+            logDataByPopupDetail(posterNo)
+            console.log("클릭")
+        }
+
+        
+
     
 
 
@@ -38,7 +46,7 @@ function PopupComp({popupstore,posterNo}){
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`} onClick={()=>{location.href(`/user/${popupstore.no}`)}}>
+                <Link to={`/user/${popupstore.no}`} onClick={()=>{onClickLog;location.href(`/user/${popupstore.no}`)}}>
                 <div className={PSStyle.back}>
                     <img src={posterUrl} alt={posterNo} />
 
