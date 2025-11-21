@@ -39,4 +39,34 @@ public class KpiService {
     public List<DailyVisitorDTO> selectDailyVisitorStats() {
         return kpiMapper.selectDailyVisitorStats();
     }
+
+    public List<Map<String, Object>> selectEventTypeRatioByMonth(String month) {
+        List<Map<String, Object>> eventCounts = kpiMapper.selectEventTypeRatioByMonth(month);
+
+        if (eventCounts == null || eventCounts.isEmpty()) {
+            return List.of();
+        }
+
+        // 전체 행동 수 계산
+        double totalEvents = eventCounts.stream()
+                .mapToDouble(item -> ((Number) item.get("eventCount")).doubleValue())
+                .sum();
+
+        // 각 항목의 비율을 계산
+        return eventCounts.stream()
+                .map(item -> {
+                    String eventType = (String) item.get("eventType");
+                    double eventCount = ((Number) item.get("eventCount")).doubleValue();
+                    // 소수점 둘째 자리까지 반올림하여 퍼센트로 계산
+                    double ratio = (totalEvents > 0) ? Math.round((eventCount / totalEvents) * 10000) / 100.0 : 0;
+
+                    Map<String, Object> resultItem = new java.util.HashMap<>();
+                    resultItem.put("name", eventType);
+                    resultItem.put("value", eventCount);
+                    resultItem.put("ratio", ratio);
+
+                    return resultItem;
+                })
+                .collect(Collectors.toList());
+    }
 }

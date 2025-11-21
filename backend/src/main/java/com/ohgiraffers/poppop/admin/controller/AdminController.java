@@ -22,6 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -153,5 +155,19 @@ public class AdminController {
     @GetMapping("/kpi/daily-visitor-stats")
     public ResponseEntity<List<DailyVisitorDTO>> selectDailyVisitorStats() {
         return ResponseEntity.ok(kpiService.selectDailyVisitorStats());
+    }
+
+    // User 대시보드 파이 차트 사용자 행동 유형별 비율 조회
+    @GetMapping("/event-ratio")
+    public ResponseEntity<List<Map<String, Object>>> selectEventTypeRatioByMonth(
+            @RequestParam(value = "month", required = false) String month) {
+
+        String targetMonth = month;
+        // month 파라미터가 없으면 현재 월을 기본 값으로 설정
+        if (targetMonth == null || targetMonth.trim().isEmpty()) {
+            targetMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        }
+
+        return ResponseEntity.ok(kpiService.selectEventTypeRatioByMonth(targetMonth));
     }
 }
