@@ -3,6 +3,7 @@ package com.ohgiraffers.poppop.review.model.service;
 import com.ohgiraffers.poppop.behavior.model.dao.BehaviorMapper;
 import com.ohgiraffers.poppop.review.model.dao.ReviewMapper;
 import com.ohgiraffers.poppop.review.model.dto.ReviewDTO;
+import com.ohgiraffers.poppop.sample.model.dto.UserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,5 +34,9 @@ public class ReviewService {
         reviewMapper.insertReview(content,popupNo,id);
         behaviorMapper.insertLogByReview(popupNo,sessionId);
 
+    }
+
+    public List<ReviewDTO> selectReviewById(String memberId) {
+        return reviewMapper.selectReviewById(memberId);
     }
 }

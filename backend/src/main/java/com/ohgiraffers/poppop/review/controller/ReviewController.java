@@ -4,6 +4,7 @@ import com.ohgiraffers.poppop.review.model.dto.ReviewDTO;
 import com.ohgiraffers.poppop.review.model.service.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Controller;
@@ -57,5 +58,18 @@ public class ReviewController {
 
 
         return ResponseEntity.created(URI.create("")).build();
+    }
+
+    @GetMapping("/myreview")
+    public ResponseEntity<List<ReviewDTO>> selectReviewById(
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        if (userDetails == null) {
+            return ResponseEntity.status(401).build();
+        }
+
+        String memberId = userDetails.getUsername();
+
+        return ResponseEntity.ok(reviewService.selectReviewById(memberId));
     }
 }

@@ -15,3 +15,9 @@ export function insertReview(content,popupNo){
     return API.post(`${BACKEND_URL}/review/insert?content=${content}&popupNo=${popupNo}`,{content:content,popupNo:popupNo})
     .then(response=>response.data)
 }
+
+// 내 리뷰 조회
+export function selectReviewById(){
+    return API.get(`${BACKEND_URL}/myreview`)
+    .then(response=>response.data)
+}
