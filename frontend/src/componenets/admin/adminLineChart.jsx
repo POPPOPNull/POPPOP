@@ -13,7 +13,7 @@ import { selectDailyVisitorStats } from "../../api/adminAPI";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-function AdminLineChart({ options, height, width }) {
+function AdminLineChart({ options }) {
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: []
@@ -97,6 +97,47 @@ function AdminLineChart({ options, height, width }) {
         }
     };
 
+    // 차트의 Y축 항목을 5개로 동적으로 계산하는 함수
+    const generateYItem = () => {
+        // 데이터가 없으면 기본 설정 반환
+        if (!chartData.datasets || chartData.datasets.length === 0 || chartData.datasets.every(d => d.data.length === 0)) {
+            return {
+                beginAtZero: true,
+                title: { display: true, text: '방문자 수 (명) '},
+                max: 40,
+                ticks: {
+                    stepSize: 10,
+                    autoSkip: false
+                }
+            };
+        }
+
+        // 모든 데이터셋의 데이터를 하나의 배열로 합친 후 최대값 찾기
+        const allData = chartData.datasets.flatMap(dataset => dataset.data);
+        const dataMax = Math.max(...allData, 0);
+
+        // dataMax보다 크거나 같은 4의 배수 중 가장 작은 값을 newMax로 설정
+        let newMax = Math.ceil(dataMax / 4) * 4;
+
+        // 계산된 newMax가 0이면 최소값을 설정하여 0으로 나누는 것 방지
+        if (newMax === 0) {
+            newMax = 4;
+        }
+
+        // 5개의 눈금(0 포함)을 만들기 위해 stepSize를 newMax/4로 계산
+        const stepSize = newMax / 4;
+
+        return {
+            beginAtZero: true,
+            title: { display: true, text: '방문자 수 (명)' },
+            max: newMax,
+            ticks: {
+                stepSize: stepSize,
+                autoSkip: false
+            }
+        };
+    };
+
     // X축 툴팁 콜백 함수 및 동적 제목 적용
     const chartOptions = options || {
         responsive: true,
@@ -146,10 +187,7 @@ function AdminLineChart({ options, height, width }) {
                     text: generateXTitle()
                 }
             },
-            y: {
-                beginAtZero: true,
-                title: { display: true, text: '방문자 수 (명)' },
-            }
+            y: generateYItem()
         }
     };
 
@@ -162,7 +200,7 @@ function AdminLineChart({ options, height, width }) {
     }
 
     return (
-        <div style={{ height: height, width: width }}>
+        <div style={{ position: 'relative', height: '100%', width: '90%' }}>
             <Line data={chartData} options={chartOptions} />
         </div>
     );
