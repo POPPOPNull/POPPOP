@@ -1,42 +1,54 @@
+.all {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .signupform {
-    margin-top: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4px;
 }
 .id {
-    margin-left: 90px;
+  display: flex;
+  width: 275px;
+  align-items: center;
+}
+.id .inputsignup {
+  flex: 1;
+  width: auto;
 }
 .idcheck {
-    margin-left: 10px;
-    background-color: gray;
-    width: 80px;
-    height: 45px;
-    color: white;
-    border-radius: 8px;
-    font-size: medium;
-    border-style: none;
+  margin-left: 10px;
+  background-color: gray;
+  width: 80px;
+  height: 45px;
+  color: white;
+  border-radius: 8px;
+  font-size: medium;
+  border-style: none;
 }
 .inputsignup {
-    width: 275px;
-    height: 45px;
-    border-radius: 8px;
-    font-size: medium;
-    border-style: none;
+  width: 275px;
+  height: 45px;
+  border-radius: 8px;
+  font-size: medium;
+  border-style: none;
+  /* margin-bottom: 4px; */
 }
 .btnsignup {
-    width: 275px;
-    height: 45px;
-    color: white;
-    background-color: #FFCF0D;
-    border-radius: 8px;
-    font-size: medium;
-    border-style: none;
-    margin-top:40px ;
+  width: 275px;
+  height: 45px;
+  color: white;
+  background-color: #FFCF0D;
+  border-radius: 8px;
+  font-size: medium;
+  border-style: none;
+  margin-top:20px ;
 }
 .id-message {
-  font-size: 15px;
-  margin-top: 1px;
+  font-size: 12px;
 }
 
 .id-message.success {
@@ -46,9 +58,51 @@
 .id-message.error {
   color: red;
 }
+.password-rule {
+  font-size: 12px;
+  color: #FFCF0D;
+}
+
+.birth-gender {
+  display: flex;
+  align-items: center;
+  width: 275px;
+}
+.birth6-input {
+  width: 186px; 
+  margin: 0;
+}
+.birth-gender .inputsignup.small {
+  width: 70px;
+  margin-left: 4px;
+}
+
+.dash {
+  margin-left: 4px;
+}
 
 .error-text {
   color: red;
   margin-bottom: 8px;
   font-size: 13px;
+}
+
+.field-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 1px;
+}
+
+.password-rule,
+.field-error,
+.gender,
+.id-message,
+.birth-gender,
+.error-area {
+  text-align: left;
+  width: 275px;
+}
+
+.error-area {
+  min-height: 14px;
 }

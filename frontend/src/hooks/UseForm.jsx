@@ -10,10 +10,10 @@ export const useForm = (initialValues) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
+    setValues(prev => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const resetForm = () => {
