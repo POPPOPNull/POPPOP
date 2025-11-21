@@ -55,4 +55,18 @@
 <!--          join user_event_data e on s.session_id = e.session_id-->
          where e.time_stamp >= date_sub(curdate(), interval 1 month)
     </select>
+
+<!--    월별 사용자 행동 유형 비율-->
+    <select id="selectEventTypeRatioByMonth" parameterType="string" resultType="map">
+        select
+               event_type as eventType,
+               count(*) as eventCount
+          from user_event_data
+        <where>
+            <if test="month != null and month != ''">
+                date_format(time_stamp, '%Y-%m') = #{month}
+            </if>
+        </where>
+         group by event_type
+    </select>
 </mapper>
