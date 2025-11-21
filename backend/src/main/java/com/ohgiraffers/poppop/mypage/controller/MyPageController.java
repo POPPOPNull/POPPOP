@@ -26,14 +26,14 @@ public class MyPageController {
     }
 
     @GetMapping("/myreservation")
-    public ResponseEntity<?> getMyReservations(HttpServletRequest request) {
+    public ResponseEntity<?> getMyReservations(@AuthenticationPrincipal UserDetails userDetails) {
 
-        String token = jwtTokenProvider.resolveToken(request);
-        if (token == null || !jwtTokenProvider.validateToken(token)) {
+        if (userDetails == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("유효하지 않은 토큰입니다.");
+                    .body("로그인이 필요합니다.");
         }
-        String memberId = jwtTokenProvider.getUsername(token);
+
+        String memberId = userDetails.getUsername();
 
         List<ReservationDetailsDTO> reservations =
                 reservationService.getReservationsByMemberId(memberId);
@@ -42,14 +42,15 @@ public class MyPageController {
     }
 
     @PutMapping("/myreservation/{reservationNo}/cancel")
-    public ResponseEntity<?> cancelReservation(@PathVariable int reservationNo, HttpServletRequest request) {
+    public ResponseEntity<?> cancelReservation(@PathVariable int reservationNo, @AuthenticationPrincipal UserDetails userDetails) {
 
-        String token = jwtTokenProvider.resolveToken(request);
-        if (token == null || !jwtTokenProvider.validateToken(token)) {
+        if (userDetails == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("유효하지 않은 토큰입니다.");
+                    .body("로그인이 필요합니다.");
         }
-        String memberId = jwtTokenProvider.getUsername(token);
+
+        String memberId = userDetails.getUsername();
+
 
         boolean result = reservationService.cancelReservation(reservationNo, memberId);
 

@@ -4,6 +4,8 @@ import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,11 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<?> insertReservation(@RequestBody ReservationDetailsDTO dto,
-                                               Authentication authentication) {
-        String memberId = authentication.getName();
+                                               @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(401).body("Unauthorized");
+        }
+        String memberId = userDetails.getUsername();
 
         dto.setMemberId(memberId);
 
