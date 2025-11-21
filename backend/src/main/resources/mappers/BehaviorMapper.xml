@@ -41,4 +41,40 @@
         now()
         )
     </insert>
+    <!--클릭 로그 수집-->
+    <insert id="logDataByClick">
+        insert into user_event_data
+        (
+        event_type,
+        event_value,
+        session_id,
+        time_stamp
+        )
+        value
+        (
+        "상세페이지 클릭",
+        #{popupNo},
+        #{sessionId},
+        now()
+        )
+    </insert>
+    <!--노출 로그 수집-->
+    <insert id="logDataBySelect">
+        insert into user_event_data
+        (
+        event_type,
+        event_value,
+        session_id,
+        time_stamp
+        )
+        value
+        <foreach collection="popupNoList" item="popupNo" separator=",">
+            (
+            "노출",
+            #{popupNo},
+            #{sessionId},
+            now()
+            )
+        </foreach>
+    </insert>
 </mapper>
