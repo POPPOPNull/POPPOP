@@ -134,3 +134,15 @@ export function selectDailyVisitorStats() {
         throw error;
     });
 }
+
+// user 대시보드 파이 차트 월별 사용자 행동유형별(노출, 조회, 관심, 예약) 비율 조회
+export function selectEventTypeRatioByMonth(month) {
+    // month 파라미터가 있으면 쿼리 스트링으로 추가, 없으면 그냥 호출
+    const queryString = month ? `?month=${month}` : '';
+    return API.get(`${BACKEND_URL}/admin/event-ratio${queryString}`)
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error(`API call error in selectEventTypeRatioByMonth for month ${month}`, error);
+        throw error;
+    });
+}

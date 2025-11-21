@@ -1,78 +1,135 @@
-import React from "react";
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import React, { useEffect, useState } from "react";
+import { Pie } from 'react-chartjs-2';
+import { 
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend
+} from 'chart.js';
+import { selectEventTypeRatioByMonth } from "../../api/adminAPI";
 
-const centerTextPlugin = {
-    id: 'centerText',
-    afterDraw: (chart) => {
-        if (chart.config.type === 'doughnut') {
-            const ctx = chart.ctx;
-            const chartArea = chart.chartArea;
-            if (chart.data.datasets.length > 0 && chart.data.datasets[0].data.length > 0) {
-                const sum = chart.data.datasets[0].data.reduce((a, b) => a + Number(b || 0), 0);
-                const textLine = ['합계', sum.toLocaleString()];
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-                ctx.save();
-                ctx.font = 'bold 20px Arial';
-                ctx.fillStyle = '#1f1b24';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                const centerX = (chartArea.left + chartArea.right) / 2;
-                const centerY = (chartArea.top + chartArea.bottom) / 2;
-                const lineHeight = 25;
-                const startY = centerY - (lineHeight * (textLine.length - 1)) / 2;
-
-                textLine.forEach((line, index) => {
-                    const y = startY + (index * lineHeight);
-                    ctx.fillText(line, centerX, y);
-                });
-
-                ctx.restore();
-            }
-        }
+// 월 선택 드롭다운 메뉴
+// 최근 12개월 목록을 생성하는 함수
+const generateMonthOptions = () => {
+    const months = [];
+    const today = new Date();
+    for (let i = 0; i < 12; i++) {
+        const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+        const monthString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+        months.push(monthString);
     }
+    return months;
 };
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels, centerTextPlugin);
+function AdminChart() {
 
-function AdminChart({ data, options, height, width }) {
-    const defaultData = {
-        labels: ['Red', 'Blue', 'Yellow'],
-        datasets: [
-            {
-                data: [30, 45, 25],
-                backgroundColor: ['#FFCF0D', '#403F6F', '#1F1B24'],
-                hoverOffset: 6,
-            },
-        ],
-    };
+    const [chartData, setChartData] = useState({
+        labels: [],
+        datasets: [{
+            data: [],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+    });
 
-    const chartData = data || defaultData;
-    const chartOptions = 
-        options || 
-        {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '65%',
-            layout: {
-                padding: 0,
-            },
-            plugins: {
-                datalabels: {
-                  display: false,
-                },
-                legend: { position: 'right', labels: { boxWidth: 12 } },
-                tooltip: { enabled: true },
-            },
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(generateMonthOptions()[0]);
+    const monthOptions = generateMonthOptions();
+
+    useEffect(() => {
+        const fetchChartData = async () => {
+            try {
+                setLoading(true);
+                // 선택된 월을 파라미터로 API 호출
+                const responseData = await selectEventTypeRatioByMonth(selectedMonth);
+
+                if (responseData && responseData.length > 0) {
+                    // API 응답 데이터를 차트 형식에 맞게 가공
+                    const labels = responseData.map(item => item.name);
+                    const data = responseData.map(item => item.value);
+
+                    setChartData(prev => ({
+                        ...prev,
+                        labels: labels,
+                        datasets: [{ ...prev.datasets[0], data: data }]
+                    }));
+                } else {
+                    // 데이터가 없을 경우 차트 비움.
+                    setChartData(prev => ({
+                        ...prev,
+                        labels: ['데이터 없음'],
+                        datasets: [{ ...prev.datasets[0], data: [1] }]
+                    }));
+                }
+            } catch (error) {
+                setError("데이터를 불러오는 데 실패했습니다.");
+                console.error("Error fetching event type ratio:", error);
+            } finally {
+                setLoading(false);
+            }
         };
 
+        fetchChartData();
+    }, [selectedMonth]);
+
+    const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            const total = context.chart.getDatasetMeta(0).total;
+                            const percentage = total > 0 ? ((value / total) * 100).toFixed(2) + '%' : '0%';
+                            return `${label}: ${value.toLocaleString()} 건 (${percentage})`;
+                        }
+                    }
+                }
+            }
+        };
+
+        if (error) return <div>오류 : {error}</div>;
+
     return(
-        <>
-        <div className="adminChart-box" style={{ height: height, width: width }}>
-            <Doughnut data={chartData} options={chartOptions} />
+        <div style={{ position: 'relative', height: '90%', width: '90%' }}>
+            <select 
+                value={selectedMonth}
+                onChange={(e) => setSelectedMonth(e.target.value)}
+                style={{ margin: '20px', position: 'absolute', top: 0, right: 0, zIndex: 10,
+                         background: 'linear-gradient(to right, #eba9cf, #f4002d)',
+                         width: '100px', height: '30px'
+                 }}
+            >
+                {monthOptions.map(month => (
+                    <option key={month} value={month}>{month}</option>
+                ))}
+            </select>
+
+            {loading ? (
+                <div style={{ textAlign: 'center', paddingTop: '50px' }}>로딩 중...</div>
+            ) : (
+                <Pie data={chartData} options={chartOptions} />
+            )}
         </div>
-        </>
     );
 }
 

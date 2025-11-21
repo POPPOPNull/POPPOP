@@ -63,8 +63,9 @@
                count(*) as eventCount
           from user_event_data
         <where>
+            event_type in ('노출', '조회', '관심목록 추가', '후기 작성', '예약')
             <if test="month != null and month != ''">
-                date_format(time_stamp, '%Y-%m') = #{month}
+                and date_format(time_stamp, '%Y-%m') = #{month}
             </if>
         </where>
          group by event_type
