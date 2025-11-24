@@ -4,6 +4,8 @@
     height:100vh;
     overflow-y:auto;
     overflow-x:auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .admin-side-logo1{
@@ -104,3 +106,9 @@
     color: #929498;
 }
 
+.admin-logout {
+    margin-top: auto;
+    display: flex;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}

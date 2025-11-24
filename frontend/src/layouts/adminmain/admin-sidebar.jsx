@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Admin-sidebar.css";
+import Logout from "../../componenets/Logout";
+import AdminLogout from "../../componenets/AdminLogout";
 
 const poppopMenus = [
     { name: "메인", icon: "/public/icons/home.png", subMenus: [
@@ -73,6 +75,9 @@ function AdminSidebar(){
             <div className="admin-side-logo1">POPPOP</div>
             <div className="admin-sidebutton-layout">
                 {renderMenus(poppopMenus, 'POPPOP')}
+            </div>
+            <div className="admin-logout">
+            <AdminLogout />
             </div>
         </div>
         </>

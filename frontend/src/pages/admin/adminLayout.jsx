@@ -15,7 +15,6 @@ function AdminLayout() {
                 <main className='admin-main-layout'>
                     <AdminSearchBar/>
                     <hr style={{ margin: '20px 0'}}/>
-                    <Logout/>
                     <Outlet />
                 </main>
             </div>
