@@ -200,7 +200,7 @@ function AdminLineChart({ options }) {
     }
 
     return (
-        <div style={{ position: 'relative', height: '90%', width: '90%' }}>
+        <div style={{ position: 'relative', height: '80%', width: '90%' }}>
             <Line data={chartData} options={chartOptions} />
         </div>
     );

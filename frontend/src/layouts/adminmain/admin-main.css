@@ -106,7 +106,25 @@
     box-sizing: border-box;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+
+.admin-chart-btn{
+    background: linear-gradient(to right, #eba9cf, #f4002d);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 45px;
+}
+
+.line-chart-header{
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .admin-LineChart{
