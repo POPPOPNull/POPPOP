@@ -28,20 +28,6 @@ export function getMyPopupList() {
     });
 }
 
-//팝업 상세 조회
-export function fetchMyPopupDetail(popupNo) {
-  return API.get(`${BACKEND_URL}/manager/mypopup/${popupNo}`)
-    .then((response) => {
-      console.log("나의 팝업 상세 조회 성공:", response.data);
-      return response.data;
-    })
-    .catch((error) => {
-      console.error("나의 팝업 상세 조회 오류:", error);
-      throw error;
-    });
-}
-
-
 // export async function registerPopup(formData) {
 //   try {
 //     const response = await API.post(
