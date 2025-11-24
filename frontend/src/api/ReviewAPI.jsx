@@ -1,4 +1,3 @@
-
 import API from './JwtAPI';
 
 
@@ -20,4 +19,11 @@ export function insertReview(content,popupNo){
 export function selectReviewById(){
     return API.get(`${BACKEND_URL}/myreview`)
     .then(response=>response.data)
+}
+
+//내 리뷰 삭제
+export function deleteReviewById(reviewNo) {
+  return API.delete(`${BACKEND_URL}/myreview`, {
+    params: { reviewNo }
+  }).then((response) => response.data);
 }

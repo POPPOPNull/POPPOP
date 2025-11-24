@@ -4,6 +4,7 @@ import com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationMapper reservationMapper;
+
+    private static final int max_count = 100;
 
     public ReservationService(ReservationMapper reservationMapper) {
         this.reservationMapper = reservationMapper;
@@ -49,5 +52,14 @@ public class ReservationService {
     public boolean cancelReservation(int reservationNo, String memberId) {
         int result = reservationMapper.cancelReservation(reservationNo, memberId);
         return result > 0;
+    }
+
+    public int selectAvailableCount(int popupNo, String reservationDate, String reservationTime) {
+
+        Integer reserved = reservationMapper.selectReservedCount(popupNo, reservationDate, reservationTime);
+        if (reserved == null) reserved = 0;
+
+        int result = max_count - reserved;
+        return Math.max(result, 0);
     }
 }

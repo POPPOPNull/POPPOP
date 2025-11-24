@@ -64,4 +64,8 @@
          where r.id = #{memberId}
          order by r.review_date desc
     </select>
+
+    <delete id="deleteReviewById">
+        delete from review where review_no = #{reviewNo} and id= #{memberId}
+    </delete>
 </mapper>

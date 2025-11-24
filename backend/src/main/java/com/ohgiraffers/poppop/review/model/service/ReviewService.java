@@ -39,4 +39,8 @@ public class ReviewService {
     public List<ReviewDTO> selectReviewById(String memberId) {
         return reviewMapper.selectReviewById(memberId);
     }
+
+    public void deleteReviewById(int reviewNo, String memberId) {
+        reviewMapper.deleteReviewById(reviewNo, memberId);
+    }
 }
