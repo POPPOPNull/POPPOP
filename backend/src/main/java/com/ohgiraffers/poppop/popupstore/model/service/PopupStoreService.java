@@ -96,12 +96,20 @@ public class PopupStoreService {
 //    }
 
     public List<PopupStoreDTO> getMyPopupList(String managerId) {
-        List<PopupStoreDTO> list = popupStoreMapper.selectMyPopupList(managerId);
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        return list;
+        //mapper 결과가 null이면 ArrayList::new (새 빈 리스트)를 반환하고, 아니면 list를 반환
+        return Optional.ofNullable(popupStoreMapper.selectMyPopupList(managerId))
+                .orElseGet(ArrayList::new);
     }
+
+    public PopupStoreDTO getMyPopupDetail(String managerId, int popupNo) {
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("managerId", managerId);
+        params.put("popupNo", popupNo);
+
+        return popupStoreMapper.selectMyPopupDetail(params);
+    }
+
 
 }
 

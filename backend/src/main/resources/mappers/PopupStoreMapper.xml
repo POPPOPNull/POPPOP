@@ -422,7 +422,6 @@
     </update>
 
     <!-- 매니저 팝업스토어 등록요청 -->
-
     <insert id="insertPopupStore"
             parameterType="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
         INSERT INTO popup_store (
@@ -489,6 +488,40 @@
         WHERE ps.id = #{managerId}
         ORDER BY ps.popup_no DESC;
     </select>
+
+    <!-- 매니저 팝업스토어 상세 조회 -->
+    <select id="selectMyPopupDetail"
+            parameterType="map"
+            resultMap="popupStoreResultMap">
+
+        SELECT
+        p.popup_no,
+        p.popup_name,
+        p.brand_name,
+        p.popup_start_date,
+        p.popup_end_date,
+        p.open_time,
+        p.close_time,
+        p.popup_location,
+        p.latitude,
+        p.longitude,
+        p.reservable_status,
+        p.popup_explanation,
+        p.approval_status,
+        p.rejection_reason,
+        p.id,
+        p.click_count,
+        p.category_name,
+        p.advance_reservation,
+        p.homepage_link,
+        p.capacity,
+        p.hashtag_name
+        FROM popup_store p
+        WHERE p.popup_no = #{popupNo}
+        AND p.id = #{managerId}
+
+    </select>
+
 
 
 </mapper>

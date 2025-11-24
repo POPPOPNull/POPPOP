@@ -42,4 +42,7 @@ public interface PopupStoreMapper {
     List<PopupStoreDTO> selectPopupByDate(String date);
 
     List<PopupStoreDTO> selectMyPopupList(String managerId);
+
+    PopupStoreDTO selectMyPopupDetail(Map<String, Object> params);
+
 }

@@ -48,7 +48,7 @@ function MyPopup() {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      setLoading(true);      // 🔹 요청 시작할 때 true (선택)
+      setLoading(true);      
       setError(null);
 
       const data = await getMyPopupList();
@@ -112,15 +112,15 @@ function MyPopup() {
         );
       }
 
-  return (
-    <div className="mp-wrap">
-      <div className="mp-top">
-        <div className="mp-user">
-  <span className="badge">
-    {managerId || "알 수 없음"}
-  </span>
-</div>
-      </div>
+      return (
+        <div className="mp-wrap">
+          <div className="mp-top">
+            <div className="mp-user">
+      <span className="badge">
+        {managerId || "알 수 없음"}
+      </span>
+    </div>
+          </div>
 
       
         <ManagerSearchBar
