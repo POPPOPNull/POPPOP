@@ -13,6 +13,7 @@ public class ReservationDetailsDTO {
     private int popupNo;
     private String memberId;
     private String popupName;
+    private String phone;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservationDate;

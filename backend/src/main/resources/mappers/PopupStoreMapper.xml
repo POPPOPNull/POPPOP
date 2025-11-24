@@ -19,6 +19,7 @@
         <result property="approvalStatus" column="approval_status"/>
         <result property="rejectionReason" column="rejection_reason"/>
         <result property="id" column="id"/>
+        <result property="managerId" column="id"/>
         <result property="clickCount" column="click_count"/>
         <result property="categoryName" column="category_name"/>
         <result property="advanceReservation" column="advance_reservation"/>

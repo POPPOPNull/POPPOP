@@ -50,4 +50,8 @@ public class ReservationService {
         int result = reservationMapper.cancelReservation(reservationNo, memberId);
         return result > 0;
     }
+
+    public List<ReservationDetailsDTO> selectAllReservationsByManager(String managerId) {
+        return reservationMapper.selectAllReservationsByManager(managerId);
+    }
 }

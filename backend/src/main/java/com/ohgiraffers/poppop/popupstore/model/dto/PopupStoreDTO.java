@@ -22,6 +22,7 @@ public class PopupStoreDTO {
     private String approvalStatus;
     private String rejectionReason;
     private String id;
+    private String managerId;
     private int clickCount;
     private String categoryName;
     private int advanceReservation;
@@ -46,6 +47,7 @@ public class PopupStoreDTO {
         this.approvalStatus = approvalStatus;
         this.rejectionReason = rejectionReason;
         this.id = id;
+        this.managerId = id;
         this.clickCount = clickCount;
         this.categoryName = categoryName;
         this.advanceReservation = advanceReservation;
