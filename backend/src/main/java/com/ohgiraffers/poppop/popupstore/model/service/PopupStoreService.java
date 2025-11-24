@@ -102,7 +102,12 @@ public class PopupStoreService {
         }
         return list;
     }
-
+    public PopupStoreDTO getMyPopupDetail(String managerId, int popupNo) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("managerId", managerId);
+        params.put("popupNo", popupNo);
+        return popupStoreMapper.selectMyPopupDetail(params);
+    }
 }
 
 
