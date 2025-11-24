@@ -10,6 +10,7 @@ import CategoryComp from "../../componenets/user/usermain/CategoryComp";
 import { MidComp1, MidComp2 } from "../../componenets/user/usermain/MidComp";
 import Container from "./Container";
 import ComponentContainer from "./TestContainer";
+import Footer from "./Footer";
 // import Test from "../../pages/dndtest/DndTest";
 
 
@@ -31,7 +32,7 @@ function User (){
                     <TopComp/>
                     <Container/>
                     <BotComp/>
-                    <div className="footer">푸터자리입니다.</div>
+                    <Footer/>
                 </div>
             </div>
             
