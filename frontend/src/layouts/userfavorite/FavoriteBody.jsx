@@ -17,7 +17,7 @@ function FavoriteBody (){
 
                     
                 
-                    {/* <div className="footer">푸터자리입니다.</div> */}
+                    
                 </div>
             </div>
             

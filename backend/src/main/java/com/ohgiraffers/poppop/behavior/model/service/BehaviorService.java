@@ -21,4 +21,13 @@ public class BehaviorService {
     public void logDataBySelect(ArrayList<Integer> popupNoList, String sessionId) {
         behaviorMapper.logDataBySelect(popupNoList,sessionId);
     }
+
+    public int countViews(String eventValue) {
+
+        return behaviorMapper.countViews(eventValue);
+    }
+
+    public int countFavorite(String eventValue) {
+        return behaviorMapper.countFavorite(eventValue);
+    }
 }

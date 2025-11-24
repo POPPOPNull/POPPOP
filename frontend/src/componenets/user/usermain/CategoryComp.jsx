@@ -28,10 +28,12 @@ function CategoryComp({popupstore}){
     const [categoryList, setCategoryList] = useState(["전체"])
     const [category, setCategory] = useState("게임");
     const [popup, setPopup] = useState([])
+    
 
 
     const onClickCategory = e => {
-        setCategory(e.target.textContent)       
+        setCategory(e.target.textContent)  
+        
     }
 
     // useEffect(()=>{
@@ -90,7 +92,7 @@ function CategoryComp({popupstore}){
         <>
             <div className={CCStyle.explain}>카테고리</div>
             <div className={CCStyle.categorylayout}>
-                {categoryList.map(a=><div key={a} className={CCStyle.category} onClick={onClickCategory}>{a}</div>)}
+                {categoryList.map((a,i)=><div key={a} className={category==a?CCStyle.categoryactive:CCStyle.category} onClick={onClickCategory} index={i}>{a}</div>)}
             </div>
                 <Swiper
                 className={CCStyle.layout}

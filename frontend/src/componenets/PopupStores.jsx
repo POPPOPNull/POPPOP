@@ -3,11 +3,14 @@ import PSStyle from "./PopupStore.module.css"
 import { useEffect,useState } from "react"
 import { insertFavorite } from "../api/FavoriteAPI"
 import { useDrag, useDrop } from "react-dnd"
+import { countFavorite, countViews } from "../api/BehaviorAPI"
 
 
 function PopupStores({popupstore,setIsDrag,posterNo}){
 
         const imageUrl =  `/public/poster/poster_${posterNo}.png`
+        const [view, setView] = useState()
+        const [favorite, setFavorite] = useState()
 
         const [{isDragging},drag,preview] = useDrag({
             type:'popup',
@@ -29,6 +32,13 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
         useEffect(()=>{
             setIsDrag(isDragging)
         },[isDragging,setIsDrag])
+
+        useEffect(()=>{
+            countViews(posterNo)
+            .then(data=>{setView(data)})
+            countFavorite(posterNo)
+            .then(data=>{setFavorite(data)})
+        },[])
     
     return(
         <>
@@ -45,7 +55,15 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
                             </div>
                     </div>
                 </Link>
-                        <div className={PSStyle.favorite}>♡</div>
+                        <div className={PSStyle.favorite}>
+                            <div className={PSStyle.viewlayout}>
+                                <div className={PSStyle.view}><img src="\public\icons\eye.png" style={{width:15,height:15}}/></div>{view}
+                            </div>
+                            <div className={PSStyle.favoritelayout}>
+                                <div>♡</div>{favorite}
+                            </div>
+                        </div>
+                    
             
         </>
     )
