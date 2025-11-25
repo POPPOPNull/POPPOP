@@ -54,6 +54,19 @@ export function fetchMyPopupReservations(popupNo) {
     });
 }
 
+// 팝업 수정 
+export function updatePopup(popupNo, formData) {
+  return API.put(`${BACKEND_URL}/manager/popup-stores/${popupNo}`, formData)
+    .then((response) => {
+      console.log("팝업 수정 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("팝업 수정 에러:", error);
+      throw error;
+    });
+}
+
 
 // export async function registerPopup(formData) {
 //   try {

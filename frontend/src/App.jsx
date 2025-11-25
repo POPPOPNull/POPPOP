@@ -8,6 +8,7 @@ import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
 import PopupRegister from "./pages/manager/popup-register";
 import ReservationPage from "./pages/manager/reservations";
+import MyPopupEditPage from "./pages/manager/MyPopupEditPage";
 import MyPopupLayout from "./pages/manager/MyPopupLayout";
 import MyInformation from "./pages/user/MyInfo"
 import MyReview from "./pages/user/MyReviews"
@@ -102,8 +103,9 @@ function App() {
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
               <Route path="/manager/mypopup/:popupNo" element={<MyPopupLayout />}>
                 <Route index element={<Dashboard />} />                
-                <Route path="detail" element={<MypopupdetPage />} />   {/* 상세 */}
-                <Route path="reservations" element={<ReservationPage />} /> {/* 예약 */}
+                <Route path="detail" element={<MypopupdetPage />} />   
+                <Route path="reservations" element={<ReservationPage />} /> 
+                <Route path="edit" element={<MyPopupEditPage />} /> 
               </Route>
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
               <Route path="/manager/popup-register" element={<PopupRegister />} />
