@@ -36,6 +36,26 @@
     align-items: center;
     border-radius: 8px;
 }
+.category:hover{
+    background-color: red;
+    color: white;
+    position: relative;
+    bottom: 5px;
+    padding-bottom: 5px;
+}
+.categoryactive{
+    background-color: red;
+    color: white;
+    height: 30px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    position: relative;
+    bottom: 5px;
+    padding-bottom: 5px;
+}
 
 .datelayout{
     display: flex;
@@ -44,6 +64,7 @@
     height: 100px;
     /* background-color: yellowgreen; */
 }
+
 .active{
     width: 75px;
     height: 75px;
@@ -57,7 +78,10 @@
     cursor: pointer;
     border: none;
 }
+.date:hover{
+    background-color: red;
 
+}
 .date{
     width: 60px;
     height: 60px;

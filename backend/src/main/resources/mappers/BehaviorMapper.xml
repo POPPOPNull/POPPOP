@@ -4,7 +4,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.poppop.behavior.model.dao.BehaviorMapper">
     <resultMap id="behaviorResultMap" type="com.ohgiraffers.poppop.behavior.model.dto.BehaviorDTO">
-
+        <id property="no"   column="event_data_no"/>
+        <result property="sessionId" column="session_id"/>
+        <result property="eventType" column="eventType"/>
+        <result property="eventValue" column="eventValue"/>
+        <result property="timeStamp" column="timeStamp"/>
     </resultMap>
 
     <!--리뷰 로그 수집-->
@@ -77,4 +81,22 @@
             )
         </foreach>
     </insert>
+
+    <!--조회 수 조회-->
+    <select id="countViews" resultType="_int">
+        select
+               count(*)
+               from user_event_data
+               where event_type="상세페이지 클릭"
+               and event_value=#{eventValue}
+    </select>
+
+    <!--찜 수 조회-->
+    <select id="countFavorite" resultType="_int">
+        select
+        count(*)
+        from user_event_data
+        where event_type="관심목록 추가"
+        and event_value=#{eventValue}
+    </select>
 </mapper>
