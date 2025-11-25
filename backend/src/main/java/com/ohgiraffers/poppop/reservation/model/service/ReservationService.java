@@ -66,4 +66,5 @@ public class ReservationService {
         int result = max_count - reserved;
         return Math.max(result, 0);
     }
+
 }

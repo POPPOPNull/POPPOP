@@ -519,5 +519,28 @@
         AND p.id = #{managerId}
     </select>
 
+    <!-- 매니저 팝업스토어 수정 -->
+    <update id="updateMyPopup"
+            parameterType="com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO">
+
+        UPDATE popup_store
+        <set>
+            <if test="name != null"> popup_name = #{name}, </if>
+            <if test="brandName != null"> brand_name = #{brandName}, </if>
+            <if test="startDate != null"> popup_start_date = #{startDate}, </if>
+            <if test="endDate != null"> popup_end_date = #{endDate}, </if>
+            <if test="openTime != null"> open_time = #{openTime}, </if>
+            <if test="closeTime != null"> close_time = #{closeTime}, </if>
+            <if test="location != null"> popup_location = #{location}, </if>
+            <if test="explanation != null"> popup_explanation = #{explanation}, </if>
+            <if test="categoryName != null"> category_name = #{categoryName}, </if>
+            <if test="homepageLink != null"> homepage_link = #{homepageLink}, </if>
+            <if test="capacity != 0"> capacity = #{capacity}, </if>
+            <if test="hashtagName != null"> hashtag_name = #{hashtagName}, </if>
+        </set>
+        WHERE popup_no = #{no}
+        AND id = #{id} <!--매니저 본인 팝업만 수정 가능-->
+    </update>
+
 
 </mapper>

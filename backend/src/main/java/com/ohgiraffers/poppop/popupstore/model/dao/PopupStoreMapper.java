@@ -44,4 +44,7 @@ public interface PopupStoreMapper {
     List<PopupStoreDTO> selectMyPopupList(String managerId);
 
     PopupStoreDTO selectMyPopupDetail(Map<String, Object> params);
+
+    // 매니저 팝업 수정
+    int updateMyPopup(PopupStoreDTO popupStoreDTO);
 }

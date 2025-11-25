@@ -78,5 +78,20 @@ public class PopupStoreManagerController {
 
         return ResponseEntity.ok(dto);
     }
+
+    // 팝업 수정 PUT /manager/popup-stores/{popupNo}
+    @PutMapping("/popup-stores/{popupNo}")
+    public ResponseEntity<Void> updateMyPopup(
+            @PathVariable int popupNo,
+            @AuthenticationPrincipal UserDetails user,
+            @RequestBody PopupStoreDTO popupStoreDTO
+    ) {
+
+        String managerId = user.getUsername();   // 로그인한 매니저 id
+        popupStoreService.updateMyPopup(popupNo, managerId, popupStoreDTO);
+
+        return ResponseEntity.ok().build();
+    }
+
 }
 

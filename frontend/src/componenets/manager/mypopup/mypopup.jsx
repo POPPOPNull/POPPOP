@@ -8,7 +8,7 @@ import { jwtDecode } from "jwt-decode";
 
 
 function mapState(p) {
-  // approvalStatus 기준 + 날짜/예약 상태로 예시 로직
+
   if (p.approvalStatus === "반려") return "반려";
   if (p.approvalStatus === "대기") return "승인 대기";
 
@@ -116,10 +116,10 @@ function MyPopup() {
     <div className="mp-wrap">
       <div className="mp-top">
         <div className="mp-user">
-  <span className="badge">
-    {managerId || "알 수 없음"}
-  </span>
-</div>
+        <span className="badge">
+          {managerId || "알 수 없음"}
+        </span>
+      </div>
       </div>
 
       
@@ -153,6 +153,12 @@ function MyPopup() {
                   onClick={() => goDetail(row.id)}
                 >
                   상세
+                </button>
+                <button
+                  className="mypopup-edit-btn"
+                  onClick={() => navigate(`/manager/mypopup/${row.id}/edit`)}
+                >
+                  수정
                 </button>
               </div>
             </div>

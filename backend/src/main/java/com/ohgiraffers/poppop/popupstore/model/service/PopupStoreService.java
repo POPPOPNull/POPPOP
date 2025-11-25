@@ -108,6 +108,18 @@ public class PopupStoreService {
         params.put("popupNo", popupNo);
         return popupStoreMapper.selectMyPopupDetail(params);
     }
+    // 매니저 팝업 수정
+    @Transactional
+    public void updateMyPopup(int popupNo, String managerId, PopupStoreDTO dto) {
+        dto.setNo(popupNo);      // WHERE popup_no = #{no}
+        dto.setId(managerId);    // WHERE id = #{id}
+
+        int result = popupStoreMapper.updateMyPopup(dto);
+        if (result == 0) {
+            throw new IllegalArgumentException("본인의 팝업만 수정할 수 있습니다.");
+        }
+    }
+
 }
 
 
