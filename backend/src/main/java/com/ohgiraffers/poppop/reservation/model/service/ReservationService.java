@@ -54,6 +54,10 @@ public class ReservationService {
         return result > 0;
     }
 
+
+    public List<ReservationDetailsDTO> selectAllReservationsByManager(String managerId) {
+        return reservationMapper.selectAllReservationsByManager(managerId);
+
     public int selectAvailableCount(int popupNo, String reservationDate, String reservationTime) {
 
         Integer reserved = reservationMapper.selectReservedCount(popupNo, reservationDate, reservationTime);
