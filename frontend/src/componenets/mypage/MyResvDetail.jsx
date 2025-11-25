@@ -2,6 +2,8 @@ import "./MyResvDetail.css"
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMyReservations, cancelReservation } from "../../api/ReservationAPI";
+import { selectPopupStoreDetails } from "../../api/PopupStoreAPI";
+import { Link } from "react-router-dom";
 
 function ResvDetail() {
     const [reservations, setReservations] = useState([]);
@@ -32,6 +34,9 @@ function ResvDetail() {
         setError(err);
       });
     }, []);
+
+    const getPosterUrl = (popupNo) =>
+    `/public/poster/poster_${popupNo}.png`;
 
     const filteredReservations = reservations.filter((resv) => {
 
@@ -100,7 +105,12 @@ function ResvDetail() {
                         <tr key={resv.reservationNo}>
                             <td className="popup-info">
                                 <div className="poster">
-                                    <img src="/images/plant.png" alt="팝업포스터"/>
+                                    <Link to={`/user/${resv.popupNo}`}>
+                                        <img
+                                            src={getPosterUrl(resv.popupNo)}
+                                            alt={resv.popupName}
+                                        />
+                                    </Link>
                                 </div>
                                 <div className="details">
                                     <p className="title">{resv.popupName}</p>
