@@ -57,5 +57,26 @@ public class PopupStoreManagerController {
 
         return ResponseEntity.ok(list);   // list가 비어 있어도 그냥 [] 로 나감
     }
+
+    @GetMapping("/mypopup/{popupNo}")
+    public ResponseEntity<?> getMyPopupDetail(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable int popupNo
+    ) {
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인이 필요합니다.");
+        }
+
+        String managerId = userDetails.getUsername();
+        PopupStoreDTO dto = popupStoreService.getMyPopupDetail(managerId, popupNo);
+
+        if (dto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("해당 팝업을 찾을 수 없습니다.");
+        }
+
+        return ResponseEntity.ok(dto);
+    }
 }
 
