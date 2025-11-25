@@ -176,4 +176,10 @@ public class AdminController {
     public ResponseEntity<List<SearchKeywordDTO>> selectTop10SearchKeywordsByMonth(@RequestParam("month") String month) {
         return ResponseEntity.ok(kpiService.selectTop10SearchKeywordsByMonth(month));
     }
+
+    // User 대시보드 막대 차트 인기 카테고리 조회(월별)
+    @GetMapping("/kpi/popular-categories")
+    public ResponseEntity<List<PopularCategoryDTO>> selectPopularCategoriesByMonth(@RequestParam("month") String month) {
+        return ResponseEntity.ok(kpiService.selectPopularCategoriesByMonth(month));
+    }
 }

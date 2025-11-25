@@ -158,3 +158,15 @@ export function selectTop10SearchKeywords(month) {
         throw error;
     });
 }
+
+// user 대시보드 막대 차트 월별 인기 카테고리 조회
+export function selectPopularCategories(month) {
+    return API.get(`${BACKEND_URL}/admin/kpi/popular-categories`, {
+        params: { month }
+    })
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error(`API call error in selectPopularCategories. ${month}`, error);
+        throw error;
+    });
+}
