@@ -3,6 +3,7 @@ import Blank from "../../componenets/user/usermain/Blank";
 import SearchBar from "../../componenets/user/usersearch/SearchBar";
 import TodayPopup from "../../componenets/user/usersearch/TodayPopup";
 import { useParams } from "react-router-dom";
+import Footer from "../usermain/Footer";
 useParams
 
 
@@ -21,7 +22,8 @@ function UserSearchBody (){
                     <Blank/>
 
                     <br />        
-                    <div className="footer">푸터자리입니다.</div>
+                    
+                    <Footer/>
                 </div>
             </div>
             

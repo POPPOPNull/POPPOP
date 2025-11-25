@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@Controller
+@RestController
 @RequestMapping("/behavior")
 public class BehaviorController {
 
@@ -19,6 +19,7 @@ public class BehaviorController {
         this.behaviorService = behaviorService;
     }
 
+    // 상세페이지 조회
     @PostMapping("/click")
     public void logDataByClick(@RequestParam String popupNo, HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -27,14 +28,29 @@ public class BehaviorController {
         behaviorService.logDataByClick(popupNo,sessionId);
     }
 
+    // 노출 수
     @PostMapping("/select/{popupNoList}")
     public void logDataBySelect(@PathVariable ArrayList<Integer> popupNoList, HttpServletRequest request){
         HttpSession session = request.getSession();
         String sessionId = session.getId();
-        for(int popupNo : popupNoList){
-            System.out.println("popupNo = " + popupNo);
-        }
+//        for(int popupNo : popupNoList){
+//            System.out.println("popupNo = " + popupNo);
+//        }
 
         behaviorService.logDataBySelect(popupNoList,sessionId);
     }
+
+    // 조회 수
+    @GetMapping("/click/{eventValue}")
+    public int countViews(@PathVariable String eventValue){
+        System.out.println("eventValue = " + eventValue);
+        return behaviorService.countViews(eventValue);
+
+    }
+    // 찜수
+    @GetMapping("/favorite/{eventValue}")
+    public int countFavorite(@PathVariable String eventValue){
+        return behaviorService.countFavorite(eventValue);
+    }
+
 }

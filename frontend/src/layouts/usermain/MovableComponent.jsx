@@ -23,7 +23,7 @@ export default function MovableComponent({ id, index, moveComponent, children })
       if (dragIndex === hoverIndex) return
 
       const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleY = (hoverBoundingRect.bottom-hoverBoundingRect.top)/2;
+      const hoverMiddleY = (hoverBoundingRect.bottom-hoverBoundingRect.top)/4;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y-hoverBoundingRect.top
 

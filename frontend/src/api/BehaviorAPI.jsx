@@ -14,3 +14,15 @@ export function logDataBySelect(popupNo){
     return API.post(`${BACKEND_URL}/behavior/select/${popupNo}`)
     .then(response=>response.data)
 }
+
+// 조회수 조회
+export function countViews(popupNo){
+    return API.get(`${BACKEND_URL}/behavior/click/${popupNo}`)
+    .then(response=>response.data)
+}
+
+// 찜 수 조회
+export function countFavorite(popupNo){
+    return API.get(`${BACKEND_URL}/behavior/favorite/${popupNo}`)
+    .then(response=>response.data)
+}
