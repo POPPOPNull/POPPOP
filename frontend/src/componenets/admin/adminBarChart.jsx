@@ -1,41 +1,125 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bar, Chart } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     BarElement,
+    Title,
     Tooltip,
     Legend,
 } from 'chart.js';
+import { selectTop10SearchKeywords } from '../../api/adminAPI';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function AdminBarChart({ data, options, height, width }) {
-    const defaultData = {
-        labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-        datasets: [
-            {
-                label: "Sales",
-                data: [50, 75, 150, 100, 130],
-                backgroundColor: ["#403F6F", "#403F6F", "#FFCF0D", "#403F6F", "#403F6F"]
+// 최근 12개월 목록을 생성하는 함수
+const generateMonthOptions = () => {
+    const months = [];
+    const today = new Date();
+    for (let i = 0; i < 12; i++) {
+        const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+        const monthString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+        months.push(monthString);
+    }
+    return months;
+};
+
+function AdminBarChart() {
+    
+    const [chartData, setChartData] = useState({
+        labels: [],
+        datasets: []
+    });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(generateMonthOptions()[0]);
+    const monthOptions = generateMonthOptions();
+
+    useEffect(() => {
+        const fetchChartData = async () => {
+            try {
+                setLoading(true);
+
+                const topKeywords = await selectTop10SearchKeywords(selectedMonth);
+
+                if (topKeywords && topKeywords.length > 0) {
+
+                    const labels = topKeywords.map(item => item.keyword);
+                    const data = topKeywords.map(item => item.searchCount);
+
+                    setChartData({
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '검색 횟수',
+                                data: data,
+                                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    });
+                } else {
+                    setChartData({ labels: ['데이터 없음'], datasets: [{ data: [0] }] });
+                }
+            } catch (error) {
+                setError("데이터를 불러오는 데 실패했습니다.");
+            } finally {
+                setLoading(false);
             }
-        ]
-    };
+        };
+        fetchChartData();
+    }, [selectedMonth]);
 
-    const chartOptions = options || {
+    const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false }, tooltip: { enabled: true } },
+        plugins: { 
+            legend: { 
+                display: false 
+            },
+            title: {
+                display: true,
+                text: `${selectedMonth}월`
+            },
+        },
         scales: {
-            x: { grid: { display: false } },
-            y: { beginAtZero: true }
+            y: { 
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
         }
     };
 
+    if (error) return <div>오류 : {error}</div>;
+
     return (
-        <div style={{ height: height, width: width }}>
-            <Bar data={data || defaultData} options={chartOptions} />
+        <div style={{ position: 'relative', flexDirection: 'column', height: '90%', width: '90%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '-5px', fontWeight: '600', marginTop: '-5px' }}>
+                인기 검색 키워드 TOP 10
+                <select
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(e.target.value)}
+                    style={{
+                        width: '100px', height: '30px',
+                        marginRight: '20px'
+                    }}
+                >
+                    {monthOptions.map(month => (
+                        <option key={month} value={month}>{month}</option>
+                    ))}
+
+                </select>
+            </div>
+
+            {loading ? (
+                <div style={{ textAlign: 'center', paddingTop: '50px' }}>로딩 중...</div>
+            ) : (
+                <Bar data={chartData} options={chartOptions} />
+            )}
         </div>
     );
 }
