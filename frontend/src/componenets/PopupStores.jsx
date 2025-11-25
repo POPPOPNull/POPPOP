@@ -23,7 +23,8 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
                 }else{
                     console.log('드래그종료, 드롭 안됨',item.popupstore.no)
                 }
-            }
+            },
+            
         })
 
         useEffect(()=>{
@@ -34,6 +35,7 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
         <>
             
                 <Link to={`/user/${popupstore.no}`}>
+                    <div ref={preview}></div>
                     <div className={PSStyle.layout} ref={drag}>
                         <div className={PSStyle.image}>
                             <img src={imageUrl} alt={popupstore.no} className={PSStyle.img}/>
