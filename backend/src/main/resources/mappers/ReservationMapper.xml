@@ -117,4 +117,14 @@
          where reservation_no = #{reservationNo}
            and id = #{memberId}
     </update>
+
+    <select id="selectReservedCount" resultType="Integer">
+        select
+               coalesce(sum(reservation_personnel), 0)
+          from reservation
+         where popup_no = #{popupNo}
+           and reservation_date = #{reservationDate}
+           and reservation_time = #{reservationTime}
+           and reservation_status != '예약취소'
+    </select>
 </mapper>
