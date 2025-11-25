@@ -16,8 +16,7 @@ function Reservation (){
             .then(data=>{
                 console.log("data",data)
                 setPopup(data)
-            })    
-            console.log(popup.location)
+            })
     
             
         },[])
@@ -28,7 +27,9 @@ function Reservation (){
                 <div className="user-main">
                     <div className="postercontainer">
                         <div className="poster">
-                            <div className="imgcontainer"><img src="/images/plant.png" alt="포스터" /></div>
+                            <div className="imgcontainer">
+                                <img src={`/poster/poster_${popupNo}.png`} alt="포스터" />
+                            </div>
                         </div>
                     </div>
                         <div className="title">{popup.name}의 예약페이지</div>
