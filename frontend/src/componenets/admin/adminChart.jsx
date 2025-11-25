@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Pie } from 'react-chartjs-2';
-import { 
+import {
     Chart as ChartJS,
     ArcElement,
     Tooltip,
     Legend
 } from 'chart.js';
-import { selectEventTypeRatioByMonth } from "../../api/adminAPI";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { selectEventTypeRatioByMonth } from "../../api/adminAPI";
+import CustomLegend from './CustomLegend';
+
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 // 월 선택 드롭다운 메뉴
-// 최근 12개월 목록을 생성하는 함수
+// 최근 12개월 목록을 생성하는 함수 (unchanged)
 const generateMonthOptions = () => {
     const months = [];
     const today = new Date();
@@ -24,7 +27,6 @@ const generateMonthOptions = () => {
 };
 
 function AdminChart() {
-
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [{
@@ -56,11 +58,9 @@ function AdminChart() {
         const fetchChartData = async () => {
             try {
                 setLoading(true);
-                // 선택된 월을 파라미터로 API 호출
                 const responseData = await selectEventTypeRatioByMonth(selectedMonth);
 
                 if (responseData && responseData.length > 0) {
-                    // API 응답 데이터를 차트 형식에 맞게 가공
                     const labels = responseData.map(item => item.name);
                     const data = responseData.map(item => item.value);
 
@@ -70,7 +70,6 @@ function AdminChart() {
                         datasets: [{ ...prev.datasets[0], data: data }]
                     }));
                 } else {
-                    // 데이터가 없을 경우 차트 비움.
                     setChartData(prev => ({
                         ...prev,
                         labels: ['데이터 없음'],
@@ -89,45 +88,71 @@ function AdminChart() {
     }, [selectedMonth]);
 
     const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'right' },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const label = context.label || '';
-                            const value = context.raw || 0;
-                            const total = context.chart.getDatasetMeta(0).total;
-                            const percentage = total > 0 ? ((value / total) * 100).toFixed(2) + '%' : '0%';
-                            return `${label}: ${value.toLocaleString()} 건 (${percentage})`;
-                        }
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const label = context.label || '';
+                        const value = context.raw || 0;
+                        const total = context.chart.getDatasetMeta(0).total;
+                        const percentage = total > 0 ? ((value / total) * 100).toFixed(2) + '%' : '0%';
+                        return `${label}: ${value.toLocaleString()} 건 (${percentage})`;
                     }
                 }
+            },
+            datalabels: {
+                formatter: (value, ctx) => {
+                    if (value === 0) return null;
+                    const total = ctx.chart.data.datasets[0].data.reduce((acc, data) => acc + data, 0);
+                    const percentage = ((value / total) * 100);
+                    if (percentage < 1) return null;
+                    return percentage.toFixed(1) + '%';
+                },
+                color: 'black',
+                font: {
+                    weight: 'bold',
+                    size: 12
+                }
             }
-        };
+        }
+    };
 
-        if (error) return <div>오류 : {error}</div>;
+    if (error) return <div>오류 : {error}</div>;
 
-    return(
-        <div style={{ position: 'relative', height: '90%', width: '90%' }}>
-            <select 
-                value={selectedMonth}
-                onChange={(e) => setSelectedMonth(e.target.value)}
-                style={{ margin: '20px', position: 'absolute', top: 0, right: 0, zIndex: 10,
-                         background: 'linear-gradient(to right, #eba9cf, #f4002d)',
-                         width: '100px', height: '30px'
-                 }}
-            >
-                {monthOptions.map(month => (
-                    <option key={month} value={month}>{month}</option>
-                ))}
-            </select>
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '90%', width: '90%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', fontWeight: '600', marginTop: '-5px' }}>
+                사용자 행동 유형 비율
+                <select
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(e.target.value)}
+                    style={{
+                        width: '100px', height: '30px',
+                        marginRight: '20px'
+                    }}
+                >
+                    {monthOptions.map(month => (
+                        <option key={month} value={month}>{month}</option>
+                    ))}
+                </select>
+            </div>
 
             {loading ? (
-                <div style={{ textAlign: 'center', paddingTop: '50px' }}>로딩 중...</div>
+                <div style={{ textAlign: 'center', paddingTop: '50px', flexGrow: 1 }}>로딩 중...</div>
             ) : (
-                <Pie data={chartData} options={chartOptions} />
+                <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ width: '70%', height: '100%', position: 'relative' }}>
+                        <Pie data={chartData} options={chartOptions} />
+                    </div>
+                    <div style={{ width: '30%', height: '100%', display: 'flex', alignItems: 'center' }}>
+                        <CustomLegend data={chartData} />
+                    </div>
+                </div>
             )}
         </div>
     );

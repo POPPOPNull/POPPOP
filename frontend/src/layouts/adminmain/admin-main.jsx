@@ -12,6 +12,15 @@ function AdminMain (){
             </div>
             <div className="admin-chart-layout">
                 <div className="admin-chart-box">
+                    <div className="line-chart-header">
+                        <span>플랫폼 성장 추이</span>
+                        <div
+                            style={{ display: 'flex', gap: '10px'}}
+                        >
+                            <button className="admin-chart-btn">일별</button>
+                            <button className="admin-chart-btn">월별</button>
+                        </div>
+                    </div>
                     <AdminLineChart/>
                 </div>
                 <div className="admin-chart-box">
