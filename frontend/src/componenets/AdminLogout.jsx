@@ -8,9 +8,10 @@ function AdminLogout() {
 
     const handleLogout = () => {
 
+        alert("로그아웃 되었습니다.");
+
         logout();
 
-        navigate('/admin/login');
     };
 
     return (
@@ -18,17 +19,17 @@ function AdminLogout() {
             <button 
             onClick={handleLogout} 
             style={{
-                marginTop:"100px",
-                color:" var(--yellow)",
+                color:"#929498",
                 fontWeight:"800",
                 cursor:"pointer",
-                fontSize:"30px",
+                fontSize:"20px",
                 lineHeight:"1.2",
-                background:"none"
+                background:"none",
+                border: 'none'
                 
             }}
             >
-            logout</button>
+            로그아웃</button>
         </>
     )
 }
