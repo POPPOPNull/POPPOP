@@ -13,4 +13,8 @@ public interface BehaviorMapper {
     void logDataByClick(String popupNo, String sessionId);
 
     void logDataBySelect(ArrayList<Integer> popupNoList, String sessionId);
+
+    int countViews(String eventValue);
+
+    int countFavorite(String eventValue);
 }

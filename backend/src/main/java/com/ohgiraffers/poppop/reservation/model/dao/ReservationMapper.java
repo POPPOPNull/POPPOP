@@ -18,7 +18,7 @@ public interface ReservationMapper {
 
     int deleteReservationDetails(int reservationNo);
 
-    int insertReservation(ReservationDetailsDTO dto);
+    void insertReservation(ReservationDetailsDTO dto);
 
     List<ReservationDetailsDTO> selectReservationByMemberId(@Param("memberId") String memberId);
 
@@ -26,5 +26,10 @@ public interface ReservationMapper {
                           @Param("memberId") String memberId);
 
     List<ReservationDetailsDTO> selectAllReservationsByManager(@Param("managerId") String managerId);
+
+
+    Integer selectReservedCount(@Param("popupNo") int popupNo,
+                                @Param("reservationDate") String reservationDate,
+                                @Param("reservationTime")  String reservationTime);
 
 }

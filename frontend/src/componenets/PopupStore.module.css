@@ -36,9 +36,25 @@ img{
 .favorite{
     color: white;
     width: 50px;
-    background-color: black;
+    /* background-color: rgb(107, 104, 104); */
     text-align: center;
+
 }
 .small{
     font-size: 12px;
 }
+.view{
+    filter: invert(100%);
+}
+.viewlayout{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.favoritelayout{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+

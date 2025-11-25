@@ -72,4 +72,16 @@ public class ReviewController {
 
         return ResponseEntity.ok(reviewService.selectReviewById(memberId));
     }
+
+    @DeleteMapping("/myreview")
+    public ResponseEntity<List<?>> deleteReviewById(@RequestParam int reviewNo, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(401).build();
+        }
+        String memberId = userDetails.getUsername();
+
+        reviewService.deleteReviewById(reviewNo, memberId);
+
+        return ResponseEntity.ok().build();
+    }
 }

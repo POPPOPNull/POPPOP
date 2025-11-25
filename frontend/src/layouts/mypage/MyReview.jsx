@@ -2,6 +2,7 @@ import "../usermain/main.css";
 import Tab from "../../componenets/mypage/MyPageTab";
 import Review from "../../componenets/mypage/Review";
 import Logout from "../../componenets/Logout";
+import Footer from "../usermain/Footer";
 
 function MyReview (){
     return(
@@ -11,7 +12,7 @@ function MyReview (){
                     <Logout/>
                     <Tab/>
                     <Review/>
-                    <div className="footer">푸터자리입니다.</div>
+                    <Footer/>
                 </div>
             </div>
         </>

@@ -2,6 +2,8 @@ import "./MyResvDetail.css"
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMyReservations, cancelReservation } from "../../api/ReservationAPI";
+import { selectPopupStoreDetails } from "../../api/PopupStoreAPI";
+import { Link } from "react-router-dom";
 
 function ResvDetail() {
     const [reservations, setReservations] = useState([]);
@@ -11,13 +13,30 @@ function ResvDetail() {
     useEffect(()=> {
         getMyReservations()
         .then((data) => {
-        setReservations(data || []);
+        const today = new Date();
+
+        const updated = (data || []).map(resv => {
+            const visitDateTime = new Date(`${resv.reservationDate}T${resv.reservationTime}`);
+
+            if (
+                resv.reservationStatus === "예약완료" &&
+                visitDateTime < today
+            ) {
+                return { ...resv, reservationStatus: "이용완료"};
+            }
+            return resv;
+        });
+
+      setReservations(updated);
       })
       .catch((err) => {
         console.error("예약 내역 조회 실패:", err);
         setError(err);
       });
     }, []);
+
+    const getPosterUrl = (popupNo) =>
+    `/public/poster/poster_${popupNo}.png`;
 
     const filteredReservations = reservations.filter((resv) => {
 
@@ -29,6 +48,10 @@ function ResvDetail() {
         if (filterStatus === "cancelled") {
             return resv.reservationStatus === "예약취소";
         }
+        if (filterStatus === "used") {
+            return resv.reservationStatus === "이용완료";
+        }
+
 
         return true;
     });
@@ -56,6 +79,7 @@ function ResvDetail() {
                     <option value="all">전체내역</option>
                     <option value="completed">예약완료</option>
                     <option value="cancelled">예약취소</option>
+                    <option value="used">이용완료</option>
                 </select>
             </div>
 
@@ -81,7 +105,12 @@ function ResvDetail() {
                         <tr key={resv.reservationNo}>
                             <td className="popup-info">
                                 <div className="poster">
-                                    <img src="/images/plant.png" alt="팝업포스터"/>
+                                    <Link to={`/user/${resv.popupNo}`}>
+                                        <img
+                                            src={getPosterUrl(resv.popupNo)}
+                                            alt={resv.popupName}
+                                        />
+                                    </Link>
                                 </div>
                                 <div className="details">
                                     <p className="title">{resv.popupName}</p>
