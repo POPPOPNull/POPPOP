@@ -11,7 +11,21 @@ function ResvDetail() {
     useEffect(()=> {
         getMyReservations()
         .then((data) => {
-        setReservations(data || []);
+        const today = new Date();
+
+        const updated = (data || []).map(resv => {
+            const visitDateTime = new Date(`${resv.reservationDate}T${resv.reservationTime}`);
+
+            if (
+                resv.reservationStatus === "예약완료" &&
+                visitDateTime < today
+            ) {
+                return { ...resv, reservationStatus: "이용완료"};
+            }
+            return resv;
+        });
+
+      setReservations(updated);
       })
       .catch((err) => {
         console.error("예약 내역 조회 실패:", err);
@@ -29,6 +43,10 @@ function ResvDetail() {
         if (filterStatus === "cancelled") {
             return resv.reservationStatus === "예약취소";
         }
+        if (filterStatus === "used") {
+            return resv.reservationStatus === "이용완료";
+        }
+
 
         return true;
     });
@@ -56,6 +74,7 @@ function ResvDetail() {
                     <option value="all">전체내역</option>
                     <option value="completed">예약완료</option>
                     <option value="cancelled">예약취소</option>
+                    <option value="used">이용완료</option>
                 </select>
             </div>
 
