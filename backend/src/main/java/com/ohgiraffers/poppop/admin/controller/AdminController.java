@@ -170,4 +170,10 @@ public class AdminController {
 
         return ResponseEntity.ok(kpiService.selectEventTypeRatioByMonth(targetMonth));
     }
+
+    // User 대시보드 막대 차트 인기 검색 키워드 상위 10개 조회(월별)
+    @GetMapping("/kpi/top-search-keywords")
+    public ResponseEntity<List<SearchKeywordDTO>> selectTop10SearchKeywordsByMonth(@RequestParam("month") String month) {
+        return ResponseEntity.ok(kpiService.selectTop10SearchKeywordsByMonth(month));
+    }
 }

@@ -70,4 +70,23 @@
         </where>
          group by event_type
     </select>
+
+<!--    검색 키워드 -->
+    <resultMap id="searchKeywordResultMap" type="com.ohgiraffers.poppop.admin.model.dto.SearchKeywordDTO">
+        <result property="keyword" column="keyword"/>
+        <result property="searchCount" column="search_count"/>
+    </resultMap>
+<!--    월별 인기 검색 키워드 상위 10개 조회-->
+    <select id="selectTop10SearchKeywordsByMonth" resultMap="searchKeywordResultMap" parameterType="String">
+        select
+               event_value as keyword,
+               count(event_value) as search_count
+          from user_event_data
+         where event_type = '검색'
+           and date_format(time_stamp, '%Y-%m')= #{yearMonth}
+         group by event_value
+         order by search_count desc
+         limit 10
+    </select>
+
 </mapper>

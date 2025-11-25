@@ -32,10 +32,6 @@ public class KpiService {
         return kpiMapper.selectMonthlyVisitorStats();
     }
 
-    public List<YearlyVisitorStatsDTO> selectYearlyVisitorStats() {
-        return kpiMapper.selectYearlyVisitorStats();
-    }
-
     public List<DailyVisitorDTO> selectDailyVisitorStats() {
         return kpiMapper.selectDailyVisitorStats();
     }
@@ -68,5 +64,9 @@ public class KpiService {
                     return resultItem;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public List<SearchKeywordDTO> selectTop10SearchKeywordsByMonth(String yearMonth) {
+        return kpiMapper.selectTop10SearchKeywordsByMonth(yearMonth);
     }
 }

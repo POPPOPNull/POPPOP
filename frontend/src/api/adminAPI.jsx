@@ -146,3 +146,15 @@ export function selectEventTypeRatioByMonth(month) {
         throw error;
     });
 }
+
+// user 대시보드 막대 차트 월별 인기 검색 키워드 상위 10개 조회
+export function selectTop10SearchKeywords(month) {
+    return API.get(`${BACKEND_URL}/admin/kpi/top-search-keywords`, {
+        params: { month }
+    })
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error(`API call error in selectTop10SearchKeywords. ${month}`, error);
+        throw error;
+    });
+}
