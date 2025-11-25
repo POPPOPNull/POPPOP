@@ -182,4 +182,10 @@ public class AdminController {
     public ResponseEntity<List<PopularCategoryDTO>> selectPopularCategoriesByMonth(@RequestParam("month") String month) {
         return ResponseEntity.ok(kpiService.selectPopularCategoriesByMonth(month));
     }
+
+    // Manager 대시보드 KPI 데이터 조회
+    @GetMapping("/kpi/manager")
+    public ResponseEntity<ManagerKpiDTO> selectManagerKpiData() {
+        return ResponseEntity.ok(kpiService.selectManagerKpiData());
+    }
 }

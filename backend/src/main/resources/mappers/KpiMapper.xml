@@ -107,4 +107,46 @@
          order by event_count desc
     </select>
 
+
+<!--    manager 대시보드-->
+
+<!--    manager 회원 수-->
+    <select id="selectManagerMembers" resultType="long">
+        select
+               count(*)
+          from member
+         where role = 'manager'
+    </select>
+
+<!--    현재 진행 중인 팝업 스토어 수-->
+    <select id="selectOngoingPopupStores" resultType="long">
+        select
+               count(*)
+          from popup_store
+         where approval_status = '승인'
+           and curdate() between popup_start_date and popup_end_date
+    </select>
+
+<!--    승인 대기 중인 팝업 스토어 수-->
+    <select id="selectPendingPopupStores" resultType="long">
+        select
+               count(*)
+          from popup_store
+         where approval_status = '대기'
+    </select>
+
+<!--    전체 브랜드 수-->
+    <select id="selectAllBrands" resultType="long">
+        select
+               count(distinct brand_name)
+          from popup_store
+    </select>
+
+<!--    종료 예정 팝업 스토어 수 (오늘 날짜 기준 종료일 3일 이하 임박)-->
+    <select id="selectImminentPopupStores" resultType="long">
+        select
+               count(*)
+          from popup_store
+         where datediff(popup_end_date, curdate()) between 0 and 2
+    </select>
 </mapper>

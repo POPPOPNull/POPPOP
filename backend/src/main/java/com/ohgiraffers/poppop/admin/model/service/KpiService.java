@@ -73,4 +73,15 @@ public class KpiService {
     public List<PopularCategoryDTO> selectPopularCategoriesByMonth(String yearMonth) {
         return kpiMapper.selectPopularCategoriesByMonth(yearMonth);
     }
+
+    public ManagerKpiDTO selectManagerKpiData() {
+
+        ManagerKpiDTO kpiData = new ManagerKpiDTO();
+        kpiData.setManagerCount(kpiMapper.selectManagerMembers());
+        kpiData.setOngoingStoreCount(kpiMapper.selectOngoingPopupStores());
+        kpiData.setBrandCount(kpiMapper.selectAllBrands());
+        kpiData.setPendingStoreCount(kpiMapper.selectPendingPopupStores());
+        kpiData.setImminentStoreCount(kpiMapper.selectImminentPopupStores());
+        return kpiData;
+    }
 }

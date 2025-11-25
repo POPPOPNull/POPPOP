@@ -19,6 +19,12 @@ public interface KpiMapper {
     long selectNewMembers();
     long selectActiveMembers();
 
+    long selectManagerMembers();
+    long selectOngoingPopupStores();
+    long selectPendingPopupStores();
+    long selectAllBrands();
+    long selectImminentPopupStores();
+
     List<MonthlyVisitorStatsDTO> selectMonthlyVisitorStats();
     List<DailyVisitorDTO> selectDailyVisitorStats();
     List<Map<String, Object>> selectEventTypeRatioByMonth(@Param("month") String month);
