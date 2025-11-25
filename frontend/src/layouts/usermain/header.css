@@ -2,14 +2,13 @@
 .header{
     width: 900px;
     height: 100px;
-    background-color: white;
+    /* background-color: white; */
     opacity: 17%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
     left: calc(50% - 450px);
-    filter: blur(3px);
     z-index: 1001;
 }
 .logo{
@@ -25,5 +24,6 @@
     align-items: center;
     justify-content: center;
     z-index: 1002;
+    backdrop-filter: blur(5px);
     
 }
