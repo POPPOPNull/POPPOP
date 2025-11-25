@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./mypopupdet.css";
 import ManagerSearchBar from "../ManagerSearchBar";
 import { NavLink, useParams } from "react-router-dom";
+import { fetchMyPopupDetail } from "../../../api/ManagerAPI";
+
+
 
 function MyPopupDet() {
 
@@ -14,27 +17,41 @@ function MyPopupDet() {
 
   const { popupNo } = useParams();
 
-  useEffect(() => {
+      useEffect(() => {
+    
+      const loadPopupDetail = async () => {
+        try {
+          const data = await fetchMyPopupDetail(popupNo);
+          
+          setPopupInfo({
+            managerId: data.id,                     // manager_id
+            popupName: data.name,                   // popup_name
+            status: data.approvalStatus,            
+            period: `${data.startDate}–${data.endDate}`,
+            categoryName: data.categoryName, 
+            totalCount: 0,                         
+            todayCount: 0,                          
+            closedDays: "-",                        
+          });
 
-    setPopupInfo({
-        managerId: "manager1",
-        popupName: "퓌(FWEE)",
-        status: "운영 중",
-        period: "25.09.30–25.11.08",
-        totalCount: 3500,
-        todayCount: 123,
-        closedDays: "10월 3일–6일",
-    });
+        } catch (error) {
+          console.error("팝업 상세 조회 실패:", error);
+          alert("팝업 상세 정보를 불러오는 중 오류가 발생했습니다.");
+        }
+      };
 
-    // 예약자 목록 (테이블)
-    setReservations([
-      { id: "user1", name: "이경철", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-      { id: "user1", name: "장동건", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-      { id: "user1", name: "박채린", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-      { id: "user1", name: "조은선", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-      { id: "user1", name: "이건우", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-    ]);
-  }, []);
+      loadPopupDetail();
+
+      setReservations([
+        { id: "user1", name: "이경철", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
+        { id: "user1", name: "장동건", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
+        { id: "user1", name: "박채린", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
+        { id: "user1", name: "조은선", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
+        { id: "user1", name: "이건우", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
+      ]);
+    }, [popupNo]);
+
+
 
 
   return (
@@ -49,9 +66,9 @@ function MyPopupDet() {
 
       <div className="mypopupdet-toprow">
         <div className="mypopupdet-top-left">
-          <span className="badge">manager01</span>
+          <span className="badge">{popupInfo ? popupInfo.managerId : ""}</span>
           <span className="mypopupdet-selected">
-            선택된 팝업 <strong>#{popupNo}</strong>
+            팝업 스토어<strong>NO_{popupNo}</strong>
           </span>
         </div>
 
@@ -106,6 +123,11 @@ function MyPopupDet() {
               <div className="mypopupdet-info-label">이름</div>
               <div className="mypopupdet-info-value">{popupInfo.popupName}</div>
             </div>
+
+            <div className="mypopupdet-info-row">
+            <div className="mypopupdet-info-label">카테고리</div>
+            <div className="mypopupdet-info-value">{popupInfo.categoryName}</div>
+          </div>
 
             <div className="mypopupdet-info-row">
               <div className="mypopupdet-info-label">팝업 운영 상태</div>
