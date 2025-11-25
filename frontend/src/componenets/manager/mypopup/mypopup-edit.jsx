@@ -6,7 +6,7 @@ import "./mypopupreg.css";
 
 function MyPopupEdit() {
   const navigate = useNavigate();
-  const { popupNo } = useParams(); //어떤 팝업 수정인지
+  const { popupNo } = useParams(); // 어떤 팝업 수정인지
 
   const [formData, setFormData] = useState({
     category: "",
@@ -22,7 +22,10 @@ function MyPopupEdit() {
   const [openTime, setOpenTime] = useState("");
   const [closeTime, setCloseTime] = useState("");
   const [dailyHours, setDailyHours] = useState(
-    ["월", "화", "수", "목", "금", "토", "일"].map(() => ({ open: "", close: "" }))
+    ["월", "화", "수", "목", "금", "토", "일"].map(() => ({
+      open: "",
+      close: "",
+    }))
   );
 
   const [submitting, setSubmitting] = useState(false); // 중복 클릭 방지
@@ -62,6 +65,7 @@ function MyPopupEdit() {
   const handleCompositionStart = () => {
     isComposingRef.current = true;
   };
+
   const handleCompositionEnd = (e) => {
     isComposingRef.current = false;
     setHashtagsInput(e.target.value.replace(/^#+/, ""));
@@ -92,26 +96,26 @@ function MyPopupEdit() {
     );
   };
 
-  // 3) 최초 진입 시 기존 데이터 불러오기
+  // 기존 데이터 불러오기
   useEffect(() => {
     const loadPopup = async () => {
       try {
         const data = await fetchMyPopupDetail(popupNo);
+
         setFormData({
           category: data.categoryName || "",
           title: data.name || "",
           brandMain: data.brandName || "",
           roadAddress: data.location || "",
-          detailAddress: "", 
+          detailAddress: "",
           startDate: data.startDate || "",
           endDate: data.endDate || "",
           description: data.explanation || "",
         });
 
-        if (data.openTime) setOpenTime(data.openTime.slice(0, 5)); 
+        if (data.openTime) setOpenTime(data.openTime.slice(0, 5));
         if (data.closeTime) setCloseTime(data.closeTime.slice(0, 5));
 
-        // 해시태그 파싱
         if (data.hashtagName) {
           const parsed = data.hashtagName
             .split(" ")
@@ -129,8 +133,7 @@ function MyPopupEdit() {
     loadPopup();
   }, [popupNo, navigate]);
 
- 
-  // 4) 제출 (수정) 처리
+  // 수정 제출
   const handleSubmit = () => {
     if (submitting) return;
 
@@ -148,21 +151,20 @@ function MyPopupEdit() {
     }
 
     const payload = {
-        name: formData.title.trim(),
-        brandName: formData.brandMain.trim(),
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        openTime: openTime ? `${openTime}:00` : null,
-        closeTime: closeTime ? `${closeTime}:00` : null,
-        location: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
-        reservableStatus: 1,
-        explanation: formData.description.trim(),
-        categoryName: formData.category,
-        hashtagName: hashtagsList.length
-            ? hashtagsList.map((t) => `#${t}`).join(" ")
-            : "",
-        };
-
+      name: formData.title.trim(),
+      brandName: formData.brandMain.trim(),
+      startDate: formData.startDate,
+      endDate: formData.endDate,
+      openTime: openTime ? `${openTime}:00` : null,
+      closeTime: closeTime ? `${closeTime}:00` : null,
+      location: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
+      reservableStatus: 1,
+      explanation: formData.description.trim(),
+      categoryName: formData.category,
+      hashtagName: hashtagsList.length
+        ? hashtagsList.map((t) => `#${t}`).join(" ")
+        : "",
+    };
 
     setSubmitting(true);
 
@@ -179,7 +181,6 @@ function MyPopupEdit() {
       .finally(() => setSubmitting(false));
   };
 
-
   return (
     <div className="mpr-layout">
       <div className="mpr-sidebar-wrap">
@@ -189,21 +190,21 @@ function MyPopupEdit() {
       <div className="mpr-content-wrap">
         <div className="mpr-header">
           <h2 className="mpr-title">나의 팝업스토어 &gt; 수정</h2>
+
           <button
             className="mpr-submit-btn"
+            type="button"
             onClick={handleSubmit}
             disabled={submitting}
           >
-            {submitting ? "수정 중..." : "저장"}
+            {submitting ? "수정 중..." : "수정"}
           </button>
         </div>
 
         <div className="mpr-scroll-area">
-
-            <section className="mpr-section">
+          <section className="mpr-section">
             <h3 className="mpr-section-title">팝업스토어 기본 *</h3>
 
-            
             <div className="mpr-field-col">
               <label className="mpr-label">카테고리 선택 *</label>
               <select
@@ -234,7 +235,6 @@ function MyPopupEdit() {
               />
             </div>
 
-            
             <div className="mpr-field-col">
               <label className="mpr-label">브랜드 *</label>
               <input
@@ -303,91 +303,95 @@ function MyPopupEdit() {
           </section>
 
           <section className="mpr-section">
-      <h3 className="mpr-section-title">영업시간</h3>
+            <h3 className="mpr-section-title">영업시간</h3>
 
-      <div className="mpr-hours-wrap">
-        <div className="mpr-hours-row">
-          <div className="mpr-hours-day">전체</div>
+            <div className="mpr-hours-wrap">
+              <div className="mpr-hours-row">
+                <div className="mpr-hours-day">전체</div>
 
-          <input
-            className="mpr-input mpr-time"
-            type="time"
-            placeholder="오픈시간"
-            value={openTime}
-            onChange={(e) => setOpenTime(e.target.value)}
-          />
-          <input
-            className="mpr-input mpr-time"
-            type="time"
-            placeholder="마감시간"
-            value={closeTime}
-            onChange={(e) => setCloseTime(e.target.value)}
-          />
+                <input
+                  className="mpr-input mpr-time"
+                  type="time"
+                  placeholder="오픈시간"
+                  value={openTime}
+                  onChange={(e) => setOpenTime(e.target.value)}
+                />
+                <input
+                  className="mpr-input mpr-time"
+                  type="time"
+                  placeholder="마감시간"
+                  value={closeTime}
+                  onChange={(e) => setCloseTime(e.target.value)}
+                />
 
-          <button
-            className="mpr-small-btn"
-            type="button"
-            onClick={() => {
-              //일괄적용: 모든 요일에 동일한 시간 복사
-              setDailyHours(dailyHours.map(() => ({ open: openTime, close: closeTime })));
-              alert("모든 요일에 동일한 시간이 적용되었습니다!");
-            }}
-          >
-            일괄적용
-          </button>
-        </div>
+                <button
+                  className="mpr-small-btn"
+                  type="button"
+                  onClick={() => {
+                    setDailyHours(
+                      dailyHours.map(() => ({
+                        open: openTime,
+                        close: closeTime,
+                      }))
+                    );
+                    alert("모든 요일에 동일한 시간이 적용되었습니다!");
+                  }}
+                >
+                  일괄적용
+                </button>
+              </div>
 
-        {["월", "화", "수", "목", "금", "토", "일"].map((day, idx) => (
-          <div className="mpr-hours-row" key={day}>
-            <div className="mpr-hours-day">{day}</div>
+              {["월", "화", "수", "목", "금", "토", "일"].map((day, idx) => (
+                <div className="mpr-hours-row" key={day}>
+                  <div className="mpr-hours-day">{day}</div>
 
-            <input
-              className="mpr-input mpr-time"
-              type="time"
-              placeholder="오픈시간"
-              value={dailyHours[idx].open}
-              onChange={(e) => {
-                const updated = [...dailyHours];
-                updated[idx].open = e.target.value;
-                setDailyHours(updated);
-              }}
-            />
-            <input
-              className="mpr-input mpr-time"
-              type="time"
-              placeholder="마감시간"
-              value={dailyHours[idx].close}
-              onChange={(e) => {
-                const updated = [...dailyHours];
-                updated[idx].close = e.target.value;
-                setDailyHours(updated);
-              }}
-            />
+                  <input
+                    className="mpr-input mpr-time"
+                    type="time"
+                    placeholder="오픈시간"
+                    value={dailyHours[idx].open}
+                    onChange={(e) => {
+                      const updated = [...dailyHours];
+                      updated[idx].open = e.target.value;
+                      setDailyHours(updated);
+                    }}
+                  />
+                  <input
+                    className="mpr-input mpr-time"
+                    type="time"
+                    placeholder="마감시간"
+                    value={dailyHours[idx].close}
+                    onChange={(e) => {
+                      const updated = [...dailyHours];
+                      updated[idx].close = e.target.value;
+                      setDailyHours(updated);
+                    }}
+                  />
 
-            <button
-              className="mpr-small-btn"
-              type="button"
-              onClick={() => {
-                const updated = [...dailyHours];
-                updated[idx] = { open: "", close: "" }; 
-                setDailyHours(updated);
-              }}
-            >
-              휴무일
-            </button>
-          </div>
-        ))}
-      </div>
+                  <button
+                    className="mpr-small-btn"
+                    type="button"
+                    onClick={() => {
+                      const updated = [...dailyHours];
+                      updated[idx] = { open: "", close: "" };
+                      setDailyHours(updated);
+                    }}
+                  >
+                    휴무일
+                  </button>
+                </div>
+              ))}
+            </div>
 
-        <div className="mpr-field-col">
-          <label className="mpr-label">휴일 공지사항</label>
-          <input
-            className="mpr-input"
-            type="text"
-            placeholder="정기휴무 및 휴일이 있다면 작성해주세요. (예: 1/1 휴무)"
-          />
-        </div>
-      </section>
+            <div className="mpr-field-col">
+              <label className="mpr-label">휴일 공지사항</label>
+              <input
+                className="mpr-input"
+                type="text"
+                placeholder="정기휴무 및 휴일이 있다면 작성해주세요. (예: 1/1 휴무)"
+              />
+            </div>
+          </section>
 
           <section className="mpr-section">
             <h3 className="mpr-section-title">사전예약정보 *</h3>
@@ -426,7 +430,6 @@ function MyPopupEdit() {
             </div>
           </section>
 
-          
           <section className="mpr-section">
             <h3 className="mpr-section-title">홈페이지 링크</h3>
             <input
@@ -454,24 +457,25 @@ function MyPopupEdit() {
                 ))}
 
                 <input
-                    className="mpr-input mpr-chip-input"
-                    type="text"
-                    placeholder="#태그 입력 후 Enter"
-                    value={hashtagsInput}
-                    onChange={handleHashtagChange}
-                    onKeyDown={handleHashtagKeyDown}
-                    onCompositionStart={handleCompositionStart}
-                    onCompositionEnd={handleCompositionEnd}
-                  />
-
-                </div>
+                  className="mpr-input mpr-chip-input"
+                  type="text"
+                  placeholder="#태그 입력 후 Enter"
+                  value={hashtagsInput}
+                  onChange={handleHashtagChange}
+                  onKeyDown={handleHashtagKeyDown}
+                  onCompositionStart={handleCompositionStart}
+                  onCompositionEnd={handleCompositionEnd}
+                />
+              </div>
 
               <p className="mpr-hint">
                 엔터/쉼표/스페이스로 태그를 추가할 수 있어요. (최대 10개)
               </p>
             </div>
 
-            <h3 className="mpr-section-title">팝업설명/안내사항/주의사항</h3>
+            <h3 className="mpr-section-title">
+              팝업설명/안내사항/주의사항
+            </h3>
             <textarea
               className="mpr-textarea"
               placeholder="팝업설명/안내사항/주의사항을 함께 작성해주세요"
@@ -506,26 +510,26 @@ function MyPopupEdit() {
                   className={`mpr-tag-btn ${
                     selectedTags.includes(tag) ? "selected" : ""
                   }`}
-                  onClick={() => handleTagToggle(tag)} 
+                  onClick={() => handleTagToggle(tag)}
                 >
                   {tag}
                 </button>
               ))}
             </div>
           </section>
-          
 
           <section className="mpr-section">
-            <h3 className="mpr-section-title">팝업스토어 이미지 </h3>
+            <h3 className="mpr-section-title">팝업스토어 이미지</h3>
 
             <div className="mpr-guide-box">
-            <p className="mpr-email-guide">
-                첨부할 포스터나 이미지를 이메일로 보내주세요! 📩<br />
-            <strong>이메일 주소:</strong> 
-            <span className="mpr-email">poppop.admin@gmail.com</span>
-         </p>
-        </div>
-        </section>
+              <p className="mpr-email-guide">
+                첨부할 포스터나 이미지를 이메일로 보내주세요! 📩
+                <br />
+                <strong>이메일 주소:</strong>
+                <span className="mpr-email">poppop.admin@gmail.com</span>
+              </p>
+            </div>
+          </section>
         </div>
       </div>
     </div>
