@@ -6,6 +6,7 @@ import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
 import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
 import UserReview from "../../componenets/user/userreview/UserReview";
 import ReviewView from "../../componenets/pupupinfo/ReviewView";
+import Footer from "../usermain/Footer";
 
 
 
@@ -55,7 +56,7 @@ function ReviewInsert(){
                        <ReviewView/>
                        <MidComp1/>
                        <MidComp2/>
-                       <div className="footer">푸터자리입니다.</div>
+                       <Footer/>
                    </div>
                </div>
            </>
