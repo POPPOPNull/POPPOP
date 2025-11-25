@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { registerPopup } from "../../../api/ManagerAPI";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchMyPopupDetail, updatePopup } from "../../../api/ManagerAPI";
 import ManagerSidebar from "../../../layouts/managermain/manager-sidebar";
 import "./mypopupreg.css";
 
-function MyPopupReg() {
-    const navigate = useNavigate();
-
+function MyPopupEdit() {
+  const navigate = useNavigate();
+  const { popupNo } = useParams(); //어떤 팝업 수정인지
 
   const [formData, setFormData] = useState({
     category: "",
@@ -17,108 +17,137 @@ function MyPopupReg() {
     startDate: "",
     endDate: "",
     description: "",
-    // hashtags: "",
   });
 
-    const [openTime, setOpenTime] = useState("");
-    const [closeTime, setCloseTime] = useState("");
-    const [dailyHours, setDailyHours] = useState(
-      ["월","화","수","목","금","토","일"].map(() => ({ open: "", close: "" }))
+  const [openTime, setOpenTime] = useState("");
+  const [closeTime, setCloseTime] = useState("");
+  const [dailyHours, setDailyHours] = useState(
+    ["월", "화", "수", "목", "금", "토", "일"].map(() => ({ open: "", close: "" }))
+  );
+
+  const [submitting, setSubmitting] = useState(false); // 중복 클릭 방지
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const [hashtagsInput, setHashtagsInput] = useState("");
+  const [hashtagsList, setHashtagsList] = useState([]);
+  const isComposingRef = useRef(false);
+
+  const normalizeTag = (raw) =>
+    raw
+      .replaceAll(",", " ")
+      .trim()
+      .replace(/^#+/, "")
+      .replace(/\s+/g, "");
+
+  const addTag = (raw) => {
+    const tag = normalizeTag(raw);
+    if (!tag) return;
+    if (hashtagsList.length >= 10) {
+      alert("해시태그는 최대 10개까지만 추가할 수 있습니다.");
+      return;
+    }
+    if (hashtagsList.includes(tag)) return;
+    setHashtagsList((prev) => [...prev, tag]);
+  };
+
+  const removeTag = (tag) => {
+    setHashtagsList((prev) => prev.filter((t) => t !== tag));
+  };
+
+  const handleHashtagChange = (e) => {
+    const value = e.target.value.replace(/^#+/, "");
+    setHashtagsInput(value);
+  };
+
+  const handleCompositionStart = () => {
+    isComposingRef.current = true;
+  };
+  const handleCompositionEnd = (e) => {
+    isComposingRef.current = false;
+    setHashtagsInput(e.target.value.replace(/^#+/, ""));
+  };
+
+  const handleHashtagKeyDown = (e) => {
+    if (e.key === "Backspace" && hashtagsInput === "" && hashtagsList.length) {
+      e.preventDefault();
+      setHashtagsList((prev) => prev.slice(0, -1));
+      return;
+    }
+
+    if (isComposingRef.current) return;
+
+    if (e.key === "Enter" || e.key === "," || e.key === " ") {
+      e.preventDefault();
+      const val = hashtagsInput.trim();
+      if (val) addTag(val);
+      setHashtagsInput("");
+    }
+  };
+
+  const handleTagToggle = (tag) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag)
+        ? prev.filter((item) => item !== tag)
+        : [...prev, tag]
     );
+  };
 
-    const [submitting, setSubmitting] = useState(false); //중복 클릭 방지용
-    const [selectedTags, setSelectedTags] = useState([]);
+  // 3) 최초 진입 시 기존 데이터 불러오기
+  useEffect(() => {
+    const loadPopup = async () => {
+      try {
+        const data = await fetchMyPopupDetail(popupNo);
+        setFormData({
+          category: data.categoryName || "",
+          title: data.name || "",
+          brandMain: data.brandName || "",
+          roadAddress: data.location || "",
+          detailAddress: "", 
+          startDate: data.startDate || "",
+          endDate: data.endDate || "",
+          description: data.explanation || "",
+        });
 
-    const handleTagToggle = (tag) => {
-      setSelectedTags((prev) =>
-        prev.includes(tag)
-          ? prev.filter((item) => item !== tag) // 선택되어 있으면 제거
-          : [...prev, tag] // 선택 안 되어 있으면 추가
-      );
-    };
+        if (data.openTime) setOpenTime(data.openTime.slice(0, 5)); 
+        if (data.closeTime) setCloseTime(data.closeTime.slice(0, 5));
 
-    //해시태그
-    const [hashtagsInput, setHashtagsInput] = useState("");
-    const [hashtagsList, setHashtagsList] = useState([]);
-
-    const isComposingRef = useRef(false);
-
-    const normalizeTag = (raw) =>
-      raw.replaceAll(",", " ")
-        .trim()
-        .replace(/^#+/, "")
-        .replace(/\s+/g, "");
-
-    const addTag = (raw) => {
-      const tag = normalizeTag(raw);
-      if (!tag) return;
-      if (hashtagsList.length >= 10) {
-        alert("해시태그는 최대 10개까지만 추가할 수 있습니다.");
-        return;
-      }
-      if (hashtagsList.includes(tag)) return;
-      setHashtagsList((prev) => [...prev, tag]);
-    };
-
-    const removeTag = (tag) => {
-      setHashtagsList((prev) => prev.filter((t) => t !== tag));
-    };
-
-    // 입력값만 반영 
-    const handleHashtagChange = (e) => {
-      const value = e.target.value.replace(/^#+/, "");
-      setHashtagsInput(value);
-    };
-
-    // 조합 시작/종료 표시
-    const handleCompositionStart = () => {
-      isComposingRef.current = true;
-    };
-    const handleCompositionEnd = (e) => {
-      isComposingRef.current = false;
-      // 종료 시 최종 문자열 반영
-      setHashtagsInput(e.target.value.replace(/^#+/, ""));
-    };
-
-    // Enter/쉼표/스페이스에서만 commit 
-    const handleHashtagKeyDown = (e) => {
-      // backspace로 마지막 태그 삭제 UX
-      if (e.key === "Backspace" && hashtagsInput === "" && hashtagsList.length) {
-        e.preventDefault();
-        setHashtagsList((prev) => prev.slice(0, -1));
-        return;
-      }
-
-      // 조합 중이면 아무 것도 하지 않음
-      if (isComposingRef.current) return;
-
-      if (e.key === "Enter" || e.key === "," || e.key === " ") {
-        e.preventDefault();
-        const val = hashtagsInput.trim();
-        if (val) addTag(val);
-        setHashtagsInput("");
+        // 해시태그 파싱
+        if (data.hashtagName) {
+          const parsed = data.hashtagName
+            .split(" ")
+            .map((t) => t.replace(/^#+/, ""))
+            .filter((t) => t);
+          setHashtagsList(parsed);
+        }
+      } catch (err) {
+        console.error("팝업 상세 조회 실패:", err);
+        alert("팝업 정보를 불러오는 데 실패했습니다.");
+        navigate("/manager/mypopup");
       }
     };
 
-    const handleSubmit = () => {
-      if (submitting) return;
+    loadPopup();
+  }, [popupNo, navigate]);
 
-      // 필수값 확인
-      if (
-        !formData.category ||
-        !formData.title ||
-        !formData.brandMain ||
-        !formData.roadAddress ||
-        !formData.startDate ||
-        !formData.endDate ||
-        !formData.description
-      ) {
-        alert("필수 항목을 모두 입력해주세요.");
-        return;
-      }
+ 
+  // 4) 제출 (수정) 처리
+  const handleSubmit = () => {
+    if (submitting) return;
 
-      // DTO에 맞춰 데이터
-      const payload = {
+    if (
+      !formData.category ||
+      !formData.title ||
+      !formData.brandMain ||
+      !formData.roadAddress ||
+      !formData.startDate ||
+      !formData.endDate ||
+      !formData.description
+    ) {
+      alert("필수 항목을 모두 입력해주세요.");
+      return;
+    }
+
+    const payload = {
         name: formData.title.trim(),
         brandName: formData.brandMain.trim(),
         startDate: formData.startDate,
@@ -129,59 +158,49 @@ function MyPopupReg() {
         reservableStatus: 1,
         explanation: formData.description.trim(),
         categoryName: formData.category,
-        // 칩을 "#태그" 공백 구분 문자열로
-        hashtags: hashtagsList.length
-          ? hashtagsList.map((t) => `#${t}`).join(" ")
-          : "",
-        // specialNotes 등은 필요 시 이후 추가
-      };
+        hashtagName: hashtagsList.length
+            ? hashtagsList.map((t) => `#${t}`).join(" ")
+            : "",
+        };
 
-      setSubmitting(true);
 
-      registerPopup(payload)
-        .then((data) => {
-          // ManagerAPI에서 response.data 를 return 했으니 data 로 들어옴
-          alert(data || "등록이 완료되었습니다. (승인 대기)");
-          // 등록 후 이동 원하면 주석 해제
-          // navigate("/manager/mypopup");
-        })
-        .catch((err) => {
-          console.error("팝업 등록 에러:", err);
-          const msg = err?.response?.data || "등록 중 오류가 발생했습니다.";
-          alert(msg);
-        })
-        .finally(() => {
-          setSubmitting(false);
-        });
-    };
+    setSubmitting(true);
+
+    updatePopup(popupNo, payload)
+      .then(() => {
+        alert("팝업 정보가 수정되었습니다.");
+        navigate(`/manager/mypopup/${popupNo}/detail`);
+      })
+      .catch((err) => {
+        console.error("팝업 수정 에러:", err);
+        const msg = err?.response?.data || "수정 중 오류가 발생했습니다.";
+        alert(msg);
+      })
+      .finally(() => setSubmitting(false));
+  };
+
 
   return (
     <div className="mpr-layout">
-      
       <div className="mpr-sidebar-wrap">
         <ManagerSidebar />
       </div>
 
-      
       <div className="mpr-content-wrap">
-        
         <div className="mpr-header">
-          <h2 className="mpr-title">POPUP 등록</h2>
-           
+          <h2 className="mpr-title">나의 팝업스토어 &gt; 수정</h2>
           <button
             className="mpr-submit-btn"
             onClick={handleSubmit}
             disabled={submitting}
           >
-            {submitting ? "등록 중..." : "등록"}
+            {submitting ? "수정 중..." : "저장"}
           </button>
         </div>
-      
 
-        
         <div className="mpr-scroll-area">
-          
-          <section className="mpr-section">
+
+            <section className="mpr-section">
             <h3 className="mpr-section-title">팝업스토어 기본 *</h3>
 
             
@@ -487,7 +506,7 @@ function MyPopupReg() {
                   className={`mpr-tag-btn ${
                     selectedTags.includes(tag) ? "selected" : ""
                   }`}
-                  onClick={() => handleTagToggle(tag)} // 🔹추가
+                  onClick={() => handleTagToggle(tag)} 
                 >
                   {tag}
                 </button>
@@ -507,11 +526,10 @@ function MyPopupReg() {
          </p>
         </div>
         </section>
-
         </div>
       </div>
     </div>
   );
 }
 
-export default MyPopupReg;
+export default MyPopupEdit;

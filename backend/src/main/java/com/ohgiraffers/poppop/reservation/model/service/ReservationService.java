@@ -54,4 +54,5 @@ public class ReservationService {
     public List<ReservationDetailsDTO> selectAllReservationsByManager(String managerId) {
         return reservationMapper.selectAllReservationsByManager(managerId);
     }
+
 }
