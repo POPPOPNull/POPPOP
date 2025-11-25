@@ -41,6 +41,19 @@ export function fetchMyPopupDetail(popupNo) {
     });
 }
 
+//예약 
+export function fetchMyPopupReservations(popupNo) {
+  return API.get(`${BACKEND_URL}/manager/reservations/${popupNo}`)
+    .then((response) => {
+      console.log("나의 팝업 예약내역 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("나의 팝업 예약내역 조회 오류:", error);
+      throw error;
+    });
+}
+
 
 // export async function registerPopup(formData) {
 //   try {

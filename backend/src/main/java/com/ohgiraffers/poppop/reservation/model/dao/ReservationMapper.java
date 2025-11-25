@@ -25,7 +25,11 @@ public interface ReservationMapper {
     int cancelReservation(@Param("reservationNo") int reservationNo,
                           @Param("memberId") String memberId);
 
+    List<ReservationDetailsDTO> selectAllReservationsByManager(@Param("managerId") String managerId);
+
+
     Integer selectReservedCount(@Param("popupNo") int popupNo,
                                 @Param("reservationDate") String reservationDate,
                                 @Param("reservationTime")  String reservationTime);
+
 }

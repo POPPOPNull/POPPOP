@@ -9,6 +9,7 @@
         <result property="reservationPersonnel" column="reservation_personnel"/>
         <result property="popupNo" column="popup_no"/>
         <result property="memberId" column="id"/>
+        <result property="phone" column="phone"/>
         <result property="popupName" column="popup_name"/>
         <result property="reservationDate" column="reservation_date"/>
         <result property="reservationTime" column="reservation_time"/>
@@ -118,6 +119,45 @@
            and id = #{memberId}
     </update>
 
+    <!-- 매니저 -->
+    <select id="selectAllReservationsByManager" parameterType="string"
+            resultMap="reservationResultMap">
+
+        SELECT
+        r.reservation_no,
+        r.reservation_status,
+        r.reservation_personnel,
+        r.popup_no,
+        r.id,
+        p.title AS popup_name,
+        r.reservation_date,
+        r.reservation_time
+        FROM reservation r
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        WHERE p.manager_id = #{managerId}
+        ORDER BY r.reservation_date DESC, r.reservation_time ASC
+    </select>
+
+    <select id="selectReservationDetailsByPopupForManager"
+            parameterType="int" resultMap="reservationResultMap">
+
+        SELECT
+        r.reservation_no,
+        r.reservation_status,
+        r.reservation_personnel,
+        r.popup_no,
+        r.id,
+        m.phone AS phone,  <!-- 연락처 필요함-->
+        p.title AS popup_name,
+        r.reservation_date,
+        r.reservation_time
+        FROM reservation r
+        JOIN member m ON r.id = m.id   <!-- member 에서 연락처 가져옴-->
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        WHERE r.popup_no = #{popupNo}
+        ORDER BY r.reservation_date DESC, r.reservation_time ASC
+    </select>
+
     <select id="selectReservedCount" resultType="Integer">
         select
                coalesce(sum(reservation_personnel), 0)
@@ -127,4 +167,5 @@
            and reservation_time = #{reservationTime}
            and reservation_status != '예약취소'
     </select>
+
 </mapper>
