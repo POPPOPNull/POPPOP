@@ -15,4 +15,8 @@ public interface MemberMapper {
     int countById(@Param("id") String id);
 
     MemberDTO selectMemberById(String id);
+
+    int updateEmail(@Param("id") String id, @Param("email") String email);
+
+    int updatePhone(@Param("id") String id, @Param("phone") String phone);
 }

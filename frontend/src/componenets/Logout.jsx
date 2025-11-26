@@ -20,13 +20,14 @@ function Logout() {
             onClick={handleLogout} 
             style={{
                 marginTop:"100px",
-                color:" var(--yellow)",
+                marginLeft:"780px",
+                color:"gray",
                 fontWeight:"800",
                 cursor:"pointer",
-                fontSize:"30px",
+                fontSize:"20px",
                 lineHeight:"1.2",
-                background:"none"
-                
+                background:"none",
+                border: "none"
             }}
             >
             logout</button>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MyPageController {
@@ -40,6 +41,44 @@ public class MyPageController {
         String memberId = userDetails.getUsername();
 
         return ResponseEntity.ok(myPageService.selectInfo(memberId));
+    }
+
+    @PutMapping("/myinfo/email")
+    public ResponseEntity<?> updateEmail(@RequestBody Map<String, String> body,
+                                         @AuthenticationPrincipal UserDetails userDetails){
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인이 필요합니다.");
+        }
+
+        String memberId = userDetails.getUsername();
+        String email = body.get("email");
+
+        try {
+            myPageService.updateEmail(memberId, email);
+            return ResponseEntity.ok("이메일이 수정되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/myinfo/phone")
+    public ResponseEntity<?> updatePhone(@RequestBody Map<String, String> body,
+                                         @AuthenticationPrincipal UserDetails userDetails){
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인이 필요합니다.");
+        }
+
+        String memberId = userDetails.getUsername();
+        String phone = body.get("phone");
+
+        try {
+            myPageService.updatePhone(memberId, phone);
+            return ResponseEntity.ok("휴대전화 번호가 수정되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping("/myreservation")

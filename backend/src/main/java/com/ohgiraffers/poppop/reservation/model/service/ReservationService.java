@@ -58,13 +58,14 @@ public class ReservationService {
     public List<ReservationDetailsDTO> selectAllReservationsByManager(String managerId) {
         return reservationMapper.selectAllReservationsByManager(managerId);
     }
-        public int selectAvailableCount ( int popupNo, String reservationDate, String reservationTime){
 
-            Integer reserved = reservationMapper.selectReservedCount(popupNo, reservationDate, reservationTime);
-            if (reserved == null) reserved = 0;
+    public int selectAvailableCount ( int popupNo, String reservationDate, String reservationTime){
 
-            int result = max_count - reserved;
-            return Math.max(result, 0);
-        }
+        Integer reserved = reservationMapper.selectReservedCount(popupNo, reservationDate, reservationTime);
+        if (reserved == null) reserved = 0;
+
+        int result = max_count - reserved;
+        return Math.max(result, 0);
+    }
 
 }
