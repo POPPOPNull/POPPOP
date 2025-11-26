@@ -66,6 +66,28 @@
     </select>
 
     <delete id="deleteReviewById">
-        delete from review where review_no = #{reviewNo} and id= #{memberId}
+        delete from review
+         where review_no = #{reviewNo}
+           and id= #{memberId}
     </delete>
+
+    <select id="selectReviewByNo" resultMap="reviewResultMap">
+        select
+               review_no,
+               id,
+               popup_no,
+               review_content,
+               review_date
+          from review
+         where review_no = #{reviewNo}
+    </select>
+
+    <update id="updateReviewById">
+        update review
+           set
+               review_content = #{content},
+               review_date = NOW()
+         where review_no = #{reviewNo}
+           and id = #{memberId}
+    </update>
 </mapper>

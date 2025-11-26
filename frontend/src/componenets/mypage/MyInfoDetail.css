@@ -51,3 +51,19 @@
     width: 60px;
     height: 30px;
 }
+
+.edit-btn {
+  /* padding: 6px 14px; */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-btn.editing {
+  background-color: #FFCF0D;
+  border-color: #e0b800;
+  /* color: #222;
+  font-weight: 600; */
+}

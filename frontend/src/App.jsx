@@ -104,10 +104,10 @@ function App() {
                 <Route index element={<ManagerDashboard />} />            
                 <Route path="detail" element={<MypopupdetPage />} />   
                 <Route path="reservations" element={<ReservationPage />} /> 
-                <Route path="edit" element={<MyPopupEditPage />} /> 
               </Route>
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
               <Route path="/manager/popup-register" element={<PopupRegister />} />
+              <Route path="/manager/mypopup/:popupNo/edit" element={<MyPopupEditPage />} />
               {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
 
