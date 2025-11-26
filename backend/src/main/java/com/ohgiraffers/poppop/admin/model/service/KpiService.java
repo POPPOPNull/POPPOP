@@ -84,4 +84,8 @@ public class KpiService {
         kpiData.setImminentStoreCount(kpiMapper.selectImminentPopupStores());
         return kpiData;
     }
+
+    public List<PopupStatusDTO> selectPopupStatusByMonth() {
+        return kpiMapper.selectPopupStatusByMonth();
+    }
 }
