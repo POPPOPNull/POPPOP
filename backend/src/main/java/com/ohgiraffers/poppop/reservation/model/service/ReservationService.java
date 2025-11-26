@@ -59,7 +59,7 @@ public class ReservationService {
         return reservationMapper.selectAllReservationsByManager(managerId);
     }
 
-    public int selectAvailableCount(int popupNo, String reservationDate, String reservationTime) {
+    public int selectAvailableCount ( int popupNo, String reservationDate, String reservationTime){
 
         Integer reserved = reservationMapper.selectReservedCount(popupNo, reservationDate, reservationTime);
         if (reserved == null) reserved = 0;
