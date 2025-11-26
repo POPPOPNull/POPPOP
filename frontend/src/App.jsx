@@ -40,6 +40,7 @@ import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
 
 import { AuthProvider, useAuth } from "./hooks/UseAuth.jsx";
 import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
+import AdminManagerMain from "./layouts/adminmain/Admin-manager-main.jsx";
 
 // 역할에 따라 첫 화면 리다이렉트
 const RedirectBasedOnRole = () => {
@@ -123,6 +124,7 @@ function App() {
                 <Route path="manager-popup/:popupNo" element={<AdminManagerPopupDetails />} />
                 <Route path="manager-reservation" element={<AdminManagerReservationList />} />
                 <Route path="manager-reservation/:popupNo" element={<AdminManagerReservationDetails />} />
+                <Route path="manager-main" element={<AdminManagerMain />} />
               </Route>
             </Route>
 
