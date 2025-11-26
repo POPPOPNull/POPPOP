@@ -1,9 +1,6 @@
 package com.ohgiraffers.poppop.admin.model.dao;
 
-import com.ohgiraffers.poppop.admin.model.dto.DailyVisitorDTO;
-import com.ohgiraffers.poppop.admin.model.dto.MonthlyVisitorStatsDTO;
-import com.ohgiraffers.poppop.admin.model.dto.PopularCategoryDTO;
-import com.ohgiraffers.poppop.admin.model.dto.SearchKeywordDTO;
+import com.ohgiraffers.poppop.admin.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +27,5 @@ public interface KpiMapper {
     List<Map<String, Object>> selectEventTypeRatioByMonth(@Param("month") String month);
     List<SearchKeywordDTO> selectTop10SearchKeywordsByMonth(String yearMonth);
     List<PopularCategoryDTO> selectPopularCategoriesByMonth(String yearMonth);
+    List<PopupStatusDTO> selectPopupStatusByMonth();
 }

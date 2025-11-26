@@ -188,4 +188,10 @@ public class AdminController {
     public ResponseEntity<ManagerKpiDTO> selectManagerKpiData() {
         return ResponseEntity.ok(kpiService.selectManagerKpiData());
     }
+
+    // Manager 대시보드 꺾은 선 차트 팝업 상태 집계 조회
+    @GetMapping("/kpi/popup-status")
+    public ResponseEntity<List<PopupStatusDTO>> selectPopupStatusByMonth() {
+        return ResponseEntity.ok(kpiService.selectPopupStatusByMonth());
+    }
 }

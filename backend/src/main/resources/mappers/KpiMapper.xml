@@ -149,4 +149,22 @@
           from popup_store
          where datediff(popup_end_date, curdate()) between 0 and 2
     </select>
+    
+<!--    팝업 상태 -->
+    <resultMap id="popupStatusResultMap" type="com.ohgiraffers.poppop.admin.model.dto.PopupStatusDTO">
+        <result property="month" column="month"/>
+        <result property="totalCount" column="total_count"/>
+        <result property="approvedCound" column="approved_count"/>
+        <result property="rejectedCount" column="rejected_count"/>
+    </resultMap>
+<!--    월별 팝업 상태(전체, 승인, 반려) 집계-->
+    <select id="selectPopupStatusByMonth" resultMap="popupStatusResultMap">
+        select
+               date_format(popup_start_date, '%Y-%m') as month,
+               count(popup_no) as total_count,
+               sum(case when approval_status = '승인' then 1 else 0 end) as approved_count,
+               sum(case when approval_status = '반려' then 1 else 0 end) as rejected_count
+          from popup_store
+         group by month
+    </select>
 </mapper>
