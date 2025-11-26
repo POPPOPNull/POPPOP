@@ -180,3 +180,13 @@ export function selectManagerKpiData() {
         throw error;
     });
 }
+
+// manager 대시보드 꺾은 선 차트 월별 승인 상태별 팝업 스토어 수 조회
+export function selectPopupStatusByMonth() {
+    return API.get(`${BACKEND_URL}/admin/kpi/popup-status`)
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error("API call error in selectPopupStatusByMonth", error);
+        throw error;
+    });
+}
