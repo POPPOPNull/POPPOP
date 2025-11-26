@@ -43,4 +43,19 @@ public class ReviewService {
     public void deleteReviewById(int reviewNo, String memberId) {
         reviewMapper.deleteReviewById(reviewNo, memberId);
     }
+
+    public ReviewDTO updateReviewById(int reviewNo, String memberId, String content) {
+
+        if (content == null || content.isBlank()) {
+            throw new IllegalArgumentException("리뷰 내용을 입력해 주세요.");
+        }
+
+        int updated = reviewMapper.updateReviewById(reviewNo, memberId, content);
+
+        if (updated == 0) {
+            throw new IllegalArgumentException("리뷰를 수정할 수 없습니다.");
+        }
+
+        return reviewMapper.selectReviewByNo(reviewNo);
+    }
 }

@@ -28,7 +28,7 @@
 } */
 .userreview {
     width: 600px;
-    height: 100px;
+    height: 120px;
     margin-top: 30px;
     border-radius: 5px;
     background-color: #212121;
@@ -40,9 +40,10 @@
 }
 .myreviewdate {
     margin-left: 510px;
+    margin-top: -8px;
+    margin-bottom: 3px;
     color: #d9d9d9;
 }
-/* .myreviewcontent {} */
 .myreviewbutton {
     margin-top: 10px;
     margin-left: 540px;
@@ -51,4 +52,17 @@
     all: unset;
     color: white;
     margin-right: 10px;
+}
+.myreviewcontent-edit {
+    background-color: gray;
+    border: none;
+    resize: none;
+    border-radius: 6px;
+    outline: none;
+    width: 100%;
+    font: inherit;
+    overflow: hidden;
+    line-height: 1.4;
+    height: 69px;
+    color: white;
 }
