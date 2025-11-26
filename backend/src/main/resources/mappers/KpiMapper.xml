@@ -115,7 +115,7 @@
         select
                count(*)
           from member
-         where role = 'manager'
+         where role = 'MANAGER'
     </select>
 
 <!--    현재 진행 중인 팝업 스토어 수-->

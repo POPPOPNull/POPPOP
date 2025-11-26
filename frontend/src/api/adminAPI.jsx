@@ -170,3 +170,13 @@ export function selectPopularCategories(month) {
         throw error;
     });
 }
+
+// manager 대시보드 KPI 카드 데이터 조회
+export function selectManagerKpiData() {
+    return API.get(`${BACKEND_URL}/admin/kpi/manager`)
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error("API call error in selectManagerKpiData", error);
+        throw error;
+    });
+}
