@@ -1,0 +1,91 @@
+/* 전체 래퍼 (사이드바 오른쪽 영역 안에서만 사용됨) */
+.manager-dashboard-wrapper {
+  padding: 24px 40px;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
+}
+
+/* 제목 */
+.manager-dashboard-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+/* 상단 KPI 박스를 감싸는 영역 */
+.manager-dashboard-kpi-section {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px 32px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+}
+
+/* KPI 한 줄 */
+.mgrdash-kpi-row {
+  display: flex;
+  gap: 24px;
+}
+
+/* 개별 KPI 카드 */
+.mgrdash-kpi-card {
+  flex: 1;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+.mgrdash-kpi-title {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.mgrdash-kpi-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  display: flex;
+  align-items: baseline;
+}
+
+.mgrdash-kpi-unit {
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 4px;
+  color: #666;
+}
+
+/* (나중에 쓸 차트 영역) */
+.manager-dashboard-chart-section {
+  margin-top: 8px;
+}
+
+.manager-dashboard-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.manager-dashboard-chart-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  min-height: 240px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  color: #555;
+  font-size: 14px;
+}
+
+.manager-dashboard-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  font-size: 14px;
+  color: #555;
+}
+

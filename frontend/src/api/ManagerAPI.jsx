@@ -67,17 +67,15 @@ export function updatePopup(popupNo, formData) {
     });
 }
 
-
-// export async function registerPopup(formData) {
-//   try {
-//     const response = await API.post(
-//       `${BACKEND_URL}/managers/popup-stores/register`,
-//       formData
-//     );
-//     console.log("팝업 등록 성공:", response.data);
-//     return response.data;
-//   } catch (error) {
-//     console.error("팝업 등록 실패:", error);
-//     throw error;
-//   }
-// }
+// 매니저 대시보드 상단 KPI 조회
+export function fetchManagerDashboardSummary(popupNo) {
+  return API.get(`${BACKEND_URL}/manager/dashboard/${popupNo}`)
+    .then((response) => {
+      console.log("매니저 대시보드 상단 데이터 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("매니저 대시보드 상단 데이터 조회 실패:", error);
+      throw error;
+    });
+}
