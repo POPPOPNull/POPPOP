@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.poppop.manager.model.dao.ManagerDashboardMapper">
+
+    <!-- 오늘 예약 수 -->
+    <select id="selectTodayReservationCount" resultType="int">
+        SELECT COUNT(*)
+        FROM reservation r
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        WHERE p.id = #{managerId}
+        AND p.popup_no = #{popupNo}
+        AND DATE(r.reservation_date) = CURDATE()
+    </select>
+
+    <!-- 누적 예약 수 -->
+    <select id="selectTotalReservationCount" resultType="int">
+        SELECT COUNT(*)
+        FROM reservation r
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        WHERE p.id = #{managerId}
+        AND p.popup_no = #{popupNo}
+    </select>
+
+    <!-- 누적 관심 수 -->
+    <select id="selectTotalFavoriteCount" resultType="int">
+        SELECT COUNT(*)
+        FROM favorite f
+        JOIN popup_store p ON f.popup_no = p.popup_no
+        WHERE p.id = #{managerId}
+        AND p.popup_no = #{popupNo}
+    </select>
+
+    <!-- 누적 리뷰 수 -->
+    <select id="selectTotalReviewCount" resultType="int">
+        SELECT COUNT(*)
+        FROM review rv
+        JOIN popup_store p ON rv.popup_no = p.popup_no
+        WHERE p.id = #{managerId}
+        AND p.popup_no = #{popupNo}
+    </select>
+
+</mapper>
+
+

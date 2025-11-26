@@ -43,7 +43,7 @@ function Reservation (){
                             <p>- 안전한 관람을 위하여 현장 상황에 따라 입장이 지연될 수 있습니다.</p>
                         </div>
                         <Calendar/>
-                        <div style={{height:"500px"}}>
+                        <div style={{height:"200px"}}>
 
                         </div>
                     </div>

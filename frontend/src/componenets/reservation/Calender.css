@@ -125,13 +125,13 @@ p {
 
 .timeslot-btn {
   width: 150px;
-  height: 40px;
+  height: 60px;
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid #ddd;
   background: #fff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .timeslot-btn:hover {
@@ -143,6 +143,12 @@ p {
   color: #fff;
   border-color: #FFCF0D;
   font-weight: 600;
+}
+.timeslot-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #fff;
 }
 
 .numticket{
