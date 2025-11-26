@@ -63,7 +63,7 @@
                count(*) as eventCount
           from user_event_data
         <where>
-            event_type in ('노출', '조회', '관심목록 추가', '후기 작성', '예약')
+            event_type in ('노출', '상세페이지 클릭', '관심목록 추가', '후기 작성', '예약')
             <if test="month != null and month != ''">
                 and date_format(time_stamp, '%Y-%m') = #{month}
             </if>
@@ -87,6 +87,24 @@
          group by event_value
          order by search_count desc
          limit 10
+    </select>
+
+<!--    인기 카테고리-->
+    <resultMap id="popularCategoryResultMap" type="com.ohgiraffers.poppop.admin.model.dto.PopularCategoryDTO">
+        <result property="categoryName" column="category_name"/>
+        <result property="eventCount" column="event_count"/>
+    </resultMap>
+<!--    월별 인기 카테고리 조회-->
+    <select id="selectPopularCategoriesByMonth" resultMap="popularCategoryResultMap">
+        select
+               ps.category_name As category_name,
+               count(ued.event_data_no) as event_count
+          from popup_store ps
+          left join user_event_data ued on ps.popup_no = ued.event_value
+           and ued.event_type in('상세페이지 클릭', '관심목록 추가', '예약')
+           and date_format(ued.time_stamp, '%Y-%m') = #{yearMonth}
+         group by ps.category_name
+         order by event_count desc
     </select>
 
 </mapper>

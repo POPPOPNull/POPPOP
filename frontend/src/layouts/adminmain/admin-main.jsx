@@ -3,6 +3,7 @@ import AdminChart from "../../componenets/admin/AdminChart"
 import AdminLineChart from "../../componenets/admin/AdminLineChart"
 import AdminBarChart from "../../componenets/admin/adminBarChart"
 import KPIData from "../../componenets/admin/adminKPIData"
+import AdminBarChart2 from "../../componenets/admin/adminBarChart2"
 
 function AdminMain (){
     return(
@@ -29,7 +30,7 @@ function AdminMain (){
             </div>
             <div className="admin-chart-layout">
                 <div className="admin-chart-box">
-                    <AdminLineChart/>
+                    <AdminBarChart2/>
                 </div>
                 <div className="admin-chart-box">
                     <AdminBarChart/>

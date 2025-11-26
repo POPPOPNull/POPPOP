@@ -69,4 +69,8 @@ public class KpiService {
     public List<SearchKeywordDTO> selectTop10SearchKeywordsByMonth(String yearMonth) {
         return kpiMapper.selectTop10SearchKeywordsByMonth(yearMonth);
     }
+
+    public List<PopularCategoryDTO> selectPopularCategoriesByMonth(String yearMonth) {
+        return kpiMapper.selectPopularCategoriesByMonth(yearMonth);
+    }
 }

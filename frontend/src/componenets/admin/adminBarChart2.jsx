@@ -9,7 +9,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { selectTop10SearchKeywords } from '../../api/adminAPI';
+import { selectPopularCategories } from '../../api/adminAPI';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -25,7 +25,7 @@ const generateMonthOptions = () => {
     return months;
 };
 
-function AdminBarChart() {
+function AdminBarChart2() {
     
     const [chartData, setChartData] = useState({
         labels: [],
@@ -41,21 +41,21 @@ function AdminBarChart() {
             try {
                 setLoading(true);
 
-                const topKeywords = await selectTop10SearchKeywords(selectedMonth);
+                const popularCategories = await selectPopularCategories(selectedMonth);
 
-                if (topKeywords && topKeywords.length > 0) {
+                if (popularCategories && popularCategories.length > 0) {
 
-                    const labels = topKeywords.map(item => item.keyword);
-                    const data = topKeywords.map(item => item.searchCount);
+                    const labels = popularCategories.map(item => item.categoryName);
+                    const data = popularCategories.map(item => item.eventCount);
 
                     setChartData({
                         labels: labels,
                         datasets: [
                             {
-                                label: '검색 횟수',
+                                label: '총 이벤트 수 (조회, 관심, 예약)',
                                 data: data,
-                                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
                                 borderWidth: 1
                             }
                         ]
@@ -85,6 +85,11 @@ function AdminBarChart() {
     const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+            padding: {
+                bottom: 20
+            }
+        },
         plugins: { 
             legend: { 
                 display: false 
@@ -112,7 +117,7 @@ function AdminBarChart() {
     return (
         <div style={{ position: 'relative', flexDirection: 'column', height: '90%', width: '90%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '-5px', fontWeight: '600', marginTop: '-5px' }}>
-                인기 검색 키워드 TOP 10
+                인기 카테고리
                 <select
                     value={selectedMonth}
                     onChange={(e) => setSelectedMonth(e.target.value)}
@@ -137,4 +142,4 @@ function AdminBarChart() {
     );
 }
 
-export default AdminBarChart;
+export default AdminBarChart2;
