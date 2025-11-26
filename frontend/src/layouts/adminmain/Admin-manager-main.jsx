@@ -1,9 +1,9 @@
 import "./Admin-main.css"
 import AdminChart from "../../componenets/admin/AdminChart"
-import AdminLineChart from "../../componenets/admin/AdminLineChart"
 import AdminBarChart from "../../componenets/admin/adminBarChart"
 import AdminBarChart2 from "../../componenets/admin/adminBarChart2"
 import AdminManagerKPIData from "../../componenets/admin/AdminManagerKPIData"
+import AdminManagerLineChart from "../../componenets/admin/AdminManagerLineChart"
 
 function AdminManagerMain (){
     return(
@@ -22,7 +22,7 @@ function AdminManagerMain (){
                             <button className="admin-chart-btn">월별</button>
                         </div>
                     </div>
-                    <AdminLineChart/>
+                    <AdminManagerLineChart/>
                 </div>
                 <div className="admin-chart-box">
                     <AdminChart/>

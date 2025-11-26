@@ -154,7 +154,7 @@
     <resultMap id="popupStatusResultMap" type="com.ohgiraffers.poppop.admin.model.dto.PopupStatusDTO">
         <result property="month" column="month"/>
         <result property="totalCount" column="total_count"/>
-        <result property="approvedCound" column="approved_count"/>
+        <result property="approvedCount" column="approved_count"/>
         <result property="rejectedCount" column="rejected_count"/>
     </resultMap>
 <!--    월별 팝업 상태(전체, 승인, 반려) 집계-->
