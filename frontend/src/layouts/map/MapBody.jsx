@@ -3,47 +3,33 @@ import "./mapbody.css";
 import { useEffect, useState } from "react";
 import KakaoMap from "../../componenets/maps/Map";
 import NearComp from "../../componenets/NearComp";
+import { MidComp1 } from "../../componenets/user/usermain/MidComp"
+import { selectAllPopupStore } from "../../api/PopupStoreAPI";
 
 function MapBody (){
 
-    const [coord, setCoord] = useState({
-    lat: 37.5610,
-    lng: 127.2111,
-    });
+  const [popupStores, setPopupStores] = useState([]);
 
-    useEffect(() => {
-    
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCoord({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-          console.log("현재 위치:", position.coords);
-        },
-        (error) => {
-          console.error("현재 위치를 가져올 수 없습니다:", error);
-        },
-        {
-            // 정확도향상
-        enableHighAccuracy: true, // GPS 우선 사용
-        timeout: 10000,           // 최대 10초 대기
-        maximumAge: 0             // 캐시된 위치 사용 안 함
-      }
-      );
-    }
-    }, 
-    []);
+  useEffect(() => {
+    selectAllPopupStore()
+      .then((data) => {
+        console.log("팝업스토어:", data);
+        setPopupStores(data || []);
+      })
+      .catch((err) => {
+        console.error("팝업스토어 위치 조회 실패:", err);
+      });
+  }, []);
 
     return(
         <>
             <div className="user-main-layout">
                 <div className="user-main">
                     <div className="map">
-                    <KakaoMap props={coord}/>
+                    <KakaoMap popupStores={popupStores}/>
                     </div>
-                    <NearComp/>
+                    <MidComp1/>
+                    {/* <NearComp/> */}
                 </div>
             </div>
         </>
