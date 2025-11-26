@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ReviewController {
@@ -83,5 +84,26 @@ public class ReviewController {
         reviewService.deleteReviewById(reviewNo, memberId);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/myreview/{reviewNo}")
+    public ResponseEntity<?> updateReviewById(@PathVariable int reviewNo,
+                                              @RequestBody Map<String, String> body,
+                                              @AuthenticationPrincipal UserDetails userDetails) {
+
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인이 필요합니다.");
+        }
+
+        String memberId = userDetails.getUsername();
+        String content = body.get("content");
+
+        try {
+            ReviewDTO updated = reviewService.updateReviewById(reviewNo, memberId, content);
+            return ResponseEntity.ok(updated);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

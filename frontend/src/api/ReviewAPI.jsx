@@ -21,9 +21,15 @@ export function selectReviewById(){
     .then(response=>response.data)
 }
 
-//내 리뷰 삭제
+// 내 리뷰 삭제
 export function deleteReviewById(reviewNo) {
   return API.delete(`${BACKEND_URL}/myreview`, {
     params: { reviewNo }
   }).then((response) => response.data);
+}
+
+// 내 리뷰 수정
+export function updateReviewById(reviewNo, {content}) {
+  return API.put(`${BACKEND_URL}/myreview/${reviewNo}`, {content})
+  .then((response) => response.data);
 }
