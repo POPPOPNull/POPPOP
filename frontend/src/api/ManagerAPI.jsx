@@ -79,3 +79,16 @@ export function fetchManagerDashboardSummary(popupNo) {
       throw error;
     });
 }
+
+// 예약 추이 API (최근 7일)
+export function fetchReservationTrend(popupNo) {
+  return API.get(`${BACKEND_URL}/manager/dashboard/${popupNo}/reservation-trend`)
+    .then((response) => {
+      console.log("예약 추이 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("예약 추이 조회 오류:", error);
+      throw error;
+    });
+}

@@ -3,6 +3,9 @@ import ManagerSidebar from "../../layouts/managermain/manager-sidebar";
 import "../../layouts/managermain/manager-main.css"; // MyPopupPage에서 쓰던 레이아웃
 import "./manager-page.css"; // MyPopupPage에서 쓰던 페이지 스타일
 import ManagerKPIData from "../../componenets/manager/dashboard/ManagerKPIData";
+import ReservationTrendChart from "../../componenets/manager/dashboard/ReservationTrendChart";
+
+
 
 function ManagerDashboard() {
   const { popupNo } = useParams();
@@ -20,7 +23,7 @@ function ManagerDashboard() {
             <ManagerKPIData popupNo={popupNo} />
           </section>
 
-          {/* 아래 차트 2개 자리 (지금은 박스만, 나중에 차트 채우기) */}
+        
           <section
             style={{
               display: "grid",
@@ -28,13 +31,50 @@ function ManagerDashboard() {
               gap: "20px",
             }}
           >
+            {/* 요일별 예약 패턴 */}
             <div className="manager-dashboard-card">
-              요일별 예약 패턴 (추후 구현)
-            </div>
+            <h3 className="dashboard-card-title">
+              예약 추이 <span className="dashboard-card-sub">최근 7일</span>
+            </h3>
+
+            <ReservationTrendChart popupNo={popupNo} />
+          </div>
+
+            {/* 예약자 성별 비율 */}
             <div className="manager-dashboard-card">
-              예약자 성별 비율 (추후 구현)
+              <h3 className="dashboard-card-title">예약자 성별 비율</h3>
+
+              <div className="dashboard-chart-placeholder">
+                <span>차트 영역 (추후 구현)</span>
+              </div>
             </div>
           </section>
+
+          <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "20px",
+          }}
+        >
+
+          {/* 요일별 예약 패턴 (막대 그래프) */}
+          <div className="manager-dashboard-card">
+            <h3 className="dashboard-card-title">요일별 예약 패턴</h3>
+            <div className="dashboard-chart-placeholder">
+              <span>막대 그래프 영역 (추후 구현)</span>
+            </div>
+          </div>
+
+          {/* 예약자 성별 비율 (파이 차트) */}
+          <div className="manager-dashboard-card">
+            <h3 className="dashboard-card-title">예약자 성별 비율</h3>
+            <div className="dashboard-chart-placeholder">
+              <span>파이 차트 영역 (추후 구현)</span>
+            </div>
+          </div>
+        </section>
+
         </div>
       </div>
     </div>

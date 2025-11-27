@@ -41,6 +41,35 @@
         AND p.popup_no = #{popupNo}
     </select>
 
+    <!-- 1행 예약 -->
+    <select id="selectReservationTrend"
+            parameterType="int"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO">
+
+        SELECT
+        DATE_FORMAT(t.stat_date, '%Y-%m-%d') AS date,
+        IFNULL(r.reservation_count, 0) AS reservationCount
+        FROM (
+        -- 최근 7일 날짜 생성
+        SELECT CURDATE() - INTERVAL seq DAY AS stat_date
+        FROM (
+        SELECT 0 AS seq UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL
+        SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6
+        ) s
+        ) t
+        LEFT JOIN (
+        SELECT
+        reservation_date AS stat_date,
+        COUNT(*) AS reservation_count
+        FROM reservation
+        WHERE popup_no = #{popupNo}
+        AND reservation_date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()
+        GROUP BY reservation_date
+        ) r ON t.stat_date = r.stat_date
+        ORDER BY t.stat_date ASC;
+
+    </select>
+
 </mapper>
 
 
