@@ -5,6 +5,8 @@ import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Mapper
@@ -32,4 +34,5 @@ public interface ReservationMapper {
                                 @Param("reservationDate") String reservationDate,
                                 @Param("reservationTime")  String reservationTime);
 
+    int getAlreadyReservedCount(String memberId, int popupNo, LocalDate reservationDate, LocalTime reservationTime);
 }

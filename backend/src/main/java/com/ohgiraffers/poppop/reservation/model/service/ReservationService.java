@@ -45,6 +45,21 @@ public class ReservationService {
 
     public void insertReservation (ReservationDetailsDTO dto, String sessionId) {
 
+        int reserved = reservationMapper.getAlreadyReservedCount(
+                dto.getMemberId(),
+                dto.getPopupNo(),
+                dto.getReservationDate(),
+                dto.getReservationTime()
+        );
+
+        int limitPerson = 2;
+
+        if (reserved + dto.getReservationPersonnel() > limitPerson) {
+            throw new IllegalArgumentException(
+                    "해당 회차는 1인당 최대 " + limitPerson + "매까지 예약 가능합니다."
+            );
+        }
+
         reservationMapper.insertReservation(dto);
         behaviorMapper.insertLogByReservation(dto.getPopupNo(), sessionId);
     }
