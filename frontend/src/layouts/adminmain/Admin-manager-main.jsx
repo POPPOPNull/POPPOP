@@ -1,9 +1,9 @@
 import "./Admin-main.css"
-import AdminChart from "../../componenets/admin/AdminChart"
 import AdminBarChart from "../../componenets/admin/adminBarChart"
 import AdminBarChart2 from "../../componenets/admin/adminBarChart2"
 import AdminManagerKPIData from "../../componenets/admin/AdminManagerKPIData"
 import AdminManagerLineChart from "../../componenets/admin/AdminManagerLineChart"
+import AdminManagerChart from "../../componenets/admin/AdminManagerChart"
 
 function AdminManagerMain (){
     return(
@@ -14,7 +14,7 @@ function AdminManagerMain (){
             <div className="admin-chart-layout">
                 <div className="admin-chart-box">
                     <div className="line-chart-header">
-                        <span>플랫폼 성장 추이</span>
+                        <span>팝업 등록/승인 추이</span>
                         <div
                             style={{ display: 'flex', gap: '10px'}}
                         >
@@ -25,7 +25,7 @@ function AdminManagerMain (){
                     <AdminManagerLineChart/>
                 </div>
                 <div className="admin-chart-box">
-                    <AdminChart/>
+                    <AdminManagerChart/>
                 </div>
             </div>
             <div className="admin-chart-layout">

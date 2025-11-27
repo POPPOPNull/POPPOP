@@ -190,3 +190,15 @@ export function selectPopupStatusByMonth() {
         throw error;
     });
 }
+
+// manager 대시보드 파이 차트 월별 반려 사유 비율 조회
+export function selectRejectionReasonsByMonth(month) {
+    return API.get(`${BACKEND_URL}/admin/kpi/rejection-reasons`, {
+        params: { month }
+    })
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error(`API call error in selectRejectionReasonsByMonth. ${month}`, error);
+        throw error;
+    });
+}

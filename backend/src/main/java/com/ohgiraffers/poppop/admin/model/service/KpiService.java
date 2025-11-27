@@ -88,4 +88,8 @@ public class KpiService {
     public List<PopupStatusDTO> selectPopupStatusByMonth() {
         return kpiMapper.selectPopupStatusByMonth();
     }
+
+    public List<RejectionReasonDTO> selectRejectionReasonsByMonth(String yearMonth) {
+        return kpiMapper.selectRejectionReasonsByMonth(yearMonth);
+    }
 }
