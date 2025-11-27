@@ -41,7 +41,7 @@
         AND p.popup_no = #{popupNo}
     </select>
 
-    <!-- 1행 예약 -->
+    <!-- 1행 왼쪽 예약 -->
     <select id="selectReservationTrend"
             parameterType="int"
             resultType="com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO">
@@ -70,6 +70,46 @@
 
     </select>
 
+    <!-- 2행 왼쪽 요일별 예약 패턴 -->
+    <select id="selectWeekdayReservations"
+            parameterType="int"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.WeekdayReservationDTO">
+
+        SELECT
+        CASE w.day_of_week
+        WHEN 1 THEN '일'
+        WHEN 2 THEN '월'
+        WHEN 3 THEN '화'
+        WHEN 4 THEN '수'
+        WHEN 5 THEN '목'
+        WHEN 6 THEN '금'
+        WHEN 7 THEN '토'
+        END AS dayOfWeek,
+        COUNT(*) AS reservationCount
+        FROM (
+        SELECT
+        DAYOFWEEK(reservation_date) AS day_of_week
+        FROM reservation
+        WHERE popup_no = #{popupNo}
+        ) w
+        GROUP BY w.day_of_week
+        ORDER BY w.day_of_week;
+
+    </select>
+
+    <!-- 2행 오른쪽 예약자 성별 비율 -->
+    <select id="selectGenderRatio" parameterType="int"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.GenderReservationDTO">
+
+        SELECT
+        m.gender AS gender,
+        COUNT(*) AS count
+        FROM reservation r
+        JOIN member m ON r.id = m.id
+        WHERE r.popup_no = #{popupNo}
+        GROUP BY m.gender;
+
+    </select>
 </mapper>
 
 

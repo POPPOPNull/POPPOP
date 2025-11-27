@@ -92,3 +92,29 @@ export function fetchReservationTrend(popupNo) {
       throw error;
     });
 }
+
+// 2행 요일별 예약 패턴
+export function fetchWeekdayReservations(popupNo) {
+  return API.get(`${BACKEND_URL}/manager/dashboard/${popupNo}/weekday-reservations`)
+    .then((response) => {
+      console.log("요일별 예약 패턴 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("요일별 예약 패턴 조회 오류:", error);
+      throw error;
+    });
+}
+
+// 2행 예약자 성별 비율
+export function fetchGenderRatio(popupNo) {
+  return API.get(`${BACKEND_URL}/manager/dashboard/${popupNo}/gender-ratio`)
+    .then((response) => {
+      console.log("예약자 성별 비율 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("예약자 성별 비율 조회 오류:", error);
+      throw error;
+    });
+}
