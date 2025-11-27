@@ -2,6 +2,8 @@ package com.ohgiraffers.poppop.reservation.controller;
 
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +26,11 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<?> insertReservation(@RequestBody ReservationDetailsDTO dto,
-                                               @AuthenticationPrincipal UserDetails userDetails) {
+                                               @AuthenticationPrincipal UserDetails userDetails,
+                                               HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
         if (userDetails == null) {
             return ResponseEntity.status(401).body("Unauthorized");
         }
@@ -32,7 +38,7 @@ public class ReservationController {
 
         dto.setMemberId(memberId);
 
-        reservationService.insertReservation(dto);
+        reservationService.insertReservation(dto, sessionId);
 
         return ResponseEntity.ok("예약이 완료되었습니다.");
     }

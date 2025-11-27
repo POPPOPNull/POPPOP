@@ -81,6 +81,23 @@
             )
         </foreach>
     </insert>
+    <!--예약 로그 수집-->
+    <insert id="insertLogByReservation">
+        insert into user_event_data
+        (
+        event_type,
+        event_value,
+        session_id,
+        time_stamp
+        )
+        value
+        (
+        "예약",
+        #{popupNo},
+        #{sessionId},
+        now()
+        )
+    </insert>
 
     <!--조회 수 조회-->
     <select id="countViews" resultType="_int">
