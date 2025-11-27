@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { selectPopupDetails, approvePopup, rejectPopup } from '../../api/adminAPI';
-import { SearchContext } from './searchProvider';
+import { SearchContext } from './SearchProvider';
 
 function AdminManagerPopupDetails() {
     const { popupNo } = useParams();
@@ -9,6 +9,20 @@ function AdminManagerPopupDetails() {
     const [popupData, setPopupData ] = useState(null);
 
     const { setIsSearchEnabled } = useContext(SearchContext);
+
+    // 반려 사유 상태
+    const [showRejectionForm, setShowRejectionForm] = useState(false);
+    const [selectedReason, setSelectedReason] = useState('');
+    const [detailReason, setDetailReason] = useState('');
+
+    // 반려 사유 목록
+    const rejectionReasons = [
+        "부적절한 컨텐츠",
+        "부적절한 키워드",
+        "상세 설명 미비",
+        "기간 부적합",
+        "기타"
+    ];
 
     useEffect(() => {
         // 상세 페이지 마운트 시 검색 기능 비활성화
@@ -49,10 +63,19 @@ function AdminManagerPopupDetails() {
 
     // 반려 처리 핸들러
     const handleReject = async () => {
-        const reason = prompt("반려 사유를 입력해주세요.");
-        if (reason) {
+        if (!selectedReason) {
+            alert('주요 반려 사유를 선택해주세요.');
+            return;
+        }
+
+        // 선택된 주 사유와 상세 사유를 ,로 결합
+        const finalReason = [selectedReason, detailReason]
+            .filter(Boolean)    // 상세 사유가 비어 있을 경우 배열에서 제거
+            .join(', ');
+
+        if (window.confirm(`다음 사유로 반려 처리하시겠습니까?\n\n${finalReason}`)) {
             try {
-                await rejectPopup(popupNo, reason);
+                await rejectPopup(popupNo, finalReason);
                 alert("반려 처리되었습니다.");
                 navigate('/admin/manager-popup');
             } catch (error) {
@@ -85,7 +108,53 @@ function AdminManagerPopupDetails() {
             {popupData.approvalStatus === '대기' && (
                 <div>
                     <button onClick={handleApprove}>승인</button>
-                    <button onClick={handleReject} style={{ marginLeft: '10px', backgroundColor: 'red' }}>반려</button>
+                    <button 
+                        onClick={() => setShowRejectionForm(!showRejectionForm)}
+                        style={{ marginLeft: '10px', backgroundColor: 'red' }}
+                    >
+                        반려
+                    </button>
+
+                    {/* showRejectionForm이 true일 때 반려 사유 입력 폼 표시 */}
+                    {showRejectionForm && (
+                        <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', marginTop: '20px' }}>
+                            
+                            <h4 style={{ marginTop: '0 '}}>반려 사유 입력</h4>
+
+                            <strong>주요 사유 (필수)</strong>
+                            <div style={{ margin: '10px 0' }}>
+                                {rejectionReasons.map(reason=> (
+                                    <div key={reason}>
+                                        <input
+                                            type='radio'
+                                            id={reason}
+                                            name='rejectionReason'
+                                            value={reason}
+                                            checked={selectedReason === reason}
+                                            onChange={(e) => setSelectedReason(e.target.value)}
+                                        />
+                                        <label htmlFor={reason} style={{ marginLeft: '8px' }}>{reason}</label>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <strong>상세 사유 (선택)</strong>
+                            <textarea
+                                placeholder='상세 반려 사유를 입력하세요.'
+                                value={detailReason}
+                                onChange={(e) => setDetailReason(e.target.value)}
+                                style={{ width: '100%', height: '80px', marginTop: '10px', padding: '8px' }}
+                            />
+
+                            <button
+                                onClick={handleReject}
+                                disabled={!selectedReason}
+                                style={{ marginTop: '15px', padding: '10px 15px' }}
+                            >
+                                반려 확정
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
