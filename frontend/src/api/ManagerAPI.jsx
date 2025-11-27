@@ -118,3 +118,16 @@ export function fetchGenderRatio(popupNo) {
       throw error;
     });
 }
+
+// 1행 이벤트 비율 
+export function fetchEventTypeStats(popupNo) {
+  return API.get(`${BACKEND_URL}/manager/dashboard/${popupNo}/event-type-stats`)
+    .then((response) => {
+      console.log("이벤트 유형 비율 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("이벤트 유형 비율 조회 오류:", error);
+      throw error;
+    });
+}

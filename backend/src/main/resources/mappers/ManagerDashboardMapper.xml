@@ -110,6 +110,19 @@
         GROUP BY m.gender;
 
     </select>
+
+    <!-- 1행 오른쪽 사용자 행동 유형 비율 -->
+    <select id="selectEventTypeStats" parameterType="int"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.EventTypeStatDTO">
+
+        SELECT
+        event_type AS eventType,
+        COUNT(*)   AS count
+        FROM user_event_data
+        WHERE popup_no = #{popupNo}
+        GROUP BY event_type;
+
+    </select>
 </mapper>
 
 

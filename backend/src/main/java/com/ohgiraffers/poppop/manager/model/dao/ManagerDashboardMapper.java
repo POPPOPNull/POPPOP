@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.manager.model.dao;
 
+import com.ohgiraffers.poppop.manager.model.dto.EventTypeStatDTO;
 import com.ohgiraffers.poppop.manager.model.dto.GenderReservationDTO;
 import com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO;
 import com.ohgiraffers.poppop.manager.model.dto.WeekdayReservationDTO;
@@ -31,5 +32,8 @@ public interface ManagerDashboardMapper {
 
     // 2행 예약자 성별 비율
     List<GenderReservationDTO> selectGenderRatio(@Param("popupNo") int popupNo);
+
+    //1행 사용자 행동 타입
+    List<EventTypeStatDTO> selectEventTypeStats(int popupNo);
 }
 
