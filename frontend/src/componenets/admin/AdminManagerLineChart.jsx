@@ -13,12 +13,12 @@ import { selectPopupStatusByMonth } from "../../api/adminAPI";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-// x축 범례 생성 함수 (오늘 날짜 기준 이전 7개월까지 표시)
+// x축 범례 생성 함수 (오늘 날짜 기준 이전 5개월부터 다음 1개월까지 표시)
 const generateLast7Months = () => {
     const months = [];
     const today = new Date();
-    for (let i = 6; i >= 0; i--) {
-        const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+    for (let i = -5; i <= 1; i++) {
+        const date = new Date(today.getFullYear(), today.getMonth() + i, 1);
         const monthString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
         months.push(monthString);
     }
