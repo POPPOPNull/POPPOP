@@ -1,9 +1,6 @@
 package com.ohgiraffers.poppop.manager.controller;
 
-import com.ohgiraffers.poppop.manager.model.dto.GenderReservationDTO;
-import com.ohgiraffers.poppop.manager.model.dto.ManagerDashboardSummaryDTO;
-import com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO;
-import com.ohgiraffers.poppop.manager.model.dto.WeekdayReservationDTO;
+import com.ohgiraffers.poppop.manager.model.dto.*;
 import com.ohgiraffers.poppop.manager.model.service.ManagerDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +56,12 @@ public class ManagerDashboardController {
             @PathVariable int popupNo
     ) {
         return ResponseEntity.ok(dashboardService.getGenderRatio(popupNo));
+    }
+
+    //1행 오른쪽 사용자 행동
+    @GetMapping("/{popupNo}/event-type-stats")
+    public ResponseEntity<List<EventTypeStatDTO>> getEventTypeStats(@PathVariable int popupNo) {
+        return ResponseEntity.ok(dashboardService.getEventTypeStats(popupNo));
     }
 }
 

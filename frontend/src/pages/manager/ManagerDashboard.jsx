@@ -6,6 +6,7 @@ import ManagerKPIData from "../../componenets/manager/dashboard/ManagerKPIData";
 import ReservationTrendChart from "../../componenets/manager/dashboard/ReservationTrendChart";
 import WeekdayReservationChart from "../../componenets/manager/dashboard/WeekdayReservationChart";
 import GenderRatioChart from "../../componenets/manager/dashboard/GenderRatioChart";
+import EventTypeChart from "../../componenets/manager/dashboard/EventTypeChart";
 
 
 function ManagerDashboard() {
@@ -41,12 +42,12 @@ function ManagerDashboard() {
             <ReservationTrendChart popupNo={popupNo} />
           </div>
 
-            {/* 예약자 성별 비율 */}
+            {/* 이벤트 타입 */}
             <div className="manager-dashboard-card">
-            <h3 className="dashboard-card-title">예약자 성별 비율</h3>
-
-            <GenderRatioChart popupNo={popupNo} />
+            <h3 className="dashboard-card-title">사용자 행동 유형 비율</h3>
+            <EventTypeChart popupNo={popupNo} />
           </div>
+
           </section>
 
           <section
@@ -67,9 +68,8 @@ function ManagerDashboard() {
           {/* 예약자 성별 비율 (파이 차트) */}
           <div className="manager-dashboard-card">
             <h3 className="dashboard-card-title">예약자 성별 비율</h3>
-            <div className="dashboard-chart-placeholder">
-              <span>파이 차트 영역 (추후 구현)</span>
-            </div>
+
+            <GenderRatioChart popupNo={popupNo} />
           </div>
         </section>
 
