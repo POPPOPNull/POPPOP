@@ -167,4 +167,23 @@
           from popup_store
          group by month
     </select>
+
+<!--    반려 사유-->
+    <resultMap id="rejectionReasonResultMap" type="com.ohgiraffers.poppop.admin.model.dto.RejectionReasonDTO">
+        <result property="primaryReason" column="primary_reason"/>
+        <result property="reasonCount" column="reason_count"/>
+    </resultMap>
+<!--    월별 반려 사유 비율 집계-->
+    <select id="selectRejectionReasonsByMonth" resultMap="rejectionReasonResultMap" parameterType="String">
+        select
+               substring_index(rejection_reason, ',', 1) as primary_reason,
+               count(*) as reason_count
+          from popup_store
+         where approval_status = '반려'
+           and rejection_reason is not null
+           and rejection_reason != ''
+           and date_format(popup_start_date, '%Y-%m') = #{yearMonth}
+         group by primary_reason
+         order by reason_count desc
+    </select>
 </mapper>

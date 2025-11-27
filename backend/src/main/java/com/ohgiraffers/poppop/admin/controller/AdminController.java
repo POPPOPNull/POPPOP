@@ -194,4 +194,10 @@ public class AdminController {
     public ResponseEntity<List<PopupStatusDTO>> selectPopupStatusByMonth() {
         return ResponseEntity.ok(kpiService.selectPopupStatusByMonth());
     }
+
+    // Manager 대시보드 파이 차트 반려 사유 집계 조회
+    @GetMapping("/kpi/rejection-reasons")
+    public ResponseEntity<List<RejectionReasonDTO>> selectRejectionReasonsByMonth(@RequestParam("month") String month) {
+        return ResponseEntity.ok(kpiService.selectRejectionReasonsByMonth(month));
+    }
 }
