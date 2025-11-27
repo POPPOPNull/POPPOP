@@ -133,7 +133,7 @@ function Calendar() {
     }
 
     if (count > limitPerson) {
-      alert(`1인당 시간별 최대 ${limitPerson}명까지만 예약할 수 있습니다.`);
+      alert(`시간별 최대 ${limitPerson}명까지만 예약할 수 있습니다.`);
       return;
     }
     
