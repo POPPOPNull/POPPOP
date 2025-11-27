@@ -154,12 +154,6 @@ function ManagerSignUpComponent() {
             return(
                 <>
                 <form className="signupform" onSubmit={handleSubmit} noValidate>
-                    <h1>Biz 회원가입</h1>
-
-                    <div className="error-area">
-                      {submitError && <p className="error-text">{submitError}</p>}  
-                    </div>
-
                     <div className="id">
                         <input className="inputsignup"
                             type="text"

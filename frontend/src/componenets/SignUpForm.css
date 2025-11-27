@@ -1,18 +1,6 @@
-.all {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.signupform {
-  margin-top: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 4px;
-}
 .id {
   display: flex;
-  width: 275px;
+  width: 375px;
   align-items: center;
 }
 .id .inputsignup {
@@ -30,7 +18,7 @@
   border-style: none;
 }
 .inputsignup {
-  width: 275px;
+  width: 375px;
   height: 45px;
   border-radius: 8px;
   font-size: medium;
@@ -38,7 +26,7 @@
   /* margin-bottom: 4px; */
 }
 .btnsignup {
-  width: 275px;
+  width: 375px;
   height: 45px;
   color: white;
   background-color: #FFCF0D;
@@ -66,14 +54,14 @@
 .birth-gender {
   display: flex;
   align-items: center;
-  width: 275px;
+  width: 375px;
 }
 .birth6-input {
   width: 186px; 
   margin: 0;
 }
 .birth-gender .inputsignup.small {
-  width: 70px;
+  width: 170px;
   margin-left: 4px;
 }
 
@@ -100,7 +88,7 @@
 .birth-gender,
 .error-area {
   text-align: left;
-  width: 275px;
+  width: 375px;
 }
 
 .error-area {

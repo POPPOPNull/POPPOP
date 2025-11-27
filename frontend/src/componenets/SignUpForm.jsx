@@ -1,4 +1,4 @@
-import "./signupform.css"
+import "./SignUpForm.css"
 import React from 'react';
 import { useForm } from '../hooks/UseForm'; 
 import { useNavigate } from "react-router-dom";
@@ -219,14 +219,7 @@ function SignUpComponent() {
 
             return(
                 <>
-                <div className="all">
-
-                <form className="signupform" onSubmit={handleSubmit} noValidate>
-                    <h1>회원가입</h1>
-
-                    <div className="error-area">
-                      {submitError && <p className="error-text">{submitError}</p>}  
-                    </div>
+                  <form className="signupform" onSubmit={handleSubmit} noValidate>
 
                     <div className="id">
                         <input className="inputsignup"
@@ -353,9 +346,7 @@ function SignUpComponent() {
                     <button className="btnsignup" type="submit" disabled={isSubmitting}>
                         {isSubmitting ? '가입 처리 중..' : '회원가입'}
                     </button>
-                </form>
-                      
-                </div>
+                  </form>
                 </>
             );
         }

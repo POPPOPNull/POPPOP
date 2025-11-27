@@ -1,0 +1,54 @@
+.body{
+    display: flex;
+    justify-content: center;
+}
+.signup-consent {
+    width: 375px;
+}
+.card {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.check input[type="checkbox"] {
+    transform: scale(1.6); 
+    margin-right: 8px;
+    cursor: pointer;
+}
+.signup-consent input[type="checkbox"] {
+  accent-color: white; 
+}
+.card-all-agree {
+    margin-top: 0;
+}
+.label-text {
+    font-size: 20px;
+}
+.box{
+    margin-top: 10px;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 5px;
+}
+.box p {
+    font-size: 14px;
+}
+.nextBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.nextBtn {
+    background-color: #ffcf0d;
+    cursor: pointer;
+    width: 375px;
+    height: 45px;
+    color: white;
+    border-radius: 8px;
+    font-size: medium;
+    border-style: none;
+    margin-top: 40px;
+}
+.btn-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
