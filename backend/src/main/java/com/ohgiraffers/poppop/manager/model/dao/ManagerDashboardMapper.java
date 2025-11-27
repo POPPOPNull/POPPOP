@@ -1,6 +1,8 @@
 package com.ohgiraffers.poppop.manager.model.dao;
 
+import com.ohgiraffers.poppop.manager.model.dto.GenderReservationDTO;
 import com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO;
+import com.ohgiraffers.poppop.manager.model.dto.WeekdayReservationDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,5 +25,11 @@ public interface ManagerDashboardMapper {
 
     //1행 최근 7일 예약
     List<ReservationTrendDTO> selectReservationTrend(@Param("popupNo") int popupNo);
+
+    // 2행 요일별 예약 패턴
+    List<WeekdayReservationDTO> selectWeekdayReservations(@Param("popupNo") int popupNo);
+
+    // 2행 예약자 성별 비율
+    List<GenderReservationDTO> selectGenderRatio(@Param("popupNo") int popupNo);
 }
 
