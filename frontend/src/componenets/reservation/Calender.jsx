@@ -13,10 +13,10 @@ function Calendar() {
   const twoWeeksLater = new Date(new Date().setDate(new Date().getDate() + 14));
 
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-
   const [availableCounts, setAvailableCounts] = useState({}); 
-
   const [count, setCount] = useState(1);
+
+  const limitPerson = 2;
 
   const increase = () => {
     if (!selectedTimeSlot) {
@@ -30,9 +30,11 @@ function Calendar() {
       return;
     }
 
+    const maxLimit = Math.min(maxForSlot, limitPerson);
+
     setCount((prev) => {
-      if (prev >= maxForSlot) {
-        alert(`해당 회차는 최대 ${maxForSlot}명까지 예약할 수 있습니다.`);
+      if (prev >= maxLimit) {
+        alert(`최대 ${limitPerson}명까지 예약할 수 있습니다.`);
         return prev;
       }
       return prev + 1;
@@ -115,7 +117,10 @@ function Calendar() {
     const maxForSlot = availableCounts[selectedTimeSlot];
 
     if (typeof maxForSlot === "number" && maxForSlot > 0) {
-      setCount((prev) => (prev > maxForSlot ? maxForSlot : prev));
+      const maxLimit = Math.min(maxForSlot, limitPerson);
+      setCount((prev) => (prev > maxLimit ? maxLimit : prev));
+    } else {
+      setCount(1);
     }
   }, [selectedTimeSlot, availableCounts]);
 
@@ -124,6 +129,11 @@ function Calendar() {
   const handleSubmit = async () => {
     if(!selectedTimeSlot) {
       alert("회차를 선택해주세요");
+      return;
+    }
+
+    if (count > limitPerson) {
+      alert(`시간별 최대 ${limitPerson}명까지만 예약할 수 있습니다.`);
       return;
     }
     
@@ -147,10 +157,18 @@ function Calendar() {
 
     console.log('보낼 데이터:', body);
 
-    const response = await JwtAPI.post('/reservations', body);
-    alert('예약이 완료되었습니다!');
-      console.log(response.data);
-    navigate("/myreservation", { replace: true });
+    try {
+      const response = await JwtAPI.post('/reservations', body);
+      alert('예약이 완료되었습니다!');
+      navigate("/myreservation", { replace: true });
+
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        alert(err.response.data); 
+      } else {
+        alert("요청하신 인원이 예약 가능 범위를 초과했습니다.");
+      }
+    }
   };
 
   return (
