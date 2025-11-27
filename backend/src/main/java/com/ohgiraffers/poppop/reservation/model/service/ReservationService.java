@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.reservation.model.service;
 
+import com.ohgiraffers.poppop.behavior.model.dao.BehaviorMapper;
 import com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
@@ -15,9 +16,11 @@ public class ReservationService {
     private final ReservationMapper reservationMapper;
 
     private static final int max_count = 100;
+    private final BehaviorMapper behaviorMapper;
 
-    public ReservationService(ReservationMapper reservationMapper) {
+    public ReservationService(ReservationMapper reservationMapper, BehaviorMapper behaviorMapper) {
         this.reservationMapper = reservationMapper;
+        this.behaviorMapper = behaviorMapper;
     }
 
     public List<ReservationDetailsDTO> selectAllReservation() {
@@ -40,9 +43,10 @@ public class ReservationService {
         }
     }
 
-    public void insertReservation (ReservationDetailsDTO dto){
+    public void insertReservation (ReservationDetailsDTO dto, String sessionId) {
 
         reservationMapper.insertReservation(dto);
+        behaviorMapper.insertLogByReservation(dto.getPopupNo(), sessionId);
     }
 
     public List<ReservationDetailsDTO> getReservationsByMemberId(String memberId) {

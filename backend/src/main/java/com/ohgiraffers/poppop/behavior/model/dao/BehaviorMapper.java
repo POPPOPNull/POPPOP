@@ -1,6 +1,8 @@
 package com.ohgiraffers.poppop.behavior.model.dao;
 
+import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -17,4 +19,6 @@ public interface BehaviorMapper {
     int countViews(String eventValue);
 
     int countFavorite(String eventValue);
+
+    void insertLogByReservation(@Param("popupNo") int popupNo, String sessionId);
 }

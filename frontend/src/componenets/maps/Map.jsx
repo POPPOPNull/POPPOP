@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
-
+import { useNavigate } from "react-router-dom";
 
 
 function KakaoMap({ popupStores=[] }){
 
     const key = import.meta.env.VITE_KAKAOMAP_KEY
+
+    const navigate = useNavigate();
 
     useKakaoLoader({ 
         appkey: key
@@ -60,6 +62,9 @@ function KakaoMap({ popupStores=[] }){
                         lng: parseFloat(store.longitude),
                     }}
                     title={store.name}
+                    onClick={() => {
+                        navigate(`/user/${store.popupNo}`);
+                    }}
                 />
             ))}                
             </Map>
