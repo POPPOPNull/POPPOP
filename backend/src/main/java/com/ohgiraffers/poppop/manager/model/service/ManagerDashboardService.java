@@ -2,8 +2,11 @@ package com.ohgiraffers.poppop.manager.model.service;
 
 import com.ohgiraffers.poppop.manager.model.dao.ManagerDashboardMapper;
 import com.ohgiraffers.poppop.manager.model.dto.ManagerDashboardSummaryDTO;
+import com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ManagerDashboardService {
@@ -36,6 +39,11 @@ public class ManagerDashboardService {
         );
 
         return dto;
+    }
+
+    //1행 최근 7일 예약
+    public List<ReservationTrendDTO> getReservationTrend(int popupNo) {
+        return dashboardMapper.selectReservationTrend(popupNo);
     }
 }
 
