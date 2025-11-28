@@ -9,9 +9,21 @@ function EventTypeChart({ popupNo }) {
     if (!popupNo) return;
 
     fetchEventTypeStats(popupNo).then((res) => {
+        if (!res || res.length === 0) {
       setData(res);
-    });
-  }, [popupNo]);
+      return;
+    }
+    const total = res.reduce((sum, item) => sum + item.count, 0);
+
+    const mapped = res.map((item) => ({
+        ...item,
+        percent: ((item.count / total) * 100).toFixed(1), 
+      }));
+
+        setData(mapped);
+        });
+    }, [popupNo]);
+  
 
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7875", "#8dd1e1", "#d0ed57"];
 
@@ -21,18 +33,20 @@ function EventTypeChart({ popupNo }) {
         <PieChart>
           <Pie
             data={data}
-            dataKey="count"
+            dataKey="percent"  
             nameKey="eventType"
             cx="50%"
             cy="50%"
-            outerRadius={80}
-            label
+            outerRadius={85}
+            label={({ name, percent }) => `${name}: ${percent}%`}
           >
             {data.map((entry, index) => (
               <Cell key={index} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, props) => [`${props.payload.percent}%`, "비율"]}
+          />
           <Legend />
         </PieChart>
       </ResponsiveContainer>

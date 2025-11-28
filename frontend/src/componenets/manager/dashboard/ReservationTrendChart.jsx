@@ -23,6 +23,16 @@ function ReservationTrendChart({ popupNo }) {
       .catch((err) => console.error("예약 추이 조회 실패:", err));
   }, [popupNo]);
 
+  //Y축 최대값 계산 (단위 10)
+  const maxCount = data.length ? Math.max(...data.map((d) => d.reservationCount)) : 0;
+  const yMax = Math.max(10, Math.ceil(maxCount / 10) * 10);
+
+  //Y축 눈금
+  const yTicks = [];
+  for (let v = 0; v <= yMax; v += 10) {
+    yTicks.push(v);
+  }
+
   return (
     <ResponsiveContainer width="100%" height={240}>
       <LineChart
@@ -30,8 +40,12 @@ function ReservationTrendChart({ popupNo }) {
         margin={{ top: 20, right: 20, left: 0, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />    {/* 날짜(String) 그대로 사용 */}
-        <YAxis allowDecimals={false} />
+        <XAxis dataKey="date" />    
+        <YAxis
+          allowDecimals={false}
+          domain={[0, yMax]}
+          ticks={yTicks}
+        />
         <Tooltip />
         <Legend />
 

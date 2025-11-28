@@ -86,6 +86,23 @@
   filter: brightness(1.2);
 }
 
+/* 로그인 */
+.mh-login-btn {
+  margin-top: 100px;
+  margin-left: 780px;
+  color: var(--yellow);
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1.2;
+  background: none;
+  border: none;
+}
+
+.mh-login-btn:hover {
+  filter: brightness(1.2);
+}
+
 /* 중앙 메인 */
 .mh-main {
   text-align: center;
