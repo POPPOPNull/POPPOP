@@ -92,4 +92,8 @@ public class KpiService {
     public List<RejectionReasonDTO> selectRejectionReasonsByMonth(String yearMonth) {
         return kpiMapper.selectRejectionReasonsByMonth(yearMonth);
     }
+
+    public List<PopularPopupDTO> selectPopularPopupByMonth(String yearMonth) {
+        return kpiMapper.selectPopularPopupByMonth(yearMonth);
+    }
 }
