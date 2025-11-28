@@ -200,4 +200,10 @@ public class AdminController {
     public ResponseEntity<List<RejectionReasonDTO>> selectRejectionReasonsByMonth(@RequestParam("month") String month) {
         return ResponseEntity.ok(kpiService.selectRejectionReasonsByMonth(month));
     }
+
+    // Manager 대시보드 막대 차트 인기 팝업 조회
+    @GetMapping("/kpi/popular-popups")
+    public ResponseEntity<List<PopularPopupDTO>> selectPopularPopupByMonth() {
+        return ResponseEntity.ok(kpiService.selectPopularPopupByMonth());
+    }
 }
