@@ -39,10 +39,10 @@ function ReviewInsert(){
                        <div className="blank"></div>
                        <div className={PPStyle.poster}>이미지준비중</div>
                        <div className={PPStyle.imagebuttonlayout}>
-                           <Link to={`/user/${popupNo}`} className={PPStyle.imagebuttons}>
+                           <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons}>
                                정보
                            </Link>
-                           <Link to={`/user/${popupNo}/review`} className={PPStyle.imagebuttons}>
+                           <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttons}>
                                후기
                            </Link>
                        </div>
