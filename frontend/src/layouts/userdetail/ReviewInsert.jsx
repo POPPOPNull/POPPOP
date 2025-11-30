@@ -14,6 +14,7 @@ import Footer from "../usermain/Footer";
 function ReviewInsert(){
 
        const {popupNo} = useParams();
+       const popupURL = `/public/poster/poster_${popupNo}.png`
    
        const [popup, setPopup] = useState({});
    
@@ -37,7 +38,7 @@ function ReviewInsert(){
                <div className="user-main-layout">
                    <div className="main">
                        <div className="blank"></div>
-                       <div className={PPStyle.poster}>이미지준비중</div>
+                       <div className={PPStyle.poster}><img src={popupURL} alt={popupNo} /></div>
                        <div className={PPStyle.imagebuttonlayout}>
                            <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons}>
                                정보

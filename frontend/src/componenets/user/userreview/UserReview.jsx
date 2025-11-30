@@ -6,6 +6,7 @@ import { insertReview } from "../../../api/ReviewAPI";
 function UserReview(){
     
     const {popupNo}=useParams();
+     
 
     const [content, setContent] = useState();
 
@@ -17,7 +18,16 @@ function UserReview(){
     }
     const onClickRegist=()=>{
         insertReview(content,popupNo)
+        .then(
+            alert('후기가 작성되었습니다.')
+        ).catch(
+            err=>{
+                console.error('리뷰 실패')
+                alert('후기 등록에 실패하였습니다.')
+            }
         
+        )
+        window.location.reload()
         
     }
 
