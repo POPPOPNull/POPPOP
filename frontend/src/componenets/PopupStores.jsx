@@ -44,7 +44,7 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`}>
+                <Link to={`/popup-stores/${popupstore.no}`}>
                     <div ref={preview}></div>
                     <div className={PSStyle.layout} ref={drag}>
                         <div className={PSStyle.image}>
