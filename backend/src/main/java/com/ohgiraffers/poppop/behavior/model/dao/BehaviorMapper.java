@@ -21,4 +21,6 @@ public interface BehaviorMapper {
     int countFavorite(String eventValue);
 
     void insertLogByReservation(@Param("popupNo") int popupNo, String sessionId);
+
+    void logSearchWord(String searchWord, String sessionId);
 }

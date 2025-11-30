@@ -63,7 +63,7 @@ function KakaoMap({ popupStores=[] }){
                     }}
                     title={store.name}
                     onClick={() => {
-                        navigate(`/user/${store.popupNo}`);
+                        navigate(`/popup-stores/${store.popupNo}`);
                     }}
                 />
             ))}                

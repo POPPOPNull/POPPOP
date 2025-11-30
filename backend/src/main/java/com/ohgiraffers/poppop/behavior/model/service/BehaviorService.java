@@ -30,4 +30,9 @@ public class BehaviorService {
     public int countFavorite(String eventValue) {
         return behaviorMapper.countFavorite(eventValue);
     }
+
+    public void logSearchWord(String searchWord, String sessionId) {
+        behaviorMapper.logSearchWord(searchWord,sessionId);
+
+    }
 }
