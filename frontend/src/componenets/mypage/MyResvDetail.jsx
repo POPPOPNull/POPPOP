@@ -10,22 +10,28 @@ function ResvDetail() {
     const [filterStatus, setFilterStatus] = useState("all");
     const [error, setError] = useState(null);
 
+    const applyStatusByDate = (data) => {
+    const today = new Date();
+
+    return (data || []).map((resv) => {
+      const visitDateTime = new Date(
+        `${resv.reservationDate}T${resv.reservationTime}`
+      );
+
+      if (
+        resv.reservationStatus === "예약완료" &&
+        visitDateTime < today
+      ) {
+        return { ...resv, reservationStatus: "이용완료" };
+      }
+      return resv;
+    });
+  };
+
     useEffect(()=> {
         getMyReservations()
         .then((data) => {
-        const today = new Date();
-
-        const updated = (data || []).map(resv => {
-            const visitDateTime = new Date(`${resv.reservationDate}T${resv.reservationTime}`);
-
-            if (
-                resv.reservationStatus === "예약완료" &&
-                visitDateTime < today
-            ) {
-                return { ...resv, reservationStatus: "이용완료"};
-            }
-            return resv;
-        });
+        const updated = applyStatusByDate(data);
 
       setReservations(updated);
       })
@@ -59,11 +65,16 @@ function ResvDetail() {
     const handleCancel = async (no) => {
     if (!window.confirm("예약을 취소하시겠습니까?")) return;
         
-    {
+    try {
       await cancelReservation(no);
       alert("예약이 취소되었습니다.");
 
-      getMyReservations().then(setReservations);
+      const data = await getMyReservations();
+      const updated = applyStatusByDate(data);
+      setReservations(updated);
+    } catch (err) {
+      console.error("예약 취소 실패:", err);
+      alert("예약 취소에 실패했습니다.");
 
     }
   };
