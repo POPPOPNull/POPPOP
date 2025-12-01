@@ -13,6 +13,8 @@ function InfoDetail() {
 
     const [error, setError] = useState(null);
 
+    const [showEmailGuide, setShowEmailGuide] = useState(false);
+    const [showPhoneGuide, setShowPhoneGuide] = useState(false);
     const [isEditingEmail, setIsEditingEmail] = useState(false);
     const [isEditingPhone, setIsEditingPhone] = useState(false);
 
@@ -36,6 +38,7 @@ function InfoDetail() {
     const handleEmailButtonClick = async () => {
         if (!isEditingEmail) {
             setIsEditingEmail(true);
+            setShowEmailGuide(true);
         return;
         }
     
@@ -49,6 +52,7 @@ function InfoDetail() {
             await updateEmail(email);
             alert("이메일이 수정되었습니다.");
             setIsEditingEmail(false);   // 다시 readOnly
+            setShowEmailGuide(false);
         } catch (err) {
             console.error("이메일 수정 실패:", err);
             alert("이메일 수정에 실패했습니다. 다시 시도해주세요.");
@@ -58,6 +62,7 @@ function InfoDetail() {
     const handlePhoneButtonClick = async () => {
         if (!isEditingPhone) {
             setIsEditingPhone(true);
+            setShowPhoneGuide(true);
         return;
         }
 
@@ -70,6 +75,7 @@ function InfoDetail() {
             await updatePhone(phone);
             alert("휴대전화 번호가 수정되었습니다.");
             setIsEditingPhone(false);
+            setShowPhoneGuide(false);
         } catch (err) {
             console.error("휴대전화 수정 실패:", err);
             alert("휴대전화 번호 수정에 실패했습니다. 다시 시도해주세요.");
@@ -91,7 +97,14 @@ function InfoDetail() {
             </div>
 
             <div className="form-group">
-                <label>이메일주소</label>
+                <div className="label-row">
+                    <label>이메일주소</label>
+
+                    {isEditingEmail && (
+                        <span className="email-guide">(예: example@poppop.com)</span>
+                    )}
+                </div>
+
                 <div className="form-update">
                     <input 
                         type="email" 
@@ -115,7 +128,14 @@ function InfoDetail() {
             </div>
 
             <div className="form-group">
-                <label>휴대전화</label>
+                <div className="label-row">
+                    <label>휴대전화</label>
+
+                    {isEditingPhone && (
+                        <span className="phone-guide">(예: 01012345678)</span>
+                    )}
+                </div>
+
                 <div className="form-update">
                     <input 
                         type="phone" 
@@ -127,11 +147,13 @@ function InfoDetail() {
                     <button 
                         type="button"
                         className={`edit-btn ${isEditingPhone ? "editing" : ""}`}
-                        onClick={handlePhoneButtonClick}>
+                        onClick={handlePhoneButtonClick}
+                    >
                         {isEditingPhone? "저장" : "수정"}
                     </button>
                 </div>
             </div>
+
             <button style={{marginTop:"50px",marginLeft:"520px", marginBottom:"30px"}}>회원탈퇴</button>
         </div>
         </>

@@ -41,6 +41,17 @@
     color: white;
 }
 
+.label-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.email-guide, .phone-guide {
+    font-size: 14px;
+    color: #888;
+}
+
 .form-group .error-message {
     margin-left: 10px;
     font-size: 12px;
