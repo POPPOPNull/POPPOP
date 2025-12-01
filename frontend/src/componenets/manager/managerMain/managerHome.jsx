@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./managerHome.css";
-import Logout from "../../Logout";
+
 
 function ManagerHome() {
   const [hover, setHover] = useState(false);
@@ -53,18 +53,14 @@ function ManagerHome() {
           )}
         </div>
 
-        {/* 로그인 / 로그아웃*/}
+        {/* 로그인 버튼만 */}
         <div className="mh-logout">
-          {isLoggedIn ? (
-            <Logout /> // 기존 logout 컴포넌트
-          ) : (
-            <button
+          <button
             className="mh-login-btn"
             onClick={() => navigate("/auth/login")}
           >
             login
           </button>
-          )}
         </div>
       </div>
 
