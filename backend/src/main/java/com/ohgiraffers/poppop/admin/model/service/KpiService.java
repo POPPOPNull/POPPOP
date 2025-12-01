@@ -96,4 +96,8 @@ public class KpiService {
     public List<PopularPopupDTO> selectPopularPopupByMonth(String yearMonth) {
         return kpiMapper.selectPopularPopupByMonth(yearMonth);
     }
+
+    public List<CategoryDistributionDTO> selectCategoryDistributionByMonth(String yearMonth) {
+        return kpiMapper.selectCategoryDistributionByMonth(yearMonth);
+    }
 }

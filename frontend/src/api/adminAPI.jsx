@@ -214,3 +214,15 @@ export function selectPopularPopupByMonth(yearMonth) {
         throw error;
     });
 }
+
+// manager 대시보드 막대 차트 월별 카테고리별 팝업 분포 조회
+export function selectCategoryDistributionByMonth(yearMonth) {
+    return API.get(`${BACKEND_URL}/admin/kpi/category-distribution`, {
+        params: { yearMonth }
+    })
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error(`API call error in selectCategroyDistributionByMonth. ${yearMonth}`, error);
+        throw error;
+    });
+}
