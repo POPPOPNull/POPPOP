@@ -107,7 +107,7 @@ function App() {
                 <Route path="reservations" element={<ReservationPage />} /> 
               </Route>
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
-              <Route path="/manager/popup-register" element={<PopupRegister />} />
+              <Route path="/manager/popupstore" element={<PopupRegister />} />
               <Route path="/manager/mypopup/:popupNo/edit" element={<MyPopupEditPage />} />
               {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
