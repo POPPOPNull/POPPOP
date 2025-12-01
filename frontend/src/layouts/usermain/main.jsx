@@ -27,10 +27,12 @@ function User (){
         <>
             <div className="user-main-layout">
                 <div className="main">
-                    <div className="blank"/>
+                    
                     <Blank/>
                     <TopComp/>
+                    <div style={{height:20}}></div>
                     <Container/>
+                    <div style={{height:20}}></div>
                     <BotComp/>
                     <Footer/>
                 </div>

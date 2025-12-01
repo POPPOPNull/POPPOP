@@ -58,7 +58,7 @@ const RedirectBasedOnRole = () => {
     case 'MANAGER':
       return <Navigate to="/manager" replace />;
     case 'USER':
-      return <Navigate to="/user" replace />;
+      return <Navigate to="/popup-stores" replace />;
     default:
       return <Navigate to="/auth/login" replace />;
   }

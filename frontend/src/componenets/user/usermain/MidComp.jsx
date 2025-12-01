@@ -8,10 +8,11 @@ import { logDataBySelect } from "../../../api/BehaviorAPI";
 
 
 
-
+const month = new Date().getMonth()+1;
 export function MidComp1(){
 
     const [popups, setPopups] = useState([])
+    
 
     useEffect(()=>{
         const fetchData = async()=>{
@@ -34,16 +35,20 @@ export function MidComp1(){
 
     return(
         <>
-        <div className={MCStyle.explain}>중단컴포넌트 주제 1</div>
-            <Swiper
+        <div className={MCStyle.back}>
+            <div className={MCStyle.explain}>담당자 픽 인기 팝업 <span style={{color:"red"}}>{month}월</span></div>
+            <div>
+                <Swiper
             slidesPerView={3}
             className={MCStyle.layout}
             spaceBetween={10}
             slidesOffsetBefore={30}
-            slidesOffsetAfter={200}
+            slidesOffsetAfter={100}
             >
             {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore} posterNo={popupstore.no}/></SwiperSlide>)}
             </Swiper>
+            </div>
+        </div>
         </>
     )
 }
@@ -72,16 +77,20 @@ export function MidComp2(){
 
     return(
         <>
-        <div className={MCStyle.explain}>중단컴포넌트 주제 2</div>
-            <Swiper
+        <div className={MCStyle.back}>
+            <div className={MCStyle.explain}>놓치면 손해 곧 오픈 예정! <span style={{color:"red"}}>{month}월</span></div>
+            <div>
+                <Swiper
             slidesPerView={3}
             className={MCStyle.layout}
             spaceBetween={10}
             slidesOffsetBefore={30}
-            slidesOffsetAfter={200}
+            slidesOffsetAfter={100}
             >
             {popups.map(popupstore =><SwiperSlide  className={MCStyle.slide}><PopupComp key={popupstore.no} popupstore={popupstore} posterNo={popupstore.no}/></SwiperSlide>)}
             </Swiper>
+            </div>
+        </div>
         </>
     )
 }

@@ -86,7 +86,7 @@ export function BotComp() {
             <div className={BCStyle.botlayout}>
                 {(popupStores).map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag} posterNo={popupstore.no}/>)}
             </div>
-            <Link to={"/user/search"}>
+            <Link to={"/user/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className={BCStyle.more}>더보기</div>
             </Link>
         </>
