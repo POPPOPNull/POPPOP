@@ -34,8 +34,46 @@ function Calendar() {
     const maxLimit = Math.min(maxForSlot, limitPerson);
     setCount((prev) => (prev >= maxLimit ? prev : prev + 1));
   };
+
   const decrease = () => setCount((prev) => (prev > 1 ? prev : 1));
-  const timeSlots = ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
+  
+  const timeSlots = [
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+  ];
+
+  // 날짜 비교
+  const isSameDate = (d1, d2) => {
+    return (
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate()
+    );
+  };
+
+  // 과거인지 미래인지 체크
+  const isPastTimeSlot = (slot, dateObj) => {
+    if (!dateObj) return false;
+
+    const today = new Date();
+
+    if (!isSameDate(dateObj, today)) return false;
+
+    const [hStr, mStr] = slot.split(":");
+    const slotMinutes = parseInt(hStr, 10) * 60 + parseInt(mStr, 10);
+
+    const nowMinutes = today.getHours() * 60 + today.getMinutes();
+
+    return slotMinutes <= nowMinutes;
+  };
+
   const formatDate = (dateObj) => {
     const year = dateObj.getFullYear();
     const month = String(dateObj.getMonth() + 1).padStart(2, "0");
@@ -81,6 +119,16 @@ function Calendar() {
   const handlePayment = async () => {
     if(!selectedTimeSlot) {
       alert("회차를 선택해주세요");
+      return;
+    }
+
+    if (isPastTimeSlot(selectedTimeSlot, startDate)) {
+      alert("이미 지난 시간대는 예약할 수 없습니다.");
+      return;
+    }
+
+    if (count > limitPerson) {
+      alert(`시간별 최대 ${limitPerson}명까지만 예약할 수 있습니다.`);
       return;
     }
     
@@ -148,7 +196,11 @@ function Calendar() {
       <div className="timeslot-container">
         {timeSlots.map((slot) => {
           const countForSlot = availableCounts[slot];
-          const isDisabled = countForSlot === 0 || countForSlot === null; 
+
+          const isDisabled =
+            countForSlot === 0 ||
+            countForSlot === null ||
+            isPastTimeSlot(slot, startDate);
           return (
             <button
               key={slot}
