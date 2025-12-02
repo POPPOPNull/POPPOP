@@ -35,7 +35,7 @@ function Buttons () {
     return(
         <>
             <div className="buttonbar-layout">
-                <div className="buttonbar"><NavLink to="/user/search" style={{ color: "white", textDecoration: "none" }}>조회</NavLink></div>
+                <div className="buttonbar"><NavLink to="/popup-stores/search" style={{ color: "white", textDecoration: "none" }}>조회</NavLink></div>
                 <Favorite>
                     <div className="buttonbar"><NavLink to="/user/favorite" style={{ color: "white", textDecoration: "none" }}>관심</NavLink></div>
                 </Favorite>

@@ -64,10 +64,10 @@ function Popups(){
                         <img src={popupURL} alt={popupNo} />
                     </div>
                     <div className={PPStyle.imagebuttonlayout}>
-                        <Link to={`/user/${popupNo}`} className={PPStyle.imagebuttons}>
+                        <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons}>
                             <div>정보</div>
                         </Link>
-                         <Link to={`/user/${popupNo}/review`} className={PPStyle.imagebuttons}>
+                         <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttons}>
                             후기
                         </Link>
                     </div>
@@ -78,7 +78,7 @@ function Popups(){
                     <PopupInfo/>
                     <div className={PPStyle.reviewbtns}>
                         <div>후기</div>
-                        <Link to={`/user/${popupNo}/review`}><div>후기작성하기</div></Link>
+                        <Link to={`/popup-stores/${popupNo}/review`}><div>후기작성하기</div></Link>
                      </div>
                     <ReviewView/>
                     <MidComp1/>

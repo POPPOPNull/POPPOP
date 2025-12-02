@@ -79,7 +79,7 @@ function App() {
         
             <Route index element={<RedirectBasedOnRole />} />
 
-            <Route path="/user">
+            <Route path="/popup-stores">
               <Route index element={<User />} />
 
               <Route path=":popupNo" element={<PopupDetails />} />
