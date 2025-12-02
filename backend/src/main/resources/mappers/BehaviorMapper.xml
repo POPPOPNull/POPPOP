@@ -99,6 +99,23 @@
         )
     </insert>
 
+    <insert id="logSearchWord">
+        insert into user_event_data
+        (
+        event_type,
+        event_value,
+        session_id,
+        time_stamp
+        )
+        value
+        (
+        "검색",
+        #{searchWord},
+        #{sessionId},
+        now()
+        )
+    </insert>
+
     <!--조회 수 조회-->
     <select id="countViews" resultType="_int">
         select

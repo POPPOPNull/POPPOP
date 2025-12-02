@@ -4,6 +4,7 @@ import { selectPopupstoreByOpenStatus } from "../../../api/PopupStoreAPI"
 import TPStyle from "./UserSearch.module.css"
 import Blank from "../usermain/Blank"
 import PopupStores from "../../PopupStores";
+import { logSearchWord } from "../../../api/BehaviorAPI"
 
 function NoSearchResult({props}){
     return(
@@ -54,6 +55,7 @@ function SearchBar(){
     }
 
     const onCLickSearch = async ()=>{
+        logSearchWord(searchWord)
         selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord)
         .then(data=>{
             console.log("popups",data)
@@ -61,11 +63,13 @@ function SearchBar(){
         })
         
         setIsVisible(false)
+        
     
     }
 
     const onEnterKeyDown = async (e)=>{
         if(e.keyCode==13){
+            logSearchWord(searchWord)
             selectPopupstoreByOpenStatus(startDate,endDate,status,searchWord)
         .then(data=>{
             console.log("popups",data)
@@ -74,6 +78,8 @@ function SearchBar(){
         
         setIsVisible(false)
         }
+
+        
     }
 
     useEffect(()=>{
@@ -82,7 +88,7 @@ function SearchBar(){
             console.log("popups",data)
             setPopups(data)
         })
-    },[status])
+    },[searchWord])
 
     
 
