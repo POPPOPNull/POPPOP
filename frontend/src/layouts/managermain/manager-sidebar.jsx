@@ -1,6 +1,7 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./manager-sidebar.css"; // admin 스타일
 import { useState, useEffect } from "react";
+import AdminLogout from "../../componenets/AdminLogout";
 
 function ManagerSidebar() {
   const location = useLocation();
@@ -71,6 +72,9 @@ function ManagerSidebar() {
         </NavLink>
 
       </div>
+      <div className="admin-logout">
+            <AdminLogout />
+            </div>
     </div>
   );
 }
