@@ -7,7 +7,22 @@ export function getMyReservations() {
     .then(response=>response.data);
 }
 
+
+
 export function cancelReservation(reservationNo) {
+
   return API.put(`/myreservation/${reservationNo}/cancel`)
+
     .then(response=>response.data);
+
+}
+
+
+
+export function cancelPaidReservation(reservationNo) {
+
+  return API.post(`${BACKEND_URL}/reservations/${reservationNo}/cancel`)
+
+    .then(response => response.data);
+
 }

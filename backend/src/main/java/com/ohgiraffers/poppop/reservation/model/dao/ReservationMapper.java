@@ -20,6 +20,8 @@ public interface ReservationMapper {
 
     int deleteReservationDetails(int reservationNo);
 
+    void insertPendingReservation(ReservationDetailsDTO dto);
+
     void insertReservation(ReservationDetailsDTO dto);
 
     List<ReservationDetailsDTO> selectReservationByMemberId(@Param("memberId") String memberId);
@@ -35,4 +37,10 @@ public interface ReservationMapper {
                                 @Param("reservationTime")  String reservationTime);
 
     int getAlreadyReservedCount(String memberId, int popupNo, LocalDate reservationDate, LocalTime reservationTime);
+
+    Integer findAmountByOrderId(@Param("orderId") String orderId);
+
+    void updateReservationAsPaid(@Param("orderId") String orderId, @Param("paymentKey") String paymentKey);
+
+    String findPaymentKey(@Param("reservationNo") int reservationNo, @Param("memberId") String memberId);
 }

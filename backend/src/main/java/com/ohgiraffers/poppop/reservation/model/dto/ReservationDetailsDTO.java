@@ -21,6 +21,9 @@ public class ReservationDetailsDTO {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime reservationTime;
 
+    private String orderId;
+    private Integer reservationAmount;
+
     public ReservationDetailsDTO() {}
 
     public ReservationDetailsDTO(int reservationNo,
@@ -30,7 +33,7 @@ public class ReservationDetailsDTO {
                                  String memberId,
                                  String popupName,
                                  LocalDate reservationDate,
-                                 LocalTime reservationTime) {
+                                 LocalTime reservationTime, String orderId, Integer reservationAmount) {
         this.reservationNo = reservationNo;
         this.reservationStatus = reservationStatus;
         this.reservationPersonnel = reservationPersonnel;
@@ -39,6 +42,8 @@ public class ReservationDetailsDTO {
         this.popupName = popupName;
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
+        this.orderId = orderId;
+        this.reservationAmount = reservationAmount;
     }
 
     public int getReservationNo() {
@@ -105,6 +110,21 @@ public class ReservationDetailsDTO {
         this.reservationTime = reservationTime;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public Integer getReservationAmount() {
+        return reservationAmount;
+    }
+
+    public void setReservationAmount(Integer reservationAmount) {
+        this.reservationAmount = reservationAmount;
+    }
 
     @Override
     public String toString() {
@@ -117,6 +137,8 @@ public class ReservationDetailsDTO {
                 ", popupName='" + popupName + '\'' +
                 ", reservationDate=" + reservationDate +
                 ", reservationTime=" + reservationTime +
+                ", orderId='" + orderId + '\'' +
+                ", reservationAmount=" + reservationAmount +
                 '}';
     }
 }
