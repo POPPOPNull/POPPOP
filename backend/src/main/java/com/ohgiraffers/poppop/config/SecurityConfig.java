@@ -61,7 +61,8 @@ public class SecurityConfig {
                                 "/popup-stores/search",
                                 "/popup-stores/**",
                                 "/behavior/**",
-                                "/api/chatbot/**"
+                                "/api/chatbot/**",
+                                "/favorite/**"
 
 
                         ).permitAll()

@@ -40,10 +40,10 @@ function ReviewInsert(){
                        <div className="blank"></div>
                        <div className={PPStyle.poster}><img src={popupURL} alt={popupNo} /></div>
                        <div className={PPStyle.imagebuttonlayout}>
-                           <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons}>
+                           <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons} style={{ textDecoration: 'none', color: 'inherit' }}>
                                정보
                            </Link>
-                           <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttons}>
+                           <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttonsactive} style={{ textDecoration: 'none', color: 'red' }}>
                                후기
                            </Link>
                        </div>

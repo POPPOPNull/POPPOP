@@ -5,6 +5,8 @@ import com.ohgiraffers.poppop.favorite.model.dto.FavoriteDTO;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface FavoriteMapper {
 
@@ -13,4 +15,5 @@ public interface FavoriteMapper {
 
     void deleteFavorite(int popupNo, String id);
 
+    List<Integer> selectFavoritePopupNo(String id);
 }

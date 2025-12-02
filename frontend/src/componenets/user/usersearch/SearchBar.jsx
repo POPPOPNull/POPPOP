@@ -5,6 +5,8 @@ import TPStyle from "./UserSearch.module.css"
 import Blank from "../usermain/Blank"
 import PopupStores from "../../PopupStores";
 import { logSearchWord } from "../../../api/BehaviorAPI"
+import { selectFavoritePopupNo } from "../../../api/FavoriteAPI"
+
 
 function NoSearchResult({props}){
     return(
@@ -27,6 +29,11 @@ function SearchBar(){
     const [isDrag,setIsDrag] = useState(false)
     const [isVisible,setIsVisible] = useState(false)
     const [searchWord, setSearchWord] = useState("")
+
+     const [favoriteNo, setFavoriteNo] = useState([]);
+    
+    const[isFavorite,setIsFavorte]=useState(false)
+    const[Narray,setNArray] = useState([])
 
     const onClickOpen = () =>{
         setIsVisible(true)
@@ -91,6 +98,16 @@ function SearchBar(){
         })
     },[searchWord,status])
 
+    useEffect(()=>{
+            selectFavoritePopupNo()
+                .then(data=>{
+                    
+                    setFavoriteNo(data)
+                    console.log("찜한것",data)
+                    
+                })
+        },[])
+
     
 
     
@@ -127,10 +144,10 @@ function SearchBar(){
             <option value="done" >종료</option>
             <option value="open" defaultValue={true} selected={true}>진행중</option>
             <option value="scheduled">오픈 예정</option>
-        </select>
+            </select>
 
         <div className={TPStyle.popuplayout}>
-            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} setIsDrag={setIsDrag} posterNo={popup.no} />)}
+            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} isFavorite={(favoriteNo.includes(popups.no)?isFavorite:!isFavorite)} popupstore={popup} setIsDrag={setIsDrag} posterNo={popup.no} />)}
         </div>
         </>
     )

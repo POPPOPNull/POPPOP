@@ -15,11 +15,21 @@ function Favorite({item,children}){
         accept:'popup',
         hover(item){
             console.log("호버중")
-            console.log(item.popupstore.no,"user1")
+            console.log(item.popupstore.no)
         },
         drop(item){
             console.log("아이템",item.popupstore.no)
-            insertFavorite(item.popupstore.no,"user1")
+            insertFavorite(item.popupstore.no)
+            .then(
+                ()=>{
+                    alert("찜 목록에 추가되었습니다.")
+                }
+            )
+            .catch(
+                ()=>{
+                    alert("찜목록에 추가할 수 없어요.")
+                }
+            )
         }
         
     })
@@ -58,7 +68,7 @@ function Buttons () {
                 
                     <NavLink to="/popup-stores/search" style={{ color: "white", textDecoration: "none" }} className="buttonback" >
                     <div className="buttonbar" onClick={onMouse}>
-                    <img className="img" src="public\icons\search.png" style={{width:20,height:20}} alt="조회"  />
+                    <img className="img" src="..\icons\search.png" style={{width:20,height:20}} alt="조회"  />
                     <div>
                         조회
                     </div>
@@ -66,22 +76,22 @@ function Buttons () {
                     </NavLink>
                 <Favorite>
                         
-                        <NavLink to="/user/favorite" style={{ color: "white", textDecoration: "none" }} className="buttonback">
+                        <NavLink to="/popup-stores/favorite" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                     <div className="buttonbar"  onClick={onMouse}>
-                        <img className="img" src="public\icons\favorite.png" style={{width:20,height:20}} alt="관심" />
+                        <img className="img" src="..\icons\favorite.png" style={{width:20,height:20}} alt="관심" />
                         <div>관심</div>
                         </div>
                         </NavLink>
                 </Favorite>
                     <NavLink to="/popup-stores/maps" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                 <div className="buttonbar">
-                    <img className="img" src="public\icons\map.png" style={{width:20,height:20}} alt="주변" />
+                    <img className="img" src="..\icons\map.png" style={{width:20,height:20}} alt="주변" />
                     <div>주변</div>
                     </div>
                     </NavLink>
                     <NavLink to="/myinfo" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                 <div className="buttonbar">
-                    <img className="img" src="public\icons\login.png" style={{width:20,height:20}} alt="마이페이지" />
+                    <img className="img" src="..\icons\login.png" style={{width:20,height:20}} alt="마이페이지" />
                     <div>마이페이지</div>
                     </div>
                     </NavLink>

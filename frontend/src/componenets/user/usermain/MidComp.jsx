@@ -5,6 +5,8 @@ import { useState,useEffect } from "react";
 import PopupComp from "./PopupComp";
 import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStoreAPI";
 import { logDataBySelect } from "../../../api/BehaviorAPI";
+import { Link } from "react-router-dom";
+
 
 
 
@@ -36,7 +38,11 @@ export function MidComp1(){
     return(
         <>
         <div className={MCStyle.back}>
-            <div className={MCStyle.explain}>담당자 픽 인기 팝업 <span style={{color:"red"}}>{month}월</span></div>
+            <div className={MCStyle.explain}>담당자 픽 인기 팝업 <span style={{color:"red"}}>{month}월</span>
+            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className={MCStyle.midmore}>더보기</div>
+            </Link>
+            </div>
             <div>
                 <Swiper
             slidesPerView={3}
@@ -78,7 +84,11 @@ export function MidComp2(){
     return(
         <>
         <div className={MCStyle.back}>
-            <div className={MCStyle.explain}>놓치면 손해 곧 오픈 예정! <span style={{color:"red"}}>{month}월</span></div>
+            <div className={MCStyle.explain}>놓치면 손해 곧 오픈 예정! <span style={{color:"red"}}>{month}월</span>
+            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className={MCStyle.midmore}>더보기</div>
+            </Link>
+            </div>
             <div>
                 <Swiper
             slidesPerView={3}

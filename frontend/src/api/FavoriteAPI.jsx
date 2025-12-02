@@ -36,3 +36,9 @@ export function insertFavorite(popupNo){
     .then(response=>response.data)
 
 }
+
+//찜한 팝업스토어 번호  조회
+export function selectFavoritePopupNo(){
+    return API.get(`${BACKEND_URL}/favorite/no`)
+    .then(response=>response.data)
+}

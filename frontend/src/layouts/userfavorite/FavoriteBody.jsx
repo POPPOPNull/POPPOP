@@ -10,8 +10,8 @@ function FavoriteBody (){
         <>
             <div className={FBStyle.usermainlayout}>
                 <div className={FBStyle.main}>
-                    <div className={FBStyle.blank}></div>
-                    <h1>찜 목록</h1>
+                    <div style={{height:80}}></div>
+                    {/* <h1>찜 목록</h1> */}
                     <FavoritePopups/>
                     <div className={FBStyle.blank}></div>
 

@@ -17,4 +17,7 @@
         delete from favorite where popup_no = #{popupNo} and id = #{id}
     </delete>
 
+    <select id="selectFavoritePopupNo" resultType="java.lang.Integer">
+        select popup_no from favorite where id = #{id}
+    </select>
 </mapper>

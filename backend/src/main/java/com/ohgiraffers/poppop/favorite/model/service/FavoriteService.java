@@ -8,6 +8,8 @@ import com.ohgiraffers.poppop.favorite.model.dto.FavoriteDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class FavoriteService {
     private final FavoriteMapper favoriteMapper;
@@ -31,4 +33,7 @@ public class FavoriteService {
         favoriteMapper.deleteFavorite(popupNo,id);
     }
 
+    public List<Integer> selectFavoritePopupNo(String id) {
+        return favoriteMapper.selectFavoritePopupNo(id);
+    }
 }

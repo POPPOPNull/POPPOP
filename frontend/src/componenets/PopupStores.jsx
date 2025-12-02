@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 import PSStyle from "./PopupStore.module.css"
 import { useEffect,useState } from "react"
-import { insertFavorite } from "../api/FavoriteAPI"
+import { insertFavorite, selectFavoritePopupNo } from "../api/FavoriteAPI"
 import { useDrag, useDrop } from "react-dnd"
 import { countFavorite, countViews } from "../api/BehaviorAPI"
 
 
-function PopupStores({popupstore,setIsDrag,posterNo}){
+function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
 
         const imageUrl =  `/public/poster/poster_${posterNo}.png`
         const [view, setView] = useState()
@@ -39,7 +39,11 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
             .then(data=>{setView(data)})
             countFavorite(posterNo)
             .then(data=>{setFavorite(data)})
+            
         },[])
+        console.log("isFavorite",isFavorite)
+
+        
     
     return(
         <>
@@ -66,7 +70,7 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
                                     <div className={PSStyle.view}><img src="\public\icons\eye.png" style={{width:15,height:12}}/></div>{view}
                                 </div>
                                 <div className={PSStyle.favoritelayout}>
-                                    <div>♡</div>{favorite}
+                                    <div>{isFavorite?"♡":"♥"}</div>{favorite}
                                 </div>
                             </div>
                     </div>
