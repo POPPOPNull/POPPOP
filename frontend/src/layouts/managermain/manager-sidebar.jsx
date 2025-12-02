@@ -48,7 +48,7 @@ function ManagerSidebar() {
         </NavLink>
 
         <NavLink
-          to="/manager/popup-register"
+          to="/manager/popupstore"
           className={({ isActive }) =>
             "admin-side-button" +
             (isActive && !isMyPopupOpen ? " active" : "")  
