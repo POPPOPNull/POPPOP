@@ -9,7 +9,7 @@ function MyReservation (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    <Logout/>
+                    {/* <Logout/> */}
                     <Tab/>
                     <MyResrvDetail/>
                     <Footer/>

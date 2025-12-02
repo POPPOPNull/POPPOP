@@ -42,7 +42,6 @@ function KakaoMap({ popupStores=[] }){
 
     return(
         <>
-        <div>지도</div>
             <Map
                 center={currentPos}
                 style={{width:'900px',height:'500px'}}

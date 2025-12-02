@@ -255,14 +255,14 @@ function SignUpComponent() {
                     <input className="inputsignup"
                         type="password"
                         name="password"   
-                        placeholder="비밀번호"
+                        placeholder="비밀번호 (영소문자 + 숫자 포함 8자 이상)"
                         value={values.password} 
                         onChange={handleFieldChange} 
                         required 
                     />
-                    <p className="password-rule">영소문자 + 숫자 포함 8자 이상</p>
-
-                    {errors.password && <p className="field-error">{errors.password}</p>}
+                    <div className="error-area">
+                      {errors.password && <p className="field-error">{errors.password}</p>}
+                    </div>
 
                     <br/>
                     <input className="inputsignup"
@@ -324,7 +324,7 @@ function SignUpComponent() {
                     <input className="inputsignup"
                         type="text"
                         name="email"   
-                        placeholder="이메일"
+                        placeholder="이메일 (예:example@poppop.com)"
                         value={values.email} 
                         onChange={handleFieldChange} 
                         required

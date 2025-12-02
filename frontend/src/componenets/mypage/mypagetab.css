@@ -1,20 +1,53 @@
-.tabdetails {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* margin-top: 100px; */
+/* 탭 전체 영역 */
+.tab-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  border-bottom: 1px solid #333;  /* 밑에 얇은 회색 라인 (전체 900px) */
 }
-.tabs {
-    font-size: 20px;
-    font-weight: 500;
-    list-style: none;
-    display: flex;
-    padding-inline-start: 0;
-    text-decoration: 2px underline;
-    text-underline-offset: 10px;
 
+/* 900px 고정 폭 */
+.tabs {
+  width: 900px;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
+/* 각 탭을 3등분 */
 .tabs li {
-    position: relative;
-    margin: 0 50px;
+  flex: 1;
+}
+
+/* 링크 스타일 */
+.tab-link {
+  display: block;               /* ⭐ li 전체 폭을 차지하게 */
+  text-align: center;
+  padding: 14px 0 12px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  position: relative;
+}
+
+/* 밑줄 기본은 투명 */
+.tab-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;                 /* 회색 라인 위에 딱 붙도록 */
+  width: 100%;                  /* li 전체 폭 */
+  height: 2px;
+  background-color: transparent;
+}
+
+/* 활성 탭: 글자 + 밑줄 빨간색 */
+.tab-link.active {
+  color: #f4002d;
+}
+
+.tab-link.active::after {
+  background-color: #f4002d;
 }

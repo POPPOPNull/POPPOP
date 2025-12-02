@@ -62,14 +62,14 @@
 
 /* 오늘 날짜 */
 .react-datepicker__day--today {
-  border: 2px solid #FFCF0D; /* 테두리 굵기 증가 */
+  border: 2px solid #f4002d; /* 테두리 굵기 증가 */
   color: white;
   border-radius: 8px;
 }
 
 /* 선택된 날짜 */
 .react-datepicker__day--selected {
-  background-color: #FFCF0D;
+  background-color: #f4002d;
   color: white;
   border-radius: 8px;
 }
@@ -83,7 +83,7 @@
 
 /* 마우스 오버 */
 .react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
-  background-color: #fff3b8;
+  background-color: #eba9cf;
 }
 
 .timetable {
@@ -103,7 +103,7 @@
 .resv {
   width: 500px;
   height: 50px;
-  background-color: #FFCF0D;
+  background-color: #f4002d;
   border-radius: 8px;
   font-size: 18px;
 }
@@ -139,9 +139,9 @@ p {
 }
 
 .timeslot-btn.selected {
-  background: #FFCF0D; 
+  background: #f4002d; 
   color: #fff;
-  border-color: #FFCF0D;
+  border-color: #f4002d;
   font-weight: 600;
 }
 .timeslot-btn:disabled {
