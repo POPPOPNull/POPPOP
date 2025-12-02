@@ -41,7 +41,11 @@ import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
 import { AuthProvider, useAuth } from "./hooks/UseAuth.jsx";
 import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
 import AdminManagerMain from "./layouts/adminmain/Admin-manager-main.jsx";
+
 import PaymentResult from "./pages/PaymentResult"; // 결제 결과 페이지 import 추가
+
+import SimpleChat from "./componenets/chatbot/SimpleChat.jsx";
+
 
 // 역할에 따라 첫 화면 리다이렉트
 const RedirectBasedOnRole = () => {
@@ -111,7 +115,7 @@ function App() {
                 <Route path="reservations" element={<ReservationPage />} /> 
               </Route>
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
-              <Route path="/manager/popup-register" element={<PopupRegister />} />
+              <Route path="/manager/popupstore" element={<PopupRegister />} />
               <Route path="/manager/mypopup/:popupNo/edit" element={<MyPopupEditPage />} />
               {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
@@ -133,6 +137,7 @@ function App() {
 
             <Route path="/test" element={<Test />} />
           </Routes>
+          <SimpleChat />
         </BrowserRouter>
       </DndProvider>
     </AuthProvider>

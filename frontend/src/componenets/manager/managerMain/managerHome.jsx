@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./managerHome.css";
-import Logout from "../../Logout";
+
 
 function ManagerHome() {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
+
+   // 로그인 여부 체크
+  const isLoggedIn = !!localStorage.getItem("accessToken");
 
   return (
     <div className="mh-wrap">
@@ -50,9 +53,14 @@ function ManagerHome() {
           )}
         </div>
 
-        {/* 로그아웃 */}
+        {/* 로그인 버튼만 */}
         <div className="mh-logout">
-          <Logout/>
+          <button
+            className="mh-login-btn"
+            onClick={() => navigate("/auth/login")}
+          >
+            login
+          </button>
         </div>
       </div>
 
