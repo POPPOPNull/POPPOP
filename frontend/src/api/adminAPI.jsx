@@ -202,3 +202,15 @@ export function selectRejectionReasonsByMonth(month) {
         throw error;
     });
 }
+
+// manager 대시보드 막대 차트 월별 인기 팝업 조회
+export function selectPopularPopupByMonth(yearMonth) {
+    return API.get(`${BACKEND_URL}/admin/kpi/popular-popups`, {
+        params: { yearMonth }
+    })
+    .then(response=>response.data)
+    .catch(error=> {
+        console.error(`API call error in selectPopularPopupByMonth. ${yearMonth}`, error);
+        throw error;
+    });
+}
