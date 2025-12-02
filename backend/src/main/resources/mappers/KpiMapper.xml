@@ -205,4 +205,31 @@
          order by eventCount desc
          limit 7
     </select>
+
+<!--    카테고리별 팝업 분포-->
+    <resultMap id="categoryDistributionResultMap" type="com.ohgiraffers.poppop.admin.model.dto.CategoryDistributionDTO">
+        <result property="categoryName" column="categoryName"/>
+        <result property="popupCount" column="popupCount"/>
+        <result property="ratio" column="ratio"/>
+    </resultMap>
+<!--    월별 카테고리별 팝업 분포 조회-->
+<select id="selectCategoryDistributionByMonth" parameterType="String" resultMap="categoryDistributionResultMap">
+    with MonthlyActivePopups as (
+         select category_name
+           from popup_store
+          where
+    <![CDATA[
+                popup_start_date <= last_day(str_to_date(concat(#{yearMonth}, '-01'), '%Y-%m-%d'))
+            and popup_end_date >= str_to_date(concat(#{yearMonth}, '-01'), '%Y-%m-%d')
+    ]]>
+            and category_name is not null and category_name != ''
+    )
+    select
+           ap.category_name as categoryName,
+           count(*) as popupCount,
+           (count(*) * 100.0 / (select count(*) from MonthlyActivePopups)) as ratio
+      from MonthlyActivePopups ap
+     group by ap.category_name
+     order by popupCount desc
+</select>
 </mapper>

@@ -206,4 +206,10 @@ public class AdminController {
     public ResponseEntity<List<PopularPopupDTO>> selectPopularPopupByMonth(@RequestParam("yearMonth") String yearMonth) {
         return ResponseEntity.ok(kpiService.selectPopularPopupByMonth(yearMonth));
     }
+
+    // Manager 대시보드 막대 차트 카테고리별 팝업 분포 조회
+    @GetMapping("/kpi/category-distribution")
+    public ResponseEntity<List<CategoryDistributionDTO>> selectCategoryDistributionByMonth(@RequestParam("yearMonth") String yearMonth) {
+        return ResponseEntity.ok(kpiService.selectCategoryDistributionByMonth(yearMonth));
+    }
 }
