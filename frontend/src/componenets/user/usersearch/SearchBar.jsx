@@ -52,6 +52,7 @@ function SearchBar(){
 
     const onChangeStatus = (e) =>{
         setStatus(e.target.value)
+        console.log(status)
     }
 
     const onCLickSearch = async ()=>{
@@ -88,7 +89,7 @@ function SearchBar(){
             console.log("popups",data)
             setPopups(data)
         })
-    },[searchWord])
+    },[searchWord,status])
 
     
 

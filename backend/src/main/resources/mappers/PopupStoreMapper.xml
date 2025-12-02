@@ -63,6 +63,7 @@
         hashtag_name
 
         from popup_store
+        where approval_status = "승인"
     </select>
     <select id="selectPopupStoreDetails" resultMap="popupStoreResultMap">
         select
@@ -136,9 +137,6 @@
         <if test="status!=null and status=='done'">
             where popup_end_date &lt; #{endDate}
         </if>
-        <if test="status!=null and status=='all'">
-            where approval_status = "승인"
-        </if>
         and
         (popup_name like concat('%',#{searchWord},'%')
         or brand_name like concat('%',#{searchWord},'%')
@@ -146,6 +144,7 @@
         or hashtag_name like concat('%',#{searchWord},'%')
         or category_name like concat('%',#{searchWord},'%')
         )
+        and approval_status= "승인"
 
     </select>
     <!--검색조회-->
