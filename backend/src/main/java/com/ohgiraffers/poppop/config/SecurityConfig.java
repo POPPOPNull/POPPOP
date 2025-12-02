@@ -56,7 +56,8 @@ public class SecurityConfig {
                                 "/maps",
                                 "/popup-stores/search",
                                 "/popup-stores/**",
-                                "/behavior/**"
+                                "/behavior/**",
+                                "/api/chatbot/**"
 
                         ).permitAll()
 
