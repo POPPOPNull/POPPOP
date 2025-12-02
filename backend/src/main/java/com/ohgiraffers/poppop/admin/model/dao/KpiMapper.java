@@ -29,4 +29,6 @@ public interface KpiMapper {
     List<PopularCategoryDTO> selectPopularCategoriesByMonth(String yearMonth);
     List<PopupStatusDTO> selectPopupStatusByMonth();
     List<RejectionReasonDTO> selectRejectionReasonsByMonth(String yearMonth);
+    List<PopularPopupDTO> selectPopularPopupByMonth(@Param("yearMonth") String yearMonth);
+    List<CategoryDistributionDTO> selectCategoryDistributionByMonth(@Param("yearMonth") String yearMonth);
 }

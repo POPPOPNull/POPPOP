@@ -1,9 +1,9 @@
 import "./Admin-main.css"
-import AdminBarChart from "../../componenets/admin/adminBarChart"
-import AdminBarChart2 from "../../componenets/admin/adminBarChart2"
 import AdminManagerKPIData from "../../componenets/admin/AdminManagerKPIData"
 import AdminManagerLineChart from "../../componenets/admin/AdminManagerLineChart"
 import AdminManagerChart from "../../componenets/admin/AdminManagerChart"
+import AdminManagerBarChart from "../../componenets/admin/AdminManagerBarChart"
+import AdminManagerBarChart2 from "../../componenets/admin/AdminManagerBarChart2"
 
 function AdminManagerMain (){
     return(
@@ -30,10 +30,10 @@ function AdminManagerMain (){
             </div>
             <div className="admin-chart-layout">
                 <div className="admin-chart-box">
-                    <AdminBarChart2/>
+                    <AdminManagerBarChart2/>
                 </div>
                 <div className="admin-chart-box">
-                    <AdminBarChart/>
+                    <AdminManagerBarChart/>
                 </div>
             </div>
         </>

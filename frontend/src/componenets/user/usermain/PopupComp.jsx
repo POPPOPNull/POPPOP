@@ -46,9 +46,11 @@ function PopupComp({popupstore,posterNo}){
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`} onClick={()=>{onClickLog;location.href(`/user/${popupstore.no}`)}}>
+                <Link to={`/popup-stores/${popupstore.no}`} onClick={()=>{onClickLog;location.href(`/popup-stores/${popupstore.no}`)}}>
                 <div className={PSStyle.back}>
-                    <img src={posterUrl} alt={posterNo} />
+                    <div className={PSStyle.img}>
+                        <img src={posterUrl} alt={posterNo} />
+                    </div>
 
 
                     <div className={PSStyle.layout} ref={drag} >

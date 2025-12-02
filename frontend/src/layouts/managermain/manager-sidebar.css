@@ -137,4 +137,10 @@
   object-fit: contain;
   flex-shrink: 0;
 }
+.admin-logout {
+    margin-top: auto;
+    display: flex;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
 

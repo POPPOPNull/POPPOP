@@ -58,7 +58,7 @@ public class ManagerDashboardController {
         return ResponseEntity.ok(dashboardService.getGenderRatio(popupNo));
     }
 
-    //1행 오른쪽 사용자 행동
+    //1행 오른쪽 사용자 행동동
     @GetMapping("/{popupNo}/event-type-stats")
     public ResponseEntity<List<EventTypeStatDTO>> getEventTypeStats(@PathVariable int popupNo) {
         return ResponseEntity.ok(dashboardService.getEventTypeStats(popupNo));
