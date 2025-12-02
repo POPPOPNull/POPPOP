@@ -49,24 +49,26 @@ import SimpleChat from "./componenets/chatbot/SimpleChat.jsx";
 
 // 역할에 따라 첫 화면 리다이렉트
 const RedirectBasedOnRole = () => {
-  const { role, loading } = useAuth();
+  const { loading } = useAuth();
 
   if (loading) return <div>로딩 중...</div>;
 
-  if (!role) {
-    return <User />;
-  }
+  return <Navigate to={"/popup-stores"} replace />;
 
-  switch (role) {
-    case 'ADMIN':
-      return <Navigate to="/admin" replace />;
-    case 'MANAGER':
-      return <Navigate to="/manager" replace />;
-    case 'USER':
-      return <Navigate to="/popup-stores" replace />;
-    default:
-      return <Navigate to="/auth/login" replace />;
-  }
+  // if (!role) {
+  //   return <User />;
+  // }
+
+  // switch (role) {
+  //   case 'ADMIN':
+  //     return <Navigate to="/admin" replace />;
+  //   case 'MANAGER':
+  //     return <Navigate to="/manager" replace />;
+  //   case 'USER':
+  //     return <Navigate to="/popup-stores" replace />;
+  //   default:
+  //     return <Navigate to="/auth/login" replace />;
+  // }
 };
 
 function App() {

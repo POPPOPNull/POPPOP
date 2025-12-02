@@ -18,9 +18,10 @@ const ProtectedRoute = ({ requiredRoles }) => {
         return <Navigate to={loginPath} state={{ from: location }} replace />;
     }
 
-    // 현재 역할이 요구되는 역할 목록에 포함되지 않으면 접근 불가
+    // 현재 역할이 요구되는 역할 목록에 포함되지 않으면 각 역할에 맞는 로그인 페이지로 이동
     if (requiredRoles && requiredRoles.length > 0 && !requiredRoles.includes(user.role)) {
-        return <Navigate to="/" replace />;
+        const targetLoginPath = requiredRoles.includes('ADMIN') ? '/admin/login' : '/auth/login';
+        return <Navigate to={targetLoginPath} replace />;
     }
 
     return <Outlet />;
