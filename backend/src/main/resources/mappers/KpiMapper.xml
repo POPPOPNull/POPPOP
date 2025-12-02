@@ -186,4 +186,24 @@
          group by primary_reason
          order by reason_count desc
     </select>
+
+<!--    인기 팝업-->
+    <resultMap id="popularPopupResultMap" type="com.ohgiraffers.poppop.admin.model.dto.PopularPopupDTO">
+        <result property="popupName" column="popup_name"/>
+        <result property="eventCount" column="eventCount"/>
+    </resultMap>
+<!--    월별 인기 팝업 상위 7개 조회-->
+    <select id="selectPopularPopupByMonth" resultMap="popularPopupResultMap">
+        select
+               ps.popup_name as popupName,
+               count(ued.event_value) as eventCount
+          from user_event_data ued
+          join popup_store ps on ued.event_value = ps.popup_no
+         where ued.event_type in ('상세페이지 클릭', '관심목록 추가', '예약')
+           and year(ued.time_stamp) = year(curdate())
+           and month(ued.time_stamp) = month(curdate())
+         group by ued.event_value, ps.popup_name
+         order by eventCount desc
+         limit 7
+    </select>
 </mapper>
