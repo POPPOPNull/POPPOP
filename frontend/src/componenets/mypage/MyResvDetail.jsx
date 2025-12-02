@@ -8,20 +8,28 @@ function ResvDetail() {
     const [filterStatus, setFilterStatus] = useState("all");
     const [error, setError] = useState(null);
 
+    const applyStatusByDate = (data) => {
+    const today = new Date();
+
+    return (data || []).map((resv) => {
+      const visitDateTime = new Date(
+        `${resv.reservationDate}T${resv.reservationTime}`
+      );
+
+      if (
+        (resv.reservationStatus === "예약완료" || resv.reservationStatus === "결제완료") &&
+        visitDateTime < today
+      ) {
+        return { ...resv, reservationStatus: "이용완료" };
+      }
+      return resv;
+    });
+  };
+  
     const fetchReservations = () => {
         getMyReservations()
             .then((data) => {
-                const today = new Date();
-                const updated = (data || []).map(resv => {
-                    const visitDateTime = new Date(`${resv.reservationDate}T${resv.reservationTime}`);
-                    if (
-                        (resv.reservationStatus === "예약완료" || resv.reservationStatus === "결제완료") &&
-                        visitDateTime < today
-                    ) {
-                        return { ...resv, reservationStatus: "이용완료" };
-                    }
-                    return resv;
-                });
+                const updated = applyStatusByDate(data);
                 setReservations(updated);
             })
             .catch((err) => {
