@@ -1,5 +1,6 @@
 .layout{
-    height: 500px;
+    padding-top: 60px;
+    height: 600px;
     /* background-color: skyblue; */
     color: black;
     display: flex;
@@ -16,10 +17,12 @@
 .slide{
     /* background-color: #d9d9d9; */
     border-radius: 16px;
+    width: 460px;
+    height: 610px;
 }
 .swiper{
     /* background-color: green; */
-    height: 600px;
+    height: 610px;
     z-index: 1000;
     width:100%
     
@@ -38,3 +41,5 @@
     
     
 }
+
+

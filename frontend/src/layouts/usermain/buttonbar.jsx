@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./buttonbar.css"
 import { NavLink } from "react-router-dom";
 import { useDrop } from "react-dnd";
@@ -7,6 +7,8 @@ import { insertFavorite } from "../../api/FavoriteAPI";
 function Favorite({item,children}){
 
     const ref = useRef(null)
+
+    
 
       
     const [,drop]=useDrop({
@@ -31,16 +33,58 @@ function Favorite({item,children}){
 
 function Buttons () {
 
+    const [mouseCoord,setMouseCoord] = useState({
+        x:0,
+        y:0
+    })
+    
+    const onMouse = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMouseCoord({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
+
+    useEffect(()=>{
+        console.log(mouseCoord)
+    },[mouseCoord])
+
 
     return(
         <>
             <div className="buttonbar-layout">
-                <div className="buttonbar"><NavLink to="/popup-stores/search" style={{ color: "white", textDecoration: "none" }}>조회</NavLink></div>
+                
+                
+                    <NavLink to="/popup-stores/search" style={{ color: "white", textDecoration: "none" }} className="buttonback" >
+                    <div className="buttonbar" onClick={onMouse}>
+                    <img className="img" src="public\icons\search.png" style={{width:20,height:20}} alt="조회"  />
+                    <div>
+                        조회
+                    </div>
+                    </div>
+                    </NavLink>
                 <Favorite>
-                    <div className="buttonbar"><NavLink to="/user/favorite" style={{ color: "white", textDecoration: "none" }}>관심</NavLink></div>
+                        
+                        <NavLink to="/user/favorite" style={{ color: "white", textDecoration: "none" }} className="buttonback">
+                    <div className="buttonbar"  onClick={onMouse}>
+                        <img className="img" src="public\icons\favorite.png" style={{width:20,height:20}} alt="관심" />
+                        <div>관심</div>
+                        </div>
+                        </NavLink>
                 </Favorite>
-                <div className="buttonbar"><NavLink to="/user/maps" style={{ color: "white", textDecoration: "none" }}>주변</NavLink></div>
-                <div className="buttonbar"><NavLink to="/myinfo" style={{ color: "white", textDecoration: "none" }}>마이페이지</NavLink></div>
+                    <NavLink to="/popup-stores/maps" style={{ color: "white", textDecoration: "none" }} className="buttonback">
+                <div className="buttonbar">
+                    <img className="img" src="public\icons\map.png" style={{width:20,height:20}} alt="주변" />
+                    <div>주변</div>
+                    </div>
+                    </NavLink>
+                    <NavLink to="/myinfo" style={{ color: "white", textDecoration: "none" }} className="buttonback">
+                <div className="buttonbar">
+                    <img className="img" src="public\icons\login.png" style={{width:20,height:20}} alt="마이페이지" />
+                    <div>마이페이지</div>
+                    </div>
+                    </NavLink>
             </div>
         </>    
     )

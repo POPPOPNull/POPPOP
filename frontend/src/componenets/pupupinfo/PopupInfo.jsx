@@ -17,6 +17,10 @@ function PopupInfo(){
             lat:"",
             lng:""
         })
+
+        const onClickCopyLocation = () =>{
+            navigator.clipboard.writeText(popup.location)
+        }
         
     
 
@@ -41,14 +45,14 @@ function PopupInfo(){
 
     return(
         <>
-            <div>{popup.no}의 상세페이지</div>
+            {/* <div>{popup.no}의 상세페이지</div> */}
             <hr />
             <div>편의아이콘</div>
             <hr />
             <div>운영시간
                 <div>
-                    <br />
-                    월 ~ 일 : {popup.openTime} - {popup.closeTime}
+
+                    <span style={{fontWeight:500}}>월 ~ 일 :</span> {popup.openTime} - {popup.closeTime}
                 </div>
             </div>
             <div className={PPStyle.intro}>팝업스토어 소개</div>
@@ -59,13 +63,13 @@ function PopupInfo(){
             </KakaoMap>
             <div className={PPStyle.locationcopy}>
                 <div>{popup.location}</div>
-                <div className={PPStyle.copybutton}>주소복사</div>
+                <div className={PPStyle.copybutton} onClick={onClickCopyLocation}>주소복사</div>
                 </div>
 
             <div className={PPStyle.lowerbuttonlayout}>
                 <div className={PPStyle.lowerbutton}>브랜드 홈페이지 링크</div>
                 <div className={PPStyle.lowerbutton}>SNS 링크</div>
-                <Link to={`/reservations/${popup.no}`}>
+                <Link to={`/reservations/${popup.no}`} style={{textDecoration:"none",color:"inherit"}}>
                     <div className={PPStyle.lowerbutton}>예약</div>
                 </Link>
             </div>

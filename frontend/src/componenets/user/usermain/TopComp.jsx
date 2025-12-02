@@ -9,6 +9,7 @@ import { selectAllPopupStore, selectPopupRandomly } from "../../../api/PopupStor
 import PopupComp from "./PopupComp";
 import { Link } from "react-router-dom"
 import { logDataBySelect } from "../../../api/BehaviorAPI";
+import "./swiper.css";
 
 
 
@@ -48,13 +49,14 @@ function TopComp (){
             <div className={TCSytle.layout}>
                 <Swiper
                     className={TCSytle.swiper}
-                    spaceBetween={-50}
+                    spaceBetween={-200}
                     slidesPerView={3}
                     loop={true}
                     modules={[Autoplay,EffectCreative,Pagination]} 
                     autoplay={{
                         delay:2000
                     }}
+                    
                     effect={'creative'}
                     creativeEffect={{
                         "prev": {
@@ -82,11 +84,11 @@ function TopComp (){
                     pagination={true}
                 >
                     <Link to={`user/${popups.no}`}>
-                        {popups.map(popups=> <SwiperSlide className={TCSytle.slide}><PopupComp key={popups.no} popupstore={popups} posterNo={popups.no}/></SwiperSlide>)}
+                        {popups.map(popups=> <SwiperSlide className={TCSytle.slide}><PopupComp key={popups.no} popupstore={popups} posterNo={popups.no}></PopupComp></SwiperSlide>)}
                     </Link>
                 </Swiper>
             </div>
-                <div className={TCSytle.gradation}></div>
+                {/* <div className={TCSytle.gradation}></div> */}
         </>
     )
 }

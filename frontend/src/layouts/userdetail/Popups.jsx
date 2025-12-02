@@ -9,6 +9,7 @@ import ReviewView from "../../componenets/pupupinfo/ReviewView";
 import { logDataByPopupDetail } from "../../api/BehaviorAPI";
 // import Footer from "../../componenets/user/Footer";
 // import Blank from "../../componenets/user/usermain/Blank";
+import Footer from "../usermain/Footer";
 
 
 function Poster(){
@@ -64,10 +65,10 @@ function Popups(){
                         <img src={popupURL} alt={popupNo} />
                     </div>
                     <div className={PPStyle.imagebuttonlayout}>
-                        <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons}>
+                        <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <div>정보</div>
                         </Link>
-                         <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttons}>
+                         <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttons} style={{ textDecoration: 'none', color: 'inherit' }}>
                             후기
                         </Link>
                     </div>
@@ -78,13 +79,14 @@ function Popups(){
                     <PopupInfo/>
                     <div className={PPStyle.reviewbtns}>
                         <div>후기</div>
-                        <Link to={`/popup-stores/${popupNo}/review`}><div>후기작성하기</div></Link>
+                        <Link to={`/popup-stores/${popupNo}/review`} style={{textDecoration:"none",color:"inherit"}}><div>후기작성하기</div></Link>
                      </div>
                     <ReviewView/>
                     <MidComp1/>
                     <MidComp2/>
-                    {/* <Blank/>
-                    <Footer/> */}
+                    <div style={{height:30}}></div>
+                    
+                    <Footer/>
                 </div>
             </div>
         </>
