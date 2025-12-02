@@ -7,6 +7,9 @@ function ManagerHome() {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
 
+   // 로그인 여부 체크
+  const isLoggedIn = !!localStorage.getItem("accessToken");
+
   return (
     <div className="mh-wrap">
       {/* 이모티콘  */}
@@ -50,9 +53,18 @@ function ManagerHome() {
           )}
         </div>
 
-        {/* 로그아웃 */}
+        {/* 로그인 / 로그아웃*/}
         <div className="mh-logout">
-          <Logout/>
+          {isLoggedIn ? (
+            <Logout /> // 기존 logout 컴포넌트
+          ) : (
+            <button
+            className="mh-login-btn"
+            onClick={() => navigate("/auth/login")}
+          >
+            login
+          </button>
+          )}
         </div>
       </div>
 
