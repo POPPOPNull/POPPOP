@@ -44,6 +44,10 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
+                        // 1. 문제가 되는 toss-success 경로를 가장 먼저, 단독으로 permitAll() 처리
+                        .requestMatchers("/reservations/toss-success").permitAll()
+
+                        // 2. 나머지 permitAll 경로들
                         .requestMatchers(
                                 "/auth/login",
                                 "/auth/admin/login",
@@ -56,7 +60,9 @@ public class SecurityConfig {
                                 "/maps",
                                 "/popup-stores/search",
                                 "/popup-stores/**",
-                                "/behavior/**"
+                                "/behavior/**",
+                                "/api/chatbot/**"
+
 
                         ).permitAll()
 

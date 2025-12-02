@@ -17,7 +17,7 @@ function MyPopupReg() {
     startDate: "",
     endDate: "",
     description: "",
-    // hashtags: "",
+    hashtagName: "", 
   });
 
     const [openTime, setOpenTime] = useState("");
@@ -101,59 +101,73 @@ function MyPopupReg() {
     };
 
     const handleSubmit = () => {
-      if (submitting) return;
+  if (submitting) return;
 
-      // 필수값 확인
-      if (
-        !formData.category ||
-        !formData.title ||
-        !formData.brandMain ||
-        !formData.roadAddress ||
-        !formData.startDate ||
-        !formData.endDate ||
-        !formData.description
-      ) {
-        alert("필수 항목을 모두 입력해주세요.");
-        return;
-      }
+  if (
+  !formData.category ||
+  !formData.title ||
+  !formData.brandMain ||
+  !formData.roadAddress ||
+  !formData.startDate ||
+  !formData.endDate
+) {
+  alert("필수 항목을 모두 입력해주세요.");
+  return;
+}
 
-      // DTO에 맞춰 데이터
-      const payload = {
-        name: formData.title.trim(),
-        brandName: formData.brandMain.trim(),
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        openTime: openTime ? `${openTime}:00` : null,
-        closeTime: closeTime ? `${closeTime}:00` : null,
-        location: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
-        reservableStatus: 1,
-        explanation: formData.description.trim(),
-        categoryName: formData.category,
-        // 칩을 "#태그" 공백 구분 문자열로
-        hashtags: hashtagsList.length
-          ? hashtagsList.map((t) => `#${t}`).join(" ")
-          : "",
-        // specialNotes 등은 필요 시 이후 추가
-      };
+  // 해시태그 문자열 만들기: "#태그1 #태그2" 형식
+  const hashtagString = hashtagsList.length
+    ? hashtagsList.map((t) => `#${t}`).join(" ")
+    : "";
 
-      setSubmitting(true);
+    const specialNotes = {
+    parking:             selectedTags.includes("주차 가능"),
+    noparking:           selectedTags.includes("주차불가"),
+    freeAdmission:       selectedTags.includes("입장료 무료"),
+    paidAdmission:       selectedTags.includes("입장료 유료"),
+    petAllowed:          selectedTags.includes("반려동물"),
+    petNotAllowed:       selectedTags.includes("반려동물 입장금지"),
+    kidZone:             selectedTags.includes("키즈존"),
+    nokidsZone:          selectedTags.includes("노키즈존"),
+    foodBeverageBanned:  selectedTags.includes("식음료 반입 금지"),
+    adult:               selectedTags.includes("19세 이상"),
+    wifi:                selectedTags.includes("와이파이"),
+    photographyPossible: selectedTags.includes("사진촬영 가능"),
+  };
 
-      registerPopup(payload)
-        .then((data) => {
-          // ManagerAPI에서 response.data 를 return 했으니 data 로 들어옴
-          alert(data || "등록이 완료되었습니다. (승인 대기)");
-          // 등록 후 이동 원하면 주석 해제
-          // navigate("/manager/mypopup");
-        })
-        .catch((err) => {
-          console.error("팝업 등록 에러:", err);
-          const msg = err?.response?.data || "등록 중 오류가 발생했습니다.";
-          alert(msg);
-        })
-        .finally(() => {
-          setSubmitting(false);
-        });
-    };
+  const payload = {
+    name: formData.title.trim(),
+    brandName: formData.brandMain.trim(),
+    startDate: formData.startDate,
+    endDate: formData.endDate,
+    openTime: openTime ? `${openTime}:00` : null,
+    closeTime: closeTime ? `${closeTime}:00` : null,
+    location: `${formData.roadAddress} ${formData.detailAddress || ""}`.trim(),
+    reservableStatus: 1,
+    explanation: formData.description.trim(),
+    categoryName: formData.category,
+    hashtagName: hashtagString,
+
+     specialNotes,
+
+  };
+
+  setSubmitting(true);
+
+  registerPopup(payload)
+    .then((data) => {
+      alert(data || "등록이 완료되었습니다. (승인 대기)");
+      // navigate("/manager/mypopup");
+    })
+    .catch((err) => {
+      console.error("팝업 등록 에러:", err);
+      const msg = err?.response?.data || "등록 중 오류가 발생했습니다.";
+      alert(msg);
+    })
+    .finally(() => {
+      setSubmitting(false);
+    });
+};
 
   return (
     <div className="mpr-layout">
@@ -242,9 +256,6 @@ function MyPopupReg() {
                     setFormData({ ...formData, roadAddress: e.target.value })
                   }
                 />
-                <button className="mpr-small-btn" type="button">
-                  검색
-                </button>
               </div>
 
               <input

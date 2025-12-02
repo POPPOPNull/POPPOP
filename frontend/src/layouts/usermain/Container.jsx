@@ -35,6 +35,7 @@ function Container(){
                 moveComponent={moveComponent}
             >
                 {item.content}
+                <div style={{height:20}}></div>
             </MovableComponent>
         ))}
             

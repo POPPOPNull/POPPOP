@@ -75,6 +75,31 @@
          where reservation_no = #{reservationNo}
     </delete>
 
+    <insert id="insertPendingReservation" parameterType="com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO">
+        INSERT INTO reservation
+        (
+            popup_no,
+            id,
+            reservation_personnel,
+            reservation_date,
+            reservation_time,
+            order_id,
+            reservation_amount,
+            reservation_status
+        )
+        VALUES
+        (
+            #{popupNo},
+            #{memberId},
+            #{reservationPersonnel},
+            #{reservationDate},
+            #{reservationTime},
+            #{orderId},
+            #{reservationAmount},
+            '결제대기'
+        )
+    </insert>
+    
     <insert id="insertReservation" parameterType="com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO">
         INSERT INTO reservation
         (
@@ -177,5 +202,28 @@
            and reservation_time = #{reservationTime}
            and reservation_status = '예약완료'
     </select>
+
+
+    <select id="findAmountByOrderId" resultType="Integer">
+        SELECT
+               reservation_amount
+          FROM reservation
+         WHERE order_id = #{orderId}
+    </select>
+
+    <select id="findPaymentKey" resultType="string">
+        SELECT
+               payment_key
+          FROM reservation
+         WHERE reservation_no = #{reservationNo}
+           AND id = #{memberId}
+    </select>
+
+    <update id="updateReservationAsPaid">
+        UPDATE reservation
+           SET reservation_status = '결제완료',
+               payment_key = #{paymentKey}
+         WHERE order_id = #{orderId}
+    </update>
 
 </mapper>

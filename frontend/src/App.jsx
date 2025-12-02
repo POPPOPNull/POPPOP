@@ -42,6 +42,11 @@ import { AuthProvider, useAuth } from "./hooks/UseAuth.jsx";
 import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
 import AdminManagerMain from "./layouts/adminmain/Admin-manager-main.jsx";
 
+import PaymentResult from "./pages/PaymentResult"; // 결제 결과 페이지 import 추가
+
+import SimpleChat from "./componenets/chatbot/SimpleChat.jsx";
+
+
 // 역할에 따라 첫 화면 리다이렉트
 const RedirectBasedOnRole = () => {
   const { role, loading } = useAuth();
@@ -58,7 +63,7 @@ const RedirectBasedOnRole = () => {
     case 'MANAGER':
       return <Navigate to="/manager" replace />;
     case 'USER':
-      return <Navigate to="/user" replace />;
+      return <Navigate to="/popup-stores" replace />;
     default:
       return <Navigate to="/auth/login" replace />;
   }
@@ -74,7 +79,7 @@ function App() {
         
             <Route index element={<RedirectBasedOnRole />} />
 
-            <Route path="/user">
+            <Route path="/popup-stores">
               <Route index element={<User />} />
 
               <Route path=":popupNo" element={<PopupDetails />} />
@@ -97,6 +102,9 @@ function App() {
             <Route path="/user/signup" element={<SignUp />} />
             <Route path="/manager/signup" element={<ManagerSignUp />} />
 
+            {/* ▼▼▼ 결제 결과 페이지 경로 추가 ▼▼▼ */}
+            <Route path="/payment-result" element={<PaymentResult />} />
+
             <Route path="/manager" element={<Manager />} />
 
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
@@ -107,7 +115,7 @@ function App() {
                 <Route path="reservations" element={<ReservationPage />} /> 
               </Route>
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
-              <Route path="/manager/popup-register" element={<PopupRegister />} />
+              <Route path="/manager/popupstore" element={<PopupRegister />} />
               <Route path="/manager/mypopup/:popupNo/edit" element={<MyPopupEditPage />} />
               {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
@@ -129,6 +137,7 @@ function App() {
 
             <Route path="/test" element={<Test />} />
           </Routes>
+          <SimpleChat />
         </BrowserRouter>
       </DndProvider>
     </AuthProvider>

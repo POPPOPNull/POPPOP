@@ -44,27 +44,35 @@ function PopupStores({popupstore,setIsDrag,posterNo}){
     return(
         <>
             
-                <Link to={`/user/${popupstore.no}`}>
+                <Link to={`/popup-stores/${popupstore.no}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div ref={preview}></div>
                     <div className={PSStyle.layout} ref={drag}>
-                        <div className={PSStyle.image}>
-                            <img src={imageUrl} alt={popupstore.no} className={PSStyle.img}/>
-                        </div>
+
+                            {/* 이미지 */}
+                            <div className={PSStyle.image}>
+                                <img src={imageUrl} alt={popupstore.no} className={PSStyle.img}/>
+                            </div>
+
+                            {/* 설명 */}
                             <div className={PSStyle.explain}>
                                 <div>{popupstore.name}</div>
                                 <div className={PSStyle.small}>{popupstore.location}</div>
                                 <div className={PSStyle.small}>{popupstore.startDate} ~ {popupstore.endDate}</div>
                             </div>
+
+                            {/* 찜 및 조회 수 */}
+                            <div className={PSStyle.favorite}>
+                                <div className={PSStyle.viewlayout}>
+                                    <div className={PSStyle.view}><img src="\public\icons\eye.png" style={{width:15,height:12}}/></div>{view}
+                                </div>
+                                <div className={PSStyle.favoritelayout}>
+                                    <div>♡</div>{favorite}
+                                </div>
+                            </div>
                     </div>
+                    
                 </Link>
-                        <div className={PSStyle.favorite}>
-                            <div className={PSStyle.viewlayout}>
-                                <div className={PSStyle.view}><img src="\public\icons\eye.png" style={{width:15,height:15}}/></div>{view}
-                            </div>
-                            <div className={PSStyle.favoritelayout}>
-                                <div>♡</div>{favorite}
-                            </div>
-                        </div>
+                        
                     
             
         </>
