@@ -41,6 +41,7 @@ import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
 import { AuthProvider, useAuth } from "./hooks/UseAuth.jsx";
 import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
 import AdminManagerMain from "./layouts/adminmain/Admin-manager-main.jsx";
+import SimpleChat from "./componenets/chatbot/SimpleChat.jsx";
 
 // 역할에 따라 첫 화면 리다이렉트
 const RedirectBasedOnRole = () => {
@@ -129,6 +130,7 @@ function App() {
 
             <Route path="/test" element={<Test />} />
           </Routes>
+          <SimpleChat />
         </BrowserRouter>
       </DndProvider>
     </AuthProvider>

@@ -1,0 +1,106 @@
+/* ChatMessage.css */
+.chat-message {
+    display: flex;
+    margin-bottom: 15px;
+    max-width: 85%;
+    align-items: flex-end;
+}
+
+.chat-message.bot {
+    align-self: flex-start;
+}
+
+.chat-message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-content {
+    background-color: #f1f0f0;
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.chat-message.bot .message-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-top-left-radius: 0;
+}
+
+.chat-message.user .message-content {
+    background-color: #e9e9eb;
+    border-top-right-radius: 0;
+}
+
+.message-text {
+    margin: 0;
+    white-space: pre-wrap;
+    /* This will respect newlines */
+}
+
+.message-time {
+    font-size: 11px;
+    color: #999;
+    margin: 0 8px;
+    white-space: nowrap;
+}
+
+/* Popup Store List Styling */
+.popup-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.popup-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.popup-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.popup-name {
+    margin: 0 0 5px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.popup-brand {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+}
+
+.popup-details {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.popup-location,
+.popup-category {
+    display: inline-block;
+}
+
+.popup-date {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+}
