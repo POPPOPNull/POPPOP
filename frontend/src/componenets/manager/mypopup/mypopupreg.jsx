@@ -104,17 +104,16 @@ function MyPopupReg() {
   if (submitting) return;
 
   if (
-    !formData.category ||
-    !formData.title ||
-    !formData.brandMain ||
-    !formData.roadAddress ||
-    !formData.startDate ||
-    !formData.endDate ||
-    !formData.description
-  ) {
-    alert("필수 항목을 모두 입력해주세요.");
-    return;
-  }
+  !formData.category ||
+  !formData.title ||
+  !formData.brandMain ||
+  !formData.roadAddress ||
+  !formData.startDate ||
+  !formData.endDate
+) {
+  alert("필수 항목을 모두 입력해주세요.");
+  return;
+}
 
   // 해시태그 문자열 만들기: "#태그1 #태그2" 형식
   const hashtagString = hashtagsList.length
@@ -257,9 +256,6 @@ function MyPopupReg() {
                     setFormData({ ...formData, roadAddress: e.target.value })
                   }
                 />
-                <button className="mpr-small-btn" type="button">
-                  검색
-                </button>
               </div>
 
               <input
