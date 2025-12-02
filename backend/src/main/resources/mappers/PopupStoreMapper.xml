@@ -128,14 +128,20 @@
         <if test="status!=null and status=='open'">
               where popup_end_date &gt; #{startDate}
               and popup_start_date &lt; #{endDate}
+            and approval_status= "승인"
         </if>
         <!--오픈예정-->
         <if test="status!=null and status=='scheduled'">
             where popup_start_date &gt; #{startDate}
+            and approval_status= "승인"
         </if>
         <!--종료-->
         <if test="status!=null and status=='done'">
             where popup_end_date &lt; #{endDate}
+            and approval_status= "승인"
+        </if>
+        <if test="status!=null and status=='all'">
+            where approval_status= "승인"
         </if>
         and
         (popup_name like concat('%',#{searchWord},'%')
@@ -144,7 +150,7 @@
         or hashtag_name like concat('%',#{searchWord},'%')
         or category_name like concat('%',#{searchWord},'%')
         )
-        and approval_status= "승인"
+
 
     </select>
     <!--검색조회-->
