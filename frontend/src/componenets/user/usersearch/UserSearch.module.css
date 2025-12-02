@@ -8,6 +8,8 @@
     justify-content: space-around;
     align-items: center;
     z-index: 1001px;
+    position: fixed;
+    top: 60px;
 }
 .searchbar{
     width: 750px;
@@ -20,6 +22,7 @@
     align-items: center;
     padding-left: 15px;  
     color: white;
+    
 
 }
 .popuplayout{
@@ -80,13 +83,15 @@
     top: 0px;
     opacity: 30%;
     pointer-events: none;
-    z-index: 2000px
+    z-index: 2000;
 }
 .searchbox{
     background-color: rgb(63, 62, 62);
     position: fixed;
+    top: 60px;
     width: 900px;
     height: 200px;
+    z-index: 2000;
     
     
 }

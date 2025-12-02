@@ -41,7 +41,7 @@
 .img {
   width: 100%;       /* 원하는 가로 */
   height: 100%;      /* 원하는 세로 */
-  border-radius: 16px; /* 둥근 모서리 */
+  border-radius: 12px; /* 둥근 모서리 */
   overflow: hidden;    /* 자식이 삐져나오지 않게 */
   position: relative;  /* 필요시 */
 }
