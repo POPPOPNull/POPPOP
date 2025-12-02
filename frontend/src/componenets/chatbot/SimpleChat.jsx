@@ -88,7 +88,7 @@ const SimpleChat = () => {
         width: '60px',
         height: '60px',
         borderRadius: '50%',
-        backgroundColor: '#764ba2',
+        background: 'linear-gradient(135deg, #eba9cf 0%, #f4002d 100%)',
         color: 'white',
         border: 'none',
         cursor: 'pointer',
@@ -103,7 +103,7 @@ const SimpleChat = () => {
     return (
         <>
             <button style={floatingButtonStyle} onClick={toggleChat}>
-                💬
+                🤖
             </button>
 
             {isOpen && (
