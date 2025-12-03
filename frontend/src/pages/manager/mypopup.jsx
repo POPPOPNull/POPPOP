@@ -8,7 +8,7 @@ function MyPopupPage() {
       <div className="main-layout">
         <ManagerSidebar />
         <div className="manager-main-content">
-          <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>내 팝업스토어</h2>
+          {/* <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>내 팝업스토어</h2> */}
           <MyPopup />
         </div>
       </div>

@@ -48,6 +48,16 @@ function ManagerSidebar() {
         </NavLink>
 
         <NavLink
+          to="/manager/dashboard"
+          className={({ isActive }) =>
+            "admin-side-button" + (isActive ? " active" : "")
+          }
+        >
+          <img src="/icons/chart-histogram.png" alt="dashboard" className="side-icon" />
+          대시보드
+        </NavLink>
+
+        <NavLink
           to="/manager/popupstore"
           className={({ isActive }) =>
             "admin-side-button" +

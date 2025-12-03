@@ -59,5 +59,23 @@ public class ManagerDashboardService {
     public List<EventTypeStatDTO> getEventTypeStats(int popupNo) {
         return dashboardMapper.selectEventTypeStats(popupNo);
     }
+
+    // === 매니저 전체 대시보드용 메서드 ===
+
+    public List<ReservationTrendDTO> getManagerReservationTrend(String managerId) {
+        return dashboardMapper.selectManagerReservationTrend(managerId);
+    }
+
+    public List<WeekdayReservationDTO> getManagerWeekdayReservations(String managerId) {
+        return dashboardMapper.selectManagerWeekdayReservations(managerId);
+    }
+
+    public List<GenderReservationDTO> getManagerGenderRatio(String managerId) {
+        return dashboardMapper.selectManagerGenderRatio(managerId);
+    }
+
+    public List<EventTypeStatDTO> getManagerEventTypeStats(String managerId) {
+        return dashboardMapper.selectManagerEventTypeStats(managerId);
+    }
 }
 

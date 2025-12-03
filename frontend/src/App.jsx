@@ -4,6 +4,7 @@ import Manager from "./pages/manager/manager";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PopupDetails from "./pages/user/PopupDetails"
 import ManagerDashboard from "./pages/manager/ManagerDashboard";
+import ManagerOverviewDashboard from "./pages/manager/ManagerOverviewDashboard";
 import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
 import PopupRegister from "./pages/manager/popup-register";
@@ -108,6 +109,7 @@ function App() {
             <Route path="/manager" element={<Manager />} />
 
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
+            <Route path="/manager/dashboard" element={<ManagerOverviewDashboard />} />
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
               <Route path="/manager/mypopup/:popupNo" element={<MyPopupLayout />}>
                 <Route index element={<ManagerDashboard />} />            

@@ -6,7 +6,7 @@ const ChatMessage = ({ message, isBot }) => {
     const navigate = useNavigate();
 
     const handlePopupClick = (popupNo) => {
-        navigate(`/user/${popupNo}`);
+        navigate(`/popup-stores/${popupNo}`);
     };
 
     return (

@@ -189,7 +189,7 @@ function MyPopupEdit() {
 
       <div className="mpr-content-wrap">
         <div className="mpr-header">
-          <h2 className="mpr-title">나의 팝업스토어 &gt; 수정</h2>
+          {/* <h2 className="mpr-title">나의 팝업스토어 &gt; 수정</h2> */}
 
           <button
             className="mpr-submit-btn"

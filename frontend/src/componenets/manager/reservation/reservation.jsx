@@ -25,6 +25,10 @@ function Reservation() {
   const [status, setStatus] = useState("전체");
   const [loading, setLoading] = useState(true);
 
+  const [page, setPage] = useState(1);       // 현재 페이지
+  const itemsPerPage = 10;                   // 페이지당 10개
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,10 +49,9 @@ function Reservation() {
 
     fetchData();
   }, [popupNo]);
-  
 
+  // 검색 + 상태 필터
   let rows = list.filter((r) => {
-
     const text = [
       r.memberId,
       r.popupName,
@@ -58,12 +61,17 @@ function Reservation() {
       .join(" ")
       .toLowerCase();
 
-      const passSearch = text.includes(q.toLowerCase());
-      const passStatus =
-      status === "전체" ? true : r.reservationStatus === status;
+    const passSearch = text.includes(q.toLowerCase());
+    const passStatus = status === "전체" ? true : r.reservationStatus === status;
     return passSearch && passStatus;
   });
 
+  // 검색어 변경 시 page=1로 리셋
+  useEffect(() => {
+    setPage(1);
+  }, [q, status]);
+
+  // 오늘 예약자 수
   const todayCount = list
     .filter(
       (r) =>
@@ -71,6 +79,12 @@ function Reservation() {
         (status === "전체" ? true : r.reservationStatus === status)
     )
     .reduce((sum, r) => sum + (r.reservationPersonnel || 0), 0);
+
+  //페이징(10개씩)
+  const startIndex = (page - 1) * itemsPerPage;
+  const paginatedRows = rows.slice(startIndex, startIndex + itemsPerPage);
+
+  const totalPages = Math.ceil(rows.length / itemsPerPage);
     
     
     return (
@@ -169,18 +183,34 @@ function Reservation() {
           </div>
         )}
 
-        {!loading &&
-          rows.map((r) => (
-            <div key={r.reservationNo} className="rv-tr">
-              <div>{r.memberId}</div>
-              <div>{r.reservationDate}</div>
-              <div>{r.reservationTime}</div>
-              <div>{r.reservationPersonnel}</div>
-              <div>{r.reservationStatus}</div>
-            </div>
-                ))}
+        {/* 목록 + 페이지네이션 */}
+  {!loading &&
+    paginatedRows.map((r) => (
+      <div key={r.reservationNo} className="rv-tr">
+        <div>{r.memberId}</div>
+        <div>{r.reservationDate}</div>
+        <div>{r.reservationTime}</div>
+        <div>{r.reservationPersonnel}</div>
+        <div>{r.reservationStatus}</div>
       </div>
+    ))}
+
+  {totalPages > 1 && (
+    <div className="pagination fixed-pagination">
+      {Array.from({ length: totalPages }, (_, i) => (
+        <button
+          key={i}
+          onClick={() => setPage(i + 1)}
+          className={`page-btn ${page === i + 1 ? "active" : ""}`}
+        >
+          {i + 1}
+        </button>
+      ))}
     </div>
+  )}
+</div>
+</div>
   );
 }
+
 export default Reservation;

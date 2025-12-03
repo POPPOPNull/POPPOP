@@ -63,6 +63,54 @@ public class ManagerDashboardController {
     public ResponseEntity<List<EventTypeStatDTO>> getEventTypeStats(@PathVariable int popupNo) {
         return ResponseEntity.ok(dashboardService.getEventTypeStats(popupNo));
     }
+
+    // ==============================
+    // 2) 매니저 전체 대시보드 
+    // ==============================
+
+    // 1행: 최근 7일 예약 추이 (전체 팝업)
+    @GetMapping("/overview/reservation-trend")
+    public ResponseEntity<List<ReservationTrendDTO>> getManagerReservationTrend(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        String managerId = userDetails.getUsername();
+        return ResponseEntity.ok(
+                dashboardService.getManagerReservationTrend(managerId)
+        );
+    }
+
+    // 2행 왼쪽: 요일별 예약 패턴 (전체 팝업)
+    @GetMapping("/overview/weekday-reservations")
+    public ResponseEntity<List<WeekdayReservationDTO>> getManagerWeekdayReservations(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        String managerId = userDetails.getUsername();
+        return ResponseEntity.ok(
+                dashboardService.getManagerWeekdayReservations(managerId)
+        );
+    }
+
+    // 2행 오른쪽: 예약자 성별 비율 (전체 팝업)
+    @GetMapping("/overview/gender-ratio")
+    public ResponseEntity<List<GenderReservationDTO>> getManagerGenderRatio(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        String managerId = userDetails.getUsername();
+        return ResponseEntity.ok(
+                dashboardService.getManagerGenderRatio(managerId)
+        );
+    }
+
+    // 1행 오른쪽: 이벤트 타입 비율 (전체 팝업)
+    @GetMapping("/overview/event-type-stats")
+    public ResponseEntity<List<EventTypeStatDTO>> getManagerEventTypeStats(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        String managerId = userDetails.getUsername();
+        return ResponseEntity.ok(
+                dashboardService.getManagerEventTypeStats(managerId)
+        );
+    }
 }
 
 

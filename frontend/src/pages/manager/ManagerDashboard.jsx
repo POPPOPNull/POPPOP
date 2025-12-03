@@ -18,7 +18,7 @@ function ManagerDashboard() {
         <ManagerSidebar />
 
         <div className="manager-main-content">
-          <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>대시보드</h2>
+          {/* <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>대시보드</h2> */}
 
           {/* 상단 KPI 카드 */}
           <section style={{ marginBottom: "24px" }}>

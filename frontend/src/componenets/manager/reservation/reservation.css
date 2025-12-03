@@ -38,7 +38,7 @@
   border-bottom: 1px solid var(--line);
 }
 
-.rv-tr:nth-child(odd) {
+.rv-card .rv-tr:nth-child(odd) {
   background: #fafbfe;
 }
 
@@ -59,12 +59,12 @@
 }
 
 .rv-select {
-  height: 44px;                  /* 검색바 높이에 맞춤 */
+  height: 44px;
   border: 1px solid var(--line);
-  border-radius: 999px;          
+  border-radius: 999px;
   padding: 0 16px;
   background: #fff;
-  font-size: 14px;
+  font-size: 15px;
   flex-shrink: 0;
   box-sizing: border-box;
 }
@@ -80,8 +80,54 @@
   align-items: center;     
 }
 
-.rv-select {
-  height: 44px;             
-  font-size: 15px;
+
+/* 페이지네이션 전체 영역 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  gap: 8px;
 }
+
+/* 기본 버튼 스타일 */
+.page-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+/* hover 효과 */
+.page-btn:hover {
+  background: #f2f2f2;
+  border-color: #bbb;
+}
+
+/* 현재 선택된 버튼 */
+.page-btn.active {
+  background: #f4002d;  
+  color: #fff;
+  border-color: #f4002d;
+  font-weight: 600;
+}
+
+/* 클릭 시 살짝 눌리는 느낌 */
+.page-btn:active {
+  transform: scale(0.97);
+}
+
+.fixed-pagination {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+
 
