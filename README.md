@@ -60,7 +60,7 @@
  
 |User계층|
 |:---:|
-|<img src="https://github.com/user-attachments/assets/1a60ba5c-6a3d-4b9b-8445-639b620f8dd9" width="900" autoplay/>|
+|<img width="1920" height="918" alt="image" src="https://github.com/user-attachments/assets/19f3f1cd-c993-4563-9f0b-771af4d2cfe7" width="900"/>|
 
 - 가맹점(Manager)
     - 팝업 스토어 등록/관리 : 팝업 스토어 정보를 직접 등록하고, 게시를 종료 할 수 있습니다.
