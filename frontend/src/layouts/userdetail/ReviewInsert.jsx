@@ -54,7 +54,9 @@ function ReviewInsert(){
                        <UserReview/>
                        
                        <div>후기</div>
+                       <div style={{height:10}}></div>
                        <ReviewView/>
+                       <div style={{height:10}}></div>
                        <MidComp1/>
                        <MidComp2/>
                        <Footer/>

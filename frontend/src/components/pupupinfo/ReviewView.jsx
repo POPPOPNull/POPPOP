@@ -7,7 +7,11 @@ import RVStyle from "./Review.module.css"
 function NoReviewYet(){
     return(
         <>
-            <div className={RVStyle.noreviewyet}>아직 리뷰가 없어요</div>
+            <div className={RVStyle.noreviewyet}>
+                <div style={{color:"gray"}}>등록된 후기가 없습니다.</div>
+                <div style={{height:10}}></div>
+                <div style={{fontSize:18}}>첫 번째 후기를 작성해보세요!</div>
+            </div>
         </>
     )
 }
@@ -42,11 +46,11 @@ function ReviewView(){
             {review.length==0? <NoReviewYet/> : review.map(
                 reviews => 
                         <SwiperSlide className={RVStyle.reviews}>
+                                <div style={{padding:5}}>{reviews.memberId}</div>
                             <div className={RVStyle.reviewsdetail}>
-                                <div>{reviews.memberId}</div>
                                 <div>{reviews.content}</div>
-                                <div>{reviews.reviewDate}</div>
                             </div>
+                                <div style={{padding:5,textAlign:"end",fontSize:12}}>{reviews.reviewDate}</div>
                         </SwiperSlide>
                             )}
         </Swiper>
