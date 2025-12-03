@@ -1,5 +1,5 @@
 import "./usermain/main.css"
-import AdminLoginform from "../componenets/AdminLoginForm";
+import AdminLoginform from "../components/AdminLoginForm";
 
 function AdminLogin (){
     return(

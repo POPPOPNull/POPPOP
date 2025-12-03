@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const JwtAPI = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: "http://localhost:8080",
   withCredentials: true, // refresh 토큰을 쿠키로 쓰는 경우
 });
 
@@ -34,6 +34,12 @@ JwtAPI.interceptors.response.use(
     }
 
     if (error.response && error.response.status === 401) {
+
+      if (!localStorage.getItem('accessToken')) {
+        // 비로그인 상태 → refresh 시도 x
+        return Promise.reject(error);
+      }
+
       try {
         originalRequest._retry = true;
 

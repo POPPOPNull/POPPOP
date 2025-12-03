@@ -1,9 +1,9 @@
 import "../usermain/main.css";
 import "./mapbody.css";
 import { useEffect, useState } from "react";
-import KakaoMap from "../../componenets/maps/Map";
-import NearComp from "../../componenets/NearComp";
-import { MidComp1 } from "../../componenets/user/usermain/MidComp"
+import KakaoMap from "../../components/maps/Map";
+import NearComp from "../../components/NearComp";
+import { MidComp1 } from "../../components/user/usermain/MidComp"
 import { selectAllPopupStore } from "../../api/PopupStoreAPI";
 
 function MapBody (){

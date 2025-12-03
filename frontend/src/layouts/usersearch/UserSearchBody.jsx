@@ -1,7 +1,7 @@
 import "./UserSearchBody.css"
-import Blank from "../../componenets/user/usermain/Blank";
-import SearchBar from "../../componenets/user/usersearch/SearchBar";
-import TodayPopup from "../../componenets/user/usersearch/TodayPopup";
+import Blank from "../../components/user/usermain/Blank";
+import SearchBar from "../../components/user/usersearch/SearchBar";
+import TodayPopup from "../../components/user/usersearch/TodayPopup";
 import { useParams } from "react-router-dom";
 import Footer from "../usermain/Footer";
 useParams

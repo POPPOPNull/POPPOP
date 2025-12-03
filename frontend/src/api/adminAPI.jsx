@@ -1,12 +1,10 @@
-
 import API from './JwtAPI';
 
 
-const BACKEND_URL = 'http://localhost:8080';
 
 // 전체 회원(user) 조회
 export function selectAllMembers() {
-    return API.get(`${BACKEND_URL}/admin/members`)
+    return API.get(`/admin/members`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectAllMembers", error);
@@ -16,7 +14,7 @@ export function selectAllMembers() {
 
 // 전체 리뷰 조회
 export function selectAllReviews() {
-    return API.get(`${BACKEND_URL}/admin/reviews`)
+    return API.get(`/admin/reviews`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectAllReviews", error);
@@ -26,7 +24,7 @@ export function selectAllReviews() {
 
 // 전체 예약 내역(user) 조회
 export function selectAllReservation() {
-    return API.get(`${BACKEND_URL}/admin/reservation`)
+    return API.get(`/admin/reservation`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectAllReservation", error);
@@ -37,7 +35,7 @@ export function selectAllReservation() {
 // 전체 회원(manager) 조회
 export function selectAllManager() {
 
-    return API.get(`${BACKEND_URL}/admin/manager-members`)
+    return API.get(`/admin/manager-members`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectAllManager", error);
@@ -47,7 +45,7 @@ export function selectAllManager() {
 
 // 전체 팝업 스토어 조회
 export function selectAllPopup() {
-    return API.get(`${BACKEND_URL}/admin/manager-popup`)
+    return API.get(`/admin/manager-popup`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectAllPopup", error);
@@ -57,7 +55,7 @@ export function selectAllPopup() {
 
 // 팝업 스토어 상세 조회
 export function selectPopupDetails(popupNo) {
-    return API.get(`${BACKEND_URL}/admin/manager-popup/${popupNo}`)
+    return API.get(`/admin/manager-popup/${popupNo}`)
     .then(response=>response.data)
     .catch(error=> {
         console.error(`API call error in selectPopupDetails ${popupNo}`, error);
@@ -67,7 +65,7 @@ export function selectPopupDetails(popupNo) {
 
 // 팝업 스토어 승인 처리
 export function approvePopup(popupNo) {
-    return API.put(`${BACKEND_URL}/admin/manager-popup/${popupNo}/approve`)
+    return API.put(`/admin/manager-popup/${popupNo}/approve`)
     .then(response=>response.data)
     .catch(error=> {
         console.error(`API call error in approvePopup ${popupNo}`, error);
@@ -77,7 +75,7 @@ export function approvePopup(popupNo) {
 
 // 팝업 스토어 반려 처리
 export function rejectPopup(popupNo, rejectionReason) {
-    return API.put(`${BACKEND_URL}/admin/manager-popup/${popupNo}/reject`, { rejectionReason })
+    return API.put(`/admin/manager-popup/${popupNo}/reject`, { rejectionReason })
     .then(response=>response.data)
     .catch(error=> {
         console.error(`API call error in rejectPopup ${popupNo}`, error);
@@ -87,7 +85,7 @@ export function rejectPopup(popupNo, rejectionReason) {
 
 // 팝업 스토어 별 예약 조회(집계)
 export function selectReservationSummary() {
-    return API.get(`${BACKEND_URL}/admin/manager-reservation`)
+    return API.get(`/admin/manager-reservation`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectReservationSummary", error);
@@ -97,7 +95,7 @@ export function selectReservationSummary() {
 
 // 팝업 스토어 별 상세 예약 조회
 export function selectReservationDetailsByPopup(popupNo) {
-    return API.get(`${BACKEND_URL}/admin/manager-reservation/${popupNo}`)
+    return API.get(`/admin/manager-reservation/${popupNo}`)
     .then(response=>response.data)
     .catch(error=> {
         console.error(`API call error in selectReservationDetailsByPopup ${popupNo}`, error);
@@ -107,7 +105,7 @@ export function selectReservationDetailsByPopup(popupNo) {
 
 // 예약 취소
 export function deleteReservation(reservationNo) {
-    return API.delete(`${BACKEND_URL}/admin/reservation/${reservationNo}`)
+    return API.delete(`/admin/reservation/${reservationNo}`)
     .then(response=>response.data)
     .catch(error=> {
         console.error(`API call error in deleteReservation By reservationNo ${reservationNo}`, error);
@@ -117,7 +115,7 @@ export function deleteReservation(reservationNo) {
 
 // user 대시보드 KPI 카드 데이터 조회
 export function selectUserKpiData() {
-    return API.get(`${BACKEND_URL}/admin/kpi/user`)
+    return API.get(`/admin/kpi/user`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectUserKpiData", error);
@@ -127,7 +125,7 @@ export function selectUserKpiData() {
 
 // user 대시보드 꺾은 선 차트 일별 방문자 수(전체, 회원, 비회원) 조회
 export function selectDailyVisitorStats() {
-    return API.get(`${BACKEND_URL}/admin/kpi/daily-visitor-stats`)
+    return API.get(`/admin/kpi/daily-visitor-stats`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectDailyVisitorStats", error);
@@ -139,7 +137,7 @@ export function selectDailyVisitorStats() {
 export function selectEventTypeRatioByMonth(month) {
     // month 파라미터가 있으면 쿼리 스트링으로 추가, 없으면 그냥 호출
     const queryString = month ? `?month=${month}` : '';
-    return API.get(`${BACKEND_URL}/admin/event-ratio${queryString}`)
+    return API.get(`/admin/event-ratio${queryString}`)
     .then(response=>response.data)
     .catch(error=> {
         console.error(`API call error in selectEventTypeRatioByMonth for month ${month}`, error);
@@ -149,7 +147,7 @@ export function selectEventTypeRatioByMonth(month) {
 
 // user 대시보드 막대 차트 월별 인기 검색 키워드 상위 10개 조회
 export function selectTop10SearchKeywords(month) {
-    return API.get(`${BACKEND_URL}/admin/kpi/top-search-keywords`, {
+    return API.get(`/admin/kpi/top-search-keywords`, {
         params: { month }
     })
     .then(response=>response.data)
@@ -161,7 +159,7 @@ export function selectTop10SearchKeywords(month) {
 
 // user 대시보드 막대 차트 월별 인기 카테고리 조회
 export function selectPopularCategories(month) {
-    return API.get(`${BACKEND_URL}/admin/kpi/popular-categories`, {
+    return API.get(`/admin/kpi/popular-categories`, {
         params: { month }
     })
     .then(response=>response.data)
@@ -173,7 +171,7 @@ export function selectPopularCategories(month) {
 
 // manager 대시보드 KPI 카드 데이터 조회
 export function selectManagerKpiData() {
-    return API.get(`${BACKEND_URL}/admin/kpi/manager`)
+    return API.get(`/admin/kpi/manager`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectManagerKpiData", error);
@@ -183,7 +181,7 @@ export function selectManagerKpiData() {
 
 // manager 대시보드 꺾은 선 차트 월별 승인 상태별 팝업 스토어 수 조회
 export function selectPopupStatusByMonth() {
-    return API.get(`${BACKEND_URL}/admin/kpi/popup-status`)
+    return API.get(`/admin/kpi/popup-status`)
     .then(response=>response.data)
     .catch(error=> {
         console.error("API call error in selectPopupStatusByMonth", error);
@@ -193,7 +191,7 @@ export function selectPopupStatusByMonth() {
 
 // manager 대시보드 파이 차트 월별 반려 사유 비율 조회
 export function selectRejectionReasonsByMonth(month) {
-    return API.get(`${BACKEND_URL}/admin/kpi/rejection-reasons`, {
+    return API.get(`/admin/kpi/rejection-reasons`, {
         params: { month }
     })
     .then(response=>response.data)
@@ -205,7 +203,7 @@ export function selectRejectionReasonsByMonth(month) {
 
 // manager 대시보드 막대 차트 월별 인기 팝업 조회
 export function selectPopularPopupByMonth(yearMonth) {
-    return API.get(`${BACKEND_URL}/admin/kpi/popular-popups`, {
+    return API.get(`/admin/kpi/popular-popups`, {
         params: { yearMonth }
     })
     .then(response=>response.data)
@@ -217,7 +215,7 @@ export function selectPopularPopupByMonth(yearMonth) {
 
 // manager 대시보드 막대 차트 월별 카테고리별 팝업 분포 조회
 export function selectCategoryDistributionByMonth(yearMonth) {
-    return API.get(`${BACKEND_URL}/admin/kpi/category-distribution`, {
+    return API.get(`/admin/kpi/category-distribution`, {
         params: { yearMonth }
     })
     .then(response=>response.data)

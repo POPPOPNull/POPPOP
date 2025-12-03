@@ -1,7 +1,7 @@
 import "../usermain/main.css";
-import Tab from "../../componenets/mypage/MyPageTab";
-import Review from "../../componenets/mypage/Review";
-import Logout from "../../componenets/Logout";
+import Tab from "../../components/mypage/MyPageTab";
+import Review from "../../components/mypage/Review";
+import Logout from "../../components/Logout";
 import Footer from "../usermain/Footer";
 
 function MyReview (){

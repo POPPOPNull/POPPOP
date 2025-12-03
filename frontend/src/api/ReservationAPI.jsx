@@ -1,9 +1,8 @@
 import API from './JwtAPI';
 
-const BACKEND_URL = 'http://localhost:8080';
 
 export function getMyReservations() {
-    return API.get(`${BACKEND_URL}/myreservation`)
+    return API.get(`/myreservation`)
     .then(response=>response.data);
 }
 
@@ -21,7 +20,7 @@ export function cancelReservation(reservationNo) {
 
 export function cancelPaidReservation(reservationNo) {
 
-  return API.post(`${BACKEND_URL}/reservations/${reservationNo}/cancel`)
+  return API.post(`/reservations/${reservationNo}/cancel`)
 
     .then(response => response.data);
 

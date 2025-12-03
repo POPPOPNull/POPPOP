@@ -1,9 +1,9 @@
 import "./Admin-main.css"
-import AdminManagerKPIData from "../../componenets/admin/AdminManagerKPIData"
-import AdminManagerLineChart from "../../componenets/admin/AdminManagerLineChart"
-import AdminManagerChart from "../../componenets/admin/AdminManagerChart"
-import AdminManagerBarChart from "../../componenets/admin/AdminManagerBarChart"
-import AdminManagerBarChart2 from "../../componenets/admin/AdminManagerBarChart2"
+import AdminManagerKPIData from "../../components/admin/AdminManagerKPIData"
+import AdminManagerLineChart from "../../components/admin/AdminManagerLineChart"
+import AdminManagerChart from "../../components/admin/AdminManagerChart"
+import AdminManagerBarChart from "../../components/admin/AdminManagerBarChart"
+import AdminManagerBarChart2 from "../../components/admin/AdminManagerBarChart2"
 
 function AdminManagerMain (){
     return(

@@ -1,5 +1,5 @@
 import React from "react";
-import MyPopupReg from "../../componenets/manager/mypopup/mypopupreg";
+import MyPopupReg from "../../components/manager/mypopup/mypopupreg";
 import "./manager-page.css"; 
 
 function MyPopupRegPage() {

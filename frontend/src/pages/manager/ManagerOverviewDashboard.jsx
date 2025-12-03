@@ -2,10 +2,10 @@ import ManagerSidebar from "../../layouts/managermain/manager-sidebar";
 import "../../layouts/managermain/manager-main.css";
 import "./manager-page.css";
 
-import ManagerOverviewReservationTrendChart from "../../componenets/manager/dashboard/ManagerOverviewReservationTrendChart";
-import ManagerOverviewEventTypeChart from "../../componenets/manager/dashboard/ManagerOverviewEventTypeChart";
-import ManagerOverviewWeekdayReservationChart from "../../componenets/manager/dashboard/ManagerOverviewWeekdayReservationChart";
-import ManagerOverviewGenderRatioChart from "../../componenets/manager/dashboard/ManagerOverviewGenderRatioChart";
+import ManagerOverviewReservationTrendChart from "../../components/manager/dashboard/ManagerOverviewReservationTrendChart";
+import ManagerOverviewEventTypeChart from "../../components/manager/dashboard/ManagerOverviewEventTypeChart";
+import ManagerOverviewWeekdayReservationChart from "../../components/manager/dashboard/ManagerOverviewWeekdayReservationChart";
+import ManagerOverviewGenderRatioChart from "../../components/manager/dashboard/ManagerOverviewGenderRatioChart";
 
 function ManagerOverviewDashboard() {
   return (
