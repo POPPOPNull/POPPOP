@@ -1,5 +1,5 @@
 import ManagerSidebar from "../../layouts/managermain/manager-sidebar";
-import MyPopupDet from "../../componenets/manager/mypopup/mypopupdet";
+import MyPopupDet from "../../components/manager/mypopup/mypopupdet";
 import "./manager-page.css"; 
 
 function MyPopupDetPage() {

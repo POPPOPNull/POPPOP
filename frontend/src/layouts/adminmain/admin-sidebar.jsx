@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Admin-sidebar.css";
-import Logout from "../../componenets/Logout";
-import AdminLogout from "../../componenets/AdminLogout";
+import Logout from "../../components/Logout";
+import AdminLogout from "../../components/AdminLogout";
 
 const poppopMenus = [
     { name: "메인", icon: "/public/icons/home.png", subMenus: [

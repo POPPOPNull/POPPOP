@@ -1,6 +1,6 @@
 import "../usermain/main.css";
 import "./reservation.css";
-import Calendar from "../../componenets/reservation/Calender";
+import Calendar from "../../components/reservation/Calender";
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { selectPopupStoreDetails } from "../../api/PopupStoreAPI"

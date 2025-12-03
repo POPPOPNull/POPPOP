@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { SearchProvider } from '../../componenets/admin/SearchProvider';
+import { SearchProvider } from '../../components/admin/SearchProvider';
 import AdminSidebar from '../../layouts/adminmain/admin-sidebar';
-import AdminSearchBar from '../../componenets/admin/AdminSearchBar';
-import Logout from '../../componenets/Logout';
+import AdminSearchBar from '../../components/admin/AdminSearchBar';
+import Logout from '../../components/Logout';
 import "../../layouts/adminmain/List-layout.css";
 
 

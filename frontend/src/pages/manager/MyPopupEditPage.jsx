@@ -1,4 +1,4 @@
-import MyPopupEdit from "../../componenets/manager/mypopup/mypopup-edit";
+import MyPopupEdit from "../../components/manager/mypopup/mypopup-edit";
 import "./manager-page.css";
 
 function MyPopupEditPage() {

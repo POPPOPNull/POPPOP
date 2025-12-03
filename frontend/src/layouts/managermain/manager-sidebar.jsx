@@ -1,7 +1,7 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./manager-sidebar.css"; // admin 스타일
 import { useState, useEffect } from "react";
-import AdminLogout from "../../componenets/AdminLogout";
+import AdminLogout from "../../components/AdminLogout";
 
 function ManagerSidebar() {
   const location = useLocation();

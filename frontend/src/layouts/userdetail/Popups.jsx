@@ -3,12 +3,12 @@ import { locationCoordExchange, selectPopupStoreDetails } from "../../api/PopupS
 import { useParams } from "react-router-dom";
 import { BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import PPStyle from "./Popups.module.css"
-import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
-import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
-import ReviewView from "../../componenets/pupupinfo/ReviewView";
+import PopupInfo from "../../components/pupupinfo/PopupInfo";
+import { MidComp1,MidComp2 } from "../../components/user/usermain/MidComp";
+import ReviewView from "../../components/pupupinfo/ReviewView";
 import { logDataByPopupDetail } from "../../api/BehaviorAPI";
-// import Footer from "../../componenets/user/Footer";
-// import Blank from "../../componenets/user/usermain/Blank";
+// import Footer from "../../components/user/Footer";
+// import Blank from "../../components/user/usermain/Blank";
 import Footer from "../usermain/Footer";
 
 

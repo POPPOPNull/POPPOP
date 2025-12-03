@@ -1,7 +1,7 @@
 import "../usermain/main.css";
-import Tab from "../../componenets/mypage/MyPageTab";
-import MyResrvDetail from "../../componenets/mypage/MyResvDetail";
-import Logout from "../../componenets/Logout";
+import Tab from "../../components/mypage/MyPageTab";
+import MyResrvDetail from "../../components/mypage/MyResvDetail";
+import Logout from "../../components/Logout";
 import Footer from "../usermain/Footer";
 
 function MyReservation (){

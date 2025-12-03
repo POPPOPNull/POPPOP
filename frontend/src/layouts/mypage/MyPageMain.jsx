@@ -1,7 +1,7 @@
 import "../usermain/main.css";
-import Tab from "../../componenets/mypage/MyPageTab";
-import MyInfoDetail from "../../componenets/mypage/MyInfoDetail";
-import Logout from "../../componenets/Logout";
+import Tab from "../../components/mypage/MyPageTab";
+import MyInfoDetail from "../../components/mypage/MyInfoDetail";
+import Logout from "../../components/Logout";
 import Footer from "../usermain/Footer";
 
 function Mypage (){

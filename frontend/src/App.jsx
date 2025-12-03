@@ -26,18 +26,18 @@ import InsertReview from "./pages/user/InsertReview";
 import AdminLayout from "./pages/admin/adminLayout";
 import AdminMain from "./layouts/adminmain/admin-main";
 import UserSearch from "./pages/user/UserSearch";
-import AdminManagerMemberList from "./componenets/admin/AdminManagerMemberList.jsx";
-import AdminManagerPopupList from "./componenets/admin/adminManagerPopupList";
-import AdminManagerReservationList from "./componenets/admin/adminManagerReservationList";
-import AdminManagerReservationDetails from "./componenets/admin/adminManagerReservationDetails";
+import AdminManagerMemberList from "./components/admin/AdminManagerMemberList.jsx";
+import AdminManagerPopupList from "./components/admin/adminManagerPopupList";
+import AdminManagerReservationList from "./components/admin/adminManagerReservationList";
+import AdminManagerReservationDetails from "./components/admin/adminManagerReservationDetails";
 import UserFavorite from "./pages/user/UserFavorite";
-import AdminManagerPopupDetails from "./componenets/admin/adminManagerPopupDetails";
+import AdminManagerPopupDetails from "./components/admin/adminManagerPopupDetails";
 import Test from "./layouts/usermain/Test";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import AdminMemberList from "./componenets/admin/adminMemberList.jsx";
-import AdminReviewList from "./componenets/admin/adminReviewList.jsx";
-import AdminReservationList from "./componenets/admin/adminReservationList.jsx";
+import AdminMemberList from "./components/admin/adminMemberList.jsx";
+import AdminReviewList from "./components/admin/adminReviewList.jsx";
+import AdminReservationList from "./components/admin/adminReservationList.jsx";
 
 import { AuthProvider, useAuth } from "./hooks/UseAuth.jsx";
 import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
@@ -45,7 +45,7 @@ import AdminManagerMain from "./layouts/adminmain/Admin-manager-main.jsx";
 
 import PaymentResult from "./pages/PaymentResult"; // 결제 결과 페이지 import 추가
 
-import SimpleChat from "./componenets/chatbot/SimpleChat.jsx";
+import SimpleChat from "./components/chatbot/SimpleChat.jsx";
 
 
 // 역할에 따라 첫 화면 리다이렉트

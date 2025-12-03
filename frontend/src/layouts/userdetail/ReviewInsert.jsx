@@ -2,10 +2,10 @@ import { useEffect,useState } from "react"
 import { selectPopupStoreDetails } from "../../api/PopupStoreAPI"
 import { BrowserRouter, Link, Route, Routes, useParams } from "react-router-dom";
 import PPStyle from "./Popups.module.css"
-import PopupInfo from "../../componenets/pupupinfo/PopupInfo";
-import { MidComp1,MidComp2 } from "../../componenets/user/usermain/MidComp";
-import UserReview from "../../componenets/user/userreview/UserReview";
-import ReviewView from "../../componenets/pupupinfo/ReviewView";
+import PopupInfo from "../../components/pupupinfo/PopupInfo";
+import { MidComp1,MidComp2 } from "../../components/user/usermain/MidComp";
+import UserReview from "../../components/user/userreview/UserReview";
+import ReviewView from "../../components/pupupinfo/ReviewView";
 import Footer from "../usermain/Footer";
 
 

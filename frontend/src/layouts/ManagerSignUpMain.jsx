@@ -1,6 +1,6 @@
 import "./usermain/main.css"
-import ManagerSignupform from "../componenets/ManagerSignUpForm";
-import ManagerSignUpConsent from "../componenets/ManagerSignUpConsent";
+import ManagerSignupform from "../components/ManagerSignUpForm";
+import ManagerSignUpConsent from "../components/ManagerSignUpConsent";
 import { useState } from "react";
 
 function Login (){

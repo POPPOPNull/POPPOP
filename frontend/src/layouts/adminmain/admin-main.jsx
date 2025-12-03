@@ -1,9 +1,9 @@
 import "./Admin-main.css"
-import AdminChart from "../../componenets/admin/AdminChart"
-import AdminLineChart from "../../componenets/admin/AdminLineChart"
-import AdminBarChart from "../../componenets/admin/adminBarChart"
-import KPIData from "../../componenets/admin/adminKPIData"
-import AdminBarChart2 from "../../componenets/admin/adminBarChart2"
+import AdminChart from "../../components/admin/AdminChart"
+import AdminLineChart from "../../components/admin/AdminLineChart"
+import AdminBarChart from "../../components/admin/adminBarChart"
+import KPIData from "../../components/admin/adminKPIData"
+import AdminBarChart2 from "../../components/admin/adminBarChart2"
 
 function AdminMain (){
     return(

@@ -1,6 +1,6 @@
 import "./usermain/main.css"
-import Signupform from "../componenets/SignUpForm";
-import SignUpConsent from "../componenets/SignUpConsent";
+import Signupform from "../components/SignUpForm";
+import SignUpConsent from "../components/SignUpConsent";
 import { useState } from "react";
 
 function Login (){

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import MovableComponent from './MovableComponent'
-import { MidComp1, MidComp2 } from '../../componenets/user/usermain/MidComp'
-import CategoryComp from '../../componenets/user/usermain/CategoryComp'
+import { MidComp1, MidComp2 } from '../../components/user/usermain/MidComp'
+import CategoryComp from '../../components/user/usermain/CategoryComp'
 CategoryComp
 
 // function WidgetA() {

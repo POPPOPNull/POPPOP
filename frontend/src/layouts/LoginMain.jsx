@@ -1,5 +1,5 @@
 import "./usermain/main.css"
-import Loginform from "../componenets/LoginForm";
+import Loginform from "../components/LoginForm";
 
 function Login (){
     return(

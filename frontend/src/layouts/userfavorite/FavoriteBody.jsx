@@ -1,4 +1,4 @@
-import FavoritePopups from "../../componenets/user/userfavorite/FavoritePopups";
+import FavoritePopups from "../../components/user/userfavorite/FavoritePopups";
 import FBStyle from "./FavoriteBody.module.css"
 
 

@@ -2,11 +2,11 @@ import { useParams } from "react-router-dom";
 import ManagerSidebar from "../../layouts/managermain/manager-sidebar";
 import "../../layouts/managermain/manager-main.css"; // MyPopupPage에서 쓰던 레이아웃
 import "./manager-page.css"; // MyPopupPage에서 쓰던 페이지 스타일
-import ManagerKPIData from "../../componenets/manager/dashboard/ManagerKPIData";
-import ReservationTrendChart from "../../componenets/manager/dashboard/ReservationTrendChart";
-import WeekdayReservationChart from "../../componenets/manager/dashboard/WeekdayReservationChart";
-import GenderRatioChart from "../../componenets/manager/dashboard/GenderRatioChart";
-import EventTypeChart from "../../componenets/manager/dashboard/EventTypeChart";
+import ManagerKPIData from "../../components/manager/dashboard/ManagerKPIData";
+import ReservationTrendChart from "../../components/manager/dashboard/ReservationTrendChart";
+import WeekdayReservationChart from "../../components/manager/dashboard/WeekdayReservationChart";
+import GenderRatioChart from "../../components/manager/dashboard/GenderRatioChart";
+import EventTypeChart from "../../components/manager/dashboard/EventTypeChart";
 
 
 function ManagerDashboard() {

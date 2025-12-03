@@ -1,5 +1,5 @@
 import "./manager-page.css";
-import ManagerHome from "../../componenets/manager/managerMain/managerHome";
+import ManagerHome from "../../components/manager/managerMain/managerHome";
 
 function Manager() {
 
