@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import BCStyle from "./MidComp.module.css"
-import {  selectPopupByDate } from "../../../api/PopupStoreAPI"
+import {  selectPopupByDate, selectPopupRandomly } from "../../../api/PopupStoreAPI"
 import PopupStores from "../../PopupStores"
 import { Link } from "react-router-dom"
 import { logDataBySelect } from "../../../api/BehaviorAPI"
+import { selectFavoritePopupNo } from "../../../api/FavoriteAPI"
+
 
 
 
@@ -22,6 +24,12 @@ export function BotComp() {
     const today = todayYear + "-" + todayMonth + "-" + todayDate
 
     const day7 = ['일','월','화','수','목','금','토']
+
+
+    const [favoriteNo, setFavoriteNo] = useState([]);
+    
+    const[isFavorite,setIsFavorte]=useState(false)
+    const[Narray,setNArray] = useState([])
 
 
     
@@ -62,12 +70,33 @@ export function BotComp() {
             for(let i = 0;i<popupArray.length;i++){
                 array.push(popupArray[i].no)
             }
-            console.log(array)
-
+            console.log("array",array)
+            setNArray(array)
+            // console.log("Narray",Narray)
             logDataBySelect(array)
         }
         fetchData()       
-    },[searchDay])
+    },[searchDay,favoriteNo])
+
+    console.log("Narray",Narray)
+
+    useEffect(()=>{
+        selectFavoritePopupNo()
+            .then(data=>{
+                
+                setFavoriteNo(data)
+                console.log("찜한것",data)
+                
+            })
+    },[])
+
+    useEffect(()=>{
+        
+    })
+
+    
+
+    
 
 
 
@@ -84,11 +113,13 @@ export function BotComp() {
                                 </div>)}
             </div>
             <div className={BCStyle.botlayout}>
-                {(popupStores).map(popupstore =><PopupStores key={popupstore.no} popupstore={popupstore} setIsDrag={setIsDrag} posterNo={popupstore.no}/>)}
+                {(popupStores).map(popupstore =><PopupStores key={popupstore.no} isFavorite={(favoriteNo.includes(popupstore.no)?isFavorite:!isFavorite)} popupstore={popupstore} setIsDrag={setIsDrag} posterNo={popupstore.no}/>)}
             </div>
-            <Link to={"/user/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className={BCStyle.moreback}>
+            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className={BCStyle.more}>더보기</div>
-            </Link>
+                </Link>
+            </div>
         </>
     )
 }

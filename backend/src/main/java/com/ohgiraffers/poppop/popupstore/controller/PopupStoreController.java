@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class PopupStoreController {
@@ -102,6 +99,9 @@ public class PopupStoreController {
 
         return ResponseEntity.ok(popupStoreService.selectFavoritePopupStoreById(id));
     }
+    //찜한 팝업스토어 번호 가져오기
+
+
 
     // 팝업스토어 랜덤조회
     @GetMapping("popup-stores/random/{random}")

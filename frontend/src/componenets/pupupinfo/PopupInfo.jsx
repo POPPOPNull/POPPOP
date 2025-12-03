@@ -47,11 +47,13 @@ function PopupInfo(){
         <>
             {/* <div>{popup.no}의 상세페이지</div> */}
             <hr />
-            <div>편의아이콘</div>
-            <hr />
-            <div>운영시간
-                <div>
-
+            
+            {/* <div >편의아이콘</div>             */}
+            <div className={PPStyle.durationbox}>
+                <div className={PPStyle.durationtime}>
+                    운영시간
+                </div>
+                <div className={PPStyle.duration}>
                     <span style={{fontWeight:500}}>월 ~ 일 :</span> {popup.openTime} - {popup.closeTime}
                 </div>
             </div>

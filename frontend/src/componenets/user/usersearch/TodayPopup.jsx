@@ -2,6 +2,8 @@ import { useEffect,useState } from "react"
 import { selectPopupstoreByOpenStatus } from "../../../api/PopupStoreAPI"
 import PopupStores from "../../PopupStores";
 import TPStyle from "./UserSearch.module.css"
+import { selectFavoritePopupNo } from "../../../api/FavoriteAPI";
+
 
 
 
@@ -19,6 +21,21 @@ function TodayPopup(){
     const [status, setStatus] = useState("")
     const [searchWord, setSearchWord] = useState()
     const[popups, setPopups] = useState([])
+
+    const [favoriteNo, setFavoriteNo] = useState([]);
+    
+    const[isFavorite,setIsFavorte]=useState(false)
+    const[Narray,setNArray] = useState([])
+
+    useEffect(()=>{
+            selectFavoritePopupNo()
+                .then(data=>{
+                    
+                    setFavoriteNo(data)
+                    console.log("찜한것",data)
+                    
+                })
+        },[])
 
 
     const onChangeStatus = (e) =>{
@@ -47,7 +64,7 @@ function TodayPopup(){
         </select>
 
         <div className={TPStyle.popuplayout}>
-            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup}/>)}
+            {popups.map(popup=> <PopupStores key={popup.no} popupstore={popup} isFavorite={(favoriteNo.includes(popup.no)?isFavorite:!isFavorite)}/>)}
         </div>
         </>
     )

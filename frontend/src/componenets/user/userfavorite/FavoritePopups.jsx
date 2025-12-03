@@ -22,13 +22,24 @@ function FavoritePopups(){
         const [id ,setId] = useState("")
         const [isDrag, setIsDrag] = useState(false)
         const [isDrop, setIsDrop] = useState(false)
+        const [length, setLength] = useState();
     
         useEffect(()=>{
-            selectFavoritePopupStoreById(id).then(data=>{
-                console.log(data)
-                setPopupStores(data)
-            })     
-        },[])
+            const fetchData = async () =>{
+            //     selectFavoritePopupStoreById(id).then(data=>{
+                
+            //     setPopupStores(data)
+                
+            //     setLength(data.length)
+            // })  
+            const data = await selectFavoritePopupStoreById(id);
+            console.log("data",data)
+            setPopupStores(data)
+            console.log("length",data.length)
+            setLength(data.length)
+            }   
+            fetchData()
+        },[length])
 
         const [,drop] = useDrop({
             accept : 'popup',
@@ -39,6 +50,7 @@ function FavoritePopups(){
                 deleteFavorite(item.popupstore.no)
                 console.log('삭제 완')
                 setIsDrop(!isDrop)
+                window.location.reload()
             }
             
         })

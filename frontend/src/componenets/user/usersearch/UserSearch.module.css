@@ -105,12 +105,16 @@
     align-items: center;
 }
 .select{
-    /* background-color: cyan; */
+    background-color: #2c2c2c;
+    color: #ffffff;
     width: 300px;
-    height: 50px;
-    font-size: 20px;
+    height: 30px;
+    font-size: 16px;
     /* position: relative; */
     
+}
+option:hover{
+    background-color: #313131;
 }
 
 .nosearchresult{

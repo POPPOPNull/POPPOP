@@ -46,10 +46,13 @@ function Popups(){
             setPopup(data)
 
             await logDataByPopupDetail(popupNo)
+            
 
         }
         fetchData()
     },[])
+
+
 
 
 
@@ -65,7 +68,7 @@ function Popups(){
                         <img src={popupURL} alt={popupNo} />
                     </div>
                     <div className={PPStyle.imagebuttonlayout}>
-                        <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttons} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to={`/popup-stores/${popupNo}`} className={PPStyle.imagebuttonsactive} style={{ textDecoration: 'none', color: 'red' }}>
                             <div>정보</div>
                         </Link>
                          <Link to={`/popup-stores/${popupNo}/review`} className={PPStyle.imagebuttons} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -78,11 +81,13 @@ function Popups(){
                     <div>{popup.hashtags}</div>
                     <PopupInfo/>
                     <div className={PPStyle.reviewbtns}>
-                        <div>후기</div>
+                        <div className={PPStyle.reviewtitle}>후기</div>
                         <Link to={`/popup-stores/${popupNo}/review`} style={{textDecoration:"none",color:"inherit"}}><div>후기작성하기</div></Link>
                      </div>
                     <ReviewView/>
+                    <div style={{height:20}}></div>
                     <MidComp1/>
+                    <div style={{height:20}}></div>
                     <MidComp2/>
                     <div style={{height:30}}></div>
                     

@@ -7,18 +7,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URI;
 
 import java.security.Principal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,6 +62,23 @@ public class FavoriteController {
         favoriteService.deleteFavorite(popupNo,id);
 
         return ResponseEntity.created(URI.create("/user")).build();
+    }
+
+    //찜 번호 가져오기
+    @GetMapping("/favorite/no")
+    public ResponseEntity<List<Integer>> selectFavoritePopupNo(@AuthenticationPrincipal UserDetails userDetails){
+        if (userDetails == null) {
+            return ResponseEntity.status(401).body(new ArrayList<>());
+        }
+        String id = userDetails.getUsername();
+
+        List<Integer> list = favoriteService.selectFavoritePopupNo(id);
+        for(Integer no : list){
+            System.out.println("찜한 팝업번호"+no);
+        }
+        System.out.println(list);
+
+        return ResponseEntity.ok(list);
     }
 
 }

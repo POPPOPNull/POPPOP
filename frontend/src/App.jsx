@@ -92,7 +92,7 @@ function App() {
             </Route>
 
             <Route element={<ProtectedRoute requiredRoles={['USER']} />}>
-              <Route path="/user/favorite" element={<UserFavorite />} />
+              <Route path="/popup-stores/favorite" element={<UserFavorite />} />
               <Route path="/myinfo" element={<MyInformation />} />
               <Route path="/myreview" element={<MyReview />} />
               <Route path="/myreservation" element={<MyReservation />} />
