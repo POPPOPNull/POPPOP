@@ -70,7 +70,7 @@ function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
                                     <div className={PSStyle.view}><img src="\public\icons\eye.png" style={{width:15,height:12}}/></div>{view}
                                 </div>
                                 <div className={PSStyle.favoritelayout}>
-                                    <div>{isFavorite?"♡":"♥"}</div>{favorite}
+                                    <div className={isFavorite?PSStyle.n:PSStyle.f}>{isFavorite?"♡":"♥"}</div>{favorite}
                                 </div>
                             </div>
                     </div>
