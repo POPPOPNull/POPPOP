@@ -4,24 +4,20 @@ import { selectInfo } from "../../api/MyInfoAPI";
 import { updateEmail, updatePhone } from "../../api/MyInfoAPI";
 
 function InfoDetail() {
+  const [name, setName] = useState("");
+  const [Id, setId] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [phone, setPhone] = useState("");
 
-    const [name, setName] = useState("");
-    const [Id, setId] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthDate, setBirthDate] = useState("");
-    const [phone, setPhone] = useState("");
+  const [error, setError] = useState(null);
 
-    const [error, setError] = useState(null);
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
 
-    const [showEmailGuide, setShowEmailGuide] = useState(false);
-    const [showPhoneGuide, setShowPhoneGuide] = useState(false);
-    const [isEditingEmail, setIsEditingEmail] = useState(false);
-    const [isEditingPhone, setIsEditingPhone] = useState(false);
-
-    useEffect(() => {
+  useEffect(() => {
     selectInfo()
       .then((data) => {
-
         setName(data.name);
         setId(data.id);
         setEmail(data.email);
@@ -34,129 +30,130 @@ function InfoDetail() {
       });
   }, []);
 
-    // 이메일 수정
-    const handleEmailButtonClick = async () => {
-        if (!isEditingEmail) {
-            setIsEditingEmail(true);
-            setShowEmailGuide(true);
+  // 이메일 수정
+  const handleEmailButtonClick = async () => {
+    if (!isEditingEmail) {
+      setIsEditingEmail(true);
+      return;
+    }
+
+    try {
+      const isEmail = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+      if (!isEmail.test(email)) {
+        alert("올바른 이메일 주소를 입력해주세요. (예: example@poppop.com)");
         return;
-        }
-    
-        try {
-            const isEmail = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+      }
+      await updateEmail(email);
+      alert("이메일이 수정되었습니다.");
+      setIsEditingEmail(false);
+    } catch (err) {
+      console.error("이메일 수정 실패:", err);
+      alert("이메일 수정에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
-            if (!isEmail.test(email)) {
-                alert("올바른 이메일 주소를 입력해주세요. (예: example@poppop.com)");
-                return;
-            }
-            await updateEmail(email);
-            alert("이메일이 수정되었습니다.");
-            setIsEditingEmail(false);   // 다시 readOnly
-            setShowEmailGuide(false);
-        } catch (err) {
-            console.error("이메일 수정 실패:", err);
-            alert("이메일 수정에 실패했습니다. 다시 시도해주세요.");
-        }
-    };
+  // 휴대전화 수정
+  const handlePhoneButtonClick = async () => {
+    if (!isEditingPhone) {
+      setIsEditingPhone(true);
+      return;
+    }
 
-    const handlePhoneButtonClick = async () => {
-        if (!isEditingPhone) {
-            setIsEditingPhone(true);
-            setShowPhoneGuide(true);
+    try {
+      const onlyNumber = phone.replace(/\D/g, "");
+      if (onlyNumber.length < 10 || onlyNumber.length > 11) {
+        alert("올바른 휴대전화 번호를 입력해주세요. (숫자 10~11자리)");
         return;
-        }
+      }
+      await updatePhone(phone);
+      alert("휴대전화 번호가 수정되었습니다.");
+      setIsEditingPhone(false);
+    } catch (err) {
+      console.error("휴대전화 수정 실패:", err);
+      alert("휴대전화 번호 수정에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
-        try {
-            const onlyNumber = phone.replace(/\D/g, "");
-            if (onlyNumber.length < 10 || onlyNumber.length > 11) {
-                alert("올바른 휴대전화 번호를 입력해주세요. (숫자 10~11자리)");
-                return;
-            }
-            await updatePhone(phone);
-            alert("휴대전화 번호가 수정되었습니다.");
-            setIsEditingPhone(false);
-            setShowPhoneGuide(false);
-        } catch (err) {
-            console.error("휴대전화 수정 실패:", err);
-            alert("휴대전화 번호 수정에 실패했습니다. 다시 시도해주세요.");
-        }
-    };
+  return (
+    <div className="infoForm">
+      {error && <p className="info-error">{error}</p>}
 
-    return(
 
-        <>
-        <div className="infoForm">
-            <div className="form-group">
-                <label>이름</label>
-                <input type="text" value={name} readOnly/>
-            </div>
+      <div className="form-group name-group">
+        <label>이름</label>
+        <input
+          type="text"
+          value={name}
+          readOnly
+          className="input-box"
+        />
+      </div>
 
-            <div className="form-group">
-                <label>아이디</label>
-                <input type="text" value={Id} readOnly/>
-            </div>
+      <div className="form-group">
+        <label>아이디</label>
+        <input type="text" value={Id} readOnly />
+      </div>
 
-            <div className="form-group">
-                <div className="label-row">
-                    <label>이메일주소</label>
-
-                    {isEditingEmail && (
-                        <span className="email-guide">(예: example@poppop.com)</span>
-                    )}
-                </div>
-
-                <div className="form-update">
-                    <input 
-                        type="email" 
-                        value={email} 
-                        readOnly={!isEditingEmail}
-                        onChange={(e)=> setEmail(e.target.value)}
-                    />
-                    <button 
-                        type="button"
-                        className={`edit-btn ${isEditingEmail ? "editing" : ""}`}
-                        onClick={handleEmailButtonClick}
-                    >
-                        {isEditingEmail? "저장" : "수정"}
-                    </button>
-                </div>
-            </div>
-
-            <div className="form-group">
-                <label>생년월일</label>
-                <input type="text" value={birthDate} readOnly/>
-            </div>
-
-            <div className="form-group">
-                <div className="label-row">
-                    <label>휴대전화</label>
-
-                    {isEditingPhone && (
-                        <span className="phone-guide">(예: 01012345678)</span>
-                    )}
-                </div>
-
-                <div className="form-update">
-                    <input 
-                        type="phone" 
-                        maxLength="11" 
-                        value={phone}
-                        readOnly={!isEditingPhone}
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                    <button 
-                        type="button"
-                        className={`edit-btn ${isEditingPhone ? "editing" : ""}`}
-                        onClick={handlePhoneButtonClick}
-                    >
-                        {isEditingPhone? "저장" : "수정"}
-                    </button>
-                </div>
-            </div>
-
-            <button style={{marginTop:"50px",marginLeft:"520px", marginBottom:"30px"}}>회원탈퇴</button>
+      <div className="form-group">
+        <div className="label-row">
+          <label>이메일주소</label>
+          {isEditingEmail && (
+            <span className="guide-text">(예: example@poppop.com)</span>
+          )}
         </div>
-        </>
-    )
+
+        <div className="form-update">
+          <input
+            type="email"
+            value={email}
+            readOnly={!isEditingEmail}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button
+            type="button"
+            className={`edit-btn ${isEditingEmail ? "editing" : ""}`}
+            onClick={handleEmailButtonClick}
+          >
+            {isEditingEmail ? "저장" : "수정"}
+          </button>
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label>생년월일</label>
+        <input type="text" value={birthDate} readOnly />
+      </div>
+
+      <div className="form-group">
+        <div className="label-row">
+          <label>휴대전화</label>
+          {isEditingPhone && (
+            <span className="guide-text">(예: 01012345678)</span>
+          )}
+        </div>
+
+        <div className="form-update">
+          <input
+            type="tel"
+            maxLength="11"
+            value={phone}
+            readOnly={!isEditingPhone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <button
+            type="button"
+            className={`edit-btn ${isEditingPhone ? "editing" : ""}`}
+            onClick={handlePhoneButtonClick}
+          >
+            {isEditingPhone ? "저장" : "수정"}
+          </button>
+        </div>
+      </div>
+
+      <button type="button" className="withdraw-btn">
+        회원탈퇴
+      </button>
+    </div>
+  );
 }
 export default InfoDetail;

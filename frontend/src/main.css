@@ -31,7 +31,7 @@ body{
   font-size: 20px;
 }
 .step-item.active .step-circle {
-  background-color: #ffcd0f;
+  background-color: #f4002d;
   color: #fff;
 }
 .step-item.active .step-label {
