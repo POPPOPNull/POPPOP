@@ -25,13 +25,14 @@
 }
 
 .chat-message.bot .message-content {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #eba9cf 0%, #f4002d 100%);
     color: white;
     border-top-left-radius: 0;
 }
 
 .chat-message.user .message-content {
-    background-color: #e9e9eb;
+    background: linear-gradient(135deg, #eba9cf 0%, #f4002d 100%);
+    color: white;
     border-top-right-radius: 0;
 }
 

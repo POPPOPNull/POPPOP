@@ -1,5 +1,5 @@
 :root {
-  --yellow: #FFD400;
+  --yellow: #f4002d;
   --black: #000;
   --white: #fff;
 }
@@ -117,10 +117,6 @@
 .mh-title {
   font-size: 60px;
   margin-bottom: 10px;
-  text-shadow:
-    2px 2px 0 #000,    
-    4px 4px 0 #f5f5f5,    
-    3px 3px 0 rgba(0, 0, 0, 0.2); 
 }
 
 .mh-brand {
