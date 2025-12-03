@@ -1,47 +1,86 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { SearchContext } from "./SearchProvider";
+import "./adminSearchBar.css";
 
-function AdminSearchBar(){    
-
-    const { 
+function AdminSearchBar() {
+    const {
         searchText, setSearchText,
         searchCategory, setSearchCategory,
-        availableCategory, setAvailableCategory,
-        isSearchEnabled             // 검색 기능 활성화 상태를 Context에서 가져오기
-     } = useContext(SearchContext);
+        availableCategory,
+        isSearchEnabled
+    } = useContext(SearchContext);
 
-    return(
-        <div className="adminSearchBar" style={{ display: 'flex', alignItems: 'center', gap: '10px',
-            backgroundColor: isSearchEnabled ? 'white' : '#f0f0f0'
-         }}>
-            {/* 검색 카테고리 선택 상자 추가 */}
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    // 외부 클릭 감지하여 드롭다운 닫기
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const handleOptionClick = (value) => {
+        setSearchCategory(value);
+        setIsOpen(false);
+    };
+
+    const toggleDropdown = () => {
+        if (isSearchEnabled) {
+            setIsOpen(!isOpen);
+        }
+    };
+    
+    // 현재 선택된 카테고리의 전체 객체를 찾기 (accessor도 필요할 수 있으므로)
+    const selectedCategoryObject = availableCategory?.find(c => c.header === searchCategory) || { header: "전체" };
+
+
+    return (
+        <div className="adminSearchBar" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {availableCategory && availableCategory.length > 0 && (
-                <select 
-                    value={searchCategory}
-                    onChange={(e) => setSearchCategory(e.target.value)}
-                    className="adminSearchBar-select"
-                    style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px',
-                             backgroundColor: isSearchEnabled ? 'white' : '#f0f0f0' }}   // 기본 스타일
-                    disabled={!isSearchEnabled}
+                <div 
+                    className={`custom-select-container ${isOpen ? 'open' : ''} ${!isSearchEnabled ? 'disabled' : ''}`} 
+                    ref={dropdownRef}
                 >
-                    <option value="전체">전체</option>
-                    {/* availableCategory 배열을 순회하며 옵션 생성 */}
-                    {availableCategory.map(h => (
-                        <option key={h.accessor} value={h.header}>
-                            {h.header}
-                        </option>
-                    ))}
-                </select>
+                    <div className="custom-select-trigger" onClick={toggleDropdown}>
+                        {selectedCategoryObject.header}
+                    </div>
+                    {isOpen && (
+                        <ul className="custom-select-options">
+                            <li 
+                                className={`custom-select-option ${"전체" === selectedCategoryObject.header ? 'selected' : ''}`}
+                                onClick={() => handleOptionClick("전체")}
+                            >
+                                전체
+                            </li>
+                            {availableCategory.map(h => (
+                                <li
+                                    key={h.accessor}
+                                    className={`custom-select-option ${h.header === selectedCategoryObject.header ? 'selected' : ''}`}
+                                    onClick={() => handleOptionClick(h.header)}
+                                >
+                                    {h.header}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             )}
-            <img src='/public/icons/search.png' alt="검색" className="side-icon"/>
-            <input 
-            type="text"
-            placeholder="검색어를 입력하세요"
-            className="adminSearchBar-box"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            disabled={!isSearchEnabled}
-            style={{ backgroundColor: isSearchEnabled ? 'white' : '#f0f0f0' }}
+            <img src='/icons/search.png' alt="검색" className="side-icon" />
+            <input
+                type="text"
+                placeholder="검색어를 입력하세요"
+                className="adminSearchBar-box"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                disabled={!isSearchEnabled}
+                style={{ backgroundColor: isSearchEnabled ? 'white' : '#f0f0f0' }}
             />
         </div>
     );

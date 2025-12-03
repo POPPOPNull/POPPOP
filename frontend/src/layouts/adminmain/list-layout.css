@@ -8,10 +8,13 @@
 
 .list-row {
   border-bottom: 1px solid var(--line);
+  padding: 10px 15px; /* Consistent with header padding */
+  font-size: 13px; /* Slightly smaller for row text */
+  line-height: 1.4;
+  color: #555; /* Softer text color */
 }
-
 .list-row:nth-child(odd) {
-  background: #fafbfe;
+  background: #fdfdfd; /* Keep original lighter stripe */
 }
 
 .list-row:last-child {
@@ -19,11 +22,12 @@
 }
 
 .list-header {
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 700; /* Slightly less bold than original 800 */
+  font-size: 14px; /* Keep original font size */
   color: var(--text);
-  background: #f4f6fa;
-  border-radius: 10px;
+  background: #f8f9fa; /* Very light gray */
+  border-radius: 8px; /* Slightly smaller border radius */
+  padding: 10px 15px; /* Slightly adjusted padding */
   margin-bottom: 8px;
 }
 
@@ -71,18 +75,17 @@
   text-overflow: ellipsis;
 }
 
-/* 모든 컬럼의 자식 div들은 기본 왼쪽 정렬 */
 .list-row > div, .list-header > div {
-  text-align: center;
-  padding: 0 5px;
+  padding: 0 8px; /* Slightly reduced horizontal padding inside cells */
+  text-align: center; /* Default to center for all */
 }
-
-/* 첫 번째와 마지막 자식 컬럼만 가운데 정렬 */
 .list-row > div:first-child,
+.list-header > div:first-child {
+  text-align: left; /* First column left-aligned */
+}
 .list-row > div:last-child,
-.list-header > div:first-child,
 .list-header > div:last-child {
-  text-align: center;
+  text-align: center; /* Last column center-aligned */
 }
 
 /* 팝업 스토어 상태 표시 */
@@ -97,4 +100,17 @@
 
 .status-scheduled {
   color: #17a2b8;
+}
+
+/* ListContainer의 mp-card 및 mp-table 스타일 추가 (페이지네이션 고정용) */
+.mp-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 720px; /* 테이블 10행과 페이지네이션을 포함할 충분한 높이 */
+}
+
+.mp-table {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
