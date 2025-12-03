@@ -123,6 +123,101 @@
         GROUP BY event_type;
 
     </select>
+
+    <!-- ========================= -->
+    <!--   전체 대시보드 (매니저 기준) -->
+    <!-- ========================= -->
+
+    <!-- 최근 7일 예약 추이 (매니저가 가진 모든 팝업 합산) -->
+    <select id="selectManagerReservationTrend"
+            parameterType="string"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO">
+
+        SELECT
+        DATE_FORMAT(t.stat_date, '%Y-%m-%d') AS date,
+        IFNULL(r.reservation_count, 0)       AS reservationCount
+        FROM (
+        -- 최근 7일 날짜 생성
+        SELECT CURDATE() - INTERVAL seq DAY AS stat_date
+        FROM (
+        SELECT 0 AS seq UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL
+        SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6
+        ) s
+        ) t
+        LEFT JOIN (
+        SELECT
+        r.reservation_date AS stat_date,
+        COUNT(*)           AS reservation_count
+        FROM reservation r
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        WHERE p.id = #{managerId}
+        AND r.reservation_date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()
+        GROUP BY r.reservation_date
+        ) r ON t.stat_date = r.stat_date
+        ORDER BY t.stat_date ASC
+    </select>
+
+    <!-- 요일별 예약 패턴 (전체 팝업 기준) -->
+    <select id="selectManagerWeekdayReservations"
+            parameterType="string"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.WeekdayReservationDTO">
+
+        SELECT
+        CASE w.day_of_week
+        WHEN 1 THEN '일'
+        WHEN 2 THEN '월'
+        WHEN 3 THEN '화'
+        WHEN 4 THEN '수'
+        WHEN 5 THEN '목'
+        WHEN 6 THEN '금'
+        WHEN 7 THEN '토'
+        END AS dayOfWeek,
+        COUNT(*) AS reservationCount
+        FROM (
+        SELECT
+        DAYOFWEEK(r.reservation_date) AS day_of_week
+        FROM reservation r
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        WHERE p.id = #{managerId}
+        ) w
+        GROUP BY w.day_of_week
+        ORDER BY w.day_of_week
+    </select>
+
+    <!-- 예약자 성별 비율 (전체 팝업 기준) -->
+    <select id="selectManagerGenderRatio"
+            parameterType="string"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.GenderReservationDTO">
+
+        SELECT
+        m.gender AS gender,
+        COUNT(*) AS count
+        FROM reservation r
+        JOIN popup_store p ON r.popup_no = p.popup_no
+        JOIN member m      ON r.id = m.id
+        WHERE p.id = #{managerId}
+        GROUP BY m.gender
+    </select>
+
+    <!-- 사용자 행동 유형 비율 (전체 팝업 기준) -->
+    <select id="selectManagerEventTypeStats"
+            parameterType="string"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.EventTypeStatDTO">
+
+        SELECT
+        u.event_type AS eventType,
+        COUNT(*)     AS count
+        FROM user_event_data u
+        WHERE u.popup_no IN (
+        SELECT popup_no
+        FROM popup_store
+        WHERE id = #{managerId}
+        )
+        GROUP BY u.event_type
+        ORDER BY count DESC
+    </select>
 </mapper>
+
+
 
 

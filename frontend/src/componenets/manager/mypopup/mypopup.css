@@ -143,9 +143,9 @@
   font-size: 13px;
   font-weight: 600;
 
-  color: #3a63f3;            
+  color: #f4002d;            
   background: #ffffff;
-  border: 1px solid #d4dcf8;
+  border: 1px solid #eba9cf;
   border-radius: 999px;
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
@@ -172,7 +172,7 @@
 .btn-detail:active {
   background: #d9dde6;
 }
-.mypopup-edit-btn {
+.mypopup-dashboard-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -181,9 +181,9 @@
   font-size: 13px;
   font-weight: 600;
 
-  color: #3a63f3;            
+  color: #f4002d;            
   background: #ffffff;
-  border: 1px solid #d4dcf8;
+  border: 1px solid #eba9cf;
   border-radius: 999px;
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);

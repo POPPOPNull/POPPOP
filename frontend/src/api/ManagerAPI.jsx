@@ -131,3 +131,78 @@ export function fetchEventTypeStats(popupNo) {
       throw error;
     });
 }
+
+// ==============================
+// 매니저 전체 대시보드 API
+
+// 1행 — 최근 7일 예약 추이
+export function fetchManagerOverviewReservationTrend() {
+  return API.get(`${BACKEND_URL}/manager/dashboard/overview/reservation-trend`)
+    .then((response) => {
+      console.log("전체 대시보드 | 예약 추이 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("전체 대시보드 | 예약 추이 조회 오류:", error);
+      throw error;
+    });
+}
+
+// 1행 — 사용자 행동 유형 비율
+export function fetchManagerOverviewEventTypeStats() {
+  return API.get(`${BACKEND_URL}/manager/dashboard/overview/event-type-stats`)
+    .then((response) => {
+      console.log("전체 대시보드 | 이벤트 유형 비율 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("전체 대시보드 | 이벤트 유형 비율 조회 오류:", error);
+      throw error;
+    });
+}
+
+// 2행 — 요일별 예약 패턴
+export function fetchManagerOverviewWeekdayReservations() {
+  return API.get(`${BACKEND_URL}/manager/dashboard/overview/weekday-reservations`)
+    .then((response) => {
+      console.log("전체 대시보드 | 요일별 예약 패턴 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("전체 대시보드 | 요일별 예약 패턴 조회 오류:", error);
+      throw error;
+    });
+}
+
+// 2행 — 예약자 성별 비율
+export function fetchManagerOverviewGenderRatio() {
+  return API.get(`${BACKEND_URL}/manager/dashboard/overview/gender-ratio`)
+    .then((response) => {
+      console.log("전체 대시보드 | 성별 예약자 비율 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("전체 대시보드 | 성별 예약자 비율 조회 오류:", error);
+      throw error;
+    });
+}
+// ==============================
+
+// 팝업별 최근 예약자 5명 조회
+export function fetchPopupRecentReservations(popupNo, limit = 5) {
+  return API.get(
+    `${BACKEND_URL}/manager/mypopup/${popupNo}/reservations/recent`,
+    {
+      params: { limit },
+    }
+  )
+    .then((response) => {
+      console.log("팝업 최근 예약자 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("팝업 최근 예약자 조회 오류:", error);
+      throw error;
+    });
+}
+

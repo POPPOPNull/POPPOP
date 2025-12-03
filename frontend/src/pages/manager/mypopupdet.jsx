@@ -10,9 +10,9 @@ function MyPopupDetPage() {
         <ManagerSidebar />
 
         <div className="manager-main-content">
-          <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>
+          {/* <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>
             나의 팝업스토어 &gt; 상세
-          </h2>
+          </h2> */}
           <MyPopupDet />
         </div>
       </div>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./mypopupdet.css";
 import ManagerSearchBar from "../ManagerSearchBar";
 import { NavLink, useParams } from "react-router-dom";
-import { fetchMyPopupDetail } from "../../../api/ManagerAPI";
+import { fetchMyPopupDetail, fetchPopupRecentReservations } from "../../../api/ManagerAPI";
+
 
 
 
@@ -10,49 +11,72 @@ function MyPopupDet() {
 
   const [popupInfo, setPopupInfo] = useState(null);
 
-  // 예약자 리스트
+  // 예약자 리스트 (최근 5명)
   const [reservations, setReservations] = useState([]);
 
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState("");   
+  const [loading, setLoading] = useState(false);
 
   const { popupNo } = useParams();
 
       useEffect(() => {
-    
-      const loadPopupDetail = async () => {
-        try {
-          const data = await fetchMyPopupDetail(popupNo);
-          
-          setPopupInfo({
-            managerId: data.id,                     // manager_id
-            popupName: data.name,                   // popup_name
-            status: data.approvalStatus,            
-            period: `${data.startDate}–${data.endDate}`,
-            categoryName: data.categoryName, 
-            totalCount: 0,                         
-            todayCount: 0,                          
-            closedDays: "-",                        
-          });
+  if (!popupNo) return;
 
-        } catch (error) {
-          console.error("팝업 상세 조회 실패:", error);
-          alert("팝업 상세 정보를 불러오는 중 오류가 발생했습니다.");
-        }
-      };
+  // 1) 팝업 기본 정보
+  const loadPopupDetail = async () => {
+    try {
+      const data = await fetchMyPopupDetail(popupNo);
 
-      loadPopupDetail();
+      setPopupInfo({
+        managerId: data.id,
+        popupName: data.name,
+        status: data.approvalStatus,
+        period: `${data.startDate}–${data.endDate}`,
+        categoryName: data.categoryName,
+        totalCount: 0,     // 아래에서 실제 값으로 덮어씀
+        todayCount: 0,
+        closedDays: "-",
+      });
+    } catch (error) {
+      console.error("팝업 상세 조회 실패:", error);
+      alert("팝업 상세 정보를 불러오는 중 오류가 발생했습니다.");
+    }
+  };
 
-      setReservations([
-        { id: "user1", name: "이경철", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-        { id: "user1", name: "장동건", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-        { id: "user1", name: "박채린", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-        { id: "user1", name: "조은선", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-        { id: "user1", name: "이건우", phone: "010-0000-0000", birth: "000000", date: "25.10.17" },
-      ]);
-    }, [popupNo]);
+  // 2) 최근 예약자 5명
+  const loadRecentReservations = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchPopupRecentReservations(popupNo, 5);
+      // data: { totalCount, reservations: [...] }
 
+      setReservations(data.reservations || []);
 
+      // 전체 예약자 수 반영
+      setPopupInfo((prev) =>
+        prev ? { ...prev, totalCount: data.totalCount ?? prev.totalCount } : prev
+      );
+    } catch (error) {
+      console.error("최근 예약자 조회 실패:", error);
+      setReservations([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  loadPopupDetail();
+  loadRecentReservations();
+}, [popupNo]);
+
+const filteredReservations = reservations.filter((r) => {
+  if (!keyword) return true;
+  const lower = keyword.toLowerCase();
+  return (
+    r.id.toLowerCase().includes(lower) ||
+    r.name.toLowerCase().includes(lower) ||
+    r.phone.includes(keyword)
+  );
+});
 
   return (
     <div className="mypopupdet-wrapper">
@@ -82,13 +106,12 @@ function MyPopupDet() {
             상세보기
           </NavLink>
           <NavLink
-            end
-            to={`/manager/mypopup/${popupNo}`}
+            to={`/manager/mypopup/${popupNo}/edit`}
             className={({ isActive }) =>
               "mypopupdet-tab-item" + (isActive ? " active" : "")
             }
           >
-            대시보드
+            수정하기
           </NavLink>
 
           <NavLink
@@ -104,10 +127,10 @@ function MyPopupDet() {
 
       <div className="mypopupdet-search-area">
         <ManagerSearchBar
-          value={keyword}
-          onChange={setKeyword}
-          placeholder="예약 내역 검색"
-        />
+        value={keyword}
+        onChange={(value) => setKeyword(value)}
+        placeholder="예약 내역 검색"
+      />
       </div>
     
       {popupInfo && (
@@ -162,37 +185,55 @@ function MyPopupDet() {
 
       {/* 예약자 목록 */}
       <section className="mypopupdet-table-section">
-        <table className="mypopupdet-table">
-          <thead>
-            <tr>
-              <th>아이디</th>
-              <th>이름</th>
-              <th>연락처</th>
-              <th>생년월일</th>
-              <th>예약일자</th>
-            </tr>
-          </thead>
+        {loading ? (
+          <div
+            style={{
+              width: "100%",
+              padding: "40px 0",
+              textAlign: "center",
+              color: "#777",
+            }}
+          >
+            예약 내역을 불러오는 중입니다...
+          </div>
+        ) : filteredReservations.length === 0 ? (
+          <div
+            style={{
+              width: "100%",
+              padding: "40px 0",
+              textAlign: "center",
+              color: "#777",
+            }}
+          >
+            최근 예약 내역이 없습니다.
+          </div>
+        ) : (
+          <>
+            <table className="mypopupdet-table">
+              <thead>
+                <tr>
+                  <th>아이디</th>
+                  <th>이름</th>
+                  <th>연락처</th>
+                  <th>생년월일</th>
+                  <th>예약일자</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {reservations.map((r, idx) => (
-              <tr key={idx}>
-                <td>{r.id}</td>
-                <td>{r.name}</td>
-                <td>{r.phone}</td>
-                <td>{r.birth}</td>
-                <td>{r.date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <div className="mypopupdet-pagination">
-          <button className="mypopupdet-page-btn">1</button>
-          <button className="mypopupdet-page-btn">2</button>
-          <button className="mypopupdet-page-btn">3</button>
-          <button className="mypopupdet-page-btn">4</button>
-          <span className="mypopupdet-page-ellipsis">...</span>
-        </div>
+              <tbody>
+                {filteredReservations.map((r, idx) => (
+                  <tr key={idx}>
+                    <td>{r.id}</td>
+                    <td>{r.name}</td>
+                    <td>{r.phone}</td>
+                    <td>{r.birth}</td>
+                    <td>{r.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
       </section>
     </div>
   );

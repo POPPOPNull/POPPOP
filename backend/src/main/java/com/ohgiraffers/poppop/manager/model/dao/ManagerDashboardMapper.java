@@ -35,5 +35,16 @@ public interface ManagerDashboardMapper {
 
     //1행 사용자 행동 타입
     List<EventTypeStatDTO> selectEventTypeStats(int popupNo);
+
+    // === 매니저 전체 대시보드용 메서드 ===
+
+    List<ReservationTrendDTO> selectManagerReservationTrend(@Param("managerId") String managerId);
+
+    List<WeekdayReservationDTO> selectManagerWeekdayReservations(@Param("managerId") String managerId);
+
+    List<GenderReservationDTO> selectManagerGenderRatio(@Param("managerId") String managerId);
+
+    List<EventTypeStatDTO> selectManagerEventTypeStats(@Param("managerId") String managerId);
+
 }
 

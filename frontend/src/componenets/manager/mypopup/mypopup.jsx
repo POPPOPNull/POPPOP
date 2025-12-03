@@ -155,10 +155,10 @@ function MyPopup() {
                   상세
                 </button>
                 <button
-                  className="mypopup-edit-btn"
-                  onClick={() => navigate(`/manager/mypopup/${row.id}/edit`)}
+                  className="mypopup-dashboard-btn"
+                  onClick={() => navigate(`/manager/mypopup/${row.id}`)}
                 >
-                  수정
+                  대시보드
                 </button>
               </div>
             </div>

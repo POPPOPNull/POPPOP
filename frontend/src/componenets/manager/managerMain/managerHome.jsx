@@ -41,7 +41,7 @@ function ManagerHome() {
               </button>
 
               {/* 팝업스토어 등록 → /manager/popup-register */}
-              <button onClick={() => navigate("/manager/popup-register")}>
+              <button onClick={() => navigate("/manager/popupstore")}>
                 팝업스토어 등록
               </button>
 

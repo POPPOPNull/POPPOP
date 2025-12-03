@@ -180,7 +180,7 @@ function MyPopupReg() {
       <div className="mpr-content-wrap">
         
         <div className="mpr-header">
-          <h2 className="mpr-title">POPUP 등록</h2>
+          {/* <h2 className="mpr-title">POPUP 등록</h2> */}
            
           <button
             className="mpr-submit-btn"
