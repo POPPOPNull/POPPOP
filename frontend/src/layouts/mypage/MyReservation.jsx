@@ -1,5 +1,5 @@
 import "../usermain/main.css";
-import Tab from "../../components/mypage/MyPageTab";
+import Tab from "../../components/mypage/mypagetab";
 import MyResrvDetail from "../../components/mypage/MyResvDetail";
 import Logout from "../../components/Logout";
 import Footer from "../usermain/Footer";

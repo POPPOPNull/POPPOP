@@ -1,4 +1,4 @@
-import "./signupform.css"
+import "./SignUpForm.css"
 import React from 'react';
 import { useForm } from '../hooks/UseForm'; 
 import { useNavigate } from "react-router-dom";

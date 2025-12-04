@@ -1,5 +1,5 @@
 import React from "react";
-import "./AdminModal.css";
+import "./adminModal.css";
 
 function AdminModal({ isOpen, onClose, children }) {
     if(!isOpen) {
