@@ -68,12 +68,7 @@
     - 예약 관리 : 사용자들의 예약을 확인하고, 취소할 수 있습니다.
     - 리뷰 관리 : 사용자 리뷰를 조회하고, 삭제할 수 있습니다.
     - 대시보드 : 등록한 팝업 스토어에 관한 데이터를 요약 조회 합니다.
-    - 
-
-
-
-
-
+    
 |Manager계층|
 |:---:|
 |<img src="https://github.com/user-attachments/assets/c555677e-3a59-425f-a41d-a1ade9da22e0" width="900"/>|
@@ -88,6 +83,10 @@
 |<img src="https://github.com/user-attachments/assets/6d39a222-b283-4c32-91b1-7735e76bcc13" width="900"/>|
 
 ### 주요 기능
+|컴포넌트 위치 조정 및 드래그 앤 드롭으로 관심목록 추가|
+|:---:|
+|![frontend - Chrome 2025-12-04 11-05-19](https://github.com/user-attachments/assets/c542bba0-e6ad-4648-904d-452d36ac3744)|
+
 
 <br />
 
