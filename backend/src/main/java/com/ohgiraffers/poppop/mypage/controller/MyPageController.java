@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class MyPageController {
 
     private final MyPageService myPageService;

@@ -21,6 +21,7 @@ function Footer() {
                     <div className={footer.other}>
                         <div className={footer.icon}>
                             <img src="/icons/mail.png" alt="" style={{width:35}}/>
+
                         </div>
                         문의메일
                     </div>

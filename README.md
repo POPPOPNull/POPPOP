@@ -2,13 +2,14 @@
 <!-- logo -->
 <h1>POPPOP - 팝업스토어 통합 플랫폼</h1>
 
-[홈페이지](https://www.naver.com)  |  [swagger](https://www.naver.com)  |  [notion](https://www.notion.so/ohgiraffers/Project-Null-27d649136c118006889bef26948eaded)
+[홈페이지](http://poppop.shop/popup-stores)  |  [swagger](http://localhost:8080/swagger-ui/index.html#/)  |  [notion](https://www.notion.so/ohgiraffers/Project-Null-27d649136c118006889bef26948eaded) | [wiki](https://github.com/POPPOPNull/POPPOP/wiki)
 
 </div> 
 
 # 추가해야 할 것
 1. 메인이미지
 2. 기능 시연 gif
+3. 스웨거 작성
 
 # 목차
 <div>1. 프로젝트 개요</div>
@@ -50,34 +51,29 @@
 
 ## 📝 화면 구성 및 주요 기능
 
-- 사용자(User)
+### 사용자(User)
     - 팝업 스토어 정보 조회 : 위치, 카테고리, 키워드 기반으로 팝업 스토어 정보를 조회하고 검색합니다.
     - 온라인 예약 : 원하는 날짜와 시간을 선택하여 방문 예약을 진행합니다.
     - 리뷰 : 방문했던 팝업 스토어에 대한 후기를 작성하고 다른 사람들의 리뷰를 조회합니다.
     - 관심 목록 : 마음에 드는 팝업 스토어를 관심 목록에 추가하여 개인화된 목록을 관리합니다.
       
-<!-- <video src="https://github.com/user-attachments/assets/7f2157fc-2564-4f12-9631-0e8e7ad725b8" width="900"/> -->
+
  
 |User계층|
 |:---:|
 |<img width="1920" height="918" alt="image" src="https://github.com/user-attachments/assets/19f3f1cd-c993-4563-9f0b-771af4d2cfe7" width="900"/>|
 
-- 가맹점(Manager)
+### 가맹점(Manager)
     - 팝업 스토어 등록/관리 : 팝업 스토어 정보를 직접 등록하고, 게시를 종료 할 수 있습니다.
     - 예약 관리 : 사용자들의 예약을 확인하고, 취소할 수 있습니다.
     - 리뷰 관리 : 사용자 리뷰를 조회하고, 삭제할 수 있습니다.
     - 대시보드 : 등록한 팝업 스토어에 관한 데이터를 요약 조회 합니다.
-    - 
-
-
-
-
-
+    
 |Manager계층|
 |:---:|
 |<img src="https://github.com/user-attachments/assets/c555677e-3a59-425f-a41d-a1ade9da22e0" width="900"/>|
 
-- 관리자(Admin)
+### 관리자(Admin)
     - 통합 관리 : 모든 사용자(User)와 가맹점(Manager) 계정 정보를 조회하고 관리합니다.
     - 콘텐츠 관리 : 플랫폼에 등록 요청된 모든 팝업 스토어의 상태(승인/반려)를 관리합니다.
     - 대시보드 : 모든 사용자와 가맹점에 관한 데이터를 요약 조회 합니다.
@@ -87,6 +83,10 @@
 |<img src="https://github.com/user-attachments/assets/6d39a222-b283-4c32-91b1-7735e76bcc13" width="900"/>|
 
 ### 주요 기능
+|컴포넌트 위치 조정 및 드래그 앤 드롭으로 관심목록 추가|
+|:---:|
+|![frontend - Chrome 2025-12-04 11-05-19](https://github.com/user-attachments/assets/c542bba0-e6ad-4648-904d-452d36ac3744)|
+
 
 <br />
 
@@ -130,7 +130,7 @@
 
 
 ## 💁‍♂️ 프로젝트 팀원
-|Backend|Frontend|Frontend|Frontend|Frontend|
+|PM,admin 대시보드|DB,manager 대시보드|user 메인페이지,UI/UX|테스터|user 사용자페이지,JWT|
 |:---:|:---:|:---:|:---:|:---:|
 | ![](https://github.com/dgun1308.png?size=20) | ![](https://github.com/pcl9556.png?size=420) |![](https://github.com/dlrjsdn4433.png?size=420) |![](https://github.com/Lee-KyungChul.png?size=120) |![](https://github.com/eunseon12.png?size=120) |
 |[장동건](https://github.com/dgun1308)|[박채린](https://github.com/pcl9556)|[이건우](https://github.com/dlrjsdn4433)|[이경철](https://github.com/Lee-KyungChul)|[조은선](https://github.com/eunseon12)|

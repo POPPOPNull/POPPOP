@@ -23,84 +23,83 @@ import java.util.Locale;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
+        private final JwtTokenProvider jwtTokenProvider;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                   UserDetailsService userDetailsService) throws Exception {
+        @Autowired
+        public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
+                this.jwtTokenProvider = jwtTokenProvider;
+        }
 
-        http
-                // 기본 인증/폼 로그인/CSRF 비활성화 (JWT 방식)
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable)
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                        UserDetailsService userDetailsService) throws Exception {
 
-                // 세션 사용 X
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                http
+                                // 기본 인증/폼 로그인/CSRF 비활성화 (JWT 방식)
+                                .httpBasic(AbstractHttpConfigurer::disable)
+                                .csrf(AbstractHttpConfigurer::disable)
+                                .formLogin(AbstractHttpConfigurer::disable)
 
-                .authorizeHttpRequests(auth -> auth
-                        // 1. 문제가 되는 toss-success 경로를 가장 먼저, 단독으로 permitAll() 처리
-                        .requestMatchers("/reservations/toss-success").permitAll()
+                                // 세션 사용 X
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                        // 2. 나머지 permitAll 경로들
-                        .requestMatchers(
-                                "/auth/login",
-                                "/auth/admin/login",
-                                "/auth/user/join",
-                                "/auth/manager/join",
-                                "/auth/refresh",
-                                "/auth/idcheck",
-                                "/", "/index.html",
-                                "/css/**", "/js/**", "/images/**",
-                                "/maps",
-                                "/popup-stores/search",
-                                "/popup-stores/**",
-                                "/behavior/**",
-                                "/api/chatbot/**",
-                                "/favorite/**",
-                                "/review/*",
-                                "/api/**"
+                                .authorizeHttpRequests(auth -> auth
+                                                // 1. 문제가 되는 toss-success 경로를 가장 먼저, 단독으로 permitAll() 처리
+                                                .requestMatchers("/reservations/toss-success").permitAll()
 
+                                                // 2. 나머지 permitAll 경로들
+                                                .requestMatchers(
+                                                                "/auth/login",
+                                                                "/auth/admin/login",
+                                                                "/auth/user/join",
+                                                                "/auth/manager/join",
+                                                                "/auth/refresh",
+                                                                "/auth/idcheck",
+                                                                "/", "/index.html",
+                                                                "/css/**", "/js/**", "/images/**",
+                                                                "/maps",
+                                                                "/popup-stores/search",
+                                                                "/popup-stores/**",
+                                                                "/behavior/**",
+                                                                "/api/chatbot/**",
+                                                                "/favorite/**",
+                                                                "/v3/api-docs/**",
+                                                                "/review/*",
+                                                                "/api/**",
+                                                                "/swagger-ui/**",
+                                                                "/swagger-ui.html")
+                                                .permitAll()
 
+                                                .requestMatchers("/manager/mypopup").permitAll()
 
-                        ).permitAll()
+                                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                                .requestMatchers("/manager/**").hasRole("MANAGER")
+                                                .requestMatchers("/user/**","/review/insert/*").hasRole("USER")
 
-                        .requestMatchers("/manager/mypopup").permitAll()
+                                                // 나머지는 전부 인증 필요
+                                                .anyRequest().authenticated())
+                                // .authorizeHttpRequests(auth -> auth
+                                // .anyRequest().permitAll()
+                                // )
+                                .cors(cors -> {
+                                });
 
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/manager/**").hasRole("MANAGER")
-                        .requestMatchers("/user/**","/review/insert/*").hasRole("USER")
+                http.addFilterBefore(
+                                new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),
+                                UsernamePasswordAuthenticationFilter.class);
 
-                        // 나머지는 전부 인증 필요
-                        .anyRequest().authenticated()
-                )
-//                .authorizeHttpRequests(auth -> auth
-//                        .anyRequest().permitAll()
-//                )
-                .cors(cors -> {});
+                return http.build();
+        }
 
-        http.addFilterBefore(
-                new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),
-                UsernamePasswordAuthenticationFilter.class
-        );
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-        return http.build();
-    }
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+                return configuration.getAuthenticationManager();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-}

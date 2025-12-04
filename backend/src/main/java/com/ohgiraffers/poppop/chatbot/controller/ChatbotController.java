@@ -5,6 +5,8 @@ import com.ohgiraffers.poppop.chatbot.model.dto.ChatbotResponseDTO;
 import com.ohgiraffers.poppop.chatbot.model.service.ChatbotService;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import com.ohgiraffers.poppop.popupstore.model.service.PopupStoreService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Tag(name = "Spring Boot Swagger 연동 (user)")
 @RestController
 @RequestMapping("/api/chatbot")
 public class ChatbotController {
@@ -28,6 +30,7 @@ public class ChatbotController {
     /**
      * 챗봇 메시지 처리
      */
+    @Operation(summary = "챗봇 메시지 처리",description = "챗봇 메시지를 처리한다")
     @PostMapping("/message")
     public ResponseEntity<ChatbotResponseDTO> sendMessage(
             @RequestBody ChatbotRequestDTO request,
