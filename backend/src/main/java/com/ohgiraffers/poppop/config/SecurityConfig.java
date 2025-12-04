@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Locale;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -63,7 +65,9 @@ public class SecurityConfig {
                                 "/behavior/**",
                                 "/api/chatbot/**",
                                 "/favorite/**",
+                                "/review/*",
                                 "/api/**"
+
 
 
                         ).permitAll()
@@ -72,7 +76,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
-                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/user/**","/review/insert/*").hasRole("USER")
 
                         // 나머지는 전부 인증 필요
                         .anyRequest().authenticated()
