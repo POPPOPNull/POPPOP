@@ -15,7 +15,7 @@ function NoSearchResult({props}){
             <div className={TPStyle.nosearchresult}>
                 
                 <div>
-                    <div><img src="/public/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
+                    <div><img src="/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
                     검색어 "{props}" 에 해당하는 팝업스토어가 존재하지 않습니다.
                 </div>
             </div>

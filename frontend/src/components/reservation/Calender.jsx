@@ -160,8 +160,8 @@ function Calendar() {
         orderId: paymentInfo.orderId,
         orderName: paymentInfo.orderName,
         customerName: "고객님", // 실제로는 로그인된 사용자 이름으로
-        successUrl: 'http://localhost:8080/reservations/toss-success',
-        failUrl: 'http://localhost:5173/payment-result?success=false',
+        successUrl: 'http://poppop.shop:8080/reservations/toss-success',
+        failUrl: 'http://poppop.shop:5173/payment-result?success=false',
       }).catch(error => {
         if (error.code === 'USER_CANCEL') {
           alert('결제를 취소했습니다.');
