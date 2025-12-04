@@ -226,4 +226,11 @@
          WHERE order_id = #{orderId}
     </update>
 
+    <select id="findPopupNoByOrderId" parameterType="string" resultType="int">
+        select popup_no
+          from reservation
+         where order_id = #{orderId}
+    </select>
+
+
 </mapper>

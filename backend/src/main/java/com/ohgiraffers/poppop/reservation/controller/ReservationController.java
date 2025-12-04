@@ -68,13 +68,17 @@ public class ReservationController {
     public ResponseEntity<?> handleTossSuccess(
             @RequestParam String paymentKey,
             @RequestParam String orderId,
-            @RequestParam Integer amount
+            @RequestParam Integer amount,
+            HttpServletRequest request
     ) {
         String successUrl = "http://localhost:5173/payment-result?success=true";
         String failUrl = "http://localhost:5173/payment-result?success=false";
 
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
+
         try {
-            boolean isSuccess = reservationService.confirmTossPayment(paymentKey, orderId, amount);
+            boolean isSuccess = reservationService.confirmTossPayment(paymentKey, orderId, amount, sessionId);
             if(isSuccess) {
                 return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(successUrl)).build();
             } else {

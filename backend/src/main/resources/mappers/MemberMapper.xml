@@ -65,6 +65,7 @@
                name,
                email,
                phone,
+               password,
                birth_date AS birthDate
           from member
          where id = #{id}
@@ -80,6 +81,12 @@
     <update id="updatePhone">
         update member
            set phone = #{phone}
+         where id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update member
+           set password = #{password}
          where id = #{id}
     </update>
 

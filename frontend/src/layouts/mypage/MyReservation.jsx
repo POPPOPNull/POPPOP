@@ -9,9 +9,10 @@ function MyReservation (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    {/* <Logout/> */}
                     <Tab/>
-                    <MyResrvDetail/>
+                    <div className="mypage-content">
+                        <MyResrvDetail/>
+                    </div>
                     <Footer/>
                 </div>
             </div>

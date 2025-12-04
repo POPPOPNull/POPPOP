@@ -30,7 +30,13 @@
     margin-top: 50px;
     border-radius: 5px;
 }
-.managerLink {
+.bizText, .managerLink {
     text-decoration: none;
+    font-size: 14px;
+}
+.bizText {
+    color: #f4002d;
+}
+.signupText {
     color: white;
 }

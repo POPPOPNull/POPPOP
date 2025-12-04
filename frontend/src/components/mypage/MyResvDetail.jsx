@@ -90,24 +90,28 @@ function ResvDetail() {
                 <table>
                     <thead>
                         <tr>
-                            <th style={{width:"40%"}}>팝업명</th>
-                            <th style={{width:"40%"}}>예약 정보</th>
-                            <th style={{width:"20%"}}>상태</th>
+                            <th style={{width:"15%"}}>예약날짜</th>
+                            <th style={{width:"35%"}}>팝업명</th>
+                            <th style={{width:"34%"}}>예약 정보</th>
+                            <th style={{width:"16%"}}>상태</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredReservations.length === 0 && (
                             <tr>
-                                <td colSpan={3} style={{ textAlign: "center", padding: "20px" }}>
+                                <td colSpan={4} className="empty-message">
                                     예약 내역이 없습니다.
                                 </td>
                             </tr>
                         )}
                         {filteredReservations.map((resv) => (
                             <tr key={resv.reservationNo}>
+                                <td>
+                                    <p style={{marginLeft:"20px"}}>2025.12.05</p>
+                                </td>
                                 <td className="popup-info">
                                     <div className="poster">
-                                        <Link to={`/user/${resv.popupNo}`}>
+                                        <Link to={`/popup-stores/${resv.popupNo}`}>
                                             <img
                                                 src={getPosterUrl(resv.popupNo)}
                                                 alt={resv.popupName}

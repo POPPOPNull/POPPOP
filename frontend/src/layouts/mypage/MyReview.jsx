@@ -9,9 +9,10 @@ function MyReview (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    {/* <Logout/> */}
                     <Tab/>
-                    <Review/>
+                    <div className="mypage-content">
+                        <Review/>
+                    </div>
                     <Footer/>
                 </div>
             </div>

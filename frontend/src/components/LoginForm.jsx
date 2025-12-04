@@ -88,9 +88,13 @@ function LoginComponent() {
                         <Link to="/user/signup" className="loginhelp"> 회원가입</Link>
                     </div>
                     <div className="managerJoin">
-                        <Link to="/manager" className="managerLink">Biz 메인 </Link>
-                        <span>|</span>
-                        <Link to="/manager/signup" className="managerLink"> Biz 회원가입</Link>
+                        <Link to="/manager" className="bizText">POPPOP BIZ </Link>
+                        <span style={{color:"#FFDAB9"}}> | </span>
+                        <Link to="/manager/signup" className="managerLink">
+                            <span className="bizText"> POPPOP BIZ</span>
+                            &nbsp;
+                            <span className="signupText">회원가입</span>
+                        </Link>
                     </div>
                     <br/>
                     <button className="btnlogin" type="submit">로그인</button>
