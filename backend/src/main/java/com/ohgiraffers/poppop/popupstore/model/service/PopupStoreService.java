@@ -120,6 +120,11 @@ public class PopupStoreService {
         }
     }
 
+    // Admin 팝업 스토어 전체 조회
+    public List<PopupStoreDTO> selectAllPopupStoreAdmin() {
+        return popupStoreMapper.selectAllPopupStoreAdmin();
+    }
+
 }
 
 

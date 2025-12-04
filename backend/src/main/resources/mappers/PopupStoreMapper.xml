@@ -549,5 +549,35 @@
         AND id = #{id} <!--매니저 본인 팝업만 수정 가능-->
     </update>
 
+    <select id="selectAllPopupStoreAdmin" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+
+        latitude,
+        longitude,
+
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name,
+        advance_reservation,
+        homepage_link,
+        capacity,
+        hashtag_name
+
+        from popup_store
+        order by approval_status
+    </select>
+
 
 </mapper>

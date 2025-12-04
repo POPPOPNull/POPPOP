@@ -82,8 +82,8 @@ public class AdminController {
 
     // 전체 팝업 스토어 조회
     @GetMapping("/manager-popup")
-    public ResponseEntity<List<PopupStoreDTO>> selectAllPopupStore() {
-        return ResponseEntity.ok(popupStoreService.selectAllPopupStore());
+    public ResponseEntity<List<PopupStoreDTO>> selectAllPopupStoreAdmin() {
+        return ResponseEntity.ok(popupStoreService.selectAllPopupStoreAdmin());
     }
 
     // 팝업 스토어 상세 조회
