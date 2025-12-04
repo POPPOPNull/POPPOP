@@ -1,5 +1,5 @@
 import "../usermain/main.css";
-import "./reservation.css";
+import "./Reservation.css";
 import Calendar from "../../components/reservation/Calender";
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";

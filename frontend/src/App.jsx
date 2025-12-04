@@ -26,7 +26,7 @@ import InsertReview from "./pages/user/InsertReview";
 import AdminLayout from "./pages/admin/adminLayout";
 import AdminMain from "./layouts/adminmain/admin-main";
 import UserSearch from "./pages/user/UserSearch";
-import AdminManagerMemberList from "./components/admin/AdminManagerMemberList.jsx";
+import AdminManagerMemberList from "./components/admin/adminManagerMemberList.jsx";
 import AdminManagerPopupList from "./components/admin/adminManagerPopupList";
 import AdminManagerReservationList from "./components/admin/adminManagerReservationList";
 import AdminManagerReservationDetails from "./components/admin/adminManagerReservationDetails";

@@ -24,7 +24,7 @@ function Popups(){
 
     const {popupNo} = useParams();
 
-    const popupURL = `/public/poster/poster_${popupNo}.png`
+    const popupURL = `/poster/poster_${popupNo}.png`
     console.log("popupUrl:",popupURL)
 
     const [popup, setPopup] = useState({});

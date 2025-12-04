@@ -14,7 +14,7 @@ import Footer from "../usermain/Footer";
 function ReviewInsert(){
 
        const {popupNo} = useParams();
-       const popupURL = `/public/poster/poster_${popupNo}.png`
+       const popupURL = `/poster/poster_${popupNo}.png`
    
        const [popup, setPopup] = useState({});
    

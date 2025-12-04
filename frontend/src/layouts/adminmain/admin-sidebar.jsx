@@ -1,31 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Admin-sidebar.css";
+import "./admin-sidebar.css";
 import Logout from "../../components/Logout";
 import AdminLogout from "../../components/AdminLogout";
 
 const poppopMenus = [
-    { name: "메인", icon: "/public/icons/home.png", subMenus: [
+    { name: "메인", icon: "/icons/home.png", subMenus: [
         {name : "대시보드(사용자)", path: "/admin"},
         {name : "대시보드(가맹점)", path: "/admin/manager-main"}
         ]
     },
 
-    { name: "회원목록", icon: "/public/icons/member-list.png", subMenus: [
+    { name: "회원목록", icon: "/icons/member-list.png", subMenus: [
         {name: "사용자 회원 목록", path: "/admin/members"},
         {name: "가맹점 회원 목록", path: "/admin/manager-members"}
         ]
     },
 
-    { name: "리뷰내역", icon: "/public/icons/feedback-review.png", subMenus: [{name: "리뷰 전체 조회", path: "/admin/reviews"}]},
+    { name: "리뷰내역", icon: "/icons/feedback-review.png", subMenus: [{name: "리뷰 전체 조회", path: "/admin/reviews"}]},
 
-    { name: "예약내역", icon: "/public/icons/calendar-check.png", subMenus: [
+    { name: "예약내역", icon: "/icons/calendar-check.png", subMenus: [
         {name: "사용자 예약 내역", path: "/admin/reservation"},
         {name: "가맹점 예약 내역", path: "/admin/manager-reservation"}
         ]
     },
 
-    { name: "팝업목록", icon: "/public/icons/shop.png", subMenus: [{name: "팝업 스토어 목록", path: "/admin/manager-popup"}]},
+    { name: "팝업목록", icon: "/icons/shop.png", subMenus: [{name: "팝업 스토어 목록", path: "/admin/manager-popup"}]},
 ];
 
 function AdminSidebar(){
@@ -49,7 +49,7 @@ function AdminSidebar(){
                         <img src={menu.icon} alt={menu.name} className="side-icon"/>
                         {menu.name}
                         <img
-                            src="/public/icons/angle-small-right.png"
+                            src="/icons/angle-small-right.png"
                             className="arrow-icon"
                             alt="arrow"
                         />

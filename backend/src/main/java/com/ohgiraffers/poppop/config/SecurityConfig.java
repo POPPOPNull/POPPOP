@@ -65,7 +65,9 @@ public class SecurityConfig {
                                 "/behavior/**",
                                 "/api/chatbot/**",
                                 "/favorite/**",
-                                "/review/*"
+                                "/review/*",
+                                "/api/**"
+
 
 
                         ).permitAll()
