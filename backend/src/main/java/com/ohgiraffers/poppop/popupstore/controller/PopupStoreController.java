@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.*;
 
-@Controller
+@RestController
+@RequestMapping("/popup-stores")
 public class PopupStoreController {
 
     private final PopupStoreService popupStoreService;
@@ -25,32 +26,32 @@ public class PopupStoreController {
 
 
     // 팝업스토어 전체조회 (하단)
-    @GetMapping("/popup-stores/lower")
+    @GetMapping("/lower")
     public ResponseEntity<List<PopupStoreDTO>> selectAllPopupStore(){
         return ResponseEntity
                 .ok(new ArrayList<>(popupStoreService.selectAllPopupStore()));
     }
 
-    // 사용자 선호도 기반 팝업스토어 조회 (상단)
-    @GetMapping("/users/{id}/popup-store/upper")
-    public ResponseEntity<?> selectPopupStoreByUserPreferenceAndPagePlacement(@PathVariable String id){
-
-        return ResponseEntity
-                .created(URI.create(""))
-                .build();
-    }
-
-    // 사용자 선호도 기반 팝업스토어 조회 (하단)
-    @GetMapping("/users/{id}/popup-store/lower")
-    public ResponseEntity<?> selectAllPopupStoreByUserPreference(@PathVariable String id){
-
-        return ResponseEntity
-                .created(URI.create(""))
-                .build();
-    }
+//    // 사용자 선호도 기반 팝업스토어 조회 (상단)
+//    @GetMapping("/users/{id}/popup-store/upper")
+//    public ResponseEntity<?> selectPopupStoreByUserPreferenceAndPagePlacement(@PathVariable String id){
+//
+//        return ResponseEntity
+//                .created(URI.create(""))
+//                .build();
+//    }
+//
+//    // 사용자 선호도 기반 팝업스토어 조회 (하단)
+//    @GetMapping("/users/{id}/popup-store/lower")
+//    public ResponseEntity<?> selectAllPopupStoreByUserPreference(@PathVariable String id){
+//
+//        return ResponseEntity
+//                .created(URI.create(""))
+//                .build();
+//    }
 
     // 팝업스토어 검색조회
-    @GetMapping("/popup-stores/search")
+    @GetMapping("/search")
     public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreBySearchKeyword(@RequestParam String searchWord){
         System.out.println("searchWord = " + searchWord);
         System.out.println(popupStoreService.selectPopupStoreByKeyword(searchWord));
@@ -60,14 +61,14 @@ public class PopupStoreController {
     }
 
     // 팝업스토어 상세조회
-    @GetMapping("/popup-stores/{popupNo}")
+    @GetMapping("/{popupNo}")
     public ResponseEntity<PopupStoreDTO> selectPopupStoreDetails(@PathVariable("popupNo") int popupNo){
 
         return ResponseEntity
                 .ok(popupStoreService.selectPopupStoreDetails(popupNo));
     }
     // 오늘 및 검색어 기준  팝업스토어 조회
-    @GetMapping("/popup-stores")
+    @GetMapping("")
     public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreToday(
             @RequestParam String startDate,
             @RequestParam String endDate,
@@ -88,7 +89,7 @@ public class PopupStoreController {
 
     // 찜목록 조회
 
-    @GetMapping("/popup-stores/favorite")
+    @GetMapping("/favorite")
     public ResponseEntity<List<PopupStoreDTO>> selectFavoritePopupStoreById(@AuthenticationPrincipal UserDetails userDetails){
 
         if (userDetails == null) {
@@ -104,7 +105,7 @@ public class PopupStoreController {
 
 
     // 팝업스토어 랜덤조회
-    @GetMapping("popup-stores/random/{random}")
+    @GetMapping("/random/{random}")
     public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreRandomly(@PathVariable ArrayList<Integer> random){
 //        List<PopupStoreDTO> list = new ArrayList<>(popupStoreService.selectAllPopupStore());
 //
@@ -128,7 +129,7 @@ public class PopupStoreController {
 //    }
 
     // 팝업스토어 카테고리 집계
-    @GetMapping("/popup-stores/category")
+    @GetMapping("/category")
     public ResponseEntity<List<String>> selectAllCategory(){
 
         List<String> categoryList = popupStoreService.selectAllCategory();
@@ -138,7 +139,7 @@ public class PopupStoreController {
     }
 
     // 카테고리별 팝업스토어 조회
-    @GetMapping("/popup-stores/category/{category}")
+    @GetMapping("/category/{category}")
     public ResponseEntity<List<PopupStoreDTO>> selectPopupStoreByCategory(@PathVariable(required = false) String category){
 
         List<PopupStoreDTO> popupList = popupStoreService.selectPopupStoreByCategory(category);
@@ -163,7 +164,7 @@ public class PopupStoreController {
     }
 
     // 날짜별 팝업스토어 조회
-    @GetMapping("popup-stores/date/{date}")
+    @GetMapping("/date/{date}")
     public ResponseEntity<List<PopupStoreDTO>> selectPopupByDate(@PathVariable String date){
         System.out.println(date);
         return ResponseEntity.ok(popupStoreService.selectPopupByDate(date));
