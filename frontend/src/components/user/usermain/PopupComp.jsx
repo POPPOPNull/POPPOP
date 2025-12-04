@@ -9,7 +9,7 @@ import { logDataByPopupDetail } from "../../../api/BehaviorAPI"
 
 function PopupComp({popupstore,posterNo}){
 
-    const posterUrl = `/public/poster/poster_${posterNo}.png`
+    const posterUrl = `/poster/poster_${posterNo}.png`
 
     const [{isDragging},drag,preview] = useDrag({
             type:'popup',

@@ -17,9 +17,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Locale;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
 
         private final JwtTokenProvider jwtTokenProvider;
 
@@ -63,6 +66,8 @@ public class SecurityConfig {
                                                                 "/api/chatbot/**",
                                                                 "/favorite/**",
                                                                 "/v3/api-docs/**",
+                                                                "/review/*",
+                                                                "/api/**",
                                                                 "/swagger-ui/**",
                                                                 "/swagger-ui.html")
                                                 .permitAll()
@@ -71,7 +76,7 @@ public class SecurityConfig {
 
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                                 .requestMatchers("/manager/**").hasRole("MANAGER")
-                                                .requestMatchers("/user/**").hasRole("USER")
+                                                .requestMatchers("/user/**","/review/insert/*").hasRole("USER")
 
                                                 // 나머지는 전부 인증 필요
                                                 .anyRequest().authenticated())
@@ -97,4 +102,4 @@ public class SecurityConfig {
         public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
                 return configuration.getAuthenticationManager();
         }
-}
+

@@ -15,7 +15,7 @@ function NoSearchResult({props}){
             <div className={TPStyle.nosearchresult}>
                 
                 <div>
-                    <div><img src="/public/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
+                    <div><img src="/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
                     검색어 "{props}" 에 해당하는 팝업스토어가 존재하지 않습니다.
                 </div>
             </div>
@@ -34,12 +34,19 @@ function SearchBar(){
     
     const[isFavorite,setIsFavorte]=useState(false)
     const[Narray,setNArray] = useState([])
+    const [style,setStyle] = useState({
+            display:"none"
+        })
 
     const onClickOpen = () =>{
-        setIsVisible(true)
+        setStyle({
+            display:"flex"
+        })
     }
     const onClickClose = () =>{
-        setIsVisible(false)
+        setStyle({
+            display:"none"
+        })
     }
 
     const onChangeKeyword = (e)=>{
@@ -70,7 +77,9 @@ function SearchBar(){
             setPopups(data)
         })
         
-        setIsVisible(false)
+        setStyle({
+            display:"none"
+        })
         
     
     }
@@ -84,7 +93,9 @@ function SearchBar(){
             setPopups(data)
         })
         
-        setIsVisible(false)
+        setStyle({
+            display:"none"
+        })
         }
 
         
@@ -109,7 +120,7 @@ function SearchBar(){
         },[])
 
     
-
+        
     
 
 
@@ -119,8 +130,8 @@ function SearchBar(){
                 <div className={USStyle.searchbar} onClick={onClickOpen}>{searchWord}</div>
             </div>
 
-            {isVisible&&
-            <div>
+            
+            <div style={style}>
                 <div className={USStyle.searchbg}></div>
                 <div className={USStyle.searchbox}>
                     <div className={USStyle.searchlayout}>
@@ -131,11 +142,11 @@ function SearchBar(){
                         autoFocus={true}
                         value={searchWord}
                         />                    
-                        <button className={USStyle.searchbutton} onClick={onCLickSearch}>검색</button>
-                        <button className={USStyle.searchbutton} onClick={onClickClose}>닫기</button>
+                        <button className={USStyle.searchbutton} onClick={onCLickSearch}>{(searchWord=="")?"닫기":"검색"}</button>
+                        {/* <button className={USStyle.searchbutton} onClick={onClickClose}>닫기</button> */}
                     </div>
                 </div>
-            </div>}
+            </div>
             <Blank/>
 
 

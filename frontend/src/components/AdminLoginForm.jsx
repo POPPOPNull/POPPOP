@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./loginform.css"
+import "./LoginForm.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../hooks/UseAuth';
 import JwtAPI from '../api/JwtAPI';

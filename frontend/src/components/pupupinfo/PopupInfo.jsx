@@ -69,10 +69,10 @@ function PopupInfo(){
                 </div>
 
             <div className={PPStyle.lowerbuttonlayout}>
-                <div className={PPStyle.lowerbutton}>브랜드 홈페이지 링크</div>
-                <div className={PPStyle.lowerbutton}>SNS 링크</div>
+                {/* <div className={PPStyle.lowerbutton}>브랜드 홈페이지 링크</div>
+                <div className={PPStyle.lowerbutton}>SNS 링크</div> */}
                 <Link to={`/reservations/${popup.no}`} style={{textDecoration:"none",color:"inherit"}}>
-                    <div className={PPStyle.lowerbutton}>예약</div>
+                    <div className={PPStyle.lowerbutton}><div className={PPStyle.reservation}>예약</div></div>
                 </Link>
             </div>
 

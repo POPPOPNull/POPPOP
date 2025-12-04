@@ -24,7 +24,7 @@ function Popups(){
 
     const {popupNo} = useParams();
 
-    const popupURL = `/public/poster/poster_${popupNo}.png`
+    const popupURL = `/poster/poster_${popupNo}.png`
     console.log("popupUrl:",popupURL)
 
     const [popup, setPopup] = useState({});
@@ -82,9 +82,13 @@ function Popups(){
                     <PopupInfo/>
                     <div className={PPStyle.reviewbtns}>
                         <div className={PPStyle.reviewtitle}>후기</div>
-                        <Link to={`/popup-stores/${popupNo}/review`} style={{textDecoration:"none",color:"inherit"}}><div>후기작성하기</div></Link>
-                     </div>
+                    </div>
                     <ReviewView/>
+                    <Link to={`/popup-stores/${popupNo}/review`} style={{textDecoration:"none",color:"inherit"}}>
+                        <div className={PPStyle.reviewbtnlayout}>
+                            <div className={PPStyle.reviewbtn}>후기 남기기</div>
+                        </div>
+                    </Link>
                     <div style={{height:20}}></div>
                     <MidComp1/>
                     <div style={{height:20}}></div>
