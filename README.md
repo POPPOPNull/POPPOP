@@ -2,7 +2,7 @@
 <!-- logo -->
 <h1>POPPOP - 팝업스토어 통합 플랫폼</h1>
 
-[홈페이지](https://www.naver.com)  |  [swagger](https://www.naver.com)  |  [notion](https://www.notion.so/ohgiraffers/Project-Null-27d649136c118006889bef26948eaded) | [wiki](https://github.com/POPPOPNull/POPPOP/wiki)
+[홈페이지](https://www.naver.com)  |  [swagger](http://localhost:8080/swagger-ui/index.html#/)  |  [notion](https://www.notion.so/ohgiraffers/Project-Null-27d649136c118006889bef26948eaded) | [wiki](https://github.com/POPPOPNull/POPPOP/wiki)
 
 </div> 
 
