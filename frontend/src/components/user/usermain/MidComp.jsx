@@ -39,9 +39,13 @@ export function MidComp1(){
         <>
         <div className={MCStyle.back}>
             <div className={MCStyle.explain}>담당자 픽 인기 팝업 <span style={{color:"red"}}>{month}월</span>
-            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className={MCStyle.midmore}>더보기</div>
+            
+            <div className={MCStyle.midmoreback}>
+            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }} >
+                <div className={MCStyle.midmore}>더보기</div>
             </Link>
+            </div>
+            
             </div>
             <div>
                 <Swiper
@@ -85,9 +89,13 @@ export function MidComp2(){
         <>
         <div className={MCStyle.back}>
             <div className={MCStyle.explain}>놓치면 손해 곧 오픈 예정! <span style={{color:"red"}}>{month}월</span>
-            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className={MCStyle.midmore}>더보기</div>
+            
+            <div className={MCStyle.midmoreback}>
+            <Link to={"/popup-stores/search"} style={{ textDecoration: 'none', color: 'inherit' }} >
+                <div className={MCStyle.midmore}>더보기</div>
             </Link>
+            </div>
+
             </div>
             <div>
                 <Swiper
