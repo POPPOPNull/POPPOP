@@ -6,9 +6,12 @@ import com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -31,7 +34,7 @@ public class ReservationService {
 
     private static final int max_count = 100;
     private static final int TICKET_PRICE = 1000; // 티켓 가격 (임시)
-
+    private static final Logger log = LoggerFactory.getLogger(ReservationService.class);
 
     public ReservationService(ReservationMapper reservationMapper, BehaviorMapper behaviorMapper, WebClient.Builder webClientBuilder) {
         this.reservationMapper = reservationMapper;
@@ -223,4 +226,24 @@ public class ReservationService {
         int result = max_count - reserved;
         return Math.max(result, 0);
     }
+
+    @Transactional
+    public void deletePendingReservation(String orderId) {
+        reservationMapper.deletePendingReservationByOrderId(orderId);
+    }
+
+    @Scheduled(fixedRate = 3600000)
+    @Transactional
+    public void cleanupPendingReservations() {
+        LocalDateTime cutoffTime = LocalDateTime.now().minusHours(1);
+        log.info("오래된 '결제대기' 예약 정리를 시작합니다. 기준 시간 : " + cutoffTime);
+        int deletedCount = reservationMapper.deleteOldPendingReservation(cutoffTime);
+        if (deletedCount > 0) {
+            log.info(deletedCount + "개의 오래된 '결제대기' 예약을 삭제했습니다.");
+        } else {
+            log.info("삭제할 오래된 '결제대기' 예약이 없습니다.");
+        }
+    }
+
+
 }

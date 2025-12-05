@@ -11,7 +11,7 @@
 }
 
 .page-item.disabled .page-link {
-    color: #6c757d;
+    color: #f4002d;
     pointer-events: none;
     cursor: auto;
     background-color: #fff;
@@ -21,8 +21,8 @@
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #f4002d;
+    border-color: #f4002d;
 }
 
 .page-link {
@@ -30,7 +30,7 @@
     display: block;
     padding: 0.5rem 0.75rem;
     line-height: 1.25;
-    color: #007bff;
+    color: #f4002d;
     background-color: #fff;
     border: 1px solid #dee2e6;
     cursor: pointer;
@@ -39,8 +39,8 @@
 
 .page-link:hover {
     z-index: 2;
-    color: #0056b3;
+    color: #fff;
     text-decoration: none;
-    background-color: #e9ecef;
-    border-color: #dee2e6;
+    background-color: #eba9cf;
+    border-color: #eba9cf;
 }

@@ -110,4 +110,10 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/pending/{orderId}")
+    public ResponseEntity<Void> cancelPendingReservation(@PathVariable String orderId) {
+        reservationService.deletePendingReservation(orderId);
+        return ResponseEntity.ok().build();
+    }
 }

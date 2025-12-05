@@ -162,9 +162,15 @@ function Calendar() {
         customerName: "고객님", // 실제로는 로그인된 사용자 이름으로
         successUrl: 'http://localhost:8080/reservations/toss-success',
         failUrl: 'http://localhost:5173/payment-result?success=false',
-      }).catch(error => {
+      }).catch(async error => {
         if (error.code === 'USER_CANCEL') {
           alert('결제를 취소했습니다.');
+          try {
+            await JwtAPI.delete(`/reservations/pending/${paymentInfo.orderId}`);
+            console.log("결제 취소로 인해 '결제대기' 예약이 성공적으로 삭제되었습니다.");
+          } catch (deleteErr) {
+            console.error("'결제대기' 예약 삭제 중 오류 발생 : ", deleteErr);
+          }
         } else {
           alert(`결제 중 오류 발생: ${error.message}`);
         }
