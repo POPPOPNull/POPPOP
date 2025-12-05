@@ -20,6 +20,8 @@ import Login from "./pages/Login"
 import AdminLogin from "./pages/AdminLogin.jsx"
 import SignUp from "./pages/SignUp"
 import ManagerSignUp from "./pages/ManagerSignUp.jsx"
+import FindId from "./pages/FindId.jsx"
+import FindPassword from "./pages/FindPassword.jsx"
 
 import InsertReview from "./pages/user/InsertReview";
 
@@ -104,6 +106,10 @@ function App() {
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/user/signup" element={<SignUp />} />
             <Route path="/manager/signup" element={<ManagerSignUp />} />
+
+            <Route path="/find-id" element={<FindId />} />
+            <Route path="/find-password" element={<FindPassword />} />
+
 
             {/* ▼▼▼ 결제 결과 페이지 경로 추가 ▼▼▼ */}
             <Route path="/payment-result" element={<PaymentResult />} />

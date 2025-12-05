@@ -22,4 +22,8 @@ public interface MemberMapper {
 
     int updatePassword(@Param("id") String id,
                        @Param("password") String encodedNewPw);
+
+    String selectIdByEmail(@Param("email")String email);
+
+    MemberDTO selectByIdAndEmail(@Param("id")String id, @Param("email")String email);
 }

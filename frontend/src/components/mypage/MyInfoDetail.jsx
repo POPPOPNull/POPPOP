@@ -121,6 +121,7 @@ function InfoDetail() {
   return (
     <>
     <div className="infoForm">
+      <div style={{ height: "40px" }}></div>
       {error && <p className="info-error">{error}</p>}
 
 

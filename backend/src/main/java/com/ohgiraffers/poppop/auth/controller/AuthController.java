@@ -231,4 +231,51 @@ public class AuthController {
 
         return result;
     }
+
+    // --------------------
+    // 1) 아이디 찾기
+    // --------------------
+    @PostMapping("/find-id")
+    public ResponseEntity<?> findIdByEmail(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        try {
+            String id = authService.findIdByEmail(email);
+            return ResponseEntity.ok(id);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // --------------------
+    // 2) 비밀번호 찾기 - 본인 확인
+    // --------------------
+    @PostMapping("/verify-user")
+    public ResponseEntity<?> verifyUser(@RequestBody Map<String, String> body) {
+        String id = body.get("id");
+        String email = body.get("email");
+
+        try {
+            authService.verifyUser(id, email);
+            return ResponseEntity.ok("본인 확인 완료");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // --------------------
+    // 3) 비밀번호 재설정
+    // --------------------
+    @PutMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> body) {
+        String id = body.get("id");
+        String email = body.get("email");
+        String newPw = body.get("newPassword");
+
+        try {
+            authService.resetPassword(id, email, newPw);
+            return ResponseEntity.ok("비밀번호가 재설정되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
