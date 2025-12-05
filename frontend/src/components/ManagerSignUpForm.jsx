@@ -268,6 +268,7 @@ function ManagerSignUpComponent() {
                         {isSubmitting ? '가입 처리 중...' : '회원가입'}
                     </button>
                 </form>
+                <div style={{ height: "30px" }}></div>
                 </>
             );
         }
