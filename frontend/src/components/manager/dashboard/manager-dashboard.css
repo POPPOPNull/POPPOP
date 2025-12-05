@@ -13,52 +13,57 @@
   color: #1a1a1a;
 }
 
-/* 상단 KPI 박스를 감싸는 영역 */
-.manager-dashboard-kpi-section {
+/* ===== 상단 KPI 전체 박스 (어드민이랑 비슷한 큰 카드) ===== */
+.manager-kpi-layout {
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px 32px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  padding: 18px 28px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e4e4e4;
   margin-bottom: 24px;
-}
-
-/* KPI 한 줄 */
-.mgrdash-kpi-row {
-  display: flex;
-  gap: 24px;
-}
-
-/* 개별 KPI 카드 */
-.mgrdash-kpi-card {
-  flex: 1;
-  background-color: #f9fafb;
-  border-radius: 10px;
-  padding: 16px 20px;
   box-sizing: border-box;
 }
 
-.mgrdash-kpi-title {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 8px;
+/* KPI 한 줄(오늘/총/관심/리뷰 4개) */
+.mgrdash-kpi-row {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
 }
 
-.mgrdash-kpi-value {
-  font-size: 24px;
-  font-weight: 700;
-  color: #222;
+/* 개별 지표 영역 */
+.mgrdash-kpi-item {
   display: flex;
-  align-items: baseline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  flex: 1;
+  gap: 6px;
+}
+
+/* KPI 타이틀 */
+.mgrdash-kpi-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* KPI 값 + 단위 */
+.mgrdash-kpi-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
 }
 
 .mgrdash-kpi-unit {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
   margin-left: 4px;
-  color: #666;
+  color: #777;
 }
 
-/* (나중에 쓸 차트 영역) */
+/* ===== 아래 차트 영역 ===== */
+
 .manager-dashboard-chart-section {
   margin-top: 8px;
 }
@@ -69,32 +74,16 @@
   gap: 20px;
 }
 
-.manager-dashboard-chart-card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  min-height: 240px;
-  padding: 16px 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-  box-sizing: border-box;
-  color: #555;
-  font-size: 14px;
-}
-
-.manager-dashboard-card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.05);
-  padding: 20px;
-  font-size: 14px;
-  color: #555;
-}
-
+/* 공통 카드 스타일 */
 .manager-dashboard-card {
   background: #fff;
   padding: 20px;
   border-radius: 14px;
   border: 1px solid #e6e6e6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  color: #555;
+  box-sizing: border-box;
 }
 
 .dashboard-card-title {
@@ -113,5 +102,3 @@
   color: #777;
   font-size: 14px;
 }
-
-

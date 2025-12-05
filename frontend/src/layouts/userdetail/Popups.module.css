@@ -35,19 +35,61 @@
 .popupname{
     font-size: 32px;
     font-weight: 700;
+    padding: 15px 0px;
 }
 .popuplocation,.popupduration{
     font-size: 14px;
     padding-bottom: 4px;
+    padding: 15px 0px;
 }
 .reviewbtns{
         display:flex;
     /* background-color: white; */
     width: 100%;
     height: 42px;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 750px;
 }
 .reviewtitle{
     font-size: 16px;
+}
+
+.reviewbtn{
+    height: 30px;
+    width: 870px;
+    background-color: red;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 8px; 
+    transition: 0.3s;  
+}
+
+.reviewbtn:hover{
+    font-weight: 500;
+    height: 30px;
+    width: 870px;
+    background-color: rgba(175, 6, 6, 0.952);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    /* border-bottom: rgb(136, 136, 136) solid 0.5px; */
+    /* opacity: 50%; */
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+
+    
+}
+
+.reviewbtnlayout{
+    width: 900px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 0px;
+    
 }

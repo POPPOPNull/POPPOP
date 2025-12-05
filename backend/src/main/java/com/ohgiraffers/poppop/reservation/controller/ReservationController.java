@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.reservation.controller;
 
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Tag(name="User 계층 예약 관련 API")
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -68,13 +71,17 @@ public class ReservationController {
     public ResponseEntity<?> handleTossSuccess(
             @RequestParam String paymentKey,
             @RequestParam String orderId,
-            @RequestParam Integer amount
+            @RequestParam Integer amount,
+            HttpServletRequest request
     ) {
         String successUrl = "http://localhost:5173/payment-result?success=true";
         String failUrl = "http://localhost:5173/payment-result?success=false";
 
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
+
         try {
-            boolean isSuccess = reservationService.confirmTossPayment(paymentKey, orderId, amount);
+            boolean isSuccess = reservationService.confirmTossPayment(paymentKey, orderId, amount, sessionId);
             if(isSuccess) {
                 return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(successUrl)).build();
             } else {
@@ -102,5 +109,11 @@ public class ReservationController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @DeleteMapping("/pending/{orderId}")
+    public ResponseEntity<Void> cancelPendingReservation(@PathVariable String orderId) {
+        reservationService.deletePendingReservation(orderId);
+        return ResponseEntity.ok().build();
     }
 }

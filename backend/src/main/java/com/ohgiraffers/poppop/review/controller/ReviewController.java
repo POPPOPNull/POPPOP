@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.review.controller;
 
 import com.ohgiraffers.poppop.review.model.dto.ReviewDTO;
 import com.ohgiraffers.poppop.review.model.service.ReviewService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+
+@Tag(name = "리뷰 관련 API")
+@RestController
 public class ReviewController {
 
     private final ReviewService reviewService;

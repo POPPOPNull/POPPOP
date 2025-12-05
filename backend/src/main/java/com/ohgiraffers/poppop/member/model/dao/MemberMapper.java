@@ -19,4 +19,11 @@ public interface MemberMapper {
     int updateEmail(@Param("id") String id, @Param("email") String email);
 
     int updatePhone(@Param("id") String id, @Param("phone") String phone);
+
+    int updatePassword(@Param("id") String id,
+                       @Param("password") String encodedNewPw);
+
+    String selectIdByEmail(@Param("email")String email);
+
+    MemberDTO selectByIdAndEmail(@Param("id")String id, @Param("email")String email);
 }

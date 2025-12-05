@@ -15,7 +15,7 @@ function NoSearchResult({props}){
             <div className={TPStyle.nosearchresult}>
                 
                 <div>
-                    <div><img src="/public/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
+                    <div><img src="/icons/issue-loupe.png" style={{width:200,height:200}}/></div>
                     검색어 "{props}" 에 해당하는 팝업스토어가 존재하지 않습니다.
                 </div>
             </div>
@@ -26,6 +26,13 @@ function NoSearchResult({props}){
 
 function SearchBar(){
 
+    const [layout, setLayout] = useState({
+        display : "flex"
+    });
+    const [searchLayout, setSearchLayout] = useState({
+        display : "none"
+    })
+
     const [isDrag,setIsDrag] = useState(false)
     const [isVisible,setIsVisible] = useState(false)
     const [searchWord, setSearchWord] = useState("")
@@ -34,12 +41,24 @@ function SearchBar(){
     
     const[isFavorite,setIsFavorte]=useState(false)
     const[Narray,setNArray] = useState([])
+    
 
     const onClickOpen = () =>{
-        setIsVisible(true)
+        setLayout({
+            display:"none"
+        })
+        setSearchLayout({
+            display:"flex"
+        })
     }
+
     const onClickClose = () =>{
-        setIsVisible(false)
+        setLayout({
+            display:"flex"
+        })
+        setSearchLayout({
+            display:"none"
+        })
     }
 
     const onChangeKeyword = (e)=>{
@@ -70,7 +89,12 @@ function SearchBar(){
             setPopups(data)
         })
         
-        setIsVisible(false)
+        setSearchLayout({
+            display:"none"
+        })
+        setLayout({
+            display:"flex"
+        })
         
     
     }
@@ -84,10 +108,14 @@ function SearchBar(){
             setPopups(data)
         })
         
-        setIsVisible(false)
+        setSearchLayout({
+            display:"none"
+        })
+        setLayout({
+            display:"flex"
+        })
         }
 
-        
     }
 
     useEffect(()=>{
@@ -109,20 +137,20 @@ function SearchBar(){
         },[])
 
     
-
+        
     
 
 
     return(
         <>
-            <div className={USStyle.layout}>
+            <div className={USStyle.layout} style={layout}>
                 <div className={USStyle.searchbar} onClick={onClickOpen}>{searchWord}</div>
             </div>
 
-            {isVisible&&
-            <div>
-                <div className={USStyle.searchbg}></div>
-                <div className={USStyle.searchbox}>
+            
+            <div >
+                <div className={USStyle.searchbg} style={searchLayout}></div>
+                <div className={USStyle.searchbox} style={searchLayout}>
                     <div className={USStyle.searchlayout}>
                         <input type="text" 
                         className={USStyle.searchbar}
@@ -131,11 +159,11 @@ function SearchBar(){
                         autoFocus={true}
                         value={searchWord}
                         />                    
-                        <button className={USStyle.searchbutton} onClick={onCLickSearch}>검색</button>
-                        <button className={USStyle.searchbutton} onClick={onClickClose}>닫기</button>
+                        <button className={USStyle.searchbutton} onClick={(searchWord=="")?onClickClose:onCLickSearch}>{(searchWord=="")?"닫기":"검색"}</button>
+                        {/* <button className={USStyle.searchbutton} onClick={onClickClose}>닫기</button> */}
                     </div>
                 </div>
-            </div>}
+            </div>
             <Blank/>
 
 

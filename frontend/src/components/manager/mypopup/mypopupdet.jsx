@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./mypopupdet.css";
-import ManagerSearchBar from "../ManagerSearchBar";
 import { NavLink, useParams } from "react-router-dom";
-import { fetchMyPopupDetail, fetchPopupRecentReservations } from "../../../api/ManagerAPI";
+import { fetchMyPopupDetail,fetchMyPopupReservations,  } from "../../../api/ManagerAPI";
 
+const getTodayString = () => {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+};
 
+const TODAY = getTodayString();
 
 
 function MyPopupDet() {
@@ -19,64 +26,88 @@ function MyPopupDet() {
 
   const { popupNo } = useParams();
 
-      useEffect(() => {
-  if (!popupNo) return;
+  useEffect(() => {
+    if (!popupNo) return;
 
-  // 1) 팝업 기본 정보
-  const loadPopupDetail = async () => {
-    try {
-      const data = await fetchMyPopupDetail(popupNo);
+    const fetchAll = async () => {
+      try {
+        setLoading(true);
 
-      setPopupInfo({
-        managerId: data.id,
-        popupName: data.name,
-        status: data.approvalStatus,
-        period: `${data.startDate}–${data.endDate}`,
-        categoryName: data.categoryName,
-        totalCount: 0,     // 아래에서 실제 값으로 덮어씀
-        todayCount: 0,
-        closedDays: "-",
-      });
-    } catch (error) {
-      console.error("팝업 상세 조회 실패:", error);
-      alert("팝업 상세 정보를 불러오는 중 오류가 발생했습니다.");
-    }
-  };
+        // 상세 정보 + 예약 전체 목록 같이 가져오기
+        const [detailData, reservationsData] = await Promise.all([
+          fetchMyPopupDetail(popupNo),
+          fetchMyPopupReservations(popupNo),
+        ]);
 
-  // 2) 최근 예약자 5명
-  const loadRecentReservations = async () => {
-    try {
-      setLoading(true);
-      const data = await fetchPopupRecentReservations(popupNo, 5);
-      // data: { totalCount, reservations: [...] }
+        const all = Array.isArray(reservationsData)
+          ? reservationsData
+          : reservationsData || [];
 
-      setReservations(data.reservations || []);
+        // 전체 예약자 수 (인원 합)
+        const totalCount = all.reduce(
+          (sum, r) => sum + (r.reservationPersonnel || 0),
+          0
+        );
 
-      // 전체 예약자 수 반영
-      setPopupInfo((prev) =>
-        prev ? { ...prev, totalCount: data.totalCount ?? prev.totalCount } : prev
-      );
-    } catch (error) {
-      console.error("최근 예약자 조회 실패:", error);
-      setReservations([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+        // 오늘 예약자 수 (인원 합)
+        const todayCount = all
+          .filter((r) => r.reservationDate === TODAY)
+          .reduce(
+            (sum, r) => sum + (r.reservationPersonnel || 0),
+            0
+          );
 
-  loadPopupDetail();
-  loadRecentReservations();
-}, [popupNo]);
+        setPopupInfo({
+          managerId: detailData.id,
+          popupName: detailData.name,
+          status: detailData.approvalStatus,
+          period: `${detailData.startDate}–${detailData.endDate}`,
+          categoryName: detailData.categoryName,
+          totalCount: totalCount,   // 전체 예약자 수
+          todayCount: todayCount,   // 오늘 예약자 수
+          closedDays: detailData.closedDays || "-",
+        });
 
-const filteredReservations = reservations.filter((r) => {
-  if (!keyword) return true;
-  const lower = keyword.toLowerCase();
-  return (
-    r.id.toLowerCase().includes(lower) ||
-    r.name.toLowerCase().includes(lower) ||
-    r.phone.includes(keyword)
-  );
-});
+        setReservations(all);
+
+      
+      } catch (error) {
+        console.error("팝업 상세/예약 조회 실패:", error);
+        alert("팝업 상세 정보를 불러오는 중 오류가 발생했습니다.");
+        setPopupInfo(null);
+        setReservations([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAll();
+  }, [popupNo]);
+
+  const filteredReservations = reservations.filter((r) => {
+    if (!keyword) return true;
+    const lower = keyword.toLowerCase();
+    const text = [
+      r.memberId,
+      r.popupName,
+      r.reservationDate,
+      r.reservationTime,
+      r.phone,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+    return text.includes(lower);
+  });
+
+  const recent5 = [...filteredReservations]
+  .sort((a, b) => {
+    const aKey = `${a.reservationDate} ${a.reservationTime}`;
+    const bKey = `${b.reservationDate} ${b.reservationTime}`;
+    return new Date(bKey) - new Date(aKey);
+  })
+  .slice(0, 5);
 
   return (
     <div className="mypopupdet-wrapper">
@@ -90,9 +121,8 @@ const filteredReservations = reservations.filter((r) => {
 
       <div className="mypopupdet-toprow">
         <div className="mypopupdet-top-left">
-          <span className="badge">{popupInfo ? popupInfo.managerId : ""}</span>
           <span className="mypopupdet-selected">
-            팝업 스토어<strong>NO_{popupNo}</strong>
+            팝업 스토어<strong> NO_{popupNo}</strong>
           </span>
         </div>
 
@@ -123,14 +153,6 @@ const filteredReservations = reservations.filter((r) => {
             예약 내역
           </NavLink>
         </div>
-      </div>
-
-      <div className="mypopupdet-search-area">
-        <ManagerSearchBar
-        value={keyword}
-        onChange={(value) => setKeyword(value)}
-        placeholder="예약 내역 검색"
-      />
       </div>
     
       {popupInfo && (
@@ -184,58 +206,55 @@ const filteredReservations = reservations.filter((r) => {
       )}
 
       {/* 예약자 목록 */}
-      <section className="mypopupdet-table-section">
-        {loading ? (
-          <div
-            style={{
-              width: "100%",
-              padding: "40px 0",
-              textAlign: "center",
-              color: "#777",
-            }}
-          >
-            예약 내역을 불러오는 중입니다...
+      {loading ? (
+        <div
+          style={{
+            width: "100%",
+            padding: "40px 0",
+            textAlign: "center",
+            color: "#777",
+          }}
+        >
+          예약 내역을 불러오는 중입니다...
+        </div>
+      ) : recent5.length === 0 ? (
+        <div
+          style={{
+            width: "100%",
+            padding: "40px 0",
+            textAlign: "center",
+            color: "#777",
+          }}
+        >
+          최근 예약 내역이 없습니다.
+        </div>
+      ) : (
+        <section className="mypopupdet-table-section">
+        <div className="rv-card">
+          <div className="rv-thead">
+            <div>아이디</div>
+            <div>예약번호</div>
+            <div>예약 일자</div>
+            <div>예약 시간</div>
+            <div>예약 인원</div>
+            <div>예약 상태</div>
           </div>
-        ) : filteredReservations.length === 0 ? (
-          <div
-            style={{
-              width: "100%",
-              padding: "40px 0",
-              textAlign: "center",
-              color: "#777",
-            }}
-          >
-            최근 예약 내역이 없습니다.
-          </div>
-        ) : (
-          <>
-            <table className="mypopupdet-table">
-              <thead>
-                <tr>
-                  <th>아이디</th>
-                  <th>이름</th>
-                  <th>연락처</th>
-                  <th>생년월일</th>
-                  <th>예약일자</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {filteredReservations.map((r, idx) => (
-                  <tr key={idx}>
-                    <td>{r.id}</td>
-                    <td>{r.name}</td>
-                    <td>{r.phone}</td>
-                    <td>{r.birth}</td>
-                    <td>{r.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        )}
-      </section>
+          {recent5.map((r) => (
+            <div key={r.reservationNo} className="rv-tr">
+              <div>{r.memberId}</div>
+              <div>{r.reservationNo}</div>
+              <div>{r.reservationDate}</div>
+              <div>{r.reservationTime}</div>
+              <div>{r.reservationPersonnel}</div>
+              <div>{r.reservationStatus}</div>
+            </div>
+          ))}
+        </div>
+        </section>
+      )}
     </div>
+    
   );
 }
 

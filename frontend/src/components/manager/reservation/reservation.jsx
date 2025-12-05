@@ -1,7 +1,6 @@
 import "./reservation.css";
 import { useEffect, useState } from "react";
 import { useParams,NavLink } from "react-router-dom";
-import ManagerSearchBar from "../ManagerSearchBar";
 import {fetchMyPopupReservations,fetchMyPopupDetail} from "../../../api/ManagerAPI";
 
 //날짜
@@ -27,6 +26,15 @@ function Reservation() {
 
   const [page, setPage] = useState(1);       // 현재 페이지
   const itemsPerPage = 10;                   // 페이지당 10개
+
+  const [visitedMap, setVisitedMap] = useState({}); 
+
+  const toggleVisit = (reservationNo) => {
+  setVisitedMap((prev) => ({
+    ...prev,
+      [reservationNo]: !prev[reservationNo],   // 없으면 true, 있으면 반대로
+    }));
+  };
 
 
   useEffect(() => {
@@ -97,9 +105,6 @@ function Reservation() {
         
       <div className="mypopupdet-toprow">
         <div className="mypopupdet-top-left">
-          <span className="badge">
-            {popupInfo ? (popupInfo.managerId || popupInfo.id) : ""}
-          </span>
 
           <span className="mypopupdet-selected">
             팝업 스토어<strong> NO_{popupNo}</strong>
@@ -118,12 +123,12 @@ function Reservation() {
 
           <NavLink
             end
-            to={`/manager/mypopup/${popupNo}`}
+            to={`/manager/mypopup/${popupNo}/edit`}
             className={({ isActive }) =>
               "mypopupdet-tab-item" + (isActive ? " active" : "")
             }
           >
-            대시보드
+            수정하기
           </NavLink>
 
           <NavLink
@@ -137,36 +142,15 @@ function Reservation() {
         </div>
       </div>
 
-    
-      <div className="mypopupdet-search-area">
-        <div className="mypopupdet-search-left">
-          <select
-            className="rv-select"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="전체">전체</option>
-            <option value="예약확정">예약확정</option>
-            <option value="취소">예약취소</option>
-          </select>
-
-          <div className="mypopupdet-searchbar-wrap">
-            <ManagerSearchBar
-              value={q}
-              onChange={setQ}
-              placeholder="예약 내역 검색"
-            />
-          </div>
-        </div>
-      </div>
-
       <div className="rv-card">
         <div className="rv-thead">
           <div>아이디</div>
+          <div>예약번호</div>
           <div>예약 일자</div>
           <div>예약 시간</div>
           <div>예약 인원</div>
           <div>예약 상태</div>
+          <div>방문 확인</div> 
         </div>
 
         {loading && (
@@ -184,16 +168,26 @@ function Reservation() {
         )}
 
         {/* 목록 + 페이지네이션 */}
-  {!loading &&
-    paginatedRows.map((r) => (
-      <div key={r.reservationNo} className="rv-tr">
-        <div>{r.memberId}</div>
-        <div>{r.reservationDate}</div>
-        <div>{r.reservationTime}</div>
-        <div>{r.reservationPersonnel}</div>
-        <div>{r.reservationStatus}</div>
-      </div>
-    ))}
+        {!loading &&
+        paginatedRows.map((r) => (
+          <div key={r.reservationNo} className="rv-tr">
+            <div>{r.memberId}</div>
+            <div>{r.reservationNo}</div> 
+            <div>{r.reservationDate}</div>
+            <div>{r.reservationTime}</div>
+            <div>{r.reservationPersonnel}</div>
+            <div>{r.reservationStatus}</div>
+            <div>
+              <button
+                type="button"
+                className={`visit-btn ${visitedMap[r.reservationNo] ? "active" : ""}`}
+                onClick={() => toggleVisit(r.reservationNo)}
+              >
+                {visitedMap[r.reservationNo] ? "방문취소" : "방문확인"}
+              </button>
+            </div>
+          </div>
+        ))}
 
   {totalPages > 1 && (
     <div className="pagination fixed-pagination">

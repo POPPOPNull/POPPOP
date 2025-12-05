@@ -49,6 +49,7 @@
           from popup_store p
           left join reservation r on p.popup_no = r.popup_no
          group by p.popup_no, p.popup_name, p.popup_start_date, p.popup_end_date
+         having count(r.reservation_no) > 0
          order by p.popup_no
     </select>
 
@@ -225,5 +226,22 @@
                payment_key = #{paymentKey}
          WHERE order_id = #{orderId}
     </update>
+
+    <delete id="deletePendingReservationByOrderId" parameterType="string">
+        delete from reservation
+         where order_id = #{orderId} AND reservation_status = '결제대기'
+    </delete>
+
+    <delete id="deleteOldPendingReservation" parameterType="java.time.LocalDateTime">
+        delete from reservation
+         where reservation_status = '결제대기'
+           and created_at &lt; #{cutoffTime}
+    </delete>
+    <select id="findPopupNoByOrderId" parameterType="string" resultType="int">
+        select popup_no
+          from reservation
+         where order_id = #{orderId}
+    </select>
+
 
 </mapper>

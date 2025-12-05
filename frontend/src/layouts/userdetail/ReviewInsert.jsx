@@ -14,7 +14,7 @@ import Footer from "../usermain/Footer";
 function ReviewInsert(){
 
        const {popupNo} = useParams();
-       const popupURL = `/public/poster/poster_${popupNo}.png`
+       const popupURL = `/poster/poster_${popupNo}.png`
    
        const [popup, setPopup] = useState({});
    
@@ -53,8 +53,10 @@ function ReviewInsert(){
                        <div>{popup.hashtags}</div>
                        <UserReview/>
                        
-                       <div>후기</div>
+                       
+                       <div style={{height:10}}></div>
                        <ReviewView/>
+                       <div style={{height:10}}></div>
                        <MidComp1/>
                        <MidComp2/>
                        <Footer/>

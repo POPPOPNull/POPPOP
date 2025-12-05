@@ -1,5 +1,4 @@
 .loginform {
-    margin-top: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,29 +7,50 @@
     color: white;
     text-decoration: none;
 }
-.inputlogin {
-    width: 375px;
-    height: 45px;
-    border-radius: 8px;
-    font-size: medium;
-    border-style: none;
-}
+.inputlogin,
 .btnlogin {
     width: 375px;
     height: 45px;
-    color: white;
-    background-color: #f4002d;
-    text-shadow: 1px 1px 2px black;
     border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box; 
+    padding: 0 12px;      
+    border: none;
+}
+.inputlogin {
+    background: white;
+}
+.btnlogin {
+    background-color: #f4002d;
+    color: white;
     margin-top: 50px;
-    font-size: medium;
+    text-shadow: 1px 1px 2px black;
+    cursor: pointer;
+    line-height: 45px; 
+    padding: 0;         
 }
 .managerJoin {
     padding: 8px;
     margin-top: 50px;
     border-radius: 5px;
 }
-.managerLink {
+.bizText, .managerLink {
     text-decoration: none;
+    font-size: 15px;
+}
+.bizText {
+    color: #f4002d;
+}
+.signupText {
     color: white;
+}
+.admin-logo {
+    display: flex;
+    justify-content: center; 
+}
+.poppop-admin {
+    color: #f4002d; 
+    font-size: 30px;
+    font-weight: 700;
+    padding: 53px;
 }

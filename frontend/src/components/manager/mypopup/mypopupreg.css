@@ -314,8 +314,8 @@
 }
 
 .mpr-tag-btn.selected {
-  background-color: #eba9cf; 
-  border-color: #eba9cf;
+  background-color: #f4002d; 
+  border-color: #f4002d;
   color: #000;
   font-weight: 600;
 }
@@ -338,7 +338,7 @@
   gap: 6px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #f1eefb;
+  background: #eba9cf;
   font-size: 13px;
 }
 

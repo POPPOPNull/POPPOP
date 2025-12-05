@@ -20,24 +20,25 @@ function Footer() {
             <div className={footer.others}>
                     <div className={footer.other}>
                         <div className={footer.icon}>
-                            <img src="\public\icons\mail.png" alt="" style={{width:35}}/>
+                            <img src="/icons/mail.png" alt="" style={{width:35}}/>
+
                         </div>
                         문의메일
                     </div>
                     <div className={footer.other}>
                         <div className={footer.icon}>
-                            <img src="\public\icons\kakaotalk.png" alt="" style={{width:35}}/>
+                            <img src="/icons/kakaotalk.png" alt="" style={{width:35}}/>
                         </div>
                         카카오톡
                     </div>
                     <div className={footer.other}>
                         <div className={footer.icon}>
-                            <img src="\public\icons\instagram.png" alt="" style={{width:35}}/>
+                            <img src="/icons/instagram.png" alt="" style={{width:35}}/>
                         </div>
                         인스타그램
                     </div>
                     
-                    <div className={footer.other}><img src="\public\icons\blog.png" alt="" style={{width:35}}/>블로그</div>
+                    <div className={footer.other}><img src="/icons/blog.png" alt="" style={{width:35}}/>블로그</div>
             </div>
         </div>
         </>

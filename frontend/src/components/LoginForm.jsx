@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./loginform.css"
+import "./LoginForm.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../hooks/UseAuth';
 import JwtAPI from '../api/JwtAPI';
@@ -45,7 +45,7 @@ function LoginComponent() {
     if (userRole) {
       
       const roleStr = Array.isArray(userRole) ? userRole[0] : userRole;
-      if (roleStr === 'MANAGER') navigate('/manager');
+      if (roleStr === 'MANAGER') navigate('/manager/dashboard');
       else if (roleStr === 'ADMIN') navigate('/admin');
       else if (roleStr === 'USER') navigate('/');
       else navigate('/');
@@ -61,6 +61,7 @@ function LoginComponent() {
 
             return(
                 <>
+                <div style={{ height: "250px" }}></div>
                 <form className="loginform" onSubmit={handleSubmit}>
                     <input className="inputlogin"
                         type="text"  
@@ -81,16 +82,20 @@ function LoginComponent() {
 
                     <br/>
                     <div>
-                        <Link className="loginhelp">아이디 찾기 </Link>
+                        <Link to={`/find-id`} className="loginhelp">아이디 찾기 </Link>
                         <span>|</span>
-                        <Link className="loginhelp"> 비밀번호 찾기 </Link>
+                        <Link to={`/find-password`} className="loginhelp"> 비밀번호 찾기 </Link>
                         <span>|</span>
                         <Link to="/user/signup" className="loginhelp"> 회원가입</Link>
                     </div>
                     <div className="managerJoin">
-                        <Link to="/manager" className="managerLink">Biz 메인 </Link>
-                        <span>|</span>
-                        <Link to="/manager/signup" className="managerLink"> Biz 회원가입</Link>
+                        <Link to="/manager" className="bizText">POPPOP BIZ </Link>
+                        <span style={{color:"#FFDAB9"}}> | </span>
+                        <Link to="/manager/signup" className="managerLink">
+                            <span className="bizText"> POPPOP BIZ</span>
+                            &nbsp;
+                            <span className="signupText">회원가입</span>
+                        </Link>
                     </div>
                     <br/>
                     <button className="btnlogin" type="submit">로그인</button>

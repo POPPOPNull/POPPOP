@@ -6,9 +6,12 @@ import com.ohgiraffers.poppop.reservation.model.dao.ReservationMapper;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -31,7 +34,7 @@ public class ReservationService {
 
     private static final int max_count = 100;
     private static final int TICKET_PRICE = 1000; // 티켓 가격 (임시)
-
+    private static final Logger log = LoggerFactory.getLogger(ReservationService.class);
 
     public ReservationService(ReservationMapper reservationMapper, BehaviorMapper behaviorMapper, WebClient.Builder webClientBuilder) {
         this.reservationMapper = reservationMapper;
@@ -108,7 +111,7 @@ public class ReservationService {
 
 
     @Transactional
-    public boolean confirmTossPayment(String paymentKey, String orderId, Integer amount) {
+    public boolean confirmTossPayment(String paymentKey, String orderId, Integer amount, String sessionId) {
         System.out.println("--- 결제 승인 로직 시작 ---");
         System.out.println("paymentKey = " + paymentKey);
         System.out.println("orderId = " + orderId);
@@ -123,6 +126,14 @@ public class ReservationService {
             System.err.println("!!! 금액 검증 실패: DB 금액과 토스 전달 금액이 일치하지 않음 !!!");
             throw new RuntimeException("결제 정보가 일치하지 않습니다.");
         }
+
+        // 결제 관련 예약 정보 조회
+        Integer popupNo = reservationMapper.findPopupNoByOrderId(orderId);
+        if (popupNo == null) {
+            System.err.println("!!! popupNo 조회 실패: orderId = " + orderId);
+            throw new RuntimeException("예약 정보를 찾을 수 없습니다.");
+        }
+
 
         // 2. 토스페이먼츠 결제 승인 API 호출
         System.out.println("--- 토스페이먼츠 승인 API 호출 시작 ---");
@@ -140,6 +151,7 @@ public class ReservationService {
         if (response != null && "DONE".equals(response.getStatus())) {
             // 3. 결제 승인 성공 시, DB 예약 상태 업데이트
             reservationMapper.updateReservationAsPaid(orderId, paymentKey);
+            behaviorMapper.insertLogByReservation(popupNo, sessionId);
             return true;
         } else {
             throw new RuntimeException("토스페이먼츠 결제 승인에 실패했습니다. 상태: " + (response != null ? response.getStatus() : "null"));
@@ -214,4 +226,24 @@ public class ReservationService {
         int result = max_count - reserved;
         return Math.max(result, 0);
     }
+
+    @Transactional
+    public void deletePendingReservation(String orderId) {
+        reservationMapper.deletePendingReservationByOrderId(orderId);
+    }
+
+    @Scheduled(fixedRate = 3600000)
+    @Transactional
+    public void cleanupPendingReservations() {
+        LocalDateTime cutoffTime = LocalDateTime.now().minusHours(1);
+        log.info("오래된 '결제대기' 예약 정리를 시작합니다. 기준 시간 : " + cutoffTime);
+        int deletedCount = reservationMapper.deleteOldPendingReservation(cutoffTime);
+        if (deletedCount > 0) {
+            log.info(deletedCount + "개의 오래된 '결제대기' 예약을 삭제했습니다.");
+        } else {
+            log.info("삭제할 오래된 '결제대기' 예약이 없습니다.");
+        }
+    }
+
+
 }

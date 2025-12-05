@@ -1,10 +1,5 @@
 .myreviewform {
-    margin-top: 40px;
-    margin-bottom: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    display: block;
 }
 .reviewsearch {
     border: 1px solid white;
@@ -25,30 +20,34 @@
     color: white;
     font-size: 13px;
 }
-.noreview {
-    margin-top: 30px;
+.empty-message {
+  margin-top: 12px;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
 }
 .userreview {
-    width: 600px;
+    width: 840px;
     height: 120px;
     margin-top: 30px;
     border-radius: 5px;
     background-color: #212121;
-    padding: 10px;
+    padding: 30px;
 }
 .myreviewpopup {
     font-size: 20px;
     font-weight: 700;
 }
 .myreviewdate {
-    margin-left: 510px;
+    margin-left: 750px;
     margin-top: -8px;
-    margin-bottom: 3px;
+    /* margin-bottom: 3px; */
     color: #d9d9d9;
 }
 .myreviewbutton {
     margin-top: 10px;
-    margin-left: 540px;
+    margin-left: 800px;
 }
 .myreviewbutton button {
     all: unset;

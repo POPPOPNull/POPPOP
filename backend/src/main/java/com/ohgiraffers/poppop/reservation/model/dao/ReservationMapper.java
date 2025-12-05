@@ -43,4 +43,9 @@ public interface ReservationMapper {
     void updateReservationAsPaid(@Param("orderId") String orderId, @Param("paymentKey") String paymentKey);
 
     String findPaymentKey(@Param("reservationNo") int reservationNo, @Param("memberId") String memberId);
+
+    int deletePendingReservationByOrderId(String orderId);
+
+    int deleteOldPendingReservation(@Param("cutoffTime") java.time.LocalDateTime cutoffTime);
+    Integer findPopupNoByOrderId(String orderId);
 }

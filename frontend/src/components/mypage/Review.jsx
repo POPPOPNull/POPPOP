@@ -82,12 +82,13 @@ function Review(){
     return(
         <>
         <div className="myreviewform">
-            <div className="reviewsearch">
+            {/* <div className="reviewsearch">
                 <input className="myreviewsearch" type="text" placeholder="팝업스토어명, 키워드 검색"/>
-            </div>
+            </div> */}
+            <div style={{ height: "12px" }}></div>
 
                 {reviews.length === 0 ? (
-                    <p className="noreview">작성한 리뷰가 없습니다.</p>
+                    <p className="empty-message">작성한 리뷰가 없습니다.</p>
                 ) : (
                     reviews.map((review) => {
                         const isEditing = editingReviewNo === review.reviewNo;

@@ -1,20 +1,25 @@
-import { Outlet } from 'react-router-dom';
-import { SearchProvider } from '../../components/admin/SearchProvider';
+import { Outlet, useLocation } from 'react-router-dom';
+import { SearchProvider } from '../../components/admin/searchProvider';
 import AdminSidebar from '../../layouts/adminmain/admin-sidebar';
-import AdminSearchBar from '../../components/admin/AdminSearchBar';
+import AdminSearchBar from '../../components/admin/adminSearchBar';
 import Logout from '../../components/Logout';
-import "../../layouts/adminmain/List-layout.css";
+import "../../layouts/adminmain/list-layout.css";
 
 
 function AdminLayout() {
+    const location = useLocation();
+    // 검색창을 숨길 경로 목록
+    const hideSearchPaths = ['/admin', '/admin/manager-main'];
+    const showSearchBar = !hideSearchPaths.includes(location.pathname);
+
     return (
         // SearchProvider가 AdminLayout 내부 컴포넌트들에만 Context 제공
         <SearchProvider>
             <div style={{ display: 'flex' }}>
-                <AdminSidebar/>
+                <AdminSidebar />
                 <main className='admin-main-layout'>
-                    <AdminSearchBar/>
-                    <hr style={{ margin: '20px 0'}}/>
+                    {showSearchBar && <AdminSearchBar />}
+                    <hr style={{ margin: '20px 0' }} />
                     <Outlet />
                 </main>
             </div>

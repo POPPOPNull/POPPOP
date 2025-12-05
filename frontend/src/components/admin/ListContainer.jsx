@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, cloneElement } from "react";
-import { SearchContext } from "./SearchProvider";
+import { SearchContext } from "./searchProvider";
 import Pagination from "./pagination";
 
 // 모든 데이터를 받아서 리스트로 뿌려주는 컴포넌트
@@ -7,7 +7,7 @@ import Pagination from "./pagination";
 function ListContainer({ fetchDataFunction, renderItem, tableHeaders, layoutClassName, transformItem, onItemClick, itemKey }) {
     const [allItems, setAllItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;    // 화면에 표시할 행 수
+    const itemsPerPage = 15;    // 화면에 표시할 행 수
 
     const { searchText, searchCategory } = useContext(SearchContext);
 

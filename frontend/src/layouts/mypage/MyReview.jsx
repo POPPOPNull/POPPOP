@@ -1,5 +1,5 @@
 import "../usermain/main.css";
-import Tab from "../../components/mypage/MyPageTab";
+import Tab from "../../components/mypage/mypagetab";
 import Review from "../../components/mypage/Review";
 import Logout from "../../components/Logout";
 import Footer from "../usermain/Footer";
@@ -9,9 +9,10 @@ function MyReview (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    {/* <Logout/> */}
                     <Tab/>
-                    <Review/>
+                    <div className="mypage-content">
+                        <Review/>
+                    </div>
                     <Footer/>
                 </div>
             </div>

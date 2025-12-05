@@ -8,7 +8,7 @@ import { countFavorite, countViews } from "../api/BehaviorAPI"
 
 function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
 
-        const imageUrl =  `/public/poster/poster_${posterNo}.png`
+        const imageUrl =  `/poster/poster_${posterNo}.png`
         const [view, setView] = useState()
         const [favorite, setFavorite] = useState()
 
@@ -67,10 +67,10 @@ function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
                             {/* 찜 및 조회 수 */}
                             <div className={PSStyle.favorite}>
                                 <div className={PSStyle.viewlayout}>
-                                    <div className={PSStyle.view}><img src="\public\icons\eye.png" style={{width:15,height:12}}/></div>{view}
+                                    <div className={PSStyle.view}><img src="/icons/eye.png" style={{width:15,height:12}}/></div>{view}
                                 </div>
                                 <div className={PSStyle.favoritelayout}>
-                                    <div>{isFavorite?"♡":"♥"}</div>{favorite}
+                                    <div className={isFavorite?PSStyle.n:PSStyle.f}>{isFavorite?"♡":"♥"}</div>{favorite}
                                 </div>
                             </div>
                     </div>

@@ -20,13 +20,15 @@ import Login from "./pages/Login"
 import AdminLogin from "./pages/AdminLogin.jsx"
 import SignUp from "./pages/SignUp"
 import ManagerSignUp from "./pages/ManagerSignUp.jsx"
+import FindId from "./pages/FindId.jsx"
+import FindPassword from "./pages/FindPassword.jsx"
 
 import InsertReview from "./pages/user/InsertReview";
 
 import AdminLayout from "./pages/admin/adminLayout";
 import AdminMain from "./layouts/adminmain/admin-main";
 import UserSearch from "./pages/user/UserSearch";
-import AdminManagerMemberList from "./components/admin/AdminManagerMemberList.jsx";
+import AdminManagerMemberList from "./components/admin/adminManagerMemberList.jsx";
 import AdminManagerPopupList from "./components/admin/adminManagerPopupList";
 import AdminManagerReservationList from "./components/admin/adminManagerReservationList";
 import AdminManagerReservationDetails from "./components/admin/adminManagerReservationDetails";
@@ -105,6 +107,10 @@ function App() {
             <Route path="/user/signup" element={<SignUp />} />
             <Route path="/manager/signup" element={<ManagerSignUp />} />
 
+            <Route path="/find-id" element={<FindId />} />
+            <Route path="/find-password" element={<FindPassword />} />
+
+
             {/* ▼▼▼ 결제 결과 페이지 경로 추가 ▼▼▼ */}
             <Route path="/payment-result" element={<PaymentResult />} />
 
@@ -121,7 +127,6 @@ function App() {
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
               <Route path="/manager/popupstore" element={<PopupRegister />} />
               <Route path="/manager/mypopup/:popupNo/edit" element={<MyPopupEditPage />} />
-              {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
 
             <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
@@ -141,7 +146,7 @@ function App() {
 
             <Route path="/test" element={<Test />} />
           </Routes>
-          <SimpleChat />
+          
         </BrowserRouter>
       </DndProvider>
     </AuthProvider>

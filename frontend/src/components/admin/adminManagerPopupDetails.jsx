@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { selectPopupDetails, approvePopup, rejectPopup } from '../../api/adminAPI';
-import { SearchContext } from './SearchProvider';
+import { SearchContext } from './searchProvider';
 import './AdminManagerPopupDetails.css';
 
 function AdminManagerPopupDetails() {

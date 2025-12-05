@@ -68,7 +68,7 @@ function Buttons () {
                 
                     <NavLink to="/popup-stores/search" style={{ color: "white", textDecoration: "none" }} className="buttonback" >
                     <div className="buttonbar" onClick={onMouse}>
-                    <img className="img" src="..\icons\search.png" style={{width:20,height:20}} alt="조회"  />
+                    <img className="img" src="../icons/search.png" style={{width:20,height:20}} alt="조회"  />
                     <div>
                         조회
                     </div>
@@ -78,21 +78,21 @@ function Buttons () {
                         
                         <NavLink to="/popup-stores/favorite" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                     <div className="buttonbar"  onClick={onMouse}>
-                        <img className="img" src="..\icons\favorite.png" style={{width:20,height:20}} alt="관심" />
+                        <img className="img" src="../icons/favorite.png" style={{width:20,height:20}} alt="관심" />
                         <div>관심</div>
                         </div>
                         </NavLink>
                 </Favorite>
                     <NavLink to="/popup-stores/maps" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                 <div className="buttonbar">
-                    <img className="img" src="..\icons\map.png" style={{width:20,height:20}} alt="주변" />
+                    <img className="img" src="../icons/map.png" style={{width:20,height:20}} alt="주변" />
                     <div>주변</div>
                     </div>
                     </NavLink>
                     <NavLink to="/myinfo" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                 <div className="buttonbar">
-                    <img className="img" src="..\icons\login.png" style={{width:20,height:20}} alt="마이페이지" />
-                    <div>마이페이지</div>
+                    <img className="img" src="../icons/login.png" style={{width:20,height:20}} alt="마이페이지" />
+                    <div >마이페이지</div>
                     </div>
                     </NavLink>
             </div>

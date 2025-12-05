@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.manager.controller;
 
 import com.ohgiraffers.poppop.manager.model.dto.*;
 import com.ohgiraffers.poppop.manager.model.service.ManagerDashboardService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name="Manager 대시보드 관련 API")
 @RestController
 @RequestMapping("/manager/dashboard")
 public class ManagerDashboardController {
@@ -109,6 +111,13 @@ public class ManagerDashboardController {
         String managerId = userDetails.getUsername();
         return ResponseEntity.ok(
                 dashboardService.getManagerEventTypeStats(managerId)
+        );
+    }
+
+    @GetMapping("/overview/summary")
+    public ResponseEntity<DashboardOverallKpiDTO> getOverallDashboardKpi() {
+        return ResponseEntity.ok(
+                dashboardService.getOverallDashboardKpi()
         );
     }
 }

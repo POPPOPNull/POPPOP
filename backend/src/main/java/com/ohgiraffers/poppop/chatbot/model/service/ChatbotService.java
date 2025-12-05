@@ -203,10 +203,11 @@ public class ChatbotService {
         Map<String, String[]> categoryKeywords = new HashMap<>();
         categoryKeywords.put("패션", new String[] { "패션", "fashion", "의류", "옷" });
         categoryKeywords.put("뷰티", new String[] { "뷰티", "beauty", "화장품", "코스메틱" });
-        categoryKeywords.put("음식", new String[] { "음식", "food", "푸드", "먹거리", "맛집" });
-        categoryKeywords.put("K-POP", new String[] { "kpop", "k-pop", "케이팝", "아이돌" });
+        categoryKeywords.put("굿즈", new String[] { "굿즈", "키링", "가차샵", "한정판", "피규어" });
+        categoryKeywords.put("키즈", new String[] { "키즈", "장난감", "놀이터", "아기" });
         categoryKeywords.put("전시", new String[] { "전시", "exhibition", "아트", "art" });
-        categoryKeywords.put("캐릭터", new String[] { "캐릭터", "character", "피규어" });
+        categoryKeywords.put("게임", new String[] { "게임", "좀비", "서바이벌", "생존" });
+        categoryKeywords.put("기타", new String[] { "기타", "빵", "음식", "악기","커피", "음식"});
 
         for (Map.Entry<String, String[]> entry : categoryKeywords.entrySet()) {
             for (String keyword : entry.getValue()) {

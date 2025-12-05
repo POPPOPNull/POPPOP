@@ -46,6 +46,8 @@
   position: relative;  /* 필요시 */
 }
 
+
+
 /* 이미지 */
 .img img {
   width: 100%;
@@ -53,4 +55,10 @@
   object-fit: cover;   /* 부모 div 꽉 채우면서 비율 유지 */
   object-position: center; /* 중앙 기준 크롭 */
   display: block;      /* inline 요소 여백 제거 */
+  transition: 0.1s
+}
+
+.img img:hover{
+  transform: scale(105%);
+  transition: 0.1s
 }

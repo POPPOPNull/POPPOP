@@ -1,7 +1,7 @@
 import ListContainer from "./ListContainer";
 import { selectAllMembers } from "../../api/adminAPI";
 import { useEffect, useContext } from "react";
-import { SearchContext } from "./SearchProvider";
+import { SearchContext } from "./searchProvider";
 
 function AdminMemberList(){
 

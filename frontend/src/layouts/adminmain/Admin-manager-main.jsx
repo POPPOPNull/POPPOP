@@ -1,4 +1,4 @@
-import "./Admin-main.css"
+import "./admin-main.css"
 import AdminManagerKPIData from "../../components/admin/AdminManagerKPIData"
 import AdminManagerLineChart from "../../components/admin/AdminManagerLineChart"
 import AdminManagerChart from "../../components/admin/AdminManagerChart"

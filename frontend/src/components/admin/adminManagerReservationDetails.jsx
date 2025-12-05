@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ListContainer from './ListContainer';
-import AdminModal from './AdminModal';
+import AdminModal from './adminModal';
 import { selectReservationDetailsByPopup, deleteReservation } from '../../api/adminAPI';
 import { SearchContext } from './searchProvider';
 

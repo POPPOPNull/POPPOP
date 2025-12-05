@@ -1,5 +1,5 @@
 import "../usermain/main.css";
-import Tab from "../../components/mypage/MyPageTab";
+import Tab from "../../components/mypage/mypagetab";
 import MyInfoDetail from "../../components/mypage/MyInfoDetail";
 import Logout from "../../components/Logout";
 import Footer from "../usermain/Footer";
@@ -9,9 +9,10 @@ function Mypage (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    {/* <Logout/> */}
                     <Tab/>
-                    <MyInfoDetail/>
+                    <div className="mypage-content">
+                        <MyInfoDetail/>
+                    </div>
                     <Footer/>
                 </div>
             </div>

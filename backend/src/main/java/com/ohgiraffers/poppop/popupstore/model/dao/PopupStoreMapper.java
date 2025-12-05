@@ -47,4 +47,6 @@ public interface PopupStoreMapper {
 
     // 매니저 팝업 수정
     int updateMyPopup(PopupStoreDTO popupStoreDTO);
+
+    List<PopupStoreDTO> selectAllPopupStoreAdmin();
 }

@@ -8,17 +8,23 @@
 }
 
 .rv-card {
-  background: var(--card);
-  border: 1px solid #0000001a;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .04);
-  padding: 18px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
 }
+.rv-thead,.rv-card, .rv-tr:hover {
+  background-color: #f8fafc;
+  box-shadow: 0 4px 8px rgba(15, 23, 42, 0.06);
+}
+
 
 .rv-thead,
 .rv-tr {
   display: grid;
-  grid-template-columns: 1.2fr 1.6fr 1.1fr 1fr .9fr;
+  grid-template-columns: 1.2fr 1.6fr 1.1fr 1fr .9fr 1fr 1fr;
   align-items: center;
   column-gap: 16px;
 }
@@ -29,7 +35,7 @@
   color: var(--text);
   background: #f4f6fa;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   margin-bottom: 8px;
 }
 
@@ -46,16 +52,15 @@
   border-bottom: none;
 }
 
-
-.mypopupdet-search-area {
-  margin: 24px 0 16px;
-}
-
 .mypopupdet-search-left {
   display: flex;
   align-items: center;   /* 세로 가운데 정렬 */
   gap: 10px;
   width: 100%;
+}
+.mypopupdet-selected{
+  font-size: 20px;
+  
 }
 
 .rv-select {
@@ -67,11 +72,6 @@
   font-size: 15px;
   flex-shrink: 0;
   box-sizing: border-box;
-}
-
-.mypopupdet-searchbar-wrap {
-  flex: 1;
-  min-width: 0;
 }
 
 .rv-filter-row {
@@ -127,6 +127,29 @@
   display: flex;
   justify-content: center;
   gap: 8px;
+}
+
+.fixed-pagination {
+  margin-top: auto !important;  
+}
+
+.visit-btn {
+   display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #f4002d;            
+  background: #ffffff;
+  border: 1px solid #eba9cf;
+  border-radius: 999px;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 
 

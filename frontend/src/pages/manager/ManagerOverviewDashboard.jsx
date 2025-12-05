@@ -6,6 +6,7 @@ import ManagerOverviewReservationTrendChart from "../../components/manager/dashb
 import ManagerOverviewEventTypeChart from "../../components/manager/dashboard/ManagerOverviewEventTypeChart";
 import ManagerOverviewWeekdayReservationChart from "../../components/manager/dashboard/ManagerOverviewWeekdayReservationChart";
 import ManagerOverviewGenderRatioChart from "../../components/manager/dashboard/ManagerOverviewGenderRatioChart";
+import ManagerOverviewKPIData from "../../components/manager/dashboard/ManagerOverviewKPIData";
 
 function ManagerOverviewDashboard() {
   return (
@@ -14,10 +15,9 @@ function ManagerOverviewDashboard() {
         <ManagerSidebar />
 
         <div className="manager-main-content">
-          {/* <h2 style={{ margin: "8px 0 6px", fontWeight: 800 }}>대시보드</h2>
-          <p style={{ marginBottom: "20px", color: "#666", fontSize: "14px" }}>
-            내가 등록한 모든 팝업스토어의 데이터를 합산한 전체 대시보드입니다.
-          </p> */}
+          <div className="manager-kpi-layout">
+            <ManagerOverviewKPIData />
+          </div>
 
           {/* 1행: 예약 추이 + 이벤트 타입 */}
           <section

@@ -204,3 +204,28 @@ export function fetchPopupRecentReservations(popupNo, limit = 5) {
     });
 }
 
+export function fetchPopupVisitors() {
+  return API.get("/manager/visitors")
+    .then((res) => {
+      console.log("방문 로그 조회 성공:", res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.error("방문 로그 조회 실패:", err);
+      throw err;
+    });
+}
+// 매니저가 등록한 모든 팝업 대시보드 상단 요약 조회
+export function fetchManagerOverviewSummary() {
+  return API.get("/manager/dashboard/overview/summary")
+    .then((response) => {
+      console.log("전체 대시보드 상단 KPI 조회 성공:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("전체 대시보드 상단 KPI 조회 오류:", error);
+      throw error;
+    });
+}
+
+

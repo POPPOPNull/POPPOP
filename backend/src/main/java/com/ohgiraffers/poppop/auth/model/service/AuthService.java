@@ -78,4 +78,44 @@ public class AuthService {
         return null;
     }
 
+    // --------------------
+    // 1) 아이디 찾기
+    // --------------------
+    public String findIdByEmail(String email) {
+        String id = memberMapper.selectIdByEmail(email);
+        if (id == null) {
+            throw new IllegalArgumentException("해당 이메일로 가입된 아이디가 없습니다.");
+        }
+        return id;
+    }
+
+    // --------------------
+    // 2) 비밀번호 찾기 - 본인 확인
+    // --------------------
+    public void verifyUser(String id, String email) {
+        MemberDTO member = memberMapper.selectByIdAndEmail(id, email);
+        if (member == null) {
+            throw new IllegalArgumentException("입력하신 정보와 일치하는 회원이 없습니다.");
+        }
+    }
+
+    // --------------------
+    // 3) 비밀번호 재설정
+    // --------------------
+    @Transactional
+    public void resetPassword(String id, String email, String newPassword) {
+
+        MemberDTO member = memberMapper.selectByIdAndEmail(id, email);
+        if (member == null) {
+            throw new IllegalArgumentException("입력하신 정보와 일치하는 회원이 없습니다.");
+        }
+
+        String encoded = passwordEncoder.encode(newPassword);
+        int result = memberMapper.updatePassword(id, encoded);
+
+        if (result == 0) {
+            throw new IllegalArgumentException("비밀번호 재설정에 실패했습니다.");
+        }
+    }
+
 }
