@@ -1,9 +1,6 @@
 package com.ohgiraffers.poppop.manager.model.dao;
 
-import com.ohgiraffers.poppop.manager.model.dto.EventTypeStatDTO;
-import com.ohgiraffers.poppop.manager.model.dto.GenderReservationDTO;
-import com.ohgiraffers.poppop.manager.model.dto.ReservationTrendDTO;
-import com.ohgiraffers.poppop.manager.model.dto.WeekdayReservationDTO;
+import com.ohgiraffers.poppop.manager.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -45,6 +42,8 @@ public interface ManagerDashboardMapper {
     List<GenderReservationDTO> selectManagerGenderRatio(@Param("managerId") String managerId);
 
     List<EventTypeStatDTO> selectManagerEventTypeStats(@Param("managerId") String managerId);
+
+    DashboardOverallKpiDTO selectOverallDashboardKpi();
 
 }
 

@@ -137,7 +137,7 @@ const SimpleChat = () => {
 
                     <div className="quick-actions">
                         <button onClick={() => handleQuickAction('추천해줘')}>⭐ 추천</button>
-                        <button onClick={() => handleQuickAction('강남 팝업')}>📍 성수</button>
+                        <button onClick={() => handleQuickAction('성수 팝업')}>📍 성수</button>
                         <button onClick={() => handleQuickAction('패션 팝업')}>👗 패션</button>
                     </div>
 

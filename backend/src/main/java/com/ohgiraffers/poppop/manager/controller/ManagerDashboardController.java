@@ -111,6 +111,13 @@ public class ManagerDashboardController {
                 dashboardService.getManagerEventTypeStats(managerId)
         );
     }
+
+    @GetMapping("/overview/summary")
+    public ResponseEntity<DashboardOverallKpiDTO> getOverallDashboardKpi() {
+        return ResponseEntity.ok(
+                dashboardService.getOverallDashboardKpi()
+        );
+    }
 }
 
 

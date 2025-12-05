@@ -49,6 +49,8 @@ public class SecurityConfig {
                                 // 1. 문제가 되는 toss-success 경로를 가장 먼저, 단독으로 permitAll() 처리
                                 .requestMatchers("/reservations/toss-success").permitAll()
 
+                                .requestMatchers("/manager/dashboard/overview/summary").permitAll()
+
                                 // 2. 나머지 permitAll 경로들
                                 .requestMatchers(
                                         "/auth/login",
@@ -73,6 +75,7 @@ public class SecurityConfig {
                                 .permitAll()
 
                                 .requestMatchers("/manager/mypopup").permitAll()
+
 
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/manager/**").hasRole("MANAGER")

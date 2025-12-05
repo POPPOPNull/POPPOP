@@ -81,6 +81,16 @@ function ManagerSidebar() {
           나의 팝업스토어
         </NavLink>
 
+        {/* <NavLink
+          to="/manager/visitors"
+          className={({ isActive }) =>
+            "admin-side-button" + (isActive ? " active" : "")
+          }
+        >
+          <img src="/icons/users-alt.png" alt="visitors" className="side-icon" />
+          팝업 방문자 수
+        </NavLink> */}
+
       </div>
       <div className="admin-logout">
             <AdminLogout />

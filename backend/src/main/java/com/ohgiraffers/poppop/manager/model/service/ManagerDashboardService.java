@@ -77,5 +77,9 @@ public class ManagerDashboardService {
     public List<EventTypeStatDTO> getManagerEventTypeStats(String managerId) {
         return dashboardMapper.selectManagerEventTypeStats(managerId);
     }
+
+    public DashboardOverallKpiDTO getOverallDashboardKpi() {
+        return dashboardMapper.selectOverallDashboardKpi();
+    }
 }
 

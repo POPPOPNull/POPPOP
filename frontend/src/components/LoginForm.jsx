@@ -45,7 +45,7 @@ function LoginComponent() {
     if (userRole) {
       
       const roleStr = Array.isArray(userRole) ? userRole[0] : userRole;
-      if (roleStr === 'MANAGER') navigate('/manager');
+      if (roleStr === 'MANAGER') navigate('/manager/dashboard');
       else if (roleStr === 'ADMIN') navigate('/admin');
       else if (roleStr === 'USER') navigate('/');
       else navigate('/');
