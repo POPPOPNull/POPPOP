@@ -36,16 +36,6 @@ function ManagerSidebar() {
       </div>
 
       <div className="admin-sidebutton-layout">
-        <NavLink
-          to="/manager"
-          end
-          className={({ isActive }) =>
-            "admin-side-button" + (isActive ? " active" : "")
-          }
-        >
-          <img src="/icons/home.png" alt="home" className="side-icon" />
-          POPPOP 소개
-        </NavLink>
 
         <NavLink
           to="/manager/dashboard"

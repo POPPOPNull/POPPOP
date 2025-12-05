@@ -6,7 +6,7 @@
   width: 100%;
   background-color: #f5f6f8;
   min-height: 100vh;
-  padding: 32px;
+  padding: 32px 32px 72px;
   box-sizing: border-box;
   font-family: "Pretendard", sans-serif;
 }
@@ -18,13 +18,6 @@
   align-items: center;
   margin-bottom: 4px;
 }
-.badge{ 
-    background:#EAF0FF;
-     color:#3A63F3; 
-     padding:8px 12px; 
-     border-radius:999px;
-      font-weight:700; 
-    }
 
 .mypopupdet-total-wrap {
   width: 100%;
@@ -82,13 +75,6 @@
   color: #fff;
   font-weight: 700;
 }
-
-/* 검색바 */
-.mypopupdet-search-area {
-  width: 100%;
-  margin-bottom: 2px;
-}
-
 /* ====== 팝업 정보 카드 ====== */
 .mypopupdet-info-card {
   background-color: #fff;
@@ -108,7 +94,7 @@
 .mypopupdet-info-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .mypopupdet-info-label {
@@ -127,18 +113,24 @@
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  padding: 24px;
+  padding: 20px 22px;
   border: 1px solid #e4e4e4;
   box-sizing: border-box;
   width: 100%;
-  overflow: hidden;
+  margin-bottom: 8px;
+
 }
 
-/* rv-card 컨테이너 */
+/* 카드 내부 래퍼 */
 .mypopupdet-table-section .rv-card {
   width: 100%;
   max-width: 100%;
   margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -149,13 +141,13 @@
 .mypopupdet-table-section .rv-thead,
 .mypopupdet-table-section .rv-tr {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  /*   아이디  예약번호  예약일자  예약시간  인원  상태   */
+  /* 살짝 더 촘촘하게 */
+  grid-template-columns: 0.9fr 1fr 1.3fr 0.9fr 0.7fr 1fr;
   align-items: center;
-  padding: 10px 12px;
-  column-gap: 12px;
+  padding: 8px 14px;
+  column-gap: 8px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* 헤더 스타일 */
@@ -171,12 +163,29 @@
   background-color: #fff;
   border-radius: 8px;
   border-bottom: 1px solid #eee;
-  transition: background 0.15s;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
 }
 
+/* hover 효과 */
 .mypopupdet-table-section .rv-tr:hover {
-  background-color: #fafafa;
+  background-color: #f8fafc;
+  box-shadow: 0 4px 6px rgba(15, 23, 42, 0.06);
 }
 
+/* 마지막 줄은 보더 제거 */
+.mypopupdet-table-section .rv-tr:last-child {
+  border-bottom: none;
+}
+
+/* 아이디 / 예약 상태 옆 여백 보정 */
+.mypopupdet-table-section .rv-thead > div:first-child,
+.mypopupdet-table-section .rv-tr > div:first-child {
+  padding-left: 4px;
+}
+
+.mypopupdet-table-section .rv-thead > div:last-child,
+.mypopupdet-table-section .rv-tr > div:last-child {
+  padding-right: 4px;
+}
 
 

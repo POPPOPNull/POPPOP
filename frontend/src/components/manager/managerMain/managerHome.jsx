@@ -36,8 +36,8 @@ function ManagerHome() {
           {hover && (
             <div className="mh-menu">
               {/* POPPOP 소개 → /manager */}
-              <button onClick={() => navigate("/manager")}>
-                POPPOP 소개
+              <button onClick={() => navigate("/manager/dashboard")}>
+                대시보드
               </button>
 
               {/* 팝업스토어 등록 → /manager/popup-register */}
