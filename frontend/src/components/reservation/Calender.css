@@ -83,7 +83,7 @@
 
 /* 마우스 오버 */
 .react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
-  background-color: #eba9cf;
+  background-color: #f4002d;
 }
 
 .timetable {

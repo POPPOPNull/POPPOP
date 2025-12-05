@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.swagger;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -28,8 +29,8 @@ public class SwaggerConfig {
 
     private Info apiInfo() {
         return new Info()
-                .title("POPPOP API Documentation")
-                .description("POPPOP Application API documentation")
+                .title("POPPOP API 명세서")
+//                .description("POPPOP Application API documentation")
                 .version("1.0.0");
     }
 
@@ -42,7 +43,7 @@ public class SwaggerConfig {
                 .pathsToMatch("/api/**","/auth/**","/popup-stores/**","/favorite/**",
                         "/myinfo/**","/myreservation/**","/behavior/**","/admin/**",
                         "/reservations/**","/manager/**",
-                        "/review/**","/myreview/**")
+                        "/review/**","/myreview/**","/manager/dashboard/**")
                 .build();
     }
 }

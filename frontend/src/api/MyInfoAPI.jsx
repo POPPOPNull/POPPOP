@@ -15,3 +15,11 @@ export function updatePhone(phone) {
     return API.put(`/myinfo/phone`, {phone})
     .then(response=>response.data);
 }
+
+export function updatePassword(currentPassword, newPassword) {
+  return API.put(`/myinfo/password`, {
+      currentPassword,
+      newPassword
+    })
+    .then(response => response.data);
+}

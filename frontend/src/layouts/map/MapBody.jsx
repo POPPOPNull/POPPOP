@@ -3,8 +3,9 @@ import "./MapBody.css";
 import { useEffect, useState } from "react";
 import KakaoMap from "../../components/maps/Map";
 import NearComp from "../../components/NearComp";
-import { MidComp1 } from "../../components/user/usermain/MidComp"
+import { MidComp1 } from "../../components/user/usermain/MidComp";
 import { selectAllPopupStore } from "../../api/PopupStoreAPI";
+import Footer from "../usermain/Footer";
 
 function MapBody (){
 
@@ -30,6 +31,8 @@ function MapBody (){
                     </div>
                     <MidComp1/>
                     {/* <NearComp/> */}
+                    <div style={{ height: "30px" }}></div>
+                    <Footer/>
                 </div>
             </div>
         </>

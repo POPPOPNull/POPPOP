@@ -14,6 +14,7 @@ import com.ohgiraffers.poppop.jwt.security.JwtTokenProvider;
 import com.ohgiraffers.poppop.member.model.dao.MemberMapper;
 import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
 import com.ohgiraffers.poppop.member.model.service.MemberService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag(name="인증 관련 API")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

@@ -47,4 +47,5 @@ public interface ReservationMapper {
     int deletePendingReservationByOrderId(String orderId);
 
     int deleteOldPendingReservation(@Param("cutoffTime") java.time.LocalDateTime cutoffTime);
+    Integer findPopupNoByOrderId(String orderId);
 }
