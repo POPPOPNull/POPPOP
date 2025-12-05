@@ -143,8 +143,7 @@ function MyPopupEdit() {
       !formData.brandMain ||
       !formData.roadAddress ||
       !formData.startDate ||
-      !formData.endDate ||
-      !formData.description
+      !formData.endDate
     ) {
       alert("필수 항목을 모두 입력해주세요.");
       return;

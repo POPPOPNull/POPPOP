@@ -9,6 +9,7 @@ import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
 import PopupRegister from "./pages/manager/popup-register";
 import ReservationPage from "./pages/manager/reservations";
+import ManagerVisitorsPage from "./pages/manager/ManagerVisitorsPage";
 import MyPopupEditPage from "./pages/manager/MyPopupEditPage";
 import MyPopupLayout from "./pages/manager/MyPopupLayout";
 import MyInformation from "./pages/user/MyInfo"
@@ -112,6 +113,7 @@ function App() {
 
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
             <Route path="/manager/dashboard" element={<ManagerOverviewDashboard />} />
+            <Route path="/manager/visitors" element={<ManagerVisitorsPage />} />
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
               <Route path="/manager/mypopup/:popupNo" element={<MyPopupLayout />}>
                 <Route index element={<ManagerDashboard />} />            
@@ -121,7 +123,6 @@ function App() {
               {/* <Route path="/manager/mypopupdet" element={<MypopupdetPage />} /> */}
               <Route path="/manager/popupstore" element={<PopupRegister />} />
               <Route path="/manager/mypopup/:popupNo/edit" element={<MyPopupEditPage />} />
-              {/* <Route path="/manager/reservations" element={<ReservationPage />} /> */}
             </Route>
 
             <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
@@ -141,7 +142,7 @@ function App() {
 
             <Route path="/test" element={<Test />} />
           </Routes>
-          <SimpleChat />
+          
         </BrowserRouter>
       </DndProvider>
     </AuthProvider>

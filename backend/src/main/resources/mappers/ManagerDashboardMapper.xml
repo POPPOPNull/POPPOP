@@ -216,6 +216,26 @@
         GROUP BY u.event_type
         ORDER BY count DESC
     </select>
+
+    <!-- 전체 팝업 KPI -->
+    <select id="selectOverallDashboardKpi"
+            resultType="com.ohgiraffers.poppop.manager.model.dto.DashboardOverallKpiDTO">
+
+        SELECT
+        -- 전체 팝업스토어 수
+        (SELECT COUNT(*) FROM popup_store) AS totalPopupCount,
+
+        -- 전체 예약 수
+        (SELECT COUNT(*) FROM reservation) AS totalReservationCount,
+
+        -- 전체 관심 수
+        (SELECT COUNT(*) FROM favorite) AS totalFavoriteCount,
+
+        -- 전체 리뷰 수
+        (SELECT COUNT(*) FROM review) AS totalReviewCount
+
+        FROM DUAL
+    </select>
 </mapper>
 
 

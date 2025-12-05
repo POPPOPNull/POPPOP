@@ -180,7 +180,6 @@ function MyPopupReg() {
       <div className="mpr-content-wrap">
         
         <div className="mpr-header">
-          {/* <h2 className="mpr-title">POPUP 등록</h2> */}
            
           <button
             className="mpr-submit-btn"
@@ -295,7 +294,7 @@ function MyPopupReg() {
           </section>
 
           <section className="mpr-section">
-      <h3 className="mpr-section-title">영업시간</h3>
+      <h3 className="mpr-section-title">영업시간 *</h3>
 
       <div className="mpr-hours-wrap">
         <div className="mpr-hours-row">

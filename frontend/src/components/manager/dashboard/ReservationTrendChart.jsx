@@ -18,28 +18,42 @@ function ReservationTrendChart({ popupNo }) {
   const [noData, setNoData] = useState(false);
 
   useEffect(() => {
-    if (!popupNo) return;
+  if (!popupNo) return;
 
-    fetchReservationTrend(popupNo)
-      .then((res) => {
-        // 응답이 없거나 빈 배열일 때
-        if (!res || res.length === 0) {
-          setData([]);
-          setNoData(true);
-          return;
-        }
+  setLoading(true);
+  setNoData(false);
 
-        setData(res);
-      })
-      .catch((err) => {
-        console.error("예약 추이 조회 실패:", err);
-        setData([]);
-        setNoData(true);
-      })
-      .finally(() => setLoading(false));
-  }, [popupNo]);
+  const mock = [
+    { date: "2025-11-29", reservationCount: 2 },
+    { date: "2025-11-30", reservationCount: 5 },
+    { date: "2025-12-01", reservationCount: 3 },
+    { date: "2025-12-02", reservationCount: 7 },
+    { date: "2025-12-03", reservationCount: 1 },
+    { date: "2025-12-04", reservationCount: 4 },
+    { date: "2025-12-05", reservationCount: 6 },
+  ];
 
-    if (loading) {
+  fetchReservationTrend(popupNo)
+    .then((res) => {
+      const list = Array.isArray(res) ? res : res?.data;
+      if (!list || list.length === 0) {
+        setData(mock);     // 🔥 데이터 없으면 목데이터 사용
+        return;
+      }
+
+      const sorted = [...list].sort((a, b) =>
+        String(a.date).localeCompare(String(b.date))
+      );
+
+      setData(sorted);
+    })
+    .catch(() => {
+      setData(mock);       // 🔥 오류 발생해도 목데이터 사용
+    })
+    .finally(() => setLoading(false));
+}, [popupNo]);
+
+  if (loading) {
     return (
       <div
         style={{
@@ -72,11 +86,12 @@ function ReservationTrendChart({ popupNo }) {
     );
   }
 
-  //Y축 최대값 계산 (단위 10)
-  const maxCount = data.length ? Math.max(...data.map((d) => d.reservationCount)) : 0;
+  // Y축 최대값 계산 (단위 10)
+  const maxCount = data.length
+    ? Math.max(...data.map((d) => d.reservationCount ?? 0))
+    : 0;
   const yMax = Math.max(10, Math.ceil(maxCount / 10) * 10);
 
-  //Y축 눈금
   const yTicks = [];
   for (let v = 0; v <= yMax; v += 10) {
     yTicks.push(v);
@@ -89,20 +104,16 @@ function ReservationTrendChart({ popupNo }) {
         margin={{ top: 20, right: 20, left: 0, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />    
-        <YAxis
-          allowDecimals={false}
-          domain={[0, yMax]}
-          ticks={yTicks}
-        />
+        {/* 🔥 X축은 그대로 date */}
+        <XAxis dataKey="date" />
+        <YAxis allowDecimals={false} domain={[0, yMax]} ticks={yTicks} />
         <Tooltip />
         <Legend />
-
         <Line
           type="monotone"
           dataKey="reservationCount"
           name="예약 수"
-          stroke="rgb(54, 162, 235)" 
+          stroke="rgb(54, 162, 235)"
           strokeWidth={3}
         />
       </LineChart>

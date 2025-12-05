@@ -45,6 +45,9 @@ function MyPopup() {
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState(null); 
 
+  const [page, setPage] = useState(1);
+  const pageSize = 10; // 한 페이지당 10개
+
   useEffect(() => {
   const fetchData = async () => {
     try {
@@ -86,6 +89,10 @@ function MyPopup() {
 
       if (sortKey === "title") filtered.sort((a, b) => a.title.localeCompare(b.title));
       if (sortKey === "state") filtered.sort((a, b) => a.state.localeCompare(b.state));
+
+      const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+      const startIndex = (page - 1) * pageSize;
+      const paginatedRows = filtered.slice(startIndex, startIndex + pageSize);
 
       const goDashboard = (id) => {
         navigate(`/manager/mypopup/${id}`);
@@ -140,7 +147,7 @@ function MyPopup() {
             <div className="center">관리</div>
           </div>
 
-          {filtered.map(row => (
+          {paginatedRows.map(row => (
             <div key={row.id} className="mp-tr">
               <div className="ellipsis">{row.title}</div>
               <div>{row.state}</div>
@@ -171,8 +178,39 @@ function MyPopup() {
             </div>
           )}
 
+          {filtered.length > 0 && (
+          <div className="mp-page">
+            <button
+              className="page-btn"
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+            >
+              이전
+            </button>
 
-        <div className="mp-page">1</div>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (pageNum) => (
+                <button
+                  key={pageNum}
+                  className={
+                    "page-btn" + (page === pageNum ? " active" : "")
+                  }
+                  onClick={() => handlePageChange(pageNum)}
+                >
+                  {pageNum}
+                </button>
+              )
+            )}
+
+            <button
+              className="page-btn"
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === totalPages}
+            >
+            다음
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import Header from "../../layouts/usermain/header";
 import MypageBody from "../../layouts/mypage/MyPageMain";
 import Buttons from "../../layouts/usermain/buttonbar";
+import SimpleChat from "../../components/chatbot/SimpleChat.jsx"; 
 
 function Information() {
     return(
@@ -8,6 +9,7 @@ function Information() {
         <Header/>
         <MypageBody/>
         <Buttons/>
+        <SimpleChat />
         </>
     )
 }

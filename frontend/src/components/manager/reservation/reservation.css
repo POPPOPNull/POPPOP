@@ -8,17 +8,19 @@
 }
 
 .rv-card {
-  background: var(--card);
-  border: 1px solid #0000001a;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .04);
-  padding: 18px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  min-height: 700px; 
 }
 
 .rv-thead,
 .rv-tr {
   display: grid;
-  grid-template-columns: 1.2fr 1.6fr 1.1fr 1fr .9fr;
+  grid-template-columns: 1.2fr 1.6fr 1.1fr 1fr .9fr 1fr 1fr;
   align-items: center;
   column-gap: 16px;
 }
@@ -127,6 +129,29 @@
   display: flex;
   justify-content: center;
   gap: 8px;
+}
+
+.fixed-pagination {
+  margin-top: auto !important;  
+}
+
+.visit-btn {
+   display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #f4002d;            
+  background: #ffffff;
+  border: 1px solid #eba9cf;
+  border-radius: 999px;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 
 

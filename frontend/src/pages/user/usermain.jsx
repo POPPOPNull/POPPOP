@@ -1,6 +1,7 @@
 import Header from "../../layouts/usermain/header";
 import Main from "../../layouts/usermain/main";
 import Buttons from "../../layouts/usermain/buttonbar";
+import SimpleChat from "../../components/chatbot/SimpleChat.jsx"; 
 
 function UserMain(){
     return(
@@ -8,6 +9,7 @@ function UserMain(){
         <Header/>
         <Main/>
         <Buttons/>
+        <SimpleChat /> 
         </>
     )
 }

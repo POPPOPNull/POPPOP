@@ -18,13 +18,9 @@ function ManagerDashboard() {
         <ManagerSidebar />
 
         <div className="manager-main-content">
-          {/* <h2 style={{ margin: "8px 0 14px", fontWeight: 800 }}>대시보드</h2> */}
-
-          {/* 상단 KPI 카드 */}
-          <section style={{ marginBottom: "24px" }}>
+          <div className="manager-kpi-layout">
             <ManagerKPIData popupNo={popupNo} />
-          </section>
-
+          </div>
         
           <section
             style={{
@@ -55,6 +51,8 @@ function ManagerDashboard() {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: "20px",
+            marginTop: "24px", 
+        
           }}
         >
 
