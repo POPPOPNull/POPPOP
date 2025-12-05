@@ -28,6 +28,12 @@ function ReviewInsert(){
    
            
        },[])
+
+       const [refresh, setRefresh] = useState(0)
+
+       const refreshReview = () => {
+        setRefresh(prev => prev +1)
+       }
    
    
    
@@ -51,11 +57,11 @@ function ReviewInsert(){
                        <div className={PPStyle.popupduration}>{popup.startDate} ~ {popup.endDate}</div>
                        <div className={PPStyle.popuplocation}>{popup.location}</div>
                        <div>{popup.hashtags}</div>
-                       <UserReview/>
+                       <UserReview onSuccess={()=>{refreshReview}}/>
                        
                        
                        <div style={{height:10}}></div>
-                       <ReviewView/>
+                       <ReviewView refresh={refresh} />
                        <div style={{height:10}}></div>
                        <MidComp1/>
                        <MidComp2/>

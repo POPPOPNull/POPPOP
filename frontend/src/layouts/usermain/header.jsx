@@ -67,6 +67,7 @@ function Header(){
         logout();
     
       };
+      
     
 
     return(
@@ -75,7 +76,7 @@ function Header(){
             <div className="logo">
                 <NavLink to="/" style={{ color: "#f4002d", textDecoration: "none" }}>POPPOP</NavLink>
                 <div className="hamburger">
-                    <img src="..\icons\menu-burger.png" alt="" style={{width:20,height:25}} onClick={onClickBurger}/>
+                    <img src="\icons\menu-burger.png" alt="" style={{width:20,height:25}} onClick={onClickBurger}/>
                 </div>
             </div>
             <div className="back" style={style}  onClick={onClickX}></div>
