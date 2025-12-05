@@ -73,7 +73,7 @@ function FindPassword() {
                 <h2 className="auth-title">비밀번호 찾기</h2>
 
             <p className="auth-subtitle">
-                가입하신 <span className="accent-text">아이디와 이메일</span>을
+                <span className="accent-text">아이디와 이메일</span>을
                 입력하면 새 비밀번호를 설정할 수 있어요.
             </p>
 

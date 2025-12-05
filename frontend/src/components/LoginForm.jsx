@@ -61,6 +61,7 @@ function LoginComponent() {
 
             return(
                 <>
+                <div style={{ height: "250px" }}></div>
                 <form className="loginform" onSubmit={handleSubmit}>
                     <input className="inputlogin"
                         type="text"  
