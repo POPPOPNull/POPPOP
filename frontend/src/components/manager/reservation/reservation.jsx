@@ -1,7 +1,6 @@
 import "./reservation.css";
 import { useEffect, useState } from "react";
 import { useParams,NavLink } from "react-router-dom";
-import ManagerSearchBar from "../ManagerSearchBar";
 import {fetchMyPopupReservations,fetchMyPopupDetail} from "../../../api/ManagerAPI";
 
 //날짜
@@ -106,9 +105,6 @@ function Reservation() {
         
       <div className="mypopupdet-toprow">
         <div className="mypopupdet-top-left">
-          <span className="badge">
-            {popupInfo ? (popupInfo.managerId || popupInfo.id) : ""}
-          </span>
 
           <span className="mypopupdet-selected">
             팝업 스토어<strong> NO_{popupNo}</strong>
@@ -144,17 +140,6 @@ function Reservation() {
             예약 내역
           </NavLink>
         </div>
-      </div>
-
-    
-      <div className="mypopupdet-search-area">
-          <div className="mypopupdet-searchbar-wrap">
-            <ManagerSearchBar
-              value={q}
-              onChange={setQ}
-              placeholder="예약 내역 검색"
-            />
-          </div>
       </div>
 
       <div className="rv-card">

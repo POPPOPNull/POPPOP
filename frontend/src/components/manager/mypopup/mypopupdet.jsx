@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./mypopupdet.css";
-import ManagerSearchBar from "../ManagerSearchBar";
 import { NavLink, useParams } from "react-router-dom";
 import { fetchMyPopupDetail,fetchMyPopupReservations,  } from "../../../api/ManagerAPI";
 
@@ -122,9 +121,8 @@ function MyPopupDet() {
 
       <div className="mypopupdet-toprow">
         <div className="mypopupdet-top-left">
-          <span className="badge">{popupInfo ? popupInfo.managerId : ""}</span>
           <span className="mypopupdet-selected">
-            팝업 스토어<strong>NO_{popupNo}</strong>
+            팝업 스토어<strong> NO_{popupNo}</strong>
           </span>
         </div>
 
@@ -155,14 +153,6 @@ function MyPopupDet() {
             예약 내역
           </NavLink>
         </div>
-      </div>
-
-      <div className="mypopupdet-search-area">
-        <ManagerSearchBar
-        value={keyword}
-        onChange={(value) => setKeyword(value)}
-        placeholder="예약 내역 검색"
-      />
       </div>
     
       {popupInfo && (
@@ -216,7 +206,6 @@ function MyPopupDet() {
       )}
 
       {/* 예약자 목록 */}
-      {/* <section className="mypopupdet-table-section"> */}
       {loading ? (
         <div
           style={{
@@ -240,6 +229,7 @@ function MyPopupDet() {
           최근 예약 내역이 없습니다.
         </div>
       ) : (
+        <section className="mypopupdet-table-section">
         <div className="rv-card">
           <div className="rv-thead">
             <div>아이디</div>
@@ -261,9 +251,10 @@ function MyPopupDet() {
             </div>
           ))}
         </div>
+        </section>
       )}
-    {/* </section> */}
     </div>
+    
   );
 }
 

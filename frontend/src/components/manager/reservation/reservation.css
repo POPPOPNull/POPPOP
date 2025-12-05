@@ -10,12 +10,16 @@
 .rv-card {
   background: #fff;
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: 16px 20px;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
   display: flex;
   flex-direction: column;
-  min-height: 700px; 
 }
+.rv-thead,.rv-card, .rv-tr:hover {
+  background-color: #f8fafc;
+  box-shadow: 0 4px 8px rgba(15, 23, 42, 0.06);
+}
+
 
 .rv-thead,
 .rv-tr {
@@ -31,7 +35,7 @@
   color: var(--text);
   background: #f4f6fa;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   margin-bottom: 8px;
 }
 
@@ -48,16 +52,15 @@
   border-bottom: none;
 }
 
-
-.mypopupdet-search-area {
-  margin: 24px 0 16px;
-}
-
 .mypopupdet-search-left {
   display: flex;
   align-items: center;   /* 세로 가운데 정렬 */
   gap: 10px;
   width: 100%;
+}
+.mypopupdet-selected{
+  font-size: 20px;
+  
 }
 
 .rv-select {
@@ -69,11 +72,6 @@
   font-size: 15px;
   flex-shrink: 0;
   box-sizing: border-box;
-}
-
-.mypopupdet-searchbar-wrap {
-  flex: 1;
-  min-width: 0;
 }
 
 .rv-filter-row {

@@ -1,7 +1,6 @@
 import "./mypopup.css";
 import { useState, useEffect } from "react";  
 import { useNavigate } from "react-router-dom";  
-import ManagerSearchBar from "../ManagerSearchBar";
 import { getMyPopupList } from "../../../api/ManagerAPI";
 import { jwtDecode } from "jwt-decode";
 
@@ -123,18 +122,8 @@ function MyPopup() {
     <div className="mp-wrap">
       <div className="mp-top">
         <div className="mp-user">
-        <span className="badge">
-          {managerId || "알 수 없음"}
-        </span>
       </div>
       </div>
-
-      
-        <ManagerSearchBar
-          value={q}
-          onChange={setQ}
-          placeholder="팝업스토어 검색"
-        />
 
       <div className="mp-card">
         <div className="mp-table">
