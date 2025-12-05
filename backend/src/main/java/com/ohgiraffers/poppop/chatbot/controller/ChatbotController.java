@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-@Tag(name = "Spring Boot Swagger 연동 (user)")
+@Tag(name = "챗봇 관련 API")
 @RestController
 @RequestMapping("/api/chatbot")
 public class ChatbotController {

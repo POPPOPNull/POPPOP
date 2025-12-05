@@ -5,6 +5,7 @@ import com.ohgiraffers.poppop.member.model.dto.MemberDTO;
 import com.ohgiraffers.poppop.mypage.model.service.MyPageService;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name="마이페이지 관련 API")
 @RestController
 public class MyPageController {
 

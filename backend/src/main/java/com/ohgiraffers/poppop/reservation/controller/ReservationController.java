@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.reservation.controller;
 
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Tag(name="User 계층 예약 관련 API")
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
