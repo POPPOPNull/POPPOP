@@ -30,9 +30,9 @@ function User (){
                     
                     <Blank/>
                     <TopComp/>
-                    <div style={{height:20}}></div>
+                    <div style={{height:40}}></div>
                     <Container/>
-                    <div style={{height:20}}></div>
+                    <div style={{height:40}}></div>
                     <BotComp/>
                     <Footer/>
                 </div>
