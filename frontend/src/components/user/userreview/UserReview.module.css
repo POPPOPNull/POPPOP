@@ -13,7 +13,7 @@
     background-color: #2c2c2c;
     color: white;
     resize: none;
-    width: calc(90% - 60px);
+    width: 840px;
     height: 80%;
     font-size: 15px;
     font-family: inter;
@@ -22,27 +22,29 @@
     
 }
 .registback{
-    width: 90%;
+    width: 900px;
     height: 80px;
     display: flex;
     align-items: center;
+    padding: 20px 0px;
     
 }
 .registbtn{
     height: 30px;
-    width: 800px;
+    width: 870px;
     background-color: red;
     font-size: 16px;
     display: flex;
     align-items: center;
     padding: 8px 15px;
     border-radius: 8px;   
+    transition: 0.3s;
 }
 
 .registbtn:hover{
     font-weight: 500;
     height: 30px;
-    width: 800px;
+    width: 870px;
     background-color: rgba(175, 6, 6, 0.952);
     font-size: 16px;
     display: flex;
@@ -51,6 +53,6 @@
     /* opacity: 50%; */
     padding: 8px 15px;
     border-radius: 8px;
-
+    transition: 0.3s;
     
 }

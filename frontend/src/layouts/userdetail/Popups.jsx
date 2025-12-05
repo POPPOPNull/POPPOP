@@ -80,9 +80,7 @@ function Popups(){
                     <div className={PPStyle.popuplocation}>{popup.location}</div>
                     <div>{popup.hashtags}</div>
                     <PopupInfo/>
-                    <div className={PPStyle.reviewbtns}>
-                        <div className={PPStyle.reviewtitle}>후기</div>
-                    </div>
+                    
                     <ReviewView/>
                     <Link to={`/popup-stores/${popupNo}/review`} style={{textDecoration:"none",color:"inherit"}}>
                         <div className={PPStyle.reviewbtnlayout}>

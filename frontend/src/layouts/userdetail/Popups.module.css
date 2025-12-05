@@ -35,10 +35,12 @@
 .popupname{
     font-size: 32px;
     font-weight: 700;
+    padding: 15px 0px;
 }
 .popuplocation,.popupduration{
     font-size: 14px;
     padding-bottom: 4px;
+    padding: 15px 0px;
 }
 .reviewbtns{
         display:flex;
@@ -54,19 +56,20 @@
 
 .reviewbtn{
     height: 30px;
-    width: 800px;
+    width: 870px;
     background-color: red;
     font-size: 16px;
     display: flex;
     align-items: center;
     padding: 8px 15px;
-    border-radius: 8px;   
+    border-radius: 8px; 
+    transition: 0.3s;  
 }
 
 .reviewbtn:hover{
     font-weight: 500;
     height: 30px;
-    width: 800px;
+    width: 870px;
     background-color: rgba(175, 6, 6, 0.952);
     font-size: 16px;
     display: flex;
@@ -75,6 +78,7 @@
     /* opacity: 50%; */
     padding: 8px 15px;
     border-radius: 8px;
+    transition: 0.3s;
 
     
 }
@@ -86,6 +90,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 20px;
+    padding: 30px 0px;
     
 }

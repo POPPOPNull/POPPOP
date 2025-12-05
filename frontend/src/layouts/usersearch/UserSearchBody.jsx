@@ -16,7 +16,7 @@ function UserSearchBody (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    <div className="blank"></div>
+                    <div style={{height:80}}></div>
                     <SearchBar/>
                     <Blank/>
 
