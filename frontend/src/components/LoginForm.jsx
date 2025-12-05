@@ -81,9 +81,9 @@ function LoginComponent() {
 
                     <br/>
                     <div>
-                        <Link className="loginhelp">아이디 찾기 </Link>
+                        <Link to={`/find-id`} className="loginhelp">아이디 찾기 </Link>
                         <span>|</span>
-                        <Link className="loginhelp"> 비밀번호 찾기 </Link>
+                        <Link to={`/find-password`} className="loginhelp"> 비밀번호 찾기 </Link>
                         <span>|</span>
                         <Link to="/user/signup" className="loginhelp"> 회원가입</Link>
                     </div>

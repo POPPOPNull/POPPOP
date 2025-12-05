@@ -24,12 +24,12 @@ table {
   table-layout: fixed;
 }
 thead {
-  background-color: rgb(32, 31, 31);
+  background-color: #141414;
 }
 table th {
   font-weight: 500;
-  font-size: 14px;
-  padding: 6px 8px;
+  font-size: 15px;
+  padding: 12px 8px;
 }
 table td {
   padding: 12px 10px;

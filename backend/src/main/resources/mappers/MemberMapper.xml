@@ -90,4 +90,22 @@
          where id = #{id}
     </update>
 
+    <!-- 1) 아이디 찾기 -->
+    <select id="selectIdByEmail" parameterType="string" resultType="string">
+        select id
+          from member
+         where email = #{email}
+    </select>
+
+    <!-- 2) 비밀번호 찾기 - 본인 확인 -->
+    <select id="selectByIdAndEmail" resultType="com.ohgiraffers.poppop.member.model.dto.MemberDTO">
+        select
+               id,
+               email,
+               password
+          from member
+         where id = #{id}
+           and email = #{email}
+    </select>
+
 </mapper>
