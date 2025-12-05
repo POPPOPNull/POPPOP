@@ -53,7 +53,7 @@ function ReviewInsert(){
                        <div>{popup.hashtags}</div>
                        <UserReview/>
                        
-                       <div>후기</div>
+                       
                        <div style={{height:10}}></div>
                        <ReviewView/>
                        <div style={{height:10}}></div>

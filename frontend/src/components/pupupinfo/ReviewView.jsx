@@ -37,7 +37,8 @@ function ReviewView(){
 
     return(
         <>
-        
+        <div className={RVStyle.back}>
+            <div className={RVStyle.title}>후기</div>
         <Swiper
         slidesPerView={3}
         slidesOffsetAfter={30}
@@ -54,6 +55,7 @@ function ReviewView(){
                         </SwiperSlide>
                             )}
         </Swiper>
+        </div>
         </>
     )
 }

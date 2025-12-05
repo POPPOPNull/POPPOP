@@ -92,7 +92,7 @@ function Buttons () {
                     <NavLink to="/myinfo" style={{ color: "white", textDecoration: "none" }} className="buttonback">
                 <div className="buttonbar">
                     <img className="img" src="../icons/login.png" style={{width:20,height:20}} alt="마이페이지" />
-                    <div>마이페이지</div>
+                    <div >마이페이지</div>
                     </div>
                     </NavLink>
             </div>

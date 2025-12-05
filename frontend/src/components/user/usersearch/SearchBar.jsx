@@ -26,6 +26,13 @@ function NoSearchResult({props}){
 
 function SearchBar(){
 
+    const [layout, setLayout] = useState({
+        display : "flex"
+    });
+    const [searchLayout, setSearchLayout] = useState({
+        display : "none"
+    })
+
     const [isDrag,setIsDrag] = useState(false)
     const [isVisible,setIsVisible] = useState(false)
     const [searchWord, setSearchWord] = useState("")
@@ -34,17 +41,22 @@ function SearchBar(){
     
     const[isFavorite,setIsFavorte]=useState(false)
     const[Narray,setNArray] = useState([])
-    const [style,setStyle] = useState({
-            display:"none"
-        })
+    
 
     const onClickOpen = () =>{
-        setStyle({
+        setLayout({
+            display:"none"
+        })
+        setSearchLayout({
             display:"flex"
         })
     }
+
     const onClickClose = () =>{
-        setStyle({
+        setLayout({
+            display:"flex"
+        })
+        setSearchLayout({
             display:"none"
         })
     }
@@ -77,8 +89,11 @@ function SearchBar(){
             setPopups(data)
         })
         
-        setStyle({
+        setSearchLayout({
             display:"none"
+        })
+        setLayout({
+            display:"flex"
         })
         
     
@@ -93,12 +108,14 @@ function SearchBar(){
             setPopups(data)
         })
         
-        setStyle({
+        setSearchLayout({
             display:"none"
+        })
+        setLayout({
+            display:"flex"
         })
         }
 
-        
     }
 
     useEffect(()=>{
@@ -126,14 +143,14 @@ function SearchBar(){
 
     return(
         <>
-            <div className={USStyle.layout}>
+            <div className={USStyle.layout} style={layout}>
                 <div className={USStyle.searchbar} onClick={onClickOpen}>{searchWord}</div>
             </div>
 
             
-            <div style={style}>
-                <div className={USStyle.searchbg}></div>
-                <div className={USStyle.searchbox}>
+            <div >
+                <div className={USStyle.searchbg} style={searchLayout}></div>
+                <div className={USStyle.searchbox} style={searchLayout}>
                     <div className={USStyle.searchlayout}>
                         <input type="text" 
                         className={USStyle.searchbar}
@@ -142,7 +159,7 @@ function SearchBar(){
                         autoFocus={true}
                         value={searchWord}
                         />                    
-                        <button className={USStyle.searchbutton} onClick={onCLickSearch}>{(searchWord=="")?"닫기":"검색"}</button>
+                        <button className={USStyle.searchbutton} onClick={(searchWord=="")?onClickClose:onCLickSearch}>{(searchWord=="")?"닫기":"검색"}</button>
                         {/* <button className={USStyle.searchbutton} onClick={onClickClose}>닫기</button> */}
                     </div>
                 </div>
