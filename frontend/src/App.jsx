@@ -9,7 +9,6 @@ import MyPopupPage from "./pages/manager/mypopup";
 import MypopupdetPage from "./pages/manager/mypopupdet";
 import PopupRegister from "./pages/manager/popup-register";
 import ReservationPage from "./pages/manager/reservations";
-import ManagerVisitorsPage from "./pages/manager/ManagerVisitorsPage";
 import MyPopupEditPage from "./pages/manager/MyPopupEditPage";
 import MyPopupLayout from "./pages/manager/MyPopupLayout";
 import MyInformation from "./pages/user/MyInfo"
@@ -113,7 +112,6 @@ function App() {
 
             <Route element={<ProtectedRoute requiredRoles={['MANAGER']} />}>
             <Route path="/manager/dashboard" element={<ManagerOverviewDashboard />} />
-            <Route path="/manager/visitors" element={<ManagerVisitorsPage />} />
               <Route path="/manager/mypopup" element={<MyPopupPage />} />
               <Route path="/manager/mypopup/:popupNo" element={<MyPopupLayout />}>
                 <Route index element={<ManagerDashboard />} />            
