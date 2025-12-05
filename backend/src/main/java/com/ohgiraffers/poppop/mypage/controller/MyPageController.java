@@ -83,6 +83,28 @@ public class MyPageController {
         }
     }
 
+    @PutMapping("/myinfo/password")
+    public ResponseEntity<?> updatePassword(@RequestBody Map<String, String> body,
+                                            @AuthenticationPrincipal UserDetails userDetails) {
+
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인이 필요합니다.");
+        }
+
+        String memberId = userDetails.getUsername();
+        String currentPassword = body.get("currentPassword");
+        String newPassword = body.get("newPassword");
+
+        try {
+            myPageService.updatePassword(memberId, currentPassword, newPassword);
+            return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+
     @GetMapping("/myreservation")
     public ResponseEntity<?> getMyReservations(@AuthenticationPrincipal UserDetails userDetails) {
 

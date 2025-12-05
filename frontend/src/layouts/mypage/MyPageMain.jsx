@@ -9,9 +9,10 @@ function Mypage (){
         <>
             <div className="user-main-layout">
                 <div className="user-main">
-                    {/* <Logout/> */}
                     <Tab/>
-                    <MyInfoDetail/>
+                    <div className="mypage-content">
+                        <MyInfoDetail/>
+                    </div>
                     <Footer/>
                 </div>
             </div>

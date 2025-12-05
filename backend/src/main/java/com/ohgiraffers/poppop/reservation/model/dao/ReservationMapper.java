@@ -43,4 +43,6 @@ public interface ReservationMapper {
     void updateReservationAsPaid(@Param("orderId") String orderId, @Param("paymentKey") String paymentKey);
 
     String findPaymentKey(@Param("reservationNo") int reservationNo, @Param("memberId") String memberId);
+
+    Integer findPopupNoByOrderId(String orderId);
 }
