@@ -10,44 +10,32 @@ import { loadTossPayments } from '@tosspayments/payment-sdk';
 function Calendar() {
   const navigate = useNavigate();
   const { popupNo } = useParams();
-  const [startDate, setStartDate] = useState(new Date());
-  const twoWeeksLater = new Date(new Date().setDate(new Date().getDate() + 14));
+  const [startDate, setStartDate] = useState(null);
+
+  const [popupStartDate, setPopupStartDate] = useState(null);
+  const [popupEndDate, setPopupEndDate] = useState(null);
 
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [availableCounts, setAvailableCounts] = useState({}); 
   const [count, setCount] = useState(1);
   const [popupInfo, setPopupInfo] = useState({ name: '팝업스토어', price: 1000 });
 
+  const [timeSlots, setTimeSlots] = useState([]); 
+
   const limitPerson = 2;
-
-  // --- 기존 인원 증감 및 시간 선택 로직은 그대로 사용 ---
-  const increase = () => {
-    if (!selectedTimeSlot) {
-      alert("회차를 먼저 선택해주세요.");
-      return;
-    }
-    const maxForSlot = availableCounts[selectedTimeSlot];
-    if (typeof maxForSlot !== "number" || maxForSlot <= 0) {
-      alert("해당 회차는 예약이 불가능합니다.");
-      return;
-    }
-    const maxLimit = Math.min(maxForSlot, limitPerson);
-    setCount((prev) => (prev >= maxLimit ? prev : prev + 1));
-  };
-
-  const decrease = () => setCount((prev) => (prev > 1 ? prev : 1));
   
-  const timeSlots = [
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-  ];
+  const generateTimeSlots = (openTimeStr, closeTimeStr) => {
+    if (!openTimeStr || !closeTimeStr) return [];
+
+    const [openH] = openTimeStr.split(":").map(Number);
+    const [closeH] = closeTimeStr.split(":").map(Number);
+
+    const slots = [];
+    for (let h = openH; h < closeH; h++) {
+      slots.push(`${String(h).padStart(2, "0")}:00`);
+    }
+    return slots;
+  };
 
   // 날짜 비교
   const isSameDate = (d1, d2) => {
@@ -63,13 +51,14 @@ function Calendar() {
     if (!dateObj) return false;
 
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     if (!isSameDate(dateObj, today)) return false;
 
     const [hStr, mStr] = slot.split(":");
     const slotMinutes = parseInt(hStr, 10) * 60 + parseInt(mStr, 10);
 
-    const nowMinutes = today.getHours() * 60 + today.getMinutes();
+    const nowMinutes = new Date().getHours() * 60 + new Date().getMinutes();
 
     return slotMinutes <= nowMinutes;
   };
@@ -81,13 +70,71 @@ function Calendar() {
     return `${year}-${month}-${day}`;
   };
 
+  const parseDateString = (dateStr) => {
+    if (!dateStr) return null;
+    const [y, m, d] = dateStr.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  };
+
+  useEffect(() => {
+    const fetchPopupInfo = async () => {
+      try {
+        const res = await JwtAPI.get(`/popup-stores/${popupNo}`);
+
+        const data = res.data;
+
+        console.log('팝업 응답 데이터 👉', data);
+
+        const start = parseDateString(data.startDate);
+        const end = parseDateString(data.endDate);
+
+        setPopupStartDate(start);
+        setPopupEndDate(end);
+
+        setPopupInfo({
+          name: data.name,
+          price: data.price ?? 1000,
+        });
+
+        const slots = generateTimeSlots(data.openTime, data.closeTime);
+        setTimeSlots(slots);
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let initialDate = start;
+        if (today > start) {
+          initialDate = today;
+        }
+
+        if (end && initialDate > end) {
+          alert("현재 이 팝업스토어는 예약 가능한 날짜가 없습니다.");
+          navigate(-1);
+          return;
+        }
+
+        setStartDate(initialDate);
+
+        fetchAllRemainingForDate(initialDate, slots);
+
+      } catch (err) {
+        console.error("팝업 정보 조회 실패:", err);
+        alert("팝업 정보 조회에 실패했습니다. 잠시 후 다시 시도해주세요.");
+        navigate(-1);
+      }
+    };
+
+    fetchPopupInfo();
+  }, [popupNo]);
+
+
   // 예약 가능 인원 조회 로직 (기존과 동일)
-  const fetchAllRemainingForDate = (dateObj) => {
+  const fetchAllRemainingForDate = (dateObj, slots = timeSlots) => {
     if (!dateObj) return;
     setAvailableCounts({});
-    timeSlots.forEach((slot) => fetchRemaining(dateObj, slot));
+    (slots || []).forEach((slot) => fetchRemaining(dateObj, slot));
   };
-  useEffect(() => { fetchAllRemainingForDate(startDate); }, []);
+
   const fetchRemaining = async (dateObj, timeSlot) => {
     if (!timeSlot || !dateObj) return;
     const reservationDate = formatDate(dateObj);
@@ -101,6 +148,23 @@ function Calendar() {
       setAvailableCounts((prev) => ({ ...prev, [timeSlot]: null }));
     }
   };
+
+  const increase = () => {
+    if (!selectedTimeSlot) {
+      alert("회차를 먼저 선택해주세요.");
+      return;
+    }
+    const maxForSlot = availableCounts[selectedTimeSlot];
+    if (typeof maxForSlot !== "number" || maxForSlot <= 0) {
+      alert("해당 회차는 예약이 불가능합니다.");
+      return;
+    }
+    const maxLimit = Math.min(maxForSlot, limitPerson);
+    setCount((prev) => (prev >= maxLimit ? prev : prev + 1));
+  };
+
+  const decrease = () => setCount((prev) => (prev > 1 ? prev : 1));
+
   useEffect(() => {
     if (!selectedTimeSlot) return;
     const maxForSlot = availableCounts[selectedTimeSlot];
@@ -183,6 +247,10 @@ function Calendar() {
     }
   };
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const minSelectableDate = today > popupStartDate ? today : popupStartDate;
+
   return (
     <>
       <div className='caltitle'>
@@ -190,10 +258,14 @@ function Calendar() {
       </div>
       <DatePicker
         selected={startDate}
-        onChange={(date) => { setStartDate(date); fetchAllRemainingForDate(date); }}
+        onChange={(date) => { 
+          setStartDate(date); 
+          fetchAllRemainingForDate(date); 
+          setSelectedTimeSlot(null);
+        }}
         locale={ko}
-        minDate={new Date()}
-        maxDate={twoWeeksLater}
+        minDate={minSelectableDate}
+        maxDate={popupEndDate}
         inline
       />
       <div className='subtitle'>
