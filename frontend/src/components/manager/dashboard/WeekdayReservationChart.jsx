@@ -73,24 +73,26 @@ function WeekdayReservationChart({ popupNo }) {
   }
 
   return (
-    <ResponsiveContainer width="100%" height={240}>
-      <BarChart
-        data={data}
-        margin={{ top: 20, right: 20, left: 0, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="dayOfWeek" />      {/* "월","화","수"... */}
-        <YAxis allowDecimals={false} />
-        <Tooltip />
-        <Bar
-          dataKey="reservationCount"
-          name="예약 수"
-          fill="rgba(75, 192, 192, 0.5)"   
-          stroke="rgba(75, 192, 192, 1)"    
-          strokeWidth={2}
-        />
-      </BarChart>
-    </ResponsiveContainer>
+    <div style={{ width: "100%", height: 240 }}>
+      <ResponsiveContainer>
+        <BarChart
+          data={data}
+          margin={{ top: 20, right: 20, left: 0, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="dayOfWeek" />      {/* "월","화","수"... */}
+          <YAxis allowDecimals={false} />
+          <Tooltip />
+          <Bar
+            dataKey="reservationCount"
+            name="예약 수"
+            fill="rgba(75, 192, 192, 0.5)"
+            stroke="rgba(75, 192, 192, 1)"
+            strokeWidth={2}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 

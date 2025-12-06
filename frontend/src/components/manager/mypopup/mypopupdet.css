@@ -43,11 +43,6 @@
   color: #555;
 }
 
-.mypopupdet-selected strong {
-  font-weight: 700;
-  color: #000;
-}
-
 /* 탭 영역 */
 .mypopupdet-tabs {
   display: flex;
@@ -71,15 +66,16 @@
 }
 
 .mypopupdet-tab-item.active {
-  background-color: #111;
+  background-color: #f4002d;
   color: #fff;
   font-weight: 700;
 }
+
 /* ====== 팝업 정보 카드 ====== */
 .mypopupdet-info-card {
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   padding: 24px;
   border: 1px solid #e4e4e4;
   box-sizing: border-box;
@@ -108,84 +104,151 @@
   font-size: 14px;
 }
 
-/* ====== 최근 예약 5건 카드 ====== */
-.mypopupdet-table-section {
+/* ====== 하단 Split Layout (달력 + 정보) ====== */
+.calendar-split-container {
+  display: flex;
+  gap: 20px;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  padding: 20px 22px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 20px;
   border: 1px solid #e4e4e4;
   box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 8px;
-
+  /* 높이 제한을 두어 스크롤 방지 느낌, 필요시 auto로 변경 가능 */
+  height: auto;
+  min-height: 400px;
+  align-items: stretch;
 }
 
-/* 카드 내부 래퍼 */
-.mypopupdet-table-section .rv-card {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
+/* 왼쪽: 달력 패널 (5:5 비율) */
+.calendar-left-panel {
+  flex: 1;
+  /* 50% 너비 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #eee;
+  padding-right: 20px;
+}
 
+/* 달력 스타일 커스텀 (크기 조절) */
+.calendar-left-panel .react-datepicker {
+  border: none;
+  font-family: "Pretendard", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  /* 배경 흰색 */
+}
+
+.calendar-left-panel .react-datepicker__month-container {
+  width: 100%;
+}
+
+.calendar-left-panel .react-datepicker__header {
+  background-color: #fff;
+  border-bottom: none;
+  padding-top: 10px;
+}
+
+.calendar-left-panel .react-datepicker__day-name,
+.calendar-left-panel .react-datepicker__day {
+  width: 3rem;
+  /* 날짜 셀 크기 */
+  line-height: 3rem;
+  margin: 0.2rem;
+  color: #333;
+  /* 기본 글자색 검정 */
+}
+
+/* 예약 있는 날 스타일 (연한 분홍) */
+.has-reservation-day {
+  background-color: #ffe6e6;
+  color: #333;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+/* 선택된 날짜 스타일 (빨간색) - 최우선 순위 */
+.calendar-left-panel .react-datepicker__day--selected {
+  background-color: #f4002d !important;
+  color: #fff !important;
+  border-radius: 50%;
+  /* 원형 */
+}
+
+/* 오늘 날짜 스타일 */
+.calendar-left-panel .react-datepicker__day--today {
+  font-weight: bold;
+  color: #f4002d !important;
+  /* 오늘 날짜는 항상 빨간 글씨 */
+}
+
+/* 오늘이면서 선택된 경우 (흰색 글씨 유지) */
+.calendar-left-panel .react-datepicker__day--selected.react-datepicker__day--today {
+  color: #fff !important;
+}
+
+.calendar-left-panel .react-datepicker__current-month {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  /* 여백 축소 */
+  color: #333;
+}
+
+.calendar-left-panel .react-datepicker__navigation {
+  top: 15px;
+}
+
+/* 오른쪽: 일별 정보 패널 (5:5 비율) */
+.daily-info-panel {
+  flex: 1;
+  /* 50% 너비 */
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
+  padding-left: 10px;
 }
 
-/* 헤더 / 각 행 : 6개 컬럼 고정
-   아이디 | 예약번호 | 예약 일자 | 예약 시간 | 예약 인원 | 예약 상태 */
-.mypopupdet-table-section .rv-thead,
-.mypopupdet-table-section .rv-tr {
-  display: grid;
-  /* 살짝 더 촘촘하게 */
-  grid-template-columns: 0.9fr 1fr 1.3fr 0.9fr 0.7fr 1fr;
-  align-items: center;
-  padding: 8px 14px;
-  column-gap: 8px;
-  box-sizing: border-box;
-  font-size: 13px;
-}
-
-/* 헤더 스타일 */
-.mypopupdet-table-section .rv-thead {
-  font-weight: 600;
-  background-color: #f1f3f5;
+.daily-info-title {
+  font-size: 18px;
+  font-weight: 700;
   color: #333;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #111;
+  padding-bottom: 10px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.daily-stat-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 16px 20px;
   border-radius: 8px;
+  margin-bottom: 12px;
 }
 
-/* 데이터 행 스타일 */
-.mypopupdet-table-section .rv-tr {
-  background-color: #fff;
-  border-radius: 8px;
-  border-bottom: 1px solid #eee;
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+.daily-stat-box .stat-label {
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
 }
 
-/* hover 효과 */
-.mypopupdet-table-section .rv-tr:hover {
-  background-color: #f8fafc;
-  box-shadow: 0 4px 6px rgba(15, 23, 42, 0.06);
+.daily-stat-box .stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
 }
 
-/* 마지막 줄은 보더 제거 */
-.mypopupdet-table-section .rv-tr:last-child {
-  border-bottom: none;
+.daily-info-desc {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
 }
-
-/* 아이디 / 예약 상태 옆 여백 보정 */
-.mypopupdet-table-section .rv-thead > div:first-child,
-.mypopupdet-table-section .rv-tr > div:first-child {
-  padding-left: 4px;
-}
-
-.mypopupdet-table-section .rv-thead > div:last-child,
-.mypopupdet-table-section .rv-tr > div:last-child {
-  padding-right: 4px;
-}
-
-

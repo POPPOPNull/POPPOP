@@ -21,7 +21,32 @@ function ManagerDashboard() {
           <div className="manager-kpi-layout">
             <ManagerKPIData popupNo={popupNo} />
           </div>
-        
+
+          <section
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "20px",
+              marginBottom: "20px",
+            }}
+          >
+            {/* 요일별 예약 패턴 */}
+            <div className="manager-dashboard-card">
+              <h3 className="dashboard-card-title">
+                예약 추이 <span className="dashboard-card-sub">최근 7일</span>
+              </h3>
+
+              <ReservationTrendChart popupNo={popupNo} />
+            </div>
+
+            {/* 이벤트 타입 */}
+            <div className="manager-dashboard-card">
+              <h3 className="dashboard-card-title">사용자 행동 유형 비율</h3>
+              <EventTypeChart popupNo={popupNo} />
+            </div>
+
+          </section>
+
           <section
             style={{
               display: "grid",
@@ -29,47 +54,21 @@ function ManagerDashboard() {
               gap: "20px",
             }}
           >
-            {/* 요일별 예약 패턴 */}
+
+            {/* 요일별 예약 패턴 (막대 그래프) */}
             <div className="manager-dashboard-card">
-            <h3 className="dashboard-card-title">
-              예약 추이 <span className="dashboard-card-sub">최근 7일</span>
-            </h3>
+              <h3 className="dashboard-card-title">요일별 예약 패턴</h3>
 
-            <ReservationTrendChart popupNo={popupNo} />
-          </div>
+              <WeekdayReservationChart popupNo={popupNo} />
+            </div>
 
-            {/* 이벤트 타입 */}
+            {/* 예약자 성별 비율 (파이 차트) */}
             <div className="manager-dashboard-card">
-            <h3 className="dashboard-card-title">사용자 행동 유형 비율</h3>
-            <EventTypeChart popupNo={popupNo} />
-          </div>
+              <h3 className="dashboard-card-title">예약자 성별 비율</h3>
 
+              <GenderRatioChart popupNo={popupNo} />
+            </div>
           </section>
-
-          <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "20px",
-            marginTop: "24px", 
-        
-          }}
-        >
-
-          {/* 요일별 예약 패턴 (막대 그래프) */}
-          <div className="manager-dashboard-card">
-          <h3 className="dashboard-card-title">요일별 예약 패턴</h3>
-
-          <WeekdayReservationChart popupNo={popupNo} />
-        </div>
-
-          {/* 예약자 성별 비율 (파이 차트) */}
-          <div className="manager-dashboard-card">
-            <h3 className="dashboard-card-title">예약자 성별 비율</h3>
-
-            <GenderRatioChart popupNo={popupNo} />
-          </div>
-        </section>
 
         </div>
       </div>

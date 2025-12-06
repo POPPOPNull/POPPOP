@@ -7,44 +7,128 @@
   --radius: 14px;
 }
 
-.rv-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 16px 20px;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+/* ====== 레이아웃 래퍼 (mypopup.css와 통일) ====== */
+.mypopupdet-wrapper {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
   display: flex;
   flex-direction: column;
-}
-.rv-thead,.rv-card, .rv-tr:hover {
-  background-color: #f8fafc;
-  box-shadow: 0 4px 8px rgba(15, 23, 42, 0.06);
+  gap: 12px;
 }
 
+/* 상단 총 예약자 수 */
+.mypopupdet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
 
-.rv-thead,
-.rv-tr {
+.mypopupdet-total-wrap {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #555;
+}
+
+/* 상단: manager + 탭 줄 */
+.mypopupdet-toprow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mypopupdet-top-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #555;
+}
+
+/* 탭 영역 */
+.mypopupdet-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mypopupdet-tab-item {
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #666;
+  background-color: #f5f6f8;
+  transition: 0.15s ease-in-out;
+}
+
+.mypopupdet-tab-item:hover {
+  background-color: #e9edf5;
+}
+
+.mypopupdet-tab-item.active {
+  background-color: #f4002d;
+  /* 브랜드 컬러 */
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ====== 카드 + 테이블 (mypopup.css 스타일 적용) ====== */
+.rv-card {
+  background: var(--card);
+  border: 1px solid #0000001a;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .04);
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 테이블 헤더 */
+.rv-thead {
   display: grid;
   grid-template-columns: 1.2fr 1.6fr 1.1fr 1fr .9fr 1fr 1fr;
   align-items: center;
   column-gap: 16px;
-}
 
-.rv-thead {
   font-weight: 800;
   font-size: 14px;
   color: var(--text);
   background: #f4f6fa;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   margin-bottom: 8px;
+  flex-shrink: 0;
+  /* 헤더는 스크롤되지 않음 */
+}
+
+/* 테이블 바디 */
+.rv-tbody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .rv-tr {
-  padding: 14px;
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr 1.1fr 1fr .9fr 1fr 1fr;
+  align-items: center;
+  column-gap: 16px;
+  padding: 16px 14px;
   border-bottom: 1px solid var(--line);
+  font-size: 14px;
 }
 
-.rv-card .rv-tr:nth-child(odd) {
+.rv-tr:nth-child(odd) {
   background: #fafbfe;
 }
 
@@ -52,105 +136,176 @@
   border-bottom: none;
 }
 
-.mypopupdet-search-left {
-  display: flex;
-  align-items: center;   /* 세로 가운데 정렬 */
-  gap: 10px;
-  width: 100%;
-}
-.mypopupdet-selected{
-  font-size: 20px;
-  
-}
-
-.rv-select {
-  height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0 16px;
-  background: #fff;
-  font-size: 15px;
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.rv-filter-row {
-  margin: 8px 0 16px;    
-  display: flex;
-  align-items: center;     
+.rv-tr:hover {
+  background-color: #f8fafc;
+  /* hover 효과 */
+  cursor: pointer;
 }
 
 
-/* 페이지네이션 전체 영역 */
+/* ====== 페이지 네이션 ====== */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 24px;
-  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  gap: 6px;
+  flex-shrink: 0;
+  /* 페이지네이션도 스크롤되지 않음 */
 }
 
-/* 기본 버튼 스타일 */
 .page-btn {
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 8px;
   border: 1px solid #ddd;
   background: #fff;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   color: #555;
   transition: all 0.2s ease;
 }
 
-/* hover 효과 */
 .page-btn:hover {
   background: #f2f2f2;
   border-color: #bbb;
 }
 
-/* 현재 선택된 버튼 */
 .page-btn.active {
-  background: #f4002d;  
+  background: #f4002d;
+  /* 브랜드 컬러 */
   color: #fff;
   border-color: #f4002d;
-  font-weight: 600;
-}
-
-/* 클릭 시 살짝 눌리는 느낌 */
-.page-btn:active {
-  transform: scale(0.97);
+  font-weight: 700;
 }
 
 .fixed-pagination {
-  margin-top: 12px;
-  padding-top: 16px;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+  margin-top: auto !important;
 }
 
-.fixed-pagination {
-  margin-top: auto !important;  
-}
-
+/* ====== 버튼류 ====== */
 .visit-btn {
-   display: inline-flex;
+  display: inline-flex;
   align-items: center;
   gap: 4px;
-
   padding: 6px 14px;
   font-size: 13px;
   font-weight: 600;
-
-  color: #f4002d;            
+  color: #f4002d;
   background: #ffffff;
   border: 1px solid #eba9cf;
   border-radius: 999px;
-
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
   cursor: pointer;
   transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 
+.visit-btn.active {
+  background: #f4002d;
+  color: #fff;
+}
+
+/* CSV/Print 버튼 그룹 */
+.export-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  transition: 0.2s ease;
+}
+
+.csv-btn {
+  background: #fff;
+  color: #f4002d;
+  border: 1px solid #f4002d;
+}
+
+.csv-btn:hover {
+  background: #fff0f3;
+}
+
+.print-btn {
+  background: #fff;
+  color: #f4002d;
+  border: 1px solid #f4002d;
+}
+
+.print-btn:hover {
+  background: #fff0f3;
+}
 
 
+@media print {
+
+  /* 숨길 요소들 */
+  .manager-sidebar,
+  .mypopupdet-header,
+  .mypopupdet-toprow,
+  .rv-filter-row,
+  .pagination,
+  .visit-btn,
+  .export-btn-group,
+  header,
+  nav {
+    display: none !important;
+  }
+
+  /* 레이아웃 초기화 */
+  .manager-page,
+  .main-layout,
+  .manager-main-content,
+  .mypopupdet-wrapper,
+  .rv-card {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    display: block !important;
+    max-height: none !important;
+    /* 높이 제한 해제 */
+  }
+
+  .rv-tbody {
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 테이블 스타일 조정 */
+  .rv-thead,
+  .rv-tr {
+    grid-template-columns: 1fr 1.2fr 1.2fr 1fr 0.8fr 1fr !important;
+    /* 방문확인 버튼 컬럼 제외 */
+    border-bottom: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  .rv-thead {
+    background: #eee !important;
+    border-bottom: 2px solid #000 !important;
+  }
+
+  /* 방문확인 버튼 컬럼 숨기기 (7번째 컬럼) */
+  .rv-thead>div:nth-child(7),
+  .rv-tr>div:nth-child(7) {
+    display: none !important;
+  }
+}
