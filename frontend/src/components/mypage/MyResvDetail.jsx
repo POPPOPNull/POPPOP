@@ -107,7 +107,7 @@ function ResvDetail() {
                         {filteredReservations.map((resv) => (
                             <tr key={resv.reservationNo}>
                                 <td>
-                                    <p style={{marginLeft:"20px"}}>2025.12.05</p>
+                                    <p style={{marginLeft:"20px", color:"white"}}>{resv.createdAt}</p>
                                 </td>
                                 <td className="popup-info">
                                     <div className="poster">
