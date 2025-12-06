@@ -28,13 +28,13 @@ function UserReview(){
   };
 
   useEffect(() => {
-      const savedToken = localStorage.getItem('accessToken');
+      const savedToken = sessionStorage.getItem('accessToken');
       if (savedToken) {
         const payload = parseJwt(savedToken);
         if (payload) {
           setIsAuthorized(true)
         } else {
-          localStorage.removeItem('accessToken');
+          sessionStorage.removeItem('accessToken');
         }
       }
     }, []);

@@ -11,7 +11,7 @@ JwtAPI.interceptors.request.use((config) => {
     return config;
   }
   
-  const token = localStorage.getItem('accessToken');
+  const token = sessionStorage.getItem('accessToken');
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
@@ -35,7 +35,7 @@ JwtAPI.interceptors.response.use(
 
     if (error.response && error.response.status === 401) {
 
-      if (!localStorage.getItem('accessToken')) {
+      if (!sessionStorage.getItem('accessToken')) {
         // 비로그인 상태 → refresh 시도 x
         return Promise.reject(error);
       }
@@ -50,7 +50,7 @@ JwtAPI.interceptors.response.use(
         const newAccessToken = refreshResponse.data.accessToken;
 
         // 새 토큰 저장
-        localStorage.setItem('accessToken', newAccessToken);
+        sessionStorage.setItem('accessToken', newAccessToken);
 
         // 원래 요청 헤더에 새 토큰 세팅
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
@@ -61,7 +61,7 @@ JwtAPI.interceptors.response.use(
         console.log('Refresh Token 갱신 실패. 강제 로그아웃 처리.');
         console.log('refresh 실패 응답:', refreshError.response?.data);
 
-        localStorage.removeItem('accessToken');
+        sessionStorage.removeItem('accessToken');
         window.location.href = '/auth/login';
 
         return Promise.reject(refreshError);
