@@ -13,7 +13,9 @@ public class ReservationDetailsDTO {
     private int popupNo;
     private String memberId;
     private String popupName;
-    private String phone;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate createdAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservationDate;
@@ -26,20 +28,14 @@ public class ReservationDetailsDTO {
 
     public ReservationDetailsDTO() {}
 
-    public ReservationDetailsDTO(int reservationNo,
-                                 String reservationStatus,
-                                 int reservationPersonnel,
-                                 int popupNo,
-                                 String memberId,
-                                 String popupName,
-                                 LocalDate reservationDate,
-                                 LocalTime reservationTime, String orderId, Integer reservationAmount) {
+    public ReservationDetailsDTO(int reservationNo, String reservationStatus, int reservationPersonnel, int popupNo, String memberId, String popupName, LocalDate createdAt, LocalDate reservationDate, LocalTime reservationTime, String orderId, Integer reservationAmount) {
         this.reservationNo = reservationNo;
         this.reservationStatus = reservationStatus;
         this.reservationPersonnel = reservationPersonnel;
         this.popupNo = popupNo;
         this.memberId = memberId;
         this.popupName = popupName;
+        this.createdAt = createdAt;
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
         this.orderId = orderId;
@@ -94,6 +90,14 @@ public class ReservationDetailsDTO {
         this.popupName = popupName;
     }
 
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDate getReservationDate() {
         return reservationDate;
     }
@@ -128,13 +132,14 @@ public class ReservationDetailsDTO {
 
     @Override
     public String toString() {
-        return "ReservationDTO{" +
+        return "ReservationDetailsDTO{" +
                 "reservationNo=" + reservationNo +
                 ", reservationStatus='" + reservationStatus + '\'' +
                 ", reservationPersonnel=" + reservationPersonnel +
                 ", popupNo=" + popupNo +
                 ", memberId='" + memberId + '\'' +
                 ", popupName='" + popupName + '\'' +
+                ", createdAt=" + createdAt +
                 ", reservationDate=" + reservationDate +
                 ", reservationTime=" + reservationTime +
                 ", orderId='" + orderId + '\'' +
