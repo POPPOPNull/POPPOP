@@ -20,14 +20,14 @@ function Header(){
   };
 
     useEffect(() => {
-        const savedToken = localStorage.getItem('accessToken');
+        const savedToken = sessionStorage.getItem('accessToken');
         if (savedToken) {
           const payload = parseJwt(savedToken);
           if (payload) {
             console.log("아이디",payload.id)
             setIsAuthorized(true)
           } else {
-            localStorage.removeItem('accessToken');
+            sessionStorage.removeItem('accessToken');
             
           }
         }else{
