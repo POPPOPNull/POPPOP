@@ -19,9 +19,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // 새로고침 시 localStorage에서 accessToken을 읽어서 로그인 상태 복원
+  // 새로고침 시 sessionStorage accessToken을 읽어서 로그인 상태 복원
   useEffect(() => {
-    const savedToken = localStorage.getItem('accessToken');
+    const savedToken = sessionStorage.getItem('accessToken');
     if (savedToken) {
       const payload = parseJwt(savedToken);
       if (payload) {
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
           token: savedToken,
         });
       } else {
-        localStorage.removeItem('accessToken');
+        sessionStorage.removeItem('accessToken');
       }
     }
     setLoading(false);
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   // 로그인 시
   const login = (token) => {
-    localStorage.setItem('accessToken', token);
+    sessionStorage.setItem('accessToken', token);
     const payload = parseJwt(token);
     if (payload) {
       setUser({
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('accessToken');
+    sessionStorage.removeItem('accessToken');
   };
 
   const value = {

@@ -107,7 +107,7 @@ function ResvDetail() {
                         {filteredReservations.map((resv) => (
                             <tr key={resv.reservationNo}>
                                 <td>
-                                    <p style={{marginLeft:"20px"}}>2025.12.05</p>
+                                    <p style={{marginLeft:"20px", color:"white"}}>{resv.createdAt}</p>
                                 </td>
                                 <td className="popup-info">
                                     <div className="poster">
@@ -141,7 +141,7 @@ function ResvDetail() {
                                     </div>
                                 </td>
                                 <td>
-                                    <span className={`status ${resv.reservationStatus === '결제완료' ? 'completed' : 
+                                    <span style={{fontSize:"14px"}} className={`status ${resv.reservationStatus === '결제완료' ? 'completed' : 
                                                                 resv.reservationStatus === '예약완료' ? 'completed' : 'cancelled'}`}>
                                         {resv.reservationStatus}
                                     </span>
