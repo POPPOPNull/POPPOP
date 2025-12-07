@@ -445,7 +445,9 @@
         category_name,
         id,
         click_count,
-        hashtag_name
+        hashtag_name,
+        latitude,
+        longitude
         )
         VALUES (
         #{name},
@@ -461,7 +463,9 @@
         #{categoryName},
         #{id},
         0,
-        #{hashtagName}
+        #{hashtagName},
+        #{latitude},
+        #{longitude}
         )
     </insert>
 
@@ -544,6 +548,8 @@
             <if test="homepageLink != null"> homepage_link = #{homepageLink}, </if>
             <if test="capacity != 0"> capacity = #{capacity}, </if>
             <if test="hashtagName != null"> hashtag_name = #{hashtagName}, </if>
+            <if test="latitude != 0"> latitude = #{latitude}, </if>
+            <if test="longitude != 0"> longitude = #{longitude}, </if>
         </set>
         WHERE popup_no = #{no}
         AND id = #{id} <!--매니저 본인 팝업만 수정 가능-->

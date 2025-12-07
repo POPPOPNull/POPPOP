@@ -7,7 +7,7 @@ function ManagerHome() {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
 
-   // 로그인 여부 체크
+  // 로그인 여부 체크
   const isLoggedIn = !!localStorage.getItem("accessToken");
 
   return (
@@ -53,22 +53,24 @@ function ManagerHome() {
           )}
         </div>
 
-        {/* 로그인 버튼만 */}
-        <div className="mh-logout">
-          <button
-            className="mh-login-btn"
-            onClick={() => navigate("/auth/login")}
-          >
-            login
-          </button>
-        </div>
+        {/* 로그인 버튼만 (비로그인 시에만 노출) */}
+        {!isLoggedIn && (
+          <div className="mh-logout">
+            <button
+              className="mh-login-btn"
+              onClick={() => navigate("/auth/login")}
+            >
+              login
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="mh-main">
         <h2 className="mh-title">대한민국 유일의 팝업스토어 전문 플랫폼</h2>
         <h1 className="mh-brand">POPPOP</h1>
         <p className="mh-desc">
-          대한민국 유일의 팝업스토어 전문 플랫폼 팝팝에서는<br/>
+          대한민국 유일의 팝업스토어 전문 플랫폼 팝팝에서는<br />
           고객경험 마케팅의 최정상에 자리잡은 팝업스토어의 홍보, 성과관리 등<br />
           필요한 서비스와 솔루션을 제공합니다 ✨
         </p>
