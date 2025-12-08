@@ -131,7 +131,7 @@ function SearchBar(){
                 .then(data=>{
                     
                     setFavoriteNo(data)
-                    console.log("찜한것",data)
+                    console.log("찜한것?",data)
                     
                 })
         },[])
@@ -170,12 +170,12 @@ function SearchBar(){
             <select onChange={onChangeStatus} className={TPStyle.select}>
             <option value="all" >전체</option>
             <option value="done" >종료</option>
-            <option value="open" defaultValue={true} selected={true}>진행중</option>
+            <option value="open" selected>진행중</option>
             <option value="scheduled">오픈 예정</option>
             </select>
 
         <div className={TPStyle.popuplayout}>
-            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} isFavorite={(favoriteNo.includes(popups.no)?isFavorite:!isFavorite)} popupstore={popup} setIsDrag={setIsDrag} posterNo={popup.no} />)}
+            {popups.length==0? <NoSearchResult props={searchWord} /> : popups.map(popup=> <PopupStores key={popup.no} isFavorite={(favoriteNo.includes(popup.no)?isFavorite:!isFavorite)} popupstore={popup} setIsDrag={setIsDrag} posterNo={popup.no} />)}
         </div>
         </>
     )

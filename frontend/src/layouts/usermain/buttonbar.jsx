@@ -63,13 +63,6 @@ function Buttons () {
 
     
     
-    const onMouse = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMouseCoord({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
 
     
 
@@ -80,7 +73,7 @@ function Buttons () {
                 
                 
                     <NavLink to="/popup-stores/search" style={{ color: "white", textDecoration: "none" }} className="buttonback" >
-                    <div className="buttonbar"  onClick={onMouse}>
+                    <div className="buttonbar">
                     <img className={location.pathname=="/popup-stores/search"?"imgred":'img'} src="/icons/search.png" style={{width:20,height:20}} alt="조회" />
                     <div style={location.pathname=="/popup-stores/search"?{color:"#f4002d"}:{color:'white'}}>조회</div>
                     </div>
@@ -88,7 +81,7 @@ function Buttons () {
                 <Favorite>
                         
                         <NavLink to="/popup-stores/favorite" style={{ color: "white", textDecoration: "none" }} className="buttonback">
-                        <div className="buttonbar"  onClick={onMouse}>
+                        <div className="buttonbar">
                         <img className={location.pathname=="/popup-stores/favorite"?"imgred":'img'} src="/icons/favorite.png" style={{width:20,height:20}} alt="관심" />
                         <div style={location.pathname=="/popup-stores/favorite"?{color:"#f4002d"}:{color:'white'}}>관심</div>
                         </div>
