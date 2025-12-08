@@ -56,7 +56,6 @@ function UserReview(){
             insertReview(content,popupNo)
         .then(
             alert('후기가 작성되었습니다.')
-            
         ).catch(
             err=>{
                 console.error('리뷰 실패',err)
@@ -68,7 +67,7 @@ function UserReview(){
 
 
         
-        // window.location.reload()
+        window.location.reload()
     }
 
 

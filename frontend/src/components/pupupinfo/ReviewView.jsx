@@ -16,7 +16,7 @@ function NoReviewYet(){
     )
 }
 
-function ReviewView({refresh}){
+function ReviewView(){
 
 
     const {popupNo} = useParams();
@@ -33,7 +33,7 @@ function ReviewView({refresh}){
         }
         
     )
-    },[refresh])
+    },[review.length])
 
     return(
         <>
