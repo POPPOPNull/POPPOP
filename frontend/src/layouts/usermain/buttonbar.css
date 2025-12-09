@@ -36,9 +36,11 @@
     z-index: 2000;
 }
 .img{
-    filter: invert();
+    filter: invert(100%);
 }
-
+.imgred{
+    filter: invert(12%) sepia(99%) saturate(7490%) hue-rotate(346deg) brightness(94%) contrast(103%);
+}
 .ripple {
   position: absolute;
   width: 20px;
@@ -55,4 +57,32 @@
     transform: translate(-50%, -50%) scale(10);
     opacity: 0;
   }
+}
+
+.modal{
+  display:flex;
+  opacity: 0%;
+  top: 200px;
+  left: calc(50% - 125px);
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  transition: 1s;
+}
+
+.modalview{
+  display:flex;
+  opacity: 100%;
+  top: 200px;
+  left: calc(50% - 125px);
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  transition: 0.1s;
 }

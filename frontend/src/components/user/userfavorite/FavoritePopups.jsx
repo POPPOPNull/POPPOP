@@ -50,7 +50,7 @@ function FavoritePopups(){
             setLength(data.length)
             }   
             fetchData()
-        },[length])
+        },[isDrop,isDrag])
 
         const [,drop] = useDrop({
             accept : 'popup',
@@ -61,7 +61,7 @@ function FavoritePopups(){
                 deleteFavorite(item.popupstore.no)
                 console.log('삭제 완')
                 setIsDrop(!isDrop)
-                window.location.reload()
+                // window.location.reload()
             }
             
         })
