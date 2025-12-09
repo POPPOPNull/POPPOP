@@ -19,7 +19,7 @@ function AdminLayout() {
                 <AdminSidebar />
                 <main className='admin-main-layout'>
                     {showSearchBar && <AdminSearchBar />}
-                    <hr style={{ margin: '20px 0' }} />
+                    {/* {showSearchBar && <hr style={{ margin: '20px 0' }} />} */}
                     <Outlet />
                 </main>
             </div>

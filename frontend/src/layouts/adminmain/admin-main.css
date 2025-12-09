@@ -86,7 +86,7 @@
 
 .admin-chart-layout{
     width: 100%;
-    height: 300px;
+    height: 365px;
     border-radius: 10px;
     background-color: #f4f6fa;
     display: flex;
@@ -98,7 +98,7 @@
 
 .admin-chart-box{
     width: 50%;
-    height: 300px;
+    height: 365px;
     border-radius: 10px;
     background-color: #ffffff;
     display: flex;

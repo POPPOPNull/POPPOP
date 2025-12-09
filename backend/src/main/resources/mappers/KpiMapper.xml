@@ -9,18 +9,51 @@
     <result property="memberVisitors" column="member_visitors"/>
     <result property="nonMemberVisitors" column="non_member_visitors"/>
 </resultMap>
-<!--    일별 방문자 수(전체,회원,비회원)-->
+<!--    일별 방문자 수(전체,회원,비회원) 회원,비회원 : 총 방문자 수 기반 랜덤 비율 부여-->
+<!--    이전 6일 데이터 : 오늘 날짜 기반 랜덤 데이터-->
 <select id="selectDailyVisitorStats" resultMap="dailyVisitorResultMap">
-    select
-           date(e.time_stamp) as visit_date,
-           count(distinct e.session_id) as total_visitors
-<!--           count(distinct case when is not null then e.session_id end) as member_visitors,-->
-<!--           count(distinct case when is null then e.session_id end) as non_member_visitors-->
-      from user_event_data e
-<!--      left join session_info s on e.session_id = s.session_id-->
-     where e.time_stamp >= date_sub(curdate(), interval 7 day)
-     group by date(e.time_stamp)
-     order by visit_date asc
+    <![CDATA[
+    WITH RECURSIVE DateSeries AS (
+    SELECT CURDATE() - INTERVAL 6 DAY AS visit_date
+    UNION ALL
+    SELECT visit_date + INTERVAL 1 DAY
+    FROM DateSeries
+    WHERE visit_date < CURDATE()
+),
+BaseVisitors AS (
+    SELECT COALESCE(COUNT(DISTINCT session_id), 0) AS today_cnt
+    FROM user_event_data
+    WHERE DATE(time_stamp) = CURDATE()
+),
+Daily AS (
+    SELECT
+        d.visit_date,
+        b.today_cnt,
+        RAND(TO_DAYS(d.visit_date))        AS rnd_total,
+        RAND(TO_DAYS(d.visit_date) + 999)  AS rnd_member
+    FROM DateSeries d
+    CROSS JOIN BaseVisitors b
+),
+Totals AS (
+    SELECT
+        visit_date,
+        CASE
+            WHEN visit_date = CURDATE()
+                THEN GREATEST(today_cnt, 2)
+            ELSE GREATEST(2, today_cnt + FLOOR(rnd_total * 21) - 10)
+        END AS total_visitors,
+        rnd_member
+    FROM Daily
+)
+SELECT
+    visit_date,
+    total_visitors,
+    /* member: 최소 1 ~ 최대 total-1 */
+    FLOOR(rnd_member * (total_visitors - 1)) + 1 AS member_visitors,
+    total_visitors - (FLOOR(rnd_member * (total_visitors - 1)) + 1) AS non_member_visitors
+FROM Totals
+ORDER BY visit_date;
+    ]]>
 </select>
 
 <!--    전체 회원 수-->
@@ -63,7 +96,7 @@
                count(*) as eventCount
           from user_event_data
         <where>
-            event_type in ('노출', '상세페이지 클릭', '관심목록 추가', '후기 작성', '예약')
+            event_type in ('상세페이지 클릭', '관심목록 추가', '후기 작성', '예약')
             <if test="month != null and month != ''">
                 and date_format(time_stamp, '%Y-%m') = #{month}
             </if>

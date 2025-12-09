@@ -34,7 +34,7 @@
 /* 레이아웃별 추가 스타일 (컬럼 수와 비율 정의) */
 /* 회원 목록 */
 .layout-members {
-  grid-template-columns: 1.4fr 1.0fr 1.5fr 2.4fr 0.6fr 1.5fr;
+  grid-template-columns: 1fr 1.0fr 1.5fr 2.4fr 0.6fr 1.5fr;
 }
 
 /* 리뷰 목록 */
@@ -44,12 +44,12 @@
 
 /* 예약 목록 */
 .layout-reservation {
-  grid-template-columns: 1.4fr 1.0fr 1.0fr 1.7fr 1.8fr 1.5fr;
+  grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr;
 }
 
 /* 회원(manager) 목록 */
 .layout-manager-members {
-  grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
 }
 
 /* 팝업 목록 */
@@ -81,7 +81,7 @@
 }
 .list-row > div:first-child,
 .list-header > div:first-child {
-  text-align: left; /* First column left-aligned */
+  text-align: center; /* First column left-aligned */
 }
 .list-row > div:last-child,
 .list-header > div:last-child {
@@ -106,7 +106,7 @@
 .mp-card {
   display: flex;
   flex-direction: column;
-  min-height: 720px; /* 테이블 10행과 페이지네이션을 포함할 충분한 높이 */
+  min-height: 780px; /* 테이블 행과 페이지네이션을 포함할 충분한 높이 */
 }
 
 .mp-table {
