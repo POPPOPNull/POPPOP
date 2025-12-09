@@ -25,7 +25,7 @@ function mapState(p) {
 
 function MyPopup() {
 
-  const token = localStorage.getItem("accessToken");
+  const token = sessionStorage.getItem("accessToken");
   let managerId = "";
 
   if (token) {
