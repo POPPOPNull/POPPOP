@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchMyPopupDetail, updatePopup } from "../../../api/ManagerAPI";
 import ManagerSidebar from "../../../layouts/managermain/manager-sidebar";
@@ -17,6 +18,8 @@ function MyPopupEdit() {
     startDate: "",
     endDate: "",
     description: "",
+    latitude: 0,
+    longitude: 0,
   });
 
   const [openTime, setOpenTime] = useState("");
@@ -96,6 +99,61 @@ function MyPopupEdit() {
     );
   };
 
+  // 주소 검색 팝업
+  const openPostcode = useDaumPostcodePopup();
+
+  const handleAddressComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    // 좌표 변환 (Geocoding)
+    if (window.kakao && window.kakao.maps) {
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.addressSearch(data.address, (result, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          const lat = parseFloat(result[0].y);
+          const lng = parseFloat(result[0].x);
+
+          setFormData((prev) => ({
+            ...prev,
+            roadAddress: fullAddress,
+            latitude: lat,
+            longitude: lng,
+          }));
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            roadAddress: fullAddress,
+            latitude: 0,
+            longitude: 0,
+          }));
+        }
+      });
+    } else {
+      console.error("Kakao Maps SDK not loaded");
+      alert("지도 스크립트가 로드되지 않았습니다. 새로고침 후 다시 시도해주세요.");
+      setFormData((prev) => ({
+        ...prev,
+        roadAddress: fullAddress,
+      }));
+    }
+  };
+
+  const handleAddressSearch = () => {
+    openPostcode({ onComplete: handleAddressComplete });
+  };
+
   // 기존 데이터 불러오기
   useEffect(() => {
     const loadPopup = async () => {
@@ -111,6 +169,8 @@ function MyPopupEdit() {
           startDate: data.startDate || "",
           endDate: data.endDate || "",
           description: data.explanation || "",
+          latitude: data.latitude || 0,
+          longitude: data.longitude || 0,
         });
 
         if (data.openTime) setOpenTime(data.openTime.slice(0, 5));
@@ -163,7 +223,11 @@ function MyPopupEdit() {
       hashtagName: hashtagsList.length
         ? hashtagsList.map((t) => `#${t}`).join(" ")
         : "",
+      latitude: formData.latitude,
+      longitude: formData.longitude,
     };
+
+    console.log("Update Payload:", payload); // 디버깅용 로그
 
     setSubmitting(true);
 
@@ -256,11 +320,14 @@ function MyPopupEdit() {
                   type="text"
                   placeholder="도로명*"
                   value={formData.roadAddress}
-                  onChange={(e) =>
-                    setFormData({ ...formData, roadAddress: e.target.value })
-                  }
+                  readOnly
+                  onClick={handleAddressSearch}
                 />
-                <button className="mpr-small-btn" type="button">
+                <button
+                  className="mpr-small-btn"
+                  type="button"
+                  onClick={handleAddressSearch}
+                >
                   검색
                 </button>
               </div>
@@ -287,6 +354,7 @@ function MyPopupEdit() {
                   onChange={(e) =>
                     setFormData({ ...formData, startDate: e.target.value })
                   }
+                  onClick={(e) => e.target.showPicker()}
                 />
                 <span className="mpr-tilde">~</span>
                 <input
@@ -296,6 +364,7 @@ function MyPopupEdit() {
                   onChange={(e) =>
                     setFormData({ ...formData, endDate: e.target.value })
                   }
+                  onClick={(e) => e.target.showPicker()}
                 />
               </div>
             </div>
@@ -402,9 +471,9 @@ function MyPopupEdit() {
               </div>
 
               <div className="mpr-row">
-                <input className="mpr-input" type="date" />
+                <input className="mpr-input" type="date" onClick={(e) => e.target.showPicker()} />
                 <span className="mpr-tilde">~</span>
-                <input className="mpr-input" type="date" />
+                <input className="mpr-input" type="date" onClick={(e) => e.target.showPicker()} />
               </div>
             </div>
 
@@ -506,9 +575,8 @@ function MyPopupEdit() {
                 <button
                   key={tag}
                   type="button"
-                  className={`mpr-tag-btn ${
-                    selectedTags.includes(tag) ? "selected" : ""
-                  }`}
+                  className={`mpr-tag-btn ${selectedTags.includes(tag) ? "selected" : ""
+                    }`}
                   onClick={() => handleTagToggle(tag)}
                 >
                   {tag}

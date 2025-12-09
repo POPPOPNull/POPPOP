@@ -89,8 +89,9 @@
   gap: 8px;
 
 
-  max-height: calc(100vh - 220px);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* 테이블 영역만 스크롤 */
@@ -99,8 +100,9 @@
   display: grid;
   gap: 0;
 
-  flex: 1;
-  overflow-y: auto;
+  width: 100%;
+  display: grid;
+  gap: 0;
 }
 
 .mp-thead,
@@ -164,8 +166,24 @@
   font-weight: 700;
 }
 
-.mp-page button.active {
-  color: #f4002d;
+.mp-page .page-btn {
+  background: none;
+  border: 1px solid #E7EBF3;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #6C727F;
+  font-weight: 600;
+}
+
+.mp-page .page-btn:hover {
+  background: #f8fafc;
+}
+
+.mp-page .page-btn.active {
+  background: #f4002d;
+  color: #fff;
+  border-color: #f4002d;
 }
 
 /* ====== 버튼류 ====== */

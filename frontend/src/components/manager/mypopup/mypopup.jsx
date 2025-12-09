@@ -1,6 +1,6 @@
 import "./mypopup.css";
-import { useState, useEffect } from "react";  
-import { useNavigate } from "react-router-dom";  
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getMyPopupList } from "../../../api/ManagerAPI";
 import { jwtDecode } from "jwt-decode";
 
@@ -31,51 +31,51 @@ function MyPopup() {
   if (token) {
     try {
       const decoded = jwtDecode(token);
-      console.log("decoded token:", decoded); 
-      managerId = decoded.id; 
+      console.log("decoded token:", decoded);
+      managerId = decoded.id;
     } catch (err) {
       console.error("토큰 디코딩 오류:", err);
     }
   }
   const [q, setQ] = useState("");
   const [sortKey, setSortKey] = useState("latest");
-  const navigate = useNavigate();  
-  const [list, setList] = useState([]); 
-  const [loading, setLoading] = useState(true);  
-  const [error, setError] = useState(null); 
+  const navigate = useNavigate();
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [page, setPage] = useState(1);
-  const pageSize = 10; // 한 페이지당 10개
+  const pageSize = 8; // 한 페이지당 8개
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      setLoading(true);      // 🔹 요청 시작할 때 true (선택)
-      setError(null);
+    const fetchData = async () => {
+      try {
+        setLoading(true);      // 🔹 요청 시작할 때 true (선택)
+        setError(null);
 
-      const data = await getMyPopupList();
-      console.log("📦 /manager/mypopup response in React:", data);
+        const data = await getMyPopupList();
+        console.log("📦 /manager/mypopup response in React:", data);
 
-      const rows = data.map((p) => ({
-        id: p.no,
-        title: p.name,
-        state: mapState(p),
-        date: `${p.startDate} ~ ${p.endDate}`,
-        location: p.location || p.popupLocation,
-        category: p.categoryName,
-      }));
+        const rows = data.map((p) => ({
+          id: p.no,
+          title: p.name,
+          state: mapState(p),
+          date: `${p.startDate} ~ ${p.endDate}`,
+          location: p.location || p.popupLocation,
+          category: p.categoryName,
+        }));
 
-      setList(rows);
-    } catch (e) {
-      console.error("조회 오류:", e);
-      setError("내 팝업스토어 목록을 불러오는 중 오류가 발생했습니다.");
-    } finally {
-      setLoading(false);     
-    }
-  };
+        setList(rows);
+      } catch (e) {
+        console.error("조회 오류:", e);
+        setError("내 팝업스토어 목록을 불러오는 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   let filtered = [...list];
 
@@ -86,43 +86,49 @@ function MyPopup() {
     );
   }
 
-      if (sortKey === "title") filtered.sort((a, b) => a.title.localeCompare(b.title));
-      if (sortKey === "state") filtered.sort((a, b) => a.state.localeCompare(b.state));
+  if (sortKey === "title") filtered.sort((a, b) => a.title.localeCompare(b.title));
+  if (sortKey === "state") filtered.sort((a, b) => a.state.localeCompare(b.state));
 
-      const totalPages = Math.ceil(filtered.length / pageSize) || 1;
-      const startIndex = (page - 1) * pageSize;
-      const paginatedRows = filtered.slice(startIndex, startIndex + pageSize);
+  const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+  const startIndex = (page - 1) * pageSize;
+  const paginatedRows = filtered.slice(startIndex, startIndex + pageSize);
 
-      const goDashboard = (id) => {
-        navigate(`/manager/mypopup/${id}`);
-      };
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+    }
+  };
 
-      const goDetail = (id) => {
-        navigate(`/manager/mypopup/${id}/detail`);
-      };
+  const goDashboard = (id) => {
+    navigate(`/manager/mypopup/${id}`);
+  };
+
+  const goDetail = (id) => {
+    navigate(`/manager/mypopup/${id}/detail`);
+  };
 
 
-      if (loading) {
-        return (
-          <div className="mp-wrap">
-            <div>나의 팝업스토어 목록을 불러오는 중...</div>
-          </div>
-        );
-      }
+  if (loading) {
+    return (
+      <div className="mp-wrap">
+        <div>나의 팝업스토어 목록을 불러오는 중...</div>
+      </div>
+    );
+  }
 
-      if (error) {
-        return (
-          <div className="mp-wrap">
-            <div style={{ color: "red", fontSize: 14 }}>{error}</div>
-          </div>
-        );
-      }
+  if (error) {
+    return (
+      <div className="mp-wrap">
+        <div style={{ color: "red", fontSize: 14 }}>{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="mp-wrap">
       <div className="mp-top">
         <div className="mp-user">
-      </div>
+        </div>
       </div>
 
       <div className="mp-card">
@@ -162,12 +168,12 @@ function MyPopup() {
         </div>
 
         {filtered.length === 0 && (
-            <div style={{ padding: "16px 14px", color: "#888" }}>
-              등록된 팝업스토어가 없어요.
-            </div>
-          )}
+          <div style={{ padding: "16px 14px", color: "#888" }}>
+            등록된 팝업스토어가 없어요.
+          </div>
+        )}
 
-          {filtered.length > 0 && (
+        {filtered.length > 0 && (
           <div className="mp-page">
             <button
               className="page-btn"
@@ -196,7 +202,7 @@ function MyPopup() {
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages}
             >
-            다음
+              다음
             </button>
           </div>
         )}
