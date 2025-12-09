@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.manager.model.dto;
 
 public class ManagerDashboardSummaryDTO {
 
+
     private int todayReservationCount;   // 오늘 예약 수
     private int totalReservationCount;   // 누적 예약 수
 

@@ -19,10 +19,11 @@ function ManagerOverviewKPIData() {
       .finally(() => setLoading(false));
   }, []);
 
-  const todayReservationCount = data?.todayReservationCount ?? 0;
-  const totalReservationCount = data?.totalReservationCount ?? 0;
-  const favoriteCount = data?.favoriteCount ?? 0;
-  const reviewCount = data?.reviewCount ?? 0;
+    const todayReservationCount = data?.todayReservationCount ?? 0;
+    const totalReservationCount = data?.totalReservationCount ?? 0;
+    const totalFavoriteCount = data?.totalFavoriteCount ?? 0;  
+    const totalReviewCount = data?.totalReviewCount ?? 0;      
+
 
   return (
     <div className="mgrdash-kpi-row">
@@ -40,13 +41,13 @@ function ManagerOverviewKPIData() {
       />
       <ManagerKpiCard
         title="관심 수"
-        value={favoriteCount}
+        value={totalFavoriteCount}
         unit="건"
         loading={loading}
       />
       <ManagerKpiCard
         title="리뷰 수"
-        value={reviewCount}
+        value={totalReviewCount}
         unit="개"
         loading={loading}
       />

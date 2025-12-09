@@ -81,5 +81,9 @@ public class ManagerDashboardService {
     public DashboardOverallKpiDTO getOverallDashboardKpi() {
         return dashboardMapper.selectOverallDashboardKpi();
     }
+
+    public int getManagerTodayReservationCount(String managerId) {
+        return dashboardMapper.selectManagerTodayReservationCount(managerId);
+    }
 }
 
