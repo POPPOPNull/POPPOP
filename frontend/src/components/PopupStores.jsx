@@ -11,6 +11,7 @@ function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
         const imageUrl =  `/poster/poster_${posterNo}.png`
         const [view, setView] = useState()
         const [favorite, setFavorite] = useState()
+        const [isDrop, setIsDrop] = useState(false)
 
         const [{isDragging},drag,preview] = useDrag({
             type:'popup',
@@ -23,6 +24,8 @@ function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
             end : (item,monitor) =>{
                 if(monitor.didDrop()){
                     console.log("드롭완료")
+                    setIsDrop(!isDrop)
+                    console.log("isDrop",isDrop)
                 }else{
                     console.log('드래그종료, 드롭 안됨',item.popupstore.no)
                 }
@@ -30,18 +33,24 @@ function PopupStores({popupstore,setIsDrag,posterNo,isFavorite}){
             
         })
 
-        useEffect(()=>{
-            setIsDrag(isDragging)
-        },[isDragging,setIsDrag])
+        
 
         useEffect(()=>{
-            countViews(posterNo)
-            .then(data=>{setView(data)})
-            countFavorite(posterNo)
-            .then(data=>{setFavorite(data)})
-            
-        },[])
-        console.log("isFavorite",isFavorite)
+            setIsDrag(isDragging)
+        },[isDragging])
+
+        useEffect(()=>{
+            const fetchData = async () =>{
+                const data =  await countViews(posterNo)
+                setView(data)
+
+                const data2 = await countFavorite(posterNo)
+                setFavorite(data2)
+                
+            }
+            fetchData()
+        },[isDrop])
+        
 
         
     

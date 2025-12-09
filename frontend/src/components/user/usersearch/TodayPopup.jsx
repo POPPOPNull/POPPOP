@@ -24,7 +24,7 @@ function TodayPopup(){
 
     const [favoriteNo, setFavoriteNo] = useState([]);
     
-    const[isFavorite,setIsFavorte]=useState(false)
+    const[isFavorite,setIsFavorite]=useState(false)
     const[Narray,setNArray] = useState([])
 
     useEffect(()=>{
@@ -32,7 +32,7 @@ function TodayPopup(){
                 .then(data=>{
                     
                     setFavoriteNo(data)
-                    console.log("찜한것",data)
+                    console.log("찜한것?",data)
                     
                 })
         },[])
@@ -59,7 +59,7 @@ function TodayPopup(){
         <select name="" id="" onChange={onChangeStatus}>
             <option value="all" >전체</option>
             <option value="done" >종료</option>
-            <option value="open" defaultValue={true}>진행중</option>
+            <option value="open" selected>진행중</option>
             <option value="scheduled">오픈 예정</option>
         </select>
 
