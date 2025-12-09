@@ -7,8 +7,8 @@ function ManagerHome() {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
 
-  // 로그인 여부 체크
-  const isLoggedIn = !!localStorage.getItem("accessToken");
+   // 로그인 여부 체크
+  const isLoggedIn = !!sessionStorage.getItem("accessToken");
 
   return (
     <div className="mh-wrap">

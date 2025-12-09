@@ -96,8 +96,8 @@ function Review(){
                         return(
                         <div key={review.reviewNo} className="myreviews">
                             <div className="userreview">
-                                <div className="myreviewpopup">{review.popupName}</div>
-                                <div className="myreviewdate">{review.reviewDate}</div>
+                                <div className="myreviewpopup">📍 {review.popupName}</div>
+                                <div className="myreviewdate">📆 {review.reviewDate}</div>
 
                                 {isEditing ? (
                                     <textarea
@@ -107,7 +107,7 @@ function Review(){
                                         maxLength={120}
                                     />
                                 ) : (
-                                    <div className="myreviewcontent">{review.content}</div>
+                                    <div className="myreviewcontent">📝 {review.content}</div>
                                 )}
                             </div>
 

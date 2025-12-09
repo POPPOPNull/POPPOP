@@ -13,6 +13,7 @@
         <result property="popupName" column="popup_name"/>
         <result property="reservationDate" column="reservation_date"/>
         <result property="reservationTime" column="reservation_time"/>
+        <result property="createdAt" column="created_at"/>
     </resultMap>
 
     <resultMap id="reservationSummaryResultMap" type="com.ohgiraffers.poppop.reservation.model.dto.ReservationSummaryDTO">
@@ -131,7 +132,8 @@
                p.popup_no,
                r.id,
                r.reservation_date,
-               r.reservation_time
+               r.reservation_time,
+               r.created_at
           from reservation r
           join popup_store p on r.popup_no = p.popup_no
          where r.id = #{memberId}
