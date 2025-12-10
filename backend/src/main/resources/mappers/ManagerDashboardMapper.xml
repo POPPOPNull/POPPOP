@@ -11,7 +11,8 @@
         JOIN popup_store p ON r.popup_no = p.popup_no
         WHERE p.id = #{managerId}
         AND p.popup_no = #{popupNo}
-        AND DATE(r.reservation_date) = CURDATE()
+        AND r.reservation_status = '결제완료'
+        AND DATE(r.created_at) = CURDATE()
     </select>
 
     <!-- 누적 예약 수 -->
@@ -246,7 +247,8 @@
         FROM reservation r
         JOIN popup_store p ON r.popup_no = p.popup_no
         WHERE p.id = #{managerId}
-        AND r.reservation_date = CURRENT_DATE
+        AND r.reservation_status = '결제완료'
+        AND DATE(r.created_at) = CURDATE()
 
     </select>
 
