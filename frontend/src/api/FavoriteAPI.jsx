@@ -37,3 +37,15 @@ export function selectFavoritePopupNo(){
     return API.get(`/favorite/no`)
     .then(response=>response.data)
 }
+
+// 오픈중 랜덤 팝업스토어 7개
+export function selectOpenPopupRandomly(){
+    return API.get(`/popup-stores/random/open`)
+    .then(response=>response.data)
+}
+
+// 오픈 예정 랜덤 팝업스토어 7개
+export function selectScheduledPopupRandomly(){
+    return API.get(`/popup-stores/random/scheduled`)
+    .then(response=>response.data)
+}

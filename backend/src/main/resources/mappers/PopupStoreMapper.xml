@@ -585,5 +585,93 @@
         order by approval_status
     </select>
 
+    <!--오픈팝업전체조회-->
+    <select id="selectAllOpenPopup" resultType="_int">
+        select
+        popup_no
+        from popup_store
+        where popup_start_date &lt; now()
+        and popup_end_date &gt; now()
+    </select>
 
+    <select id="selectOpenPopupRandomly" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+
+        latitude,
+        longitude,
+
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name,
+        advance_reservation,
+        homepage_link,
+        capacity,
+        hashtag_name
+
+        from popup_store
+        where popup_no in
+        <foreach item="popupNo" collection="popupNo2" open="(" separator="," close=")">
+            #{popupNo}
+        </foreach>
+        order by field ( popup_no
+        <foreach item="popupNo" collection="popupNo2" open="," separator="," close=")">
+            #{popupNo}
+        </foreach>
+    </select>
+
+    <select id="selectAllScheduledPopup" resultType="_int">
+        select
+               popup_no
+               from popup_store
+               where popup_start_date &gt; now()
+    </select>
+
+    <select id="selectScheduledPopupRandomly" resultMap="popupStoreResultMap">
+        select
+        popup_no,
+        popup_name,
+        brand_name,
+        popup_start_date,
+        popup_end_date,
+        open_time,
+        close_time,
+        popup_location,
+
+        latitude,
+        longitude,
+
+        reservable_status,
+        popup_explanation,
+        approval_status,
+        rejection_reason,
+        id,
+        click_count,
+        category_name,
+        advance_reservation,
+        homepage_link,
+        capacity,
+        hashtag_name
+
+        from popup_store
+        where popup_no in
+        <foreach item="popupNo" collection="popupNo2" open="(" separator="," close=")">
+            #{popupNo}
+        </foreach>
+        order by field ( popup_no
+        <foreach item="popupNo" collection="popupNo2" open="," separator="," close=")">
+            #{popupNo}
+        </foreach>
+    </select>
 </mapper>

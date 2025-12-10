@@ -2,6 +2,7 @@ package com.ohgiraffers.poppop.popupstore.model.service;
 
 import com.ohgiraffers.poppop.popupstore.model.dao.PopupStoreMapper;
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -125,6 +126,25 @@ public class PopupStoreService {
         return popupStoreMapper.selectAllPopupStoreAdmin();
     }
 
+    public List<PopupStoreDTO> selectPopupByStatus(String status) {
+        return popupStoreMapper.selectPopupByStatus(status);
+    }
+
+    public List<Integer> selectAllOpenPopup() {
+        return popupStoreMapper.selectAllOpenPopup();
+    }
+
+    public List<PopupStoreDTO> selectOpenPopupRandomly(Set<Integer> popupNo2) {
+        return popupStoreMapper.selectOpenPopupRandomly(popupNo2);
+    }
+
+    public List<Integer> selectAllScheduledPopup() {
+        return popupStoreMapper.selectAllScheduledPopup();
+    }
+
+    public List<PopupStoreDTO> selectScheduledPopupRandomly(Set<Integer> popupNo2) {
+        return popupStoreMapper.selectScheduledPopupRandomly(popupNo2);
+    }
 }
 
 

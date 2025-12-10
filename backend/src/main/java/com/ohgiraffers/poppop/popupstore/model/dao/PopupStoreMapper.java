@@ -2,11 +2,9 @@ package com.ohgiraffers.poppop.popupstore.model.dao;
 
 import com.ohgiraffers.poppop.popupstore.model.dto.PopupStoreDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Mapper
 public interface PopupStoreMapper {
@@ -49,4 +47,14 @@ public interface PopupStoreMapper {
     int updateMyPopup(PopupStoreDTO popupStoreDTO);
 
     List<PopupStoreDTO> selectAllPopupStoreAdmin();
+
+    List<PopupStoreDTO> selectPopupByStatus(String status);
+
+    List<Integer> selectAllOpenPopup();
+
+    List<PopupStoreDTO> selectOpenPopupRandomly(Set<Integer> popupNo2);
+
+    List<Integer> selectAllScheduledPopup();
+
+    List<PopupStoreDTO> selectScheduledPopupRandomly(Set<Integer> popupNo2);
 }
