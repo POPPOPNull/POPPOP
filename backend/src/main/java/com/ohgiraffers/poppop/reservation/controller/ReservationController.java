@@ -1,5 +1,6 @@
 package com.ohgiraffers.poppop.reservation.controller;
 
+import com.ohgiraffers.poppop.reservation.model.dto.PaymentConfirmationRequestDTO;
 import com.ohgiraffers.poppop.reservation.model.dto.ReservationDetailsDTO;
 import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -57,6 +58,26 @@ public class ReservationController {
             return ResponseEntity.ok(paymentInfo);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/confirm")
+    public ResponseEntity<?> confirmPayment(@RequestBody PaymentConfirmationRequestDTO requestDTO, HttpSession session) {
+        try {
+            String sessionId = session.getId();
+            boolean isSuccess = reservationService.confirmTossPayment(
+                    requestDTO.getPaymentKey(),
+                    requestDTO.getOrderId(),
+                    requestDTO.getAmount(),
+                    sessionId
+            );
+            if (isSuccess) {
+                return ResponseEntity.ok().body(Map.of("message", "결제 승인 및 예약이 최종 완료되었습니다."));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "결제 최종 승인에 실패했습니다."));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", e.getMessage()));
         }
     }
 

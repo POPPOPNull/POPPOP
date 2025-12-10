@@ -25,3 +25,12 @@ export function cancelPaidReservation(reservationNo) {
     .then(response => response.data);
 
 }
+
+export async function confirmPayment(paymentInfo) {
+  try {
+    const response = await API.post('/reservations/confirm', paymentInfo);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || new Error('서버와 통신 중 오류가 발생했습니다.');
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { confirmPayment } from '../api/ReservationAPI';
 
 function PaymentResult() {
     const location = useLocation();
@@ -9,11 +10,26 @@ function PaymentResult() {
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const isSuccess = queryParams.get('success');
-        const errorMessage = queryParams.get('message');
 
         if (isSuccess === 'true') {
-            setMessage("예약 및 결제가 성공적으로 완료되었습니다.");
+            const paymentKey = queryParams.get('paymentKey');
+            const orderId = queryParams.get('orderId');
+            const amount = Number(queryParams.get('amount'));
+
+            const processPayment = async () => {
+                try {
+                    await confirmPayment({ paymentKey, orderId, amount });
+                    setMessage("예약 및 결제가 성공적으로 완료되었습니다.");
+                } catch (error) {
+                    const errorMessage = error.message || "알 수 없는 이유로 최종 승인에 실패했습니다.";
+                    setMessage(`결제는 성공했으나 최종 승인 처리 중 오류가 발생했습니다: ${errorMessage}`);
+                }
+            };
+
+            processPayment();
+
         } else if (isSuccess === 'false') {
+            const errorMessage = queryParams.get('message');
             const displayMessage = errorMessage ? decodeURIComponent(errorMessage) : "알 수 없는 이유로 실패했습니다.";
             setMessage(`결제에 실패했습니다: ${displayMessage}`);
         }
