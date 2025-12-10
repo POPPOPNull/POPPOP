@@ -5,6 +5,7 @@ import com.ohgiraffers.poppop.reservation.model.service.ReservationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
+
+    @Value("${poppop.frontend.url}")
+    private String frontendUrl;
 
     private final ReservationService reservationService;
 
@@ -74,8 +78,8 @@ public class ReservationController {
             @RequestParam Integer amount,
             HttpServletRequest request
     ) {
-        String successUrl = "http://localhost:5173/payment-result?success=true";
-        String failUrl = "http://localhost:5173/payment-result?success=false";
+        String successUrl = frontendUrl + "/payment-result?success=true";
+        String failUrl = frontendUrl + "/payment-result?success=false";
 
         HttpSession session = request.getSession();
         String sessionId = session.getId();
