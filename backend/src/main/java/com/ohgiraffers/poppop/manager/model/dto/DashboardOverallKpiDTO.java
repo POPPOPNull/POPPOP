@@ -4,6 +4,7 @@ public class DashboardOverallKpiDTO {
 
     // 전체 팝업스토어 수
     private int totalPopupCount;
+    private int todayReservationCount;
 
     // 전체 예약 수
     private int totalReservationCount;
@@ -16,6 +17,14 @@ public class DashboardOverallKpiDTO {
 
     public int getTotalPopupCount() {
         return totalPopupCount;
+    }
+
+    public int getTodayReservationCount() {
+        return todayReservationCount;
+    }
+
+    public void setTodayReservationCount(int todayReservationCount) {
+        this.todayReservationCount = todayReservationCount;
     }
 
     public void setTotalPopupCount(int totalPopupCount) {

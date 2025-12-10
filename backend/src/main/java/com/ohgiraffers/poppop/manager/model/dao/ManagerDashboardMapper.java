@@ -45,5 +45,9 @@ public interface ManagerDashboardMapper {
 
     DashboardOverallKpiDTO selectOverallDashboardKpi();
 
+    int selectManagerTodayReservationCount(@Param("managerId") String managerId);
+
+
+
 }
 

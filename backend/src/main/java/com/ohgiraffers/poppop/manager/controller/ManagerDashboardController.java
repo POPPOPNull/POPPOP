@@ -9,7 +9,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Tag(name="Manager 대시보드 관련 API")
 @RestController
@@ -115,11 +117,25 @@ public class ManagerDashboardController {
     }
 
     @GetMapping("/overview/summary")
-    public ResponseEntity<DashboardOverallKpiDTO> getOverallDashboardKpi() {
-        return ResponseEntity.ok(
-                dashboardService.getOverallDashboardKpi()
-        );
+    public ResponseEntity<Map<String, Object>> getOverallDashboardKpi(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        String managerId = userDetails.getUsername();
+
+        DashboardOverallKpiDTO kpi = dashboardService.getOverallDashboardKpi();
+
+        int todayReservationCount = dashboardService.getManagerTodayReservationCount(managerId);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("todayReservationCount", todayReservationCount);
+        result.put("totalPopupCount", kpi.getTotalPopupCount());
+        result.put("totalReservationCount", kpi.getTotalReservationCount());
+        result.put("totalFavoriteCount", kpi.getTotalFavoriteCount());
+        result.put("totalReviewCount", kpi.getTotalReviewCount());
+
+        return ResponseEntity.ok(result);
     }
+
 }
 
 

@@ -23,8 +23,8 @@ function ManagerKPIData({ popupNo }) {
 
   const todayReservationCount = data?.todayReservationCount ?? 0;
   const totalReservationCount = data?.totalReservationCount ?? 0;
-  const favoriteCount = data?.favoriteCount ?? 0;
-  const reviewCount = data?.reviewCount ?? 0;
+  const favoriteCount = data?.totalFavoriteCount ?? 0;  
+  const reviewCount = data?.totalReviewCount ?? 0; 
 
 
 
