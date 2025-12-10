@@ -171,4 +171,59 @@ public class PopupStoreController {
         System.out.println(date);
         return ResponseEntity.ok(popupStoreService.selectPopupByDate(date));
     }
+
+//    //상태별 팝업스토어 전체조회
+//    @GetMapping("")
+//    public ResponseEntity<List<PopupStoreDTO>> selectPopupByStatus(@RequestParam String status){
+//
+//        return ResponseEntity.ok(popupStoreService.selectPopupByStatus(status));
+//    }
+//
+//    //상태에따른 팝업스토어 랜덤조회
+//    @GetMapping("random")
+//    public ResponseEntity<List<PopupStoreDTO>> selectPopupByStatusRandomly(@RequestParam String Status){
+////        ResponseEntity<List<PopupStoreDTO>> allList =
+//
+//        return ResponseEntity.ok(popupStoreService.selectPopupByStatusRandomly(Status));
+//    }
+
+    // 현재 오픈중인 팝업스토어 랜덤조회
+    @GetMapping("/random/open")
+    public ResponseEntity<List<PopupStoreDTO>> selectOpenPopupRandomly(){
+        List<Integer> allNo = popupStoreService.selectAllOpenPopup();
+        System.out.println("allNo = " + allNo);
+        Set<Integer> popupNo2 = new HashSet<>();
+        for(int j=0;j<7;j=popupNo2.size()){
+            int rn = (int)(Math.random()*allNo.size()+1);
+            popupNo2.add(allNo.get(rn));
+        }
+        System.out.println(popupNo2);
+
+        List<PopupStoreDTO> randomList = popupStoreService.selectOpenPopupRandomly(popupNo2);
+
+
+
+        return ResponseEntity.ok(randomList);
+    }
+
+    // 오픈 예정인 팝업스토어 랜덤조회
+    @GetMapping("/random/scheduled")
+    public ResponseEntity<List<PopupStoreDTO>> selectScheduledPopupRandomly(){
+        List<Integer> allNo = popupStoreService.selectAllScheduledPopup();
+        System.out.println("allNo = " + allNo);
+
+        Set<Integer> popupNo2 = new HashSet<>();
+        if(allNo.size()>=7){
+            for(int j=0;j<7;j=popupNo2.size()){
+                int rn = (int)(Math.random()*allNo.size()+1);
+                popupNo2.add(allNo.get(rn));
+            }
+        } else {
+            popupNo2.addAll(allNo);
+        }
+
+        List<PopupStoreDTO> randomList = popupStoreService.selectScheduledPopupRandomly(popupNo2);
+
+        return ResponseEntity.ok(randomList);
+    }
 }

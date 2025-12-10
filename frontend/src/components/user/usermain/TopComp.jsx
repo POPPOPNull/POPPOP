@@ -43,7 +43,7 @@ function TopComp (){
 
     
     
-
+    // 오픈중인팝업 랜덤
     return(
         <>
             <div className={TCSytle.layout}>
