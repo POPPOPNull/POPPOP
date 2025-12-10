@@ -14,7 +14,8 @@ function Favorite({item,children}){
 
     
 
-    const auth = useAuth();
+    const auth = useAuth()
+    console.log("auth",auth.isAuthenticated)
     
       
     const [,drop]=useDrop({
@@ -39,11 +40,16 @@ function Favorite({item,children}){
             .catch(
                 ()=>{
                     // alert("찜목록에 추가할 수 없어요.")
-                    setMessesge("이미 추가된 팝업스토어에요.")
-                    setStyle("modalview")
-                    setTimeout(()=>{
+                    if(auth.isAuthenticated){
+                        setMessesge("이미 추가된 팝업스토어에요.")
+                        setStyle("modalview")
+                        setTimeout(()=>{
                         setStyle("modal")
                     },500)
+                    }else{
+                        alert("로그인이 필요한 기능입니다.")
+                        window.location.href='/auth/login'
+                    }
                 }
             )
         }

@@ -14,8 +14,8 @@ function PopupInfo(){
 
 
         const [coord, setCoord] = useState({
-            lat:"",
-            lng:""
+            lat:"37",
+            lng:"129"
         })
 
         const onClickCopyLocation = () =>{
@@ -33,10 +33,13 @@ function PopupInfo(){
                 
 
                 const data2 = await locationCoordExchange(location)
+                console.log("data2",data2)
+                console.log("coord:",coord)
                 setCoord({
                     lng:data2.documents[0].x,
                     lat:data2.documents[0].y
                 })
+                
 
                 
             }

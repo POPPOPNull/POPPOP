@@ -43,7 +43,7 @@ public class SwaggerConfig {
                 .pathsToMatch("/api/**","/auth/**","/popup-stores/**","/favorite/**",
                         "/myinfo/**","/myreservation/**","/behavior/**","/admin/**",
                         "/reservations/**","/manager/**",
-                        "/review/**","/myreview/**","/manager/dashboard/**")
+                        "/review/**","/myreview/**","/manager/dashboard/**","/kakao/**")
                 .build();
     }
 }

@@ -194,7 +194,7 @@ public class PopupStoreController {
         System.out.println("allNo = " + allNo);
         Set<Integer> popupNo2 = new HashSet<>();
         for(int j=0;j<7;j=popupNo2.size()){
-            int rn = (int)(Math.random()*allNo.size()+1);
+            int rn = (int)(Math.random()*allNo.size());
             popupNo2.add(allNo.get(rn));
         }
         System.out.println(popupNo2);
@@ -215,7 +215,7 @@ public class PopupStoreController {
         Set<Integer> popupNo2 = new HashSet<>();
         if(allNo.size()>=7){
             for(int j=0;j<7;j=popupNo2.size()){
-                int rn = (int)(Math.random()*allNo.size()+1);
+                int rn = (int)(Math.random()*allNo.size());
                 popupNo2.add(allNo.get(rn));
             }
         } else {
