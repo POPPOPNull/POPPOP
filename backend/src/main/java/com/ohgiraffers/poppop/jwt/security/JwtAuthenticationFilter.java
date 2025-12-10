@@ -36,7 +36,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || path.startsWith("/auth/admin/login")
                 || path.startsWith("/auth/user/join")
                 || path.startsWith("/auth/manager/join")
-                || path.startsWith("/auth/refresh")) {
+                || path.startsWith("/auth/refresh")
+                || path.startsWith("/auth/find-id")
+                || path.startsWith("/auth/verify-user")
+                || path.startsWith("/auth/reset-password")
+
+                || path.startsWith("/api/auth/login")
+                || path.startsWith("/api/auth/admin/login")
+                || path.startsWith("/api/auth/user/join")
+                || path.startsWith("/api/auth/manager/join")
+                || path.startsWith("/api/auth/refresh")
+                || path.startsWith("/api/auth/find-id")
+                || path.startsWith("/api/auth/verify-user")
+                || path.startsWith("/api/auth/reset-password")) {
 
             filterChain.doFilter(request, response);
             return;

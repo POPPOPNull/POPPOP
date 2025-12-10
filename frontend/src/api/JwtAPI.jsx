@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const JwtAPI = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true, // refresh 토큰을 쿠키로 쓰는 경우
 });
 

@@ -23,9 +23,9 @@ export function selectPopupStoreDetails(popupNo){
 
 // 주소 -> 좌표 변환 // axios 보류
 export function locationCoordExchange(location){
-    return axios.get(`https://dapi.kakao.com/v2/local/search/address?query=${location}`,{headers:{Authorization: 'KakaoAK'+' '+restapikey}})
-    .then(response=>response.data)
-    
+    return API.get(`/kakao/address`, {
+        params: { query: location }
+    }).then((response) => response.data);
 }
 
 // 팝업스토어 오늘 기준 오픈예정상태 및 검색어에 따른 조회
