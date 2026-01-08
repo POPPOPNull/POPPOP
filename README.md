@@ -133,5 +133,5 @@
 |PM,admin 대시보드|DB,manager 대시보드|user 메인페이지,UI/UX|테스터|user 사용자페이지,JWT|
 |:---:|:---:|:---:|:---:|:---:|
 | ![](https://github.com/dgun1308.png?size=20) | ![](https://github.com/pcl9556.png?size=420) |![](https://github.com/dlrjsdn4433.png?size=420) |![](https://github.com/Lee-KyungChul.png?size=120) |![](https://github.com/eunseon12.png?size=120) |
-|[장동건](https://github.com/dgun1308)|[박채린](https://github.com/pcl9556)|[이건우](https://github.com/dlrjsdn4433)|[이경철](https://github.com/Lee-KyungChul)|[조은선](https://github.com/eunseon12)|
+|[장동건](https://github.com/dgun1308)|[박채린](https://github.com/pcl9556)|[이건우](https://github.com/dlrjsdn4433)|[이경철](https://github.com/Lee-KyungChul)|[조은선](https://github.com/eun-seon12)|
 
